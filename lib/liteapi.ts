@@ -16,19 +16,22 @@ export async function searchHotels(params: {
     return mockSearchHotels(params);
   }
 
+  const body = {
+    hotelIds: params.hotelIds,
+    checkin: params.checkin,
+    checkout: params.checkout,
+    occupancies: [{ adults: Number(params.guests) }],
+    currency: 'JPY',
+  };
+  console.log('[DEBUG] Request Body:', JSON.stringify(body));
+
   const response = await fetch(`${LITEAPI_BASE}/hotels/rates`, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
       'X-API-Key': process.env.NEXT_PUBLIC_LITEAPI_KEY!,
     },
-    body: JSON.stringify({
-      hotelIds: params.hotelIds,
-      checkin: params.checkin,
-      checkout: params.checkout,
-      adults: params.guests,
-      currency: 'JPY',
-    }),
+    body: JSON.stringify(body),
   });
 
   const data = await response.json();
