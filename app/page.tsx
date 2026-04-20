@@ -11,8 +11,10 @@ export default function Home() {
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [selectedHotel, setSelectedHotel] = useState<HotelResult | null>(null);
+  const [lastGuests, setLastGuests] = useState<number>(2);
 
   const handleSearch = async (conditions: SearchConditions) => {
+    setLastGuests(conditions.guests);
     setIsLoading(true);
     setError(null);
     setResults(null);
@@ -76,7 +78,7 @@ export default function Home() {
         )}
 
         {!isLoading && results !== null && (
-          <HotelList hotels={results} onBookNow={setSelectedHotel} />
+          <HotelList hotels={results} onBookNow={setSelectedHotel} guests={lastGuests} />
         )}
 
         {!isLoading && results === null && !error && (

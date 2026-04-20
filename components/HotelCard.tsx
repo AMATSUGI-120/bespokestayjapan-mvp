@@ -5,6 +5,7 @@ import { HotelResult } from '@/lib/types';
 interface HotelCardProps {
   hotel: HotelResult;
   onBookNow: (hotel: HotelResult) => void;
+  guests: number;
 }
 
 const matchConfig = {
@@ -13,7 +14,7 @@ const matchConfig = {
   60: { label: 'Budget-Friendly', emoji: '💛', color: 'bg-amber-100 text-amber-800 border-amber-300' },
 };
 
-export default function HotelCard({ hotel, onBookNow }: HotelCardProps) {
+export default function HotelCard({ hotel, onBookNow, guests }: HotelCardProps) {
   const match = matchConfig[hotel.matchLevel];
 
   return (
@@ -37,12 +38,17 @@ export default function HotelCard({ hotel, onBookNow }: HotelCardProps) {
       </p>
 
       {/* Price */}
-      <div className="flex items-end gap-2">
-        <span className="text-3xl font-extrabold text-gray-900">
-          ¥{hotel.finalPrice.toLocaleString()}
+      <div className="flex flex-col gap-0.5">
+        <div className="flex items-end gap-2">
+          <span className="text-3xl font-extrabold text-gray-900">
+            ¥{hotel.finalPrice.toLocaleString()}
+          </span>
+          <span className="text-gray-500 text-sm pb-1">/ night</span>
+          <span className="text-xs text-gray-400 pb-1 ml-1">(incl. {Math.round(hotel.margin * 100)}% service fee)</span>
+        </div>
+        <span className="text-xs text-gray-500">
+          Total for {guests} {guests === 1 ? 'guest' : 'guests'}
         </span>
-        <span className="text-gray-500 text-sm pb-1">/ night</span>
-        <span className="text-xs text-gray-400 pb-1 ml-1">(incl. {Math.round(hotel.margin * 100)}% service fee)</span>
       </div>
 
       {/* Pet Policy */}

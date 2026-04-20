@@ -76,6 +76,7 @@ export default function SearchForm({ onSearch, isLoading }: SearchFormProps) {
               </option>
             ))}
           </select>
+          <p className="text-xs text-gray-400">Currently supporting guests aged 12 and older.</p>
         </div>
 
         {/* Check-in */}
