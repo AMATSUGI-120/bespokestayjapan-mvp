@@ -69,7 +69,8 @@ export default function PaymentModal({ hotel, onClose }: PaymentModalProps) {
       };
       console.log('[PaymentModal] liteAPIConfig:', JSON.stringify(liteAPIConfig, null, 2));
       try {
-        new window.LiteAPIPayment(liteAPIConfig).handlePayment();
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        new window.LiteAPIPayment(liteAPIConfig as any).handlePayment();
       } catch (err: unknown) {
         console.error('[PaymentModal] LiteAPIPayment init error:', err);
         if (err && typeof err === 'object') {
