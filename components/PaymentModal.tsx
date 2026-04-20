@@ -7,10 +7,8 @@ declare global {
   interface Window {
     LiteAPIPayment: new (config: {
       publicKey: string;
-      appearance?: { theme: string };
-      options?: { business: { name: string } };
-      targetElement: string;
       secretKey: string;
+      targetElement: string;
       returnUrl: string;
     }) => { handlePayment: () => void };
   }
@@ -63,14 +61,14 @@ export default function PaymentModal({ hotel, onClose }: PaymentModalProps) {
         return;
       }
 
-      new window.LiteAPIPayment({
+      const liteAPIConfig = {
         publicKey: pubKey,
-        appearance: { theme: 'flat' },
-        options: { business: { name: 'BespokStayJapan' } },
-        targetElement: '#liteapi-payment-form',
         secretKey: secretKey,
+        targetElement: '#liteapi-payment-form',
         returnUrl: `${window.location.origin}/booking/success?tid=${transactionId}`,
-      }).handlePayment();
+      };
+      console.log('[PaymentModal] liteAPIConfig:', JSON.stringify(liteAPIConfig, null, 2));
+      new window.LiteAPIPayment(liteAPIConfig).handlePayment();
     };
 
     if (document.querySelector('script[data-liteapi-sdk]')) {
