@@ -5,8 +5,6 @@ import { calculateMargin, calculateFinalPrice, generateRecommendationReason } fr
 import { Hotel, SearchConditions, HotelResult } from '@/lib/types';
 
 export async function POST(request: NextRequest) {
-  console.log('[DEBUG] USE_MOCK_API:', process.env.USE_MOCK_API);
-  console.log('[DEBUG] LITEAPI_KEY prefix:', process.env.NEXT_PUBLIC_LITEAPI_KEY?.substring(0, 10) ?? 'NOT SET');
   try {
     const conditions: SearchConditions = await request.json();
     const { city, petSize, guests, checkin, checkout } = conditions;
@@ -105,7 +103,6 @@ export async function POST(request: NextRequest) {
     // 5. 3件を返却 (マッチレベル順)
     return NextResponse.json({ hotels: results });
   } catch (error) {
-    console.error('Search error:', error);
     return NextResponse.json({ error: 'Internal server error' }, { status: 500 });
   }
 }

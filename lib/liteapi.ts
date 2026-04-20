@@ -2,7 +2,6 @@ import { mockSearchHotels, mockPrebook, mockBook } from './liteapi-mock';
 import { SearchResult, PrebookResult, BookingResult, GuestInfo } from './types';
 
 const LITEAPI_BASE = 'https://api.liteapi.travel/v3.0';
-// DEBUG: hardcoded to bypass USE_MOCK_API env var
 const USE_MOCK = false;
 
 // 1. ホテル検索
@@ -24,8 +23,6 @@ export async function searchHotels(params: {
     guestNationality: 'JP',
     currency: 'JPY',
   };
-  console.log('[DEBUG] Request Body:', JSON.stringify(body));
-
   const response = await fetch(`${LITEAPI_BASE}/hotels/rates`, {
     method: 'POST',
     headers: {
@@ -37,19 +34,7 @@ export async function searchHotels(params: {
 
   const data = await response.json();
 
-  if (response.ok) {
-    const firstHotel = data.data?.[0];
-    console.log('[DEBUG] LiteAPI First Hotel:', JSON.stringify(firstHotel).substring(0, 1000));
-  }
-
   if (!response.ok) {
-    console.error('[LiteAPI] searchHotels error', {
-      status: response.status,
-      statusText: response.statusText,
-      url: `${LITEAPI_BASE}/hotels/rates`,
-      apiKey: process.env.NEXT_PUBLIC_LITEAPI_KEY?.slice(0, 8) + '...',
-      responseBody: JSON.stringify(data),
-    });
     throw new Error(`LiteAPI searchHotels failed [${response.status}]: ${data.message ?? JSON.stringify(data)}`);
   }
 
@@ -70,14 +55,6 @@ export async function searchHotels(params: {
       room?.retailRate?.total?.[0]?.amount ??
       room?.rates?.[0]?.retailRate?.total?.[0]?.amount ??
       null;
-
-    if (price === null || price === 0) {
-      console.error('[LiteAPI] price extraction failed for hotel', h.hotelId ?? h.id, {
-        roomKeys: room ? Object.keys(room) : 'no room',
-        pricePath: room?.price,
-        retailRatePath: room?.retailRate,
-      });
-    }
 
     const offerId = room?.offerId ?? room?.rates?.[0]?.offerId ?? '';
     return {
@@ -115,13 +92,6 @@ export async function prebook(params: {
   const data = await response.json();
 
   if (!response.ok) {
-    console.error('[LiteAPI] prebook error', {
-      status: response.status,
-      statusText: response.statusText,
-      url: `${LITEAPI_BASE}/rates/prebook`,
-      offerId: params.offerId,
-      responseBody: JSON.stringify(data),
-    });
     throw new Error(`LiteAPI prebook failed [${response.status}]: ${data.message ?? JSON.stringify(data)}`);
   }
 
@@ -171,13 +141,6 @@ export async function book(params: {
   const data = await response.json();
 
   if (!response.ok) {
-    console.error('[LiteAPI] book error', {
-      status: response.status,
-      statusText: response.statusText,
-      url: `${LITEAPI_BASE}/rates/book`,
-      prebookId: params.prebookId,
-      responseBody: JSON.stringify(data),
-    });
     throw new Error(`LiteAPI book failed [${response.status}]: ${data.message ?? JSON.stringify(data)}`);
   }
 
