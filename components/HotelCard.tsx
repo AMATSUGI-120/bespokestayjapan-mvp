@@ -46,7 +46,7 @@ export default function HotelCard({ hotel, onBookNow, guests }: HotelCardProps) 
           <span className="text-gray-500 text-sm pb-1">/ night</span>
           <span className="text-xs text-gray-400 pb-1 ml-1">(incl. {Math.round(hotel.margin * 100)}% service fee)</span>
         </div>
-        <span className="text-sm font-bold text-red-500">
+        <span className="text-sm font-bold text-gray-500">
           Total for {guests ? `${guests} ${guests === 1 ? 'guest' : 'guests'}` : 'guests'}
         </span>
       </div>
