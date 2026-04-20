@@ -48,12 +48,12 @@ export default function PaymentModal({ hotel, onClose }: PaymentModalProps) {
       JSON.stringify({ prebookId, transactionId, guestInfo })
     );
 
-    const initSdk = (apiKey: string) => {
-      console.log('[PaymentModal] SDK init — apiKey:', apiKey ? apiKey.substring(0, 10) + '...' : '(EMPTY!)', '| secretKey:', secretKey ? secretKey.substring(0, 8) + '...' : '(EMPTY!)', '| transactionId:', transactionId);
+    const initSdk = (publicKey: string) => {
+      console.log('[PaymentModal] SDK init — publicKey:', publicKey ? publicKey.substring(0, 10) + '...' : '(EMPTY!)', '| secretKey:', secretKey ? secretKey.substring(0, 8) + '...' : '(EMPTY!)', '| transactionId:', transactionId);
 
-      if (!apiKey) {
+      if (!publicKey) {
         const msg = 'Payment system error: API key is not configured. Please contact support.';
-        console.error('[PaymentModal] FATAL: apiKey is empty.');
+        console.error('[PaymentModal] FATAL: publicKey is empty.');
         setSdkError(msg);
         setSdkLoading(false);
         return;
@@ -67,12 +67,12 @@ export default function PaymentModal({ hotel, onClose }: PaymentModalProps) {
       }
 
       const liteAPIConfig = {
-        apiKey,
+        publicKey,
         secretKey,
         targetElement: 'liteapi-payment-form',
         returnUrl: `${window.location.origin}/booking/success?tid=${transactionId}`,
       };
-      console.log('[PaymentModal] liteAPIConfig:', JSON.stringify({ ...liteAPIConfig, apiKey: liteAPIConfig.apiKey.substring(0, 10) + '...' }));
+      console.log('[PaymentModal] liteAPIConfig:', JSON.stringify({ ...liteAPIConfig, publicKey: liteAPIConfig.publicKey.substring(0, 10) + '...' }));
       setTimeout(() => {
         try {
           // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -88,14 +88,14 @@ export default function PaymentModal({ hotel, onClose }: PaymentModalProps) {
     };
 
     const loadAndInit = async () => {
-      let apiKey = '';
+      let publicKey = '';
       try {
         const res = await fetch('/api/config');
         const cfg = await res.json();
         if (cfg.error) {
           throw new Error(cfg.error.message ?? JSON.stringify(cfg.error));
         }
-        apiKey = cfg.apiKey ?? '';
+        publicKey = cfg.publicKey ?? '';
       } catch (err) {
         const msg = err instanceof Error ? `Payment system error: ${err.message}` : 'Payment system error: could not load config.';
         setSdkError(msg);
@@ -104,13 +104,13 @@ export default function PaymentModal({ hotel, onClose }: PaymentModalProps) {
       }
 
       if (document.querySelector('script[data-liteapi-sdk]')) {
-        initSdk(apiKey);
+        initSdk(publicKey);
         return;
       }
       const script = document.createElement('script');
       script.src = 'https://payment-wrapper.liteapi.travel/dist/liteAPIPayment.js?v=a1';
       script.setAttribute('data-liteapi-sdk', 'true');
-      script.onload = () => initSdk(apiKey);
+      script.onload = () => initSdk(publicKey);
       script.onerror = () => {
         setSdkError('Payment system error: failed to load payment script.');
         setSdkLoading(false);
