@@ -90,7 +90,8 @@ export default function PaymentModal({ hotel, onClose }: PaymentModalProps) {
     };
 
     const loadAndInit = async () => {
-      const apiKey = (process.env.NEXT_PUBLIC_LITEAPI_KEY || '').trim();
+      // TEMP: Sandbox Public Key for isolation test — revert after LiteAPI support confirms config
+      const apiKey = '5fe2e0da-e9f8-48fd-bd68-d86f929d6dec';
       console.log('[PaymentModal] hostname:', window.location.hostname, '| apiKey prefix:', apiKey ? apiKey.substring(0, 5) : '(EMPTY!)');
 
       if (document.querySelector('script[data-liteapi-sdk]')) {
