@@ -5,12 +5,8 @@ import { HotelResult, GuestInfo } from '@/lib/types';
 
 declare global {
   interface Window {
-    LiteAPIPayment: new (config: {
-      publicKey: string;
-      secretKey: string;
-      targetElement: string;
-      returnUrl: string;
-    }) => { handlePayment: () => void };
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    LiteAPIPayment: new (config: any) => { handlePayment: () => void };
   }
 }
 
@@ -62,21 +58,23 @@ export default function PaymentModal({ hotel, onClose }: PaymentModalProps) {
       }
 
       const liteAPIConfig = {
-        apiKey: pubKey,
-        token: secretKey,
+        publicKey: pubKey,
+        secretKey: secretKey,
         targetElement: 'liteapi-payment-form',
         returnUrl: `${window.location.origin}/booking/success?tid=${transactionId}`,
       };
       console.log('[PaymentModal] liteAPIConfig:', JSON.stringify(liteAPIConfig, null, 2));
-      try {
-        // eslint-disable-next-line @typescript-eslint/no-explicit-any
-        new window.LiteAPIPayment(liteAPIConfig as any).handlePayment();
-      } catch (err: unknown) {
-        console.error('[PaymentModal] LiteAPIPayment init error:', err);
-        if (err && typeof err === 'object') {
-          console.error('[PaymentModal] error details:', JSON.stringify(err, Object.getOwnPropertyNames(err)));
+      setTimeout(() => {
+        try {
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any
+          new window.LiteAPIPayment(liteAPIConfig as any).handlePayment();
+        } catch (err: unknown) {
+          console.error('[PaymentModal] LiteAPIPayment init error:', err);
+          if (err && typeof err === 'object') {
+            console.error('[PaymentModal] error details:', JSON.stringify(err, Object.getOwnPropertyNames(err)));
+          }
         }
-      }
+      }, 1000);
     };
 
     if (document.querySelector('script[data-liteapi-sdk]')) {
