@@ -38,7 +38,8 @@ export async function searchHotels(params: {
   const data = await response.json();
 
   if (response.ok) {
-    console.log('[DEBUG] LiteAPI Success Response:', JSON.stringify(data).substring(0, 500));
+    const firstHotel = data.data?.[0];
+    console.log('[DEBUG] LiteAPI First Hotel:', JSON.stringify(firstHotel).substring(0, 1000));
   }
 
   if (!response.ok) {
@@ -52,14 +53,42 @@ export async function searchHotels(params: {
     throw new Error(`LiteAPI searchHotels failed [${response.status}]: ${data.message ?? JSON.stringify(data)}`);
   }
 
-  return (data.data ?? []).map((h: { id: string; name: string; roomTypes?: Array<{ offerId: string; price?: { finalRate?: number } }> }) => ({
-    hotelId: h.id,
-    name: h.name,
-    offerId: h.roomTypes?.[0]?.offerId ?? '',
-    price: h.roomTypes?.[0]?.price?.finalRate ?? 0,
-    currency: 'JPY',
-    available: (h.roomTypes?.length ?? 0) > 0,
-  }));
+  type RoomType = {
+    offerId?: string;
+    price?: { total?: number; finalRate?: number; currency?: string };
+    retailRate?: { total?: Array<{ amount?: number; currency?: string }> };
+    rates?: Array<{ offerId?: string; retailRate?: { total?: Array<{ amount?: number }> } }>;
+  };
+
+  return (data.data ?? []).map((h: { hotelId?: string; id?: string; name?: string; roomTypes?: RoomType[] }) => {
+    const room = h.roomTypes?.[0];
+
+    // LiteAPI V3: roomTypes[0].price.total が優先パス
+    const price =
+      room?.price?.total ??
+      room?.price?.finalRate ??
+      room?.retailRate?.total?.[0]?.amount ??
+      room?.rates?.[0]?.retailRate?.total?.[0]?.amount ??
+      null;
+
+    if (price === null || price === 0) {
+      console.error('[LiteAPI] price extraction failed for hotel', h.hotelId ?? h.id, {
+        roomKeys: room ? Object.keys(room) : 'no room',
+        pricePath: room?.price,
+        retailRatePath: room?.retailRate,
+      });
+    }
+
+    const offerId = room?.offerId ?? room?.rates?.[0]?.offerId ?? '';
+    return {
+      hotelId: h.hotelId ?? h.id ?? '',
+      name: h.name ?? '',
+      offerId,
+      price: price ?? 0,
+      currency: room?.price?.currency ?? room?.retailRate?.total?.[0]?.currency ?? 'JPY',
+      available: (h.roomTypes?.length ?? 0) > 0,
+    };
+  });
 }
 
 // 2. Prebook (予約前確認)
