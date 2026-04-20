@@ -62,13 +62,20 @@ export default function PaymentModal({ hotel, onClose }: PaymentModalProps) {
       }
 
       const liteAPIConfig = {
-        publicKey: pubKey,
-        secretKey: secretKey,
-        targetElement: '#liteapi-payment-form',
+        apiKey: pubKey,
+        token: secretKey,
+        targetElement: 'liteapi-payment-form',
         returnUrl: `${window.location.origin}/booking/success?tid=${transactionId}`,
       };
       console.log('[PaymentModal] liteAPIConfig:', JSON.stringify(liteAPIConfig, null, 2));
-      new window.LiteAPIPayment(liteAPIConfig).handlePayment();
+      try {
+        new window.LiteAPIPayment(liteAPIConfig).handlePayment();
+      } catch (err: unknown) {
+        console.error('[PaymentModal] LiteAPIPayment init error:', err);
+        if (err && typeof err === 'object') {
+          console.error('[PaymentModal] error details:', JSON.stringify(err, Object.getOwnPropertyNames(err)));
+        }
+      }
     };
 
     if (document.querySelector('script[data-liteapi-sdk]')) {
