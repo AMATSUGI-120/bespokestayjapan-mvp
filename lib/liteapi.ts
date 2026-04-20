@@ -2,6 +2,8 @@ import { mockSearchHotels, mockPrebook, mockBook } from './liteapi-mock';
 import { SearchResult, PrebookResult, BookingResult, GuestInfo } from './types';
 
 const LITEAPI_BASE = 'https://api.liteapi.travel/v3.0';
+// DEBUG: hardcoded to bypass USE_MOCK_API env var
+const USE_MOCK = false;
 
 // 1. ホテル検索
 export async function searchHotels(params: {
@@ -10,7 +12,7 @@ export async function searchHotels(params: {
   checkout: string;
   guests: number;
 }): Promise<SearchResult[]> {
-  if (process.env.USE_MOCK_API === 'true') {
+  if (USE_MOCK) {
     return mockSearchHotels(params);
   }
 
@@ -50,7 +52,7 @@ export async function prebook(params: {
   offerId: string;
   margin: number;
 }): Promise<PrebookResult> {
-  if (process.env.USE_MOCK_API === 'true') {
+  if (USE_MOCK) {
     return mockPrebook(params);
   }
 
@@ -86,7 +88,7 @@ export async function book(params: {
   guestInfo: GuestInfo;
   margin: number;
 }): Promise<BookingResult> {
-  if (process.env.USE_MOCK_API === 'true') {
+  if (USE_MOCK) {
     return mockBook(params);
   }
 
