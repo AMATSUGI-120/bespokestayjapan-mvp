@@ -22,7 +22,6 @@ export async function POST(request: NextRequest) {
         }
       }
 
-      console.log('Booking confirmed:', bookingId, confirmationNumber);
     }
 
     return NextResponse.json({ received: true });

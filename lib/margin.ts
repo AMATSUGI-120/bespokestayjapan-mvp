@@ -2,27 +2,27 @@ import { Hotel, SearchConditions } from './types';
 
 /**
  * Layer別マージン計算
- * Layer 1: 一般 (小型犬・2-3人) → 3%
- * Layer 2: 中間 (中型犬・4人) → 6%
- * Layer 3: ニッチ (大型犬・5+人・複数匹) → 12%
+ * Layer 1: 一般 (小型犬・2-3人) → 7%
+ * Layer 2: 中間 (中型犬・4人) → 10%
+ * Layer 3: ニッチ (大型犬・5+人・複数匹) → 15%
  */
 export function calculateMargin(layer: number, conditions: SearchConditions): number {
   const baseMargins: Record<number, number> = {
-    1: 0.03,
-    2: 0.06,
-    3: 0.12,
+    1: 0.07,
+    2: 0.10,
+    3: 0.15,
   };
 
-  let margin = baseMargins[layer] ?? 0.03;
+  let margin = baseMargins[layer] ?? 0.07;
 
-  // 大型犬 + Layer 3 = そのまま 12%
+  // 大型犬 + Layer 3 = そのまま 15%
   if (conditions.petSize === 'large' && layer === 3) {
-    margin = 0.12;
+    margin = 0.15;
   }
 
-  // 5人以上 + Layer 3 = そのまま 12%
+  // 5人以上 + Layer 3 = そのまま 15%
   if (conditions.guests >= 5 && layer === 3) {
-    margin = 0.12;
+    margin = 0.15;
   }
 
   return margin;
