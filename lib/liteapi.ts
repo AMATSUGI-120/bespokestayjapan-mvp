@@ -34,7 +34,14 @@ export async function searchHotels(params: {
   const data = await response.json();
 
   if (!response.ok) {
-    throw new Error(data.message ?? 'LiteAPI searchHotels failed');
+    console.error('[LiteAPI] searchHotels error', {
+      status: response.status,
+      statusText: response.statusText,
+      url: `${LITEAPI_BASE}/hotels/rates`,
+      apiKey: process.env.NEXT_PUBLIC_LITEAPI_KEY?.slice(0, 8) + '...',
+      responseBody: JSON.stringify(data),
+    });
+    throw new Error(`LiteAPI searchHotels failed [${response.status}]: ${data.message ?? JSON.stringify(data)}`);
   }
 
   return (data.data ?? []).map((h: { id: string; name: string; roomTypes?: Array<{ offerId: string; price?: { finalRate?: number } }> }) => ({
@@ -71,7 +78,14 @@ export async function prebook(params: {
   const data = await response.json();
 
   if (!response.ok) {
-    throw new Error(data.message ?? 'LiteAPI prebook failed');
+    console.error('[LiteAPI] prebook error', {
+      status: response.status,
+      statusText: response.statusText,
+      url: `${LITEAPI_BASE}/rates/prebook`,
+      offerId: params.offerId,
+      responseBody: JSON.stringify(data),
+    });
+    throw new Error(`LiteAPI prebook failed [${response.status}]: ${data.message ?? JSON.stringify(data)}`);
   }
 
   return {
@@ -120,7 +134,14 @@ export async function book(params: {
   const data = await response.json();
 
   if (!response.ok) {
-    throw new Error(data.message ?? 'LiteAPI book failed');
+    console.error('[LiteAPI] book error', {
+      status: response.status,
+      statusText: response.statusText,
+      url: `${LITEAPI_BASE}/rates/book`,
+      prebookId: params.prebookId,
+      responseBody: JSON.stringify(data),
+    });
+    throw new Error(`LiteAPI book failed [${response.status}]: ${data.message ?? JSON.stringify(data)}`);
   }
 
   return {
