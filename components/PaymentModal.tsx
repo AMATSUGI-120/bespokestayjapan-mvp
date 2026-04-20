@@ -19,7 +19,7 @@ export default function PaymentModal({ hotel, onClose }: PaymentModalProps) {
   const [error, setError] = useState<string | null>(null);
   const [step, setStep] = useState<'prebook' | 'confirm' | 'redirect'>('prebook');
   const [prebookId, setPrebookId] = useState<string | null>(null);
-  const [confirmedPrice, setConfirmedPrice] = useState<number | null>(null);
+  const [confirmedPrice, setConfirmedPrice] = useState<number>(hotel.finalPrice);
 
   const handlePrebook = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -44,7 +44,9 @@ export default function PaymentModal({ hotel, onClose }: PaymentModalProps) {
       }
 
       setPrebookId(prebookData.prebookId);
-      setConfirmedPrice(prebookData.totalPrice ?? hotel.finalPrice);
+      if (prebookData.totalPrice && prebookData.totalPrice > 0) {
+        setConfirmedPrice(prebookData.totalPrice);
+      }
       setStep('confirm');
     } catch (err) {
       setError(err instanceof Error ? err.message : 'An error occurred');
@@ -113,7 +115,7 @@ export default function PaymentModal({ hotel, onClose }: PaymentModalProps) {
           <div className="flex justify-between items-center">
             <span className="text-gray-600">Total (incl. fees)</span>
             <span className="text-2xl font-extrabold text-teal-700">
-              ¥{(confirmedPrice ?? hotel.finalPrice).toLocaleString()}
+              ¥{confirmedPrice.toLocaleString()}
             </span>
           </div>
           <p className="text-xs text-gray-400 mt-1">Payment processed by Stripe (via LiteAPI)</p>
@@ -215,7 +217,7 @@ export default function PaymentModal({ hotel, onClose }: PaymentModalProps) {
               disabled={isLoading}
               className="w-full bg-teal-600 hover:bg-teal-700 disabled:bg-teal-300 text-white font-bold py-3 rounded-xl transition-colors text-base mt-2"
             >
-              {isLoading ? 'Checking availability...' : 'Continue to Payment'}
+              {isLoading ? 'Verifying your special price with the hotel... (Est. 5-10 sec)' : 'Continue to Payment'}
             </button>
           </form>
         )}
