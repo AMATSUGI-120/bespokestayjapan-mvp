@@ -77,19 +77,7 @@ export async function POST(request: NextRequest) {
 
     let liteapiResults: Awaited<ReturnType<typeof searchHotels>> = [];
     if (hotelIds.length > 0) {
-      try {
-        liteapiResults = await searchHotels({ hotelIds, checkin, checkout, guests });
-      } catch {
-        // LiteAPI失敗時はモック価格にフォールバック
-        liteapiResults = hotelIds.map((id) => ({
-          hotelId: id,
-          name: '',
-          offerId: `fallback-offer-${id}`,
-          price: 25000,
-          currency: 'JPY',
-          available: true,
-        }));
-      }
+      liteapiResults = await searchHotels({ hotelIds, checkin, checkout, guests });
     }
 
     const liteapiMap = new Map(liteapiResults.map((r) => [r.hotelId, r]));
@@ -97,7 +85,7 @@ export async function POST(request: NextRequest) {
     // 4. Layer別マージン適用 & 最終価格計算
     const results: HotelResult[] = top3.map(({ hotel, matchLevel }) => {
       const liteapiData = hotel.liteapi_id ? liteapiMap.get(hotel.liteapi_id) : undefined;
-      const basePrice = liteapiData?.price ?? 25000;
+      const basePrice = liteapiData?.price ?? 0;
       const margin = calculateMargin(hotel.layer, conditions);
       const finalPrice = calculateFinalPrice(basePrice, margin);
       const liteapiOfferId = liteapiData?.offerId ?? '';

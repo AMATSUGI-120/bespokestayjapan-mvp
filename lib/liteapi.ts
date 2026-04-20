@@ -37,6 +37,10 @@ export async function searchHotels(params: {
 
   const data = await response.json();
 
+  if (response.ok) {
+    console.log('[DEBUG] LiteAPI Success Response:', JSON.stringify(data).substring(0, 500));
+  }
+
   if (!response.ok) {
     console.error('[LiteAPI] searchHotels error', {
       status: response.status,
