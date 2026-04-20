@@ -4,17 +4,17 @@ import { GuestInfo } from '@/lib/types';
 
 export async function POST(request: NextRequest) {
   try {
-    const { prebookId, guestInfo, margin }: {
+    const { prebookId, guestInfo, transactionId }: {
       prebookId: string;
       guestInfo: GuestInfo;
-      margin: number;
+      transactionId: string;
     } = await request.json();
 
-    if (!prebookId || !guestInfo) {
-      return NextResponse.json({ error: 'prebookId and guestInfo are required' }, { status: 400 });
+    if (!prebookId || !guestInfo || !transactionId) {
+      return NextResponse.json({ error: 'prebookId, guestInfo, and transactionId are required' }, { status: 400 });
     }
 
-    const result = await book({ prebookId, guestInfo, margin });
+    const result = await book({ prebookId, guestInfo, transactionId });
 
     return NextResponse.json(result);
   } catch (error) {

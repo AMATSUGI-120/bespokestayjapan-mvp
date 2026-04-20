@@ -116,20 +116,20 @@ export async function prebook(params: {
     status: data.data?.status ?? 'unknown',
     totalPrice: data.data?.offer?.price?.finalRate ?? 0,
     currency: data.data?.offer?.price?.currency ?? 'JPY',
+    secretKey: data.data?.secretKey ?? '',
+    transactionId: data.data?.transactionId ?? '',
   };
 }
 
-// 3. Book (予約確定 + paymentURL取得)
+// 3. Book (予約確定)
 export async function book(params: {
   prebookId: string;
   guestInfo: GuestInfo;
-  margin: number;
+  transactionId: string;
 }): Promise<BookingResult> {
   if (USE_MOCK) {
     return mockBook(params);
   }
-
-  const baseUrl = process.env.NEXT_PUBLIC_BASE_URL ?? 'http://localhost:3000';
 
   const response = await fetch(`${LITEAPI_BASE}/rates/book`, {
     method: 'POST',
@@ -140,10 +140,8 @@ export async function book(params: {
     body: JSON.stringify({
       prebookId: params.prebookId,
       payment: {
-        method: 'stripe_checkout',
-        margin: params.margin,
-        success_url: `${baseUrl}/booking/success`,
-        cancel_url: `${baseUrl}/booking/cancel`,
+        method: 'TRANSACTION_ID',
+        transactionId: params.transactionId,
       },
       guestInfo: {
         guestFirstName: params.guestInfo.firstName,

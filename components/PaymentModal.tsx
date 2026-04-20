@@ -1,12 +1,29 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { HotelResult, GuestInfo } from '@/lib/types';
+
+declare global {
+  interface Window {
+    LiteAPIPayment: new (config: {
+      publicKey: string;
+      appearance?: { theme: string };
+      options?: { business: { name: string } };
+      targetElement: string;
+      secretKey: string;
+      returnUrl: string;
+    }) => { handlePayment: () => void };
+  }
+}
 
 interface PaymentModalProps {
   hotel: HotelResult;
   onClose: () => void;
 }
+
+type Step = 'prebook' | 'confirm' | 'payment';
+
+const STEPS: Step[] = ['prebook', 'confirm', 'payment'];
 
 export default function PaymentModal({ hotel, onClose }: PaymentModalProps) {
   const [guestInfo, setGuestInfo] = useState<GuestInfo>({
@@ -17,9 +34,43 @@ export default function PaymentModal({ hotel, onClose }: PaymentModalProps) {
   });
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
-  const [step, setStep] = useState<'prebook' | 'confirm' | 'redirect'>('prebook');
+  const [step, setStep] = useState<Step>('prebook');
   const [prebookId, setPrebookId] = useState<string | null>(null);
+  const [secretKey, setSecretKey] = useState<string | null>(null);
+  const [transactionId, setTransactionId] = useState<string | null>(null);
   const [confirmedPrice, setConfirmedPrice] = useState<number>(hotel.finalPrice);
+  const sdkInitialized = useRef(false);
+
+  useEffect(() => {
+    if (step !== 'payment' || !secretKey || !transactionId || sdkInitialized.current) return;
+    sdkInitialized.current = true;
+
+    sessionStorage.setItem(
+      `liteapi_booking_${transactionId}`,
+      JSON.stringify({ prebookId, transactionId, guestInfo })
+    );
+
+    const init = () => {
+      new window.LiteAPIPayment({
+        publicKey: process.env.NEXT_PUBLIC_LITEAPI_KEY ?? 'live',
+        appearance: { theme: 'flat' },
+        options: { business: { name: 'BespokStayJapan' } },
+        targetElement: '#liteapi-payment-form',
+        secretKey: secretKey!,
+        returnUrl: `${window.location.origin}/booking/success?tid=${transactionId}`,
+      }).handlePayment();
+    };
+
+    if (document.querySelector('script[data-liteapi-sdk]')) {
+      init();
+      return;
+    }
+    const script = document.createElement('script');
+    script.src = 'https://payment-wrapper.liteapi.travel/dist/liteAPIPayment.js?v=a1';
+    script.setAttribute('data-liteapi-sdk', 'true');
+    script.onload = init;
+    document.head.appendChild(script);
+  }, [step, secretKey, transactionId, prebookId, guestInfo]);
 
   const handlePrebook = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -27,26 +78,18 @@ export default function PaymentModal({ hotel, onClose }: PaymentModalProps) {
     setError(null);
 
     try {
-      // Step 1: Prebook
-      const prebookRes = await fetch('/api/prebook', {
+      const res = await fetch('/api/prebook', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          offerId: hotel.liteapiOfferId,
-          margin: hotel.margin,
-        }),
+        body: JSON.stringify({ offerId: hotel.liteapiOfferId, margin: hotel.margin }),
       });
+      const data = await res.json();
+      if (!res.ok) throw new Error(data.error ?? 'Prebook failed');
 
-      const prebookData = await prebookRes.json();
-
-      if (!prebookRes.ok) {
-        throw new Error(prebookData.error ?? 'Prebook failed');
-      }
-
-      setPrebookId(prebookData.prebookId);
-      if (prebookData.totalPrice && prebookData.totalPrice > 0) {
-        setConfirmedPrice(prebookData.totalPrice);
-      }
+      setPrebookId(data.prebookId);
+      setSecretKey(data.secretKey);
+      setTransactionId(data.transactionId);
+      if (data.totalPrice > 0) setConfirmedPrice(data.totalPrice);
       setStep('confirm');
     } catch (err) {
       setError(err instanceof Error ? err.message : 'An error occurred');
@@ -55,109 +98,68 @@ export default function PaymentModal({ hotel, onClose }: PaymentModalProps) {
     }
   };
 
-  const handleBook = async () => {
-    if (!prebookId) return;
-    setIsLoading(true);
-    setError(null);
-
-    try {
-      // Step 2: Book -> paymentUrl取得
-      const bookRes = await fetch('/api/book', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          prebookId,
-          guestInfo,
-          margin: hotel.margin,
-        }),
-      });
-
-      const bookData = await bookRes.json();
-
-      if (!bookRes.ok) {
-        throw new Error(bookData.error ?? 'Booking failed');
-      }
-
-      setStep('redirect');
-
-      // Step 3: Stripe Checkout へリダイレクト
-      window.location.href = bookData.paymentUrl;
-    } catch (err) {
-      setError(err instanceof Error ? err.message : 'An error occurred');
-      setStep('prebook');
-    } finally {
-      setIsLoading(false);
-    }
+  const handleProceedToPayment = () => {
+    sdkInitialized.current = false;
+    setStep('payment');
   };
+
+  const stepIndex = STEPS.indexOf(step);
+  const stepTitle =
+    step === 'prebook' ? 'Guest Information' :
+    step === 'confirm' ? 'Confirm Booking' :
+    'Secure Payment';
 
   return (
     <div
       className="fixed inset-0 bg-black/60 flex items-center justify-center z-50 p-4"
-      onClick={(e) => e.target === e.currentTarget && onClose()}
+      onClick={(e) => {
+        if (e.target === e.currentTarget && step !== 'payment') onClose();
+      }}
     >
       <div className="bg-white rounded-2xl shadow-2xl w-full max-w-md max-h-[90vh] overflow-y-auto">
+
         {/* Header */}
         <div className="flex items-center justify-between p-6 border-b">
           <div>
-            <h2 className="text-xl font-bold text-gray-900">Complete Booking</h2>
+            <h2 className="text-xl font-bold text-gray-900">{stepTitle}</h2>
             <p className="text-sm text-gray-500 mt-0.5">{hotel.name}</p>
           </div>
-          <button
-            onClick={onClose}
-            className="text-gray-400 hover:text-gray-600 text-2xl font-light leading-none"
-          >
-            ×
-          </button>
+          {step !== 'payment' && (
+            <button
+              onClick={onClose}
+              className="text-gray-400 hover:text-gray-600 text-2xl font-light leading-none"
+              aria-label="Close"
+            >
+              ×
+            </button>
+          )}
         </div>
 
         {/* Price Summary */}
         <div className="px-6 py-4 bg-teal-50 border-b">
           <div className="flex justify-between items-center">
-            <span className="text-gray-600">Total (incl. fees)</span>
+            <span className="text-gray-600 text-sm">Total (incl. all fees)</span>
             <span className="text-2xl font-extrabold text-teal-700">
               ¥{confirmedPrice.toLocaleString()}
             </span>
           </div>
-          <p className="text-xs text-gray-400 mt-1">Payment processed by Stripe (via LiteAPI)</p>
+          <p className="text-xs text-gray-400 mt-1">Secured by Stripe · Processed by LiteAPI</p>
         </div>
 
-        {step === 'redirect' ? (
-          <div className="p-8 text-center">
-            <div className="animate-spin text-4xl mb-4">⏳</div>
-            <p className="text-gray-700 font-semibold">Redirecting to Stripe...</p>
-          </div>
-        ) : step === 'confirm' ? (
-          <div className="p-6 flex flex-col gap-4">
-            <div className="bg-gray-50 rounded-xl p-4 text-sm text-gray-700 space-y-1">
-              <p><span className="font-semibold">Name:</span> {guestInfo.firstName} {guestInfo.lastName}</p>
-              <p><span className="font-semibold">Email:</span> {guestInfo.email}</p>
-              <p><span className="font-semibold">Phone:</span> {guestInfo.phone}</p>
-            </div>
+        {/* Step Progress Bar */}
+        <div className="flex gap-1.5 px-6 pt-4">
+          {STEPS.map((s, i) => (
+            <div
+              key={s}
+              className={`h-1 flex-1 rounded-full transition-colors duration-300 ${
+                i <= stepIndex ? 'bg-teal-500' : 'bg-gray-200'
+              }`}
+            />
+          ))}
+        </div>
 
-            {error && (
-              <p className="text-red-500 text-sm bg-red-50 px-4 py-2 rounded-lg">{error}</p>
-            )}
-
-            <p className="text-sm text-gray-500 text-center">
-              You will be redirected to Stripe to complete payment securely.
-            </p>
-
-            <button
-              onClick={handleBook}
-              disabled={isLoading}
-              className="w-full bg-teal-600 hover:bg-teal-700 disabled:bg-teal-300 text-white font-bold py-3 rounded-xl transition-colors text-base"
-            >
-              {isLoading ? 'Processing...' : 'Confirm & Pay'}
-            </button>
-
-            <button
-              onClick={() => setStep('prebook')}
-              className="w-full text-gray-500 hover:text-gray-700 text-sm py-2"
-            >
-              Back
-            </button>
-          </div>
-        ) : (
+        {/* Step 1: Guest Information */}
+        {step === 'prebook' && (
           <form onSubmit={handlePrebook} className="p-6 flex flex-col gap-4">
             <div className="grid grid-cols-2 gap-3">
               <div className="flex flex-col gap-1">
@@ -217,10 +219,67 @@ export default function PaymentModal({ hotel, onClose }: PaymentModalProps) {
               disabled={isLoading}
               className="w-full bg-teal-600 hover:bg-teal-700 disabled:bg-teal-300 text-white font-bold py-3 rounded-xl transition-colors text-base mt-2"
             >
-              {isLoading ? 'Verifying your special price with the hotel... (Est. 5-10 sec)' : 'Continue to Payment'}
+              {isLoading
+                ? 'Verifying your special price with the hotel... (Est. 5–10 sec)'
+                : 'Continue to Payment'}
             </button>
           </form>
         )}
+
+        {/* Step 2: Confirm Booking */}
+        {step === 'confirm' && (
+          <div className="p-6 flex flex-col gap-4">
+            <div className="bg-gray-50 rounded-xl p-4 text-sm text-gray-700 space-y-2">
+              <p>
+                <span className="font-semibold">Name:</span>{' '}
+                {guestInfo.firstName} {guestInfo.lastName}
+              </p>
+              <p><span className="font-semibold">Email:</span> {guestInfo.email}</p>
+              <p><span className="font-semibold">Phone:</span> {guestInfo.phone}</p>
+            </div>
+
+            <p className="text-sm text-gray-500 text-center">
+              Please enter your card details on the next screen to complete payment securely.
+            </p>
+
+            {error && (
+              <p className="text-red-500 text-sm bg-red-50 px-4 py-2 rounded-lg">{error}</p>
+            )}
+
+            <button
+              onClick={handleProceedToPayment}
+              className="w-full bg-teal-600 hover:bg-teal-700 text-white font-bold py-3 rounded-xl transition-colors text-base"
+            >
+              Proceed to Payment
+            </button>
+
+            <button
+              onClick={() => setStep('prebook')}
+              className="w-full text-gray-500 hover:text-gray-700 text-sm py-2"
+            >
+              Back
+            </button>
+          </div>
+        )}
+
+        {/* Step 3: LiteAPI Payment SDK */}
+        {step === 'payment' && (
+          <div className="p-6">
+            <p className="text-sm text-gray-500 text-center mb-5">
+              Enter your card details below. Your payment is processed securely by Stripe.
+            </p>
+
+            <div
+              id="liteapi-payment-form"
+              className="min-h-[220px] rounded-xl border border-gray-100 bg-gray-50 p-2"
+            />
+
+            <p className="text-xs text-gray-400 text-center mt-5">
+              🔒 Your card information is encrypted and never stored on our servers.
+            </p>
+          </div>
+        )}
+
       </div>
     </div>
   );

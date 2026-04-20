@@ -64,6 +64,8 @@ export interface PrebookResult {
   status: string;
   totalPrice: number;
   currency: string;
+  secretKey: string;
+  transactionId: string;
 }
 
 export interface BookingResult {

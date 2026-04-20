@@ -32,13 +32,15 @@ export const mockPrebook = async (params: {
     status: 'confirmed',
     totalPrice: 35000,
     currency: 'JPY',
+    secretKey: 'pi_mock_secret_key',
+    transactionId: 'tr_ct_mock-transaction-001',
   };
 };
 
 export const mockBook = async (params: {
   prebookId: string;
   guestInfo: unknown;
-  margin: number;
+  transactionId: string;
 }): Promise<BookingResult> => {
   return {
     bookingId: 'mock-booking-001',
