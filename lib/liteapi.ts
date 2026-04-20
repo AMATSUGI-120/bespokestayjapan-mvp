@@ -40,23 +40,39 @@ export async function searchHotels(params: {
 
   type RoomType = {
     offerId?: string;
-    price?: { total?: number; finalRate?: number; currency?: string };
-    retailRate?: { total?: Array<{ amount?: number; currency?: string }> };
-    rates?: Array<{ offerId?: string; retailRate?: { total?: Array<{ amount?: number }> } }>;
+    price?: { total?: number; finalRate?: number; net?: number; amount?: number; currency?: string };
+    retailRate?: {
+      total?: Array<{ amount?: number; currency?: string }>;
+      suggestedSellingRate?: Array<{ amount?: number; currency?: string }>;
+    };
+    rates?: Array<{
+      offerId?: string;
+      retailRate?: {
+        total?: Array<{ amount?: number }>;
+        suggestedSellingRate?: Array<{ amount?: number }>;
+      };
+    }>;
   };
 
   return (data.data ?? []).map((h: { hotelId?: string; id?: string; name?: string; roomTypes?: RoomType[] }) => {
     const room = h.roomTypes?.[0];
 
-    // LiteAPI V3: roomTypes[0].price.total が優先パス
+    // LiteAPI V3: 複数のレスポンス構造に対応
     const price =
       room?.price?.total ??
       room?.price?.finalRate ??
+      room?.price?.net ??
+      room?.price?.amount ??
       room?.retailRate?.total?.[0]?.amount ??
+      room?.retailRate?.suggestedSellingRate?.[0]?.amount ??
       room?.rates?.[0]?.retailRate?.total?.[0]?.amount ??
+      room?.rates?.[0]?.retailRate?.suggestedSellingRate?.[0]?.amount ??
       null;
 
-    const offerId = room?.offerId ?? room?.rates?.[0]?.offerId ?? '';
+    const offerId =
+      room?.offerId ??
+      room?.rates?.[0]?.offerId ??
+      '';
     return {
       hotelId: h.hotelId ?? h.id ?? '',
       name: h.name ?? '',

@@ -100,8 +100,12 @@ export async function POST(request: NextRequest) {
       };
     });
 
-    // 5. 3件を返却 (マッチレベル順)
-    return NextResponse.json({ hotels: results });
+    // 5. 価格が取得できなかったホテルは除外して返却
+    const validResults = results.filter(
+      (r) => r.finalPrice > 0 && r.liteapiOfferId !== ''
+    );
+
+    return NextResponse.json({ hotels: validResults });
   } catch (error) {
     return NextResponse.json({ error: 'Internal server error' }, { status: 500 });
   }

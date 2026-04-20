@@ -99,12 +99,18 @@ export default function HotelCard({ hotel, onBookNow, guests }: HotelCardProps) 
       )}
 
       {/* Book Now */}
-      <button
-        onClick={() => onBookNow(hotel)}
-        className="mt-auto w-full bg-teal-600 hover:bg-teal-700 text-white font-bold py-3 rounded-xl transition-colors text-base shadow"
-      >
-        Book Now
-      </button>
+      {hotel.finalPrice > 0 && hotel.liteapiOfferId ? (
+        <button
+          onClick={() => onBookNow(hotel)}
+          className="mt-auto w-full bg-teal-600 hover:bg-teal-700 text-white font-bold py-3 rounded-xl transition-colors text-base shadow"
+        >
+          Book Now
+        </button>
+      ) : (
+        <div className="mt-auto w-full bg-gray-100 text-gray-400 font-bold py-3 rounded-xl text-base text-center border border-gray-200">
+          Price unavailable — please try different dates
+        </div>
+      )}
     </div>
   );
 }
