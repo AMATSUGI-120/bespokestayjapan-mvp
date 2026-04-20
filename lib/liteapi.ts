@@ -27,7 +27,7 @@ export async function searchHotels(params: {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
-      'X-API-Key': process.env.NEXT_PUBLIC_LITEAPI_KEY!,
+      'X-API-Key': process.env.LITEAPI_SECRET_KEY!,
     },
     body: JSON.stringify(body),
   });
