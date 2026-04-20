@@ -51,12 +51,24 @@ export default function PaymentModal({ hotel, onClose }: PaymentModalProps) {
     );
 
     const init = () => {
+      const pubKey = process.env.NEXT_PUBLIC_LITEAPI_KEY ?? '';
+      console.log('[PaymentModal] SDK init — publicKey:', pubKey ? pubKey.substring(0, 10) + '...' : '(EMPTY! NEXT_PUBLIC_LITEAPI_KEY is not set)', '| secretKey:', secretKey ? secretKey.substring(0, 8) + '...' : '(EMPTY!)', '| transactionId:', transactionId);
+
+      if (!pubKey) {
+        console.error('[PaymentModal] FATAL: NEXT_PUBLIC_LITEAPI_KEY is undefined. Check Vercel env vars (must be a live_... key for Production).');
+        return;
+      }
+      if (!secretKey) {
+        console.error('[PaymentModal] FATAL: secretKey is empty. /api/prebook did not return a secretKey — check that usePaymentSdk:true is being sent and the LiteAPI account supports it.');
+        return;
+      }
+
       new window.LiteAPIPayment({
-        publicKey: process.env.NEXT_PUBLIC_LITEAPI_KEY ?? 'live',
+        publicKey: pubKey,
         appearance: { theme: 'flat' },
         options: { business: { name: 'BespokStayJapan' } },
         targetElement: '#liteapi-payment-form',
-        secretKey: secretKey!,
+        secretKey: secretKey,
         returnUrl: `${window.location.origin}/booking/success?tid=${transactionId}`,
       }).handlePayment();
     };
@@ -86,8 +98,15 @@ export default function PaymentModal({ hotel, onClose }: PaymentModalProps) {
       const data = await res.json();
       if (!res.ok) throw new Error(data.error ?? 'Prebook failed');
 
+      console.log('[PaymentModal] /api/prebook response:', {
+        prebookId: data.prebookId || '(empty)',
+        secretKey: data.secretKey ? data.secretKey.substring(0, 8) + '...' : '(EMPTY!)',
+        transactionId: data.transactionId || '(empty)',
+        totalPrice: data.totalPrice,
+      });
+
       setPrebookId(data.prebookId);
-      setSecretKey(data.secretKey);
+      setSecretKey(data.secretKey || null);
       setTransactionId(data.transactionId);
       if (data.totalPrice > 0) setConfirmedPrice(data.totalPrice);
       setStep('confirm');

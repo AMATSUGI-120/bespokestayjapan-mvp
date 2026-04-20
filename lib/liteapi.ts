@@ -107,17 +107,30 @@ export async function prebook(params: {
 
   const data = await response.json();
 
+  console.log('[liteapi/prebook] raw response status:', response.status);
+  console.log('[liteapi/prebook] raw response data:', JSON.stringify(data, null, 2));
+
   if (!response.ok) {
     throw new Error(`LiteAPI prebook failed [${response.status}]: ${data.message ?? JSON.stringify(data)}`);
   }
 
+  const prebookId = data.data?.prebookId ?? '';
+  const secretKey = data.data?.secretKey ?? '';
+  const transactionId = data.data?.transactionId ?? '';
+
+  console.log('[liteapi/prebook] extracted → prebookId:', prebookId || '(empty)', '| secretKey:', secretKey ? secretKey.substring(0, 8) + '...' : '(EMPTY!)', '| transactionId:', transactionId || '(empty)');
+
+  if (!secretKey) {
+    console.error('[liteapi/prebook] WARNING: secretKey is empty. LiteAPI did not return usePaymentSdk data. Full data.data:', JSON.stringify(data.data));
+  }
+
   return {
-    prebookId: data.data?.prebookId ?? '',
+    prebookId,
     status: data.data?.status ?? 'unknown',
     totalPrice: data.data?.offer?.price?.finalRate ?? 0,
     currency: data.data?.offer?.price?.currency ?? 'JPY',
-    secretKey: data.data?.secretKey ?? '',
-    transactionId: data.data?.transactionId ?? '',
+    secretKey,
+    transactionId,
   };
 }
 
