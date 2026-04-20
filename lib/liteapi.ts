@@ -21,6 +21,7 @@ export async function searchHotels(params: {
     checkin: params.checkin,
     checkout: params.checkout,
     occupancies: [{ adults: Number(params.guests) }],
+    guestNationality: 'JP',
     currency: 'JPY',
   };
   console.log('[DEBUG] Request Body:', JSON.stringify(body));
