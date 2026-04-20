@@ -68,7 +68,9 @@ export default function PaymentModal({ hotel, onClose }: PaymentModalProps) {
 
       const liteAPIConfig = {
         apiKey,
+        publicKey: apiKey,
         secretKey,
+        transactionId,
         targetElement: 'liteapi-payment-form',
         returnUrl: `${window.location.origin}/booking/success?tid=${transactionId}`,
       };
