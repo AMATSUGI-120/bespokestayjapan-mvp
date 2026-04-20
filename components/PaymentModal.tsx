@@ -33,59 +33,92 @@ export default function PaymentModal({ hotel, onClose }: PaymentModalProps) {
   const [secretKey, setSecretKey] = useState<string | null>(null);
   const [transactionId, setTransactionId] = useState<string | null>(null);
   const [confirmedPrice, setConfirmedPrice] = useState<number>(hotel.finalPrice);
+  const [sdkLoading, setSdkLoading] = useState(false);
+  const [sdkError, setSdkError] = useState<string | null>(null);
   const sdkInitialized = useRef(false);
 
   useEffect(() => {
     if (step !== 'payment' || !secretKey || !transactionId || sdkInitialized.current) return;
     sdkInitialized.current = true;
+    setSdkLoading(true);
+    setSdkError(null);
 
     sessionStorage.setItem(
       `liteapi_booking_${transactionId}`,
       JSON.stringify({ prebookId, transactionId, guestInfo })
     );
 
-    const init = () => {
-      const pubKey = process.env.NEXT_PUBLIC_LITEAPI_KEY ?? '';
-      console.log('[PaymentModal] SDK init — publicKey:', pubKey ? pubKey.substring(0, 10) + '...' : '(EMPTY! NEXT_PUBLIC_LITEAPI_KEY is not set)', '| secretKey:', secretKey ? secretKey.substring(0, 8) + '...' : '(EMPTY!)', '| transactionId:', transactionId);
+    const initSdk = (apiKey: string) => {
+      console.log('[PaymentModal] SDK init — apiKey:', apiKey ? apiKey.substring(0, 10) + '...' : '(EMPTY!)', '| secretKey:', secretKey ? secretKey.substring(0, 8) + '...' : '(EMPTY!)', '| transactionId:', transactionId);
 
-      if (!pubKey) {
-        console.error('[PaymentModal] FATAL: NEXT_PUBLIC_LITEAPI_KEY is undefined. Check Vercel env vars (must be a live_... key for Production).');
+      if (!apiKey) {
+        const msg = 'Payment system error: API key is not configured. Please contact support.';
+        console.error('[PaymentModal] FATAL: apiKey is empty.');
+        setSdkError(msg);
+        setSdkLoading(false);
         return;
       }
       if (!secretKey) {
-        console.error('[PaymentModal] FATAL: secretKey is empty. /api/prebook did not return a secretKey — check that usePaymentSdk:true is being sent and the LiteAPI account supports it.');
+        const msg = 'Payment system error: session key missing. Please try again.';
+        console.error('[PaymentModal] FATAL: secretKey is empty.');
+        setSdkError(msg);
+        setSdkLoading(false);
         return;
       }
 
       const liteAPIConfig = {
-        publicKey: pubKey,
-        secretKey: secretKey,
+        apiKey,
+        secretKey,
         targetElement: 'liteapi-payment-form',
         returnUrl: `${window.location.origin}/booking/success?tid=${transactionId}`,
       };
-      console.log('[PaymentModal] liteAPIConfig:', JSON.stringify(liteAPIConfig, null, 2));
+      console.log('[PaymentModal] liteAPIConfig:', JSON.stringify({ ...liteAPIConfig, apiKey: liteAPIConfig.apiKey.substring(0, 10) + '...' }));
       setTimeout(() => {
         try {
           // eslint-disable-next-line @typescript-eslint/no-explicit-any
           new window.LiteAPIPayment(liteAPIConfig as any).handlePayment();
+          setSdkLoading(false);
         } catch (err: unknown) {
           console.error('[PaymentModal] LiteAPIPayment init error:', err);
-          if (err && typeof err === 'object') {
-            console.error('[PaymentModal] error details:', JSON.stringify(err, Object.getOwnPropertyNames(err)));
-          }
+          const msg = err instanceof Error ? `Payment system error: ${err.message}` : 'Payment system error: failed to initialize. Please try again.';
+          setSdkError(msg);
+          setSdkLoading(false);
         }
-      }, 1000);
+      }, 500);
     };
 
-    if (document.querySelector('script[data-liteapi-sdk]')) {
-      init();
-      return;
-    }
-    const script = document.createElement('script');
-    script.src = 'https://payment-wrapper.liteapi.travel/dist/liteAPIPayment.js?v=a1';
-    script.setAttribute('data-liteapi-sdk', 'true');
-    script.onload = init;
-    document.head.appendChild(script);
+    const loadAndInit = async () => {
+      let apiKey = '';
+      try {
+        const res = await fetch('/api/config');
+        const cfg = await res.json();
+        if (cfg.error) {
+          throw new Error(cfg.error.message ?? JSON.stringify(cfg.error));
+        }
+        apiKey = cfg.apiKey ?? '';
+      } catch (err) {
+        const msg = err instanceof Error ? `Payment system error: ${err.message}` : 'Payment system error: could not load config.';
+        setSdkError(msg);
+        setSdkLoading(false);
+        return;
+      }
+
+      if (document.querySelector('script[data-liteapi-sdk]')) {
+        initSdk(apiKey);
+        return;
+      }
+      const script = document.createElement('script');
+      script.src = 'https://payment-wrapper.liteapi.travel/dist/liteAPIPayment.js?v=a1';
+      script.setAttribute('data-liteapi-sdk', 'true');
+      script.onload = () => initSdk(apiKey);
+      script.onerror = () => {
+        setSdkError('Payment system error: failed to load payment script.');
+        setSdkLoading(false);
+      };
+      document.head.appendChild(script);
+    };
+
+    loadAndInit();
   }, [step, secretKey, transactionId, prebookId, guestInfo]);
 
   const handlePrebook = async (e: React.FormEvent) => {
@@ -182,7 +215,16 @@ export default function PaymentModal({ hotel, onClose }: PaymentModalProps) {
         </div>
 
         {/* Step 1: Guest Information */}
-        {step === 'prebook' && (
+        {step === 'prebook' && isLoading && (
+          <div className="p-8 flex flex-col items-center gap-4">
+            <div className="w-10 h-10 border-4 border-teal-500 border-t-transparent rounded-full animate-spin" />
+            <p className="text-sm text-gray-600 text-center">
+              Verifying your special price with the hotel…<br />
+              <span className="text-gray-400 text-xs">This may take up to 20 seconds</span>
+            </p>
+          </div>
+        )}
+        {step === 'prebook' && !isLoading && (
           <form onSubmit={handlePrebook} className="p-6 flex flex-col gap-4">
             <div className="grid grid-cols-2 gap-3">
               <div className="flex flex-col gap-1">
@@ -242,9 +284,7 @@ export default function PaymentModal({ hotel, onClose }: PaymentModalProps) {
               disabled={isLoading}
               className="w-full bg-teal-600 hover:bg-teal-700 disabled:bg-teal-300 text-white font-bold py-3 rounded-xl transition-colors text-base mt-2"
             >
-              {isLoading
-                ? 'Verifying your special price with the hotel... (Est. 5–10 sec)'
-                : 'Continue to Payment'}
+              Continue to Payment
             </button>
           </form>
         )}
@@ -288,18 +328,41 @@ export default function PaymentModal({ hotel, onClose }: PaymentModalProps) {
         {/* Step 3: LiteAPI Payment SDK */}
         {step === 'payment' && (
           <div className="p-6">
-            <p className="text-sm text-gray-500 text-center mb-5">
-              Enter your card details below. Your payment is processed securely by Stripe.
-            </p>
+            {sdkError ? (
+              <div className="rounded-xl bg-red-50 border border-red-200 p-4 text-center">
+                <p className="text-red-600 text-sm font-semibold">{sdkError}</p>
+                <button
+                  onClick={() => {
+                    sdkInitialized.current = false;
+                    setSdkError(null);
+                    setSdkLoading(false);
+                    setStep('confirm');
+                  }}
+                  className="mt-3 text-sm text-gray-500 hover:text-gray-700 underline"
+                >
+                  Go back
+                </button>
+              </div>
+            ) : sdkLoading ? (
+              <div className="flex flex-col items-center gap-4 py-8">
+                <div className="w-10 h-10 border-4 border-teal-500 border-t-transparent rounded-full animate-spin" />
+                <p className="text-sm text-gray-600">Preparing payment form…</p>
+              </div>
+            ) : (
+              <>
+                <p className="text-sm text-gray-500 text-center mb-5">
+                  Enter your card details below. Your payment is processed securely by Stripe.
+                </p>
+                <p className="text-xs text-gray-400 text-center mt-5">
+                  🔒 Your card information is encrypted and never stored on our servers.
+                </p>
+              </>
+            )}
 
             <div
               id="liteapi-payment-form"
-              className="min-h-[220px] rounded-xl border border-gray-100 bg-gray-50 p-2"
+              className={`rounded-xl border border-gray-100 bg-gray-50 p-2 ${sdkLoading || sdkError ? 'hidden' : 'min-h-[220px]'}`}
             />
-
-            <p className="text-xs text-gray-400 text-center mt-5">
-              🔒 Your card information is encrypted and never stored on our servers.
-            </p>
           </div>
         )}
 
