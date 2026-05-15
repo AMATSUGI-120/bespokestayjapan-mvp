@@ -131,6 +131,8 @@ export function HeroSection({ imageUrl, imageAlt, className }: HeroSectionProps)
               src={imageUrl}
               alt={imageAlt ?? 'A Japan stay — hotel or ryokan interior'}
               style={imgStyle}
+              fetchPriority="high"
+              loading="eager"
             />
           ) : (
             /* TODO: Replace with owned/licensed stay photography once photo seeding is live */
@@ -168,10 +170,10 @@ export function HeroSection({ imageUrl, imageAlt, className }: HeroSectionProps)
           </p>
 
           <div className="flex flex-col sm:flex-row items-start sm:items-center gap-5 mt-9">
-            <a href="#stays" style={primaryCtaStyle}>
-              Browse conditions
+            <a href="#featured-stays" style={primaryCtaStyle}>
+              View curated stays
             </a>
-            <a href="#ask" style={secondaryCtaStyle}>
+            <a href="#ask" style={secondaryCtaStyle} className="text-[13px]">
               Ask for a stay match
             </a>
           </div>

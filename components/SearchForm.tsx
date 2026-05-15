@@ -36,9 +36,15 @@ const noteStyle: CSSProperties = {
   marginTop: '8px',
 };
 
+function addOneDay(dateStr: string): string {
+  const d = new Date(dateStr + 'T00:00:00');
+  d.setDate(d.getDate() + 1);
+  return d.toISOString().split('T')[0];
+}
+
 export default function SearchForm({ onSearch, isLoading }: SearchFormProps) {
   const today = new Date().toISOString().split('T')[0];
-  const tomorrow = new Date(Date.now() + 86400000).toISOString().split('T')[0];
+  const tomorrow = addOneDay(today);
 
   const [conditions, setConditions] = useState<SearchConditions>({
     city: 'Kyoto',
@@ -114,7 +120,13 @@ export default function SearchForm({ onSearch, isLoading }: SearchFormProps) {
             type="date"
             value={conditions.checkin}
             min={today}
-            onChange={(e) => setConditions({ ...conditions, checkin: e.target.value })}
+            onChange={(e) => {
+              const newCheckin = e.target.value;
+              const minCheckout = addOneDay(newCheckin);
+              const newCheckout =
+                conditions.checkout <= newCheckin ? minCheckout : conditions.checkout;
+              setConditions({ ...conditions, checkin: newCheckin, checkout: newCheckout });
+            }}
             className={fieldStyle}
           />
         </div>
@@ -125,7 +137,7 @@ export default function SearchForm({ onSearch, isLoading }: SearchFormProps) {
           <input
             type="date"
             value={conditions.checkout}
-            min={conditions.checkin}
+            min={addOneDay(conditions.checkin)}
             onChange={(e) => setConditions({ ...conditions, checkout: e.target.value })}
             className={fieldStyle}
           />

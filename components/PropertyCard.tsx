@@ -155,7 +155,14 @@ export function PropertyCard({
   const trimmedReferenceLabel = referenceLabel?.trim();
 
   return (
-    <article className={className} style={{ display: 'flex', flexDirection: 'column', height: '100%' }}>
+    <article
+      className={[
+        'border border-[var(--bsj-border)] rounded-[6px] overflow-hidden',
+        'sm:border-0 sm:rounded-none sm:overflow-visible',
+        className,
+      ].filter(Boolean).join(' ')}
+      style={{ display: 'flex', flexDirection: 'column', height: '100%' }}
+    >
       <a
         href={ctaHref}
         style={imageLinkStyle}
@@ -170,7 +177,7 @@ export function PropertyCard({
         />
       </a>
 
-      <div style={bodyStyle}>
+      <div style={bodyStyle} className="px-4 pb-5 sm:px-0 sm:pb-0">
         <div className="flex items-center justify-between gap-3 border-b border-[var(--bsj-border)] pb-3">
           <span style={stayTypeStyle}>{stayType}</span>
           <VerificationBadge variant={verificationVariant} />
