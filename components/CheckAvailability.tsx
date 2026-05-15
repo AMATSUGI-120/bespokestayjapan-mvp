@@ -540,13 +540,33 @@ export default function CheckAvailability({
 
           {selectedPlanIndex !== null && (
             <div ref={confirmedRef} style={{ scrollMarginTop: '80px' }}>
-              {prebookStatus === 'loading' && (
-                <div className="mt-6 rounded-[4px] border border-[var(--bsj-border)] bg-[var(--bsj-bg-card)] p-6">
-                  <p className="text-[11px] font-semibold uppercase tracking-[0.14em] text-[var(--bsj-text-light)]">
-                    Confirming your plan…
+              {prebookStatus === 'loading' && selectedPlanIndex !== null && plans[selectedPlanIndex] && (
+                <div className="mt-6 rounded-[4px] border border-[var(--bsj-primary)] bg-[var(--bsj-bg-card)] p-6">
+                  <p className="text-[11px] font-semibold uppercase tracking-[0.14em] text-[var(--bsj-primary)]">
+                    Plan selected
                   </p>
-                  <p className="mt-2 text-[13px] leading-[1.7] text-[var(--bsj-text-muted)]">
-                    Checking availability and locking in your rate.
+
+                  <div className="mt-3 flex flex-wrap items-baseline gap-x-2 gap-y-1">
+                    <span className="text-[18px] font-medium text-[var(--bsj-text)]">
+                      {formatPrice(plans[selectedPlanIndex].totalPrice, plans[selectedPlanIndex].currency)}
+                    </span>
+                    <span className="text-[13px] text-[var(--bsj-text-muted)]">
+                      {plans[selectedPlanIndex].boardLabel}
+                      {' · '}
+                      {plans[selectedPlanIndex].refundable ? 'Refundable' : 'Non-refundable'}
+                    </span>
+                  </div>
+
+                  <div className="mt-5 border-t border-[var(--bsj-border)]" />
+
+                  <div className="mt-4 flex items-center gap-2">
+                    <span className="inline-block h-1.5 w-1.5 animate-pulse rounded-full bg-[var(--bsj-text-light)]" />
+                    <p className="text-[11px] font-semibold uppercase tracking-[0.14em] text-[var(--bsj-text-light)]">
+                      Confirming selected plan
+                    </p>
+                  </div>
+                  <p className="mt-1.5 text-[13px] leading-[1.7] text-[var(--bsj-text-muted)]">
+                    We&apos;re confirming the final price and cancellation terms before payment.
                   </p>
                 </div>
               )}
