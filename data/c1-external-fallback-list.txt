@@ -1,0 +1,90 @@
+# C1 External Fallback List
+# 生成日時: Fri May 15 01:27:20 JST 2026
+# 件数: 12件
+
+# LiteAPI rates API で hotel not found となる物件。
+# /data/hotel (写真取得) は動作する可能性があるが、予約導線は OTA / 公式サイト外部CTAへ fallback する。
+
+liteapi_id : lpbffda
+name       : Kyoto Machiya Fukune — Private Machiya Suite with Rotenburo Garden Bath
+city       : Kyoto / Nakagyo-ku
+tags       : private-villa | private-bath | luggage-friendly | English-friendly
+reason     : Not found in rates API — hotel may be data-only in LiteAPI (not bookable via rates endpoint): Hotel not found in rates response (invalid liteapi_id or sold out)
+fallback   : external_ota_or_official_booking_url
+
+liteapi_id : lpb9595
+name       : Kyoto Ryokan Gion Sano — Traditional Ryokan with Elevator and Luggage Storage in Southern Higashiyama
+city       : Kyoto / Gion / Higashiyama-ku
+tags       : luggage-friendly | private-bath | English-friendly | family-friendly
+reason     : Not found in rates API — hotel may be data-only in LiteAPI (not bookable via rates endpoint): Hotel not found in rates response (invalid liteapi_id or sold out)
+fallback   : external_ota_or_official_booking_url
+
+liteapi_id : lp1035eb
+name       : Onya Tachibana — Ryokan with Private Hot Tub Bathrooms, 250m from Nijo Station
+city       : Kyoto / Nijo / Nakagyo Ward
+tags       : private-bath | tattoo-consideration | luggage-friendly | family-friendly
+reason     : Not found in rates API — hotel may be data-only in LiteAPI (not bookable via rates endpoint): Hotel not found in rates response (invalid liteapi_id or sold out)
+fallback   : external_ota_or_official_booking_url
+
+liteapi_id : lp9fc14
+name       : Kumashu-an Machiya House — Private Kyoto Townhouse with Full Kitchen Near Nijo Castle
+city       : Kyoto / Nakagyo-ku
+tags       : private-villa | self-catering | luggage-friendly | English-friendly | family-friendly
+reason     : Not found in rates API — hotel may be data-only in LiteAPI (not bookable via rates endpoint): Hotel not found in rates response (invalid liteapi_id or sold out)
+fallback   : external_ota_or_official_booking_url
+
+liteapi_id : lp6558f48f
+name       : Ocean Shinsaibashi — Apartment with Full Kitchen and Deep Soaking Bath Near Dotonbori
+city       : Osaka / Shinsaibashi / Shimanouchi
+tags       : self-catering | private-bath | English-friendly | family-friendly
+reason     : Not found in rates API — hotel may be data-only in LiteAPI (not bookable via rates endpoint): Hotel not found in rates response (invalid liteapi_id or sold out)
+fallback   : external_ota_or_official_booking_url
+
+liteapi_id : lp6554dfc3
+name       : Koti Sopo Universal Bay 1 by Liaison — Self-Catering Apartment 4 Minutes from Nishikujo Station, 2 Stops to USJ
+city       : Osaka / Konohana / Nishikujo
+tags       : self-catering | luggage-friendly | English-friendly | family-friendly
+reason     : Not found in rates API — hotel may be data-only in LiteAPI (not bookable via rates endpoint): Hotel not found in rates response (invalid liteapi_id or sold out)
+fallback   : external_ota_or_official_booking_url
+
+liteapi_id : lp6554ecdb
+name       : Gummi Apartment — Self-Catering Kitchen Near USJ, Konohana-ku Osaka
+city       : Osaka / Konohana / USJ Area
+tags       : self-catering | private-bath | family-friendly
+reason     : Not found in rates API — hotel may be data-only in LiteAPI (not bookable via rates endpoint): Hotel not found in rates response (invalid liteapi_id or sold out)
+fallback   : external_ota_or_official_booking_url
+
+liteapi_id : lp27ddc7
+name       : ARlis house Shin Osaka North — Apartment Hotel with Full Stocked Kitchen and Private Soaking Bath Near Shin-Osaka
+city       : Osaka / Shin-Osaka / Higashimikuni
+tags       : self-catering | food-friendly | private-bath | English-friendly | family-friendly
+reason     : Not found in rates API — hotel may be data-only in LiteAPI (not bookable via rates endpoint): Hotel not found in rates response (invalid liteapi_id or sold out)
+fallback   : external_ota_or_official_booking_url
+
+liteapi_id : lp2515eb
+name       : AFP Tennoji Apartment — 30-Unit Self-Catering Complex with Full Kitchen and Private Soaking Bath, 1 Min from Showacho Station
+city       : Osaka / Tennoji / Abeno
+tags       : self-catering | food-friendly | private-bath | luggage-friendly | English-friendly | family-friendly
+reason     : Not found in rates API — hotel may be data-only in LiteAPI (not bookable via rates endpoint): Hotel not found in rates response (invalid liteapi_id or sold out)
+fallback   : external_ota_or_official_booking_url
+
+liteapi_id : lp1a7bcd
+name       : Machi de kurasu Tengachaya-3 — Private Holiday Home with Kitchen and Soaking Bath Near Tengachaya Station
+city       : Osaka / Nishinari-ku / Tengachaya
+tags       : private-villa | self-catering | private-bath | family-friendly
+reason     : Not found in rates API — hotel may be data-only in LiteAPI (not bookable via rates endpoint): Hotel not found in rates response (invalid liteapi_id or sold out)
+fallback   : external_ota_or_official_booking_url
+
+liteapi_id : lp1867c6
+name       : i Osaka Traditional — Guesthouse with Kitchen, Private Baths, and On-Site Italian-Korean Restaurant
+city       : Osaka / Kitakagaya
+tags       : self-catering | food-friendly | private-bath | family-friendly
+reason     : Not found in rates API — hotel may be data-only in LiteAPI (not bookable via rates endpoint): Hotel not found in rates response (invalid liteapi_id or sold out)
+fallback   : external_ota_or_official_booking_url
+
+liteapi_id : lp5fb6f
+name       : Ryokan Asakusa Shigetsu — Traditional Tokyo Ryokan with Private Bathrooms Near Senso-ji
+city       : Tokyo / Asakusa / Taito-ku
+tags       : private-bath | tattoo-consideration | luggage-friendly | English-friendly | access-friendly
+reason     : Not found in rates API — hotel may be data-only in LiteAPI (not bookable via rates endpoint): Hotel not found in rates response (invalid liteapi_id or sold out)
+fallback   : external_ota_or_official_booking_url

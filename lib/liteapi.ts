@@ -1,7 +1,7 @@
 import { mockSearchHotels, mockPrebook, mockBook } from './liteapi-mock';
 import { SearchResult, PrebookResult, BookingResult, GuestInfo } from './types';
+import { getLiteApiKey, LITEAPI_BASE } from './liteapi-env';
 
-const LITEAPI_BASE = 'https://api.liteapi.travel/v3.0';
 const USE_MOCK = false;
 
 // 1. ホテル検索
@@ -10,12 +10,13 @@ export async function searchHotels(params: {
   checkin: string;
   checkout: string;
   guests: number;
+  margin?: number;
 }): Promise<SearchResult[]> {
   if (USE_MOCK) {
     return mockSearchHotels(params);
   }
 
-  const body = {
+  const body: Record<string, unknown> = {
     hotelIds: params.hotelIds,
     checkin: params.checkin,
     checkout: params.checkout,
@@ -23,11 +24,16 @@ export async function searchHotels(params: {
     guestNationality: 'JP',
     currency: 'JPY',
   };
+
+  if (params.margin !== undefined) {
+    body.margin = params.margin;
+  }
+
   const response = await fetch(`${LITEAPI_BASE}/hotels/rates`, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
-      'X-API-Key': process.env.LITEAPI_SECRET_KEY!,
+      'X-API-Key': getLiteApiKey(),
     },
     body: JSON.stringify(body),
   });
@@ -38,8 +44,11 @@ export async function searchHotels(params: {
     throw new Error(`LiteAPI searchHotels failed [${response.status}]: ${data.message ?? JSON.stringify(data)}`);
   }
 
+  type CancelPolicyInfo = { cancelTime?: string; amount?: number; currency?: string; type?: string };
   type RoomType = {
     offerId?: string;
+    refundableTag?: string;
+    cancellationPolicies?: { cancelPolicyInfos?: CancelPolicyInfo[] };
     price?: { total?: number; finalRate?: number; net?: number; amount?: number; currency?: string };
     retailRate?: {
       total?: Array<{ amount?: number; currency?: string }>;
@@ -47,6 +56,8 @@ export async function searchHotels(params: {
     };
     rates?: Array<{
       offerId?: string;
+      refundableTag?: string;
+      cancellationPolicies?: { refundableTag?: string; cancelPolicyInfos?: CancelPolicyInfo[] };
       retailRate?: {
         total?: Array<{ amount?: number }>;
         suggestedSellingRate?: Array<{ amount?: number }>;
@@ -57,22 +68,37 @@ export async function searchHotels(params: {
   return (data.data ?? []).map((h: { hotelId?: string; id?: string; name?: string; roomTypes?: RoomType[] }) => {
     const room = h.roomTypes?.[0];
 
-    // LiteAPI V3: 複数のレスポンス構造に対応
+    // margin指定時はretailRate(小売価格)を優先。なければprice.total(net rate)にフォールバック
     const price =
-      room?.price?.total ??
-      room?.price?.finalRate ??
-      room?.price?.net ??
-      room?.price?.amount ??
       room?.retailRate?.total?.[0]?.amount ??
       room?.retailRate?.suggestedSellingRate?.[0]?.amount ??
       room?.rates?.[0]?.retailRate?.total?.[0]?.amount ??
       room?.rates?.[0]?.retailRate?.suggestedSellingRate?.[0]?.amount ??
+      room?.price?.total ??
+      room?.price?.finalRate ??
+      room?.price?.net ??
+      room?.price?.amount ??
       null;
 
     const offerId =
       room?.offerId ??
       room?.rates?.[0]?.offerId ??
       '';
+
+    const refundableTag =
+      room?.rates?.[0]?.cancellationPolicies?.refundableTag ??
+      '';
+
+    const cancelPolicyInfos =
+      room?.cancellationPolicies?.cancelPolicyInfos ??
+      room?.rates?.[0]?.cancellationPolicies?.cancelPolicyInfos ??
+      [];
+    const cancellationDeadline = cancelPolicyInfos[0]?.cancelTime ?? null;
+
+    console.log(`[liteapi/searchHotels] cancellation — hotel=${h.hotelId ?? h.id} refundableTag="${refundableTag}" room.refundableTag="${room?.refundableTag}" rates[0].refundableTag="${room?.rates?.[0]?.refundableTag}" cancelPolicyInfos=${JSON.stringify(cancelPolicyInfos.slice(0, 1))}`);
+
+    console.log(`[liteapi/searchHotels] hotel=${h.hotelId ?? h.id} offerId=${offerId || '(none)'} retailRate.total=${room?.retailRate?.total?.[0]?.amount} price.total=${room?.price?.total} → picked price=${price} refundableTag=${refundableTag}`);
+
     return {
       hotelId: h.hotelId ?? h.id ?? '',
       name: h.name ?? '',
@@ -80,6 +106,8 @@ export async function searchHotels(params: {
       price: price ?? 0,
       currency: room?.price?.currency ?? room?.retailRate?.total?.[0]?.currency ?? 'JPY',
       available: (h.roomTypes?.length ?? 0) > 0,
+      refundableTag,
+      cancellationDeadline,
     };
   });
 }
@@ -97,18 +125,16 @@ export async function prebook(params: {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
-      'X-API-Key': process.env.LITEAPI_SECRET_KEY!,
+      'X-API-Key': getLiteApiKey(),
     },
     body: JSON.stringify({
       offerId: params.offerId,
       usePaymentSdk: true,
+      ...(params.margin > 0 ? { margin: params.margin } : {}),
     }),
   });
 
   const data = await response.json();
-
-  console.log('[liteapi/prebook] raw response status:', response.status);
-  console.log('[liteapi/prebook] raw response data:', JSON.stringify(data, null, 2));
 
   if (!response.ok) {
     throw new Error(`LiteAPI prebook failed [${response.status}]: ${data.message ?? JSON.stringify(data)}`);
@@ -118,17 +144,30 @@ export async function prebook(params: {
   const secretKey = data.data?.secretKey ?? '';
   const transactionId = data.data?.transactionId ?? '';
 
-  console.log('[liteapi/prebook] extracted → prebookId:', prebookId || '(empty)', '| secretKey:', secretKey ? secretKey.substring(0, 8) + '...' : '(EMPTY!)', '| transactionId:', transactionId || '(empty)');
-
   if (!secretKey) {
     console.error('[liteapi/prebook] WARNING: secretKey is empty. LiteAPI did not return usePaymentSdk data. Full data.data:', JSON.stringify(data.data));
   }
 
+  const netPrice =
+    data.data?.sellingPriceToUser ??
+    data.data?.offer?.price?.finalRate ??
+    data.data?.offer?.price?.total ??
+    data.data?.offer?.price?.amount ??
+    data.data?.offer?.retailRate?.total?.[0]?.amount ??
+    data.data?.totalPrice ??
+    data.data?.price?.finalRate ??
+    data.data?.price?.total ??
+    0;
+
+  const totalPrice = netPrice;
+
+  console.log(`[liteapi/prebook] netPrice=${netPrice} margin=${params.margin}% → totalPrice=${totalPrice} (LiteAPI retailRate.total already includes margin — no client-side markup applied)`);
+
   return {
     prebookId,
     status: data.data?.status ?? 'unknown',
-    totalPrice: data.data?.offer?.price?.finalRate ?? 0,
-    currency: data.data?.offer?.price?.currency ?? 'JPY',
+    totalPrice,
+    currency: data.data?.offer?.price?.currency ?? data.data?.offer?.retailRate?.total?.[0]?.currency ?? 'JPY',
     secretKey,
     transactionId,
   };
@@ -148,7 +187,7 @@ export async function book(params: {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
-      'X-API-Key': process.env.LITEAPI_SECRET_KEY!,
+      'X-API-Key': getLiteApiKey(),
     },
     body: JSON.stringify({
       prebookId: params.prebookId,

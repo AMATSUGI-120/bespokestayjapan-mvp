@@ -39,6 +39,12 @@ export default function PaymentModal({ hotel, onClose }: PaymentModalProps) {
 
   useEffect(() => {
     if (step !== 'payment' || !secretKey || !transactionId || sdkInitialized.current) return;
+
+    if (!prebookId) {
+      setSdkError('Booking session error: missing booking ID. Please go back and try again.');
+      return;
+    }
+
     sdkInitialized.current = true;
     setSdkLoading(true);
     setSdkError(null);
@@ -49,7 +55,7 @@ export default function PaymentModal({ hotel, onClose }: PaymentModalProps) {
     );
 
     const initSdk = (apiKey: string) => {
-      console.log('[PaymentModal] SDK init — apiKey prefix:', apiKey ? apiKey.substring(0, 5) : '(EMPTY!)', '| secretKey:', secretKey ? secretKey.substring(0, 8) + '...' : '(EMPTY!)', '| transactionId:', transactionId);
+      console.log('[PaymentModal] SDK init — apiKey:', apiKey || '(EMPTY!)', '| secretKey:', secretKey ? '(present)' : '(EMPTY!)', '| transactionId:', transactionId ? '…' + transactionId.slice(-4) : '(empty)');
 
       if (!apiKey) {
         const msg = 'Payment system error: API key is not configured. Please contact support.';
@@ -71,30 +77,54 @@ export default function PaymentModal({ hotel, onClose }: PaymentModalProps) {
         publicKey: apiKey,
         secretKey,
         transactionId,
-        targetElement: 'liteapi-payment-form',
+        targetElement: '#liteapi-payment-form',
         returnUrl: `${window.location.origin}/booking/success?tid=${transactionId}`,
       };
-      console.log('[PaymentModal] liteAPIConfig:', JSON.stringify({ ...liteAPIConfig, apiKey: liteAPIConfig.apiKey.substring(0, 5) + '...' }));
-      setTimeout(() => {
+      const tryMount = (attemptsLeft: number) => {
+        const el = document.getElementById('liteapi-payment-form');
+        console.log(`[PaymentModal] mount attempt (${4 - attemptsLeft}/3) — el:`, el ? `found children=${el.childElementCount} w=${el.offsetWidth}` : 'NULL');
+
+        if (!el) {
+          if (attemptsLeft > 0) { setTimeout(() => tryMount(attemptsLeft - 1), 400); return; }
+          setSdkError('Payment system error: payment container not found. Please try again.');
+          setSdkLoading(false);
+          return;
+        }
+
+        // Guard: only mount if container is still empty (prevent double-mount)
+        if (el.childElementCount > 0) {
+          console.log('[PaymentModal] container already has children — skipping mount');
+          setSdkLoading(false);
+          return;
+        }
+
         try {
           // eslint-disable-next-line @typescript-eslint/no-explicit-any
           new window.LiteAPIPayment(liteAPIConfig as any).handlePayment();
           setSdkLoading(false);
+          setTimeout(() => el.scrollIntoView({ behavior: 'smooth', block: 'nearest' }), 150);
         } catch (err: unknown) {
           console.error('[PaymentModal] LiteAPIPayment init error:', err);
           const msg = err instanceof Error ? `Payment system error: ${err.message}` : 'Payment system error: failed to initialize. Please try again.';
           setSdkError(msg);
           setSdkLoading(false);
         }
-      }, 500);
+      };
+
+      setTimeout(() => tryMount(3), 800);
     };
 
     const loadAndInit = async () => {
-      // TEMP: Sandbox Public Key for isolation test — revert after LiteAPI support confirms config
-      const apiKey = '5fe2e0da-e9f8-48fd-bd68-d86f929d6dec';
-      console.log('[PaymentModal] hostname:', window.location.hostname, '| apiKey prefix:', apiKey ? apiKey.substring(0, 5) : '(EMPTY!)');
+      const apiKey = process.env.NEXT_PUBLIC_LITEAPI_ENV === 'sandbox' ? 'sandbox' : 'live';
+      console.log('[PaymentModal] hostname:', window.location.hostname, '| apiKey:', apiKey);
 
       if (document.querySelector('script[data-liteapi-sdk]')) {
+        if (!window.LiteAPIPayment) {
+          console.error('[PaymentModal] LiteAPIPayment not yet loaded — script tag exists but SDK is still loading');
+          setSdkError('Payment system error: SDK not ready. Please try again.');
+          setSdkLoading(false);
+          return;
+        }
         initSdk(apiKey);
         return;
       }
@@ -112,8 +142,13 @@ export default function PaymentModal({ hotel, onClose }: PaymentModalProps) {
     loadAndInit();
   }, [step, secretKey, transactionId, prebookId, guestInfo]);
 
-  const handlePrebook = async (e: React.FormEvent) => {
+  const handlePrebook = (e: React.FormEvent) => {
     e.preventDefault();
+    setError(null);
+    setStep('confirm');
+  };
+
+  const handleProceedToPayment = async () => {
     setIsLoading(true);
     setError(null);
 
@@ -121,33 +156,40 @@ export default function PaymentModal({ hotel, onClose }: PaymentModalProps) {
       const res = await fetch('/api/prebook', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ offerId: hotel.liteapiOfferId, margin: hotel.margin }),
+        body: JSON.stringify({
+          offerId: hotel.liteapiOfferId,
+          margin: hotel.margin,
+        }),
       });
       const data = await res.json();
       if (!res.ok) throw new Error(data.error ?? 'Prebook failed');
 
       console.log('[PaymentModal] /api/prebook response:', {
         prebookId: data.prebookId || '(empty)',
-        secretKey: data.secretKey ? data.secretKey.substring(0, 8) + '...' : '(EMPTY!)',
         transactionId: data.transactionId || '(empty)',
         totalPrice: data.totalPrice,
       });
 
-      setPrebookId(data.prebookId);
-      setSecretKey(data.secretKey || null);
-      setTransactionId(data.transactionId);
+      const newPrebookId: string = data.prebookId;
+      const newSecretKey: string | null = data.secretKey || null;
+      const newTransactionId: string = data.transactionId;
+
+      if (!newPrebookId || !newSecretKey || !newTransactionId) {
+        throw new Error('Booking session data is incomplete. Please try again.');
+      }
+
+      setPrebookId(newPrebookId);
+      setSecretKey(newSecretKey);
+      setTransactionId(newTransactionId);
       if (data.totalPrice > 0) setConfirmedPrice(data.totalPrice);
-      setStep('confirm');
+
+      sdkInitialized.current = false;
+      setStep('payment');
     } catch (err) {
       setError(err instanceof Error ? err.message : 'An error occurred');
     } finally {
       setIsLoading(false);
     }
-  };
-
-  const handleProceedToPayment = () => {
-    sdkInitialized.current = false;
-    setStep('payment');
   };
 
   const stepIndex = STEPS.indexOf(step);
@@ -190,6 +232,15 @@ export default function PaymentModal({ hotel, onClose }: PaymentModalProps) {
               ¥{confirmedPrice.toLocaleString()}
             </span>
           </div>
+          {hotel.refundableTag === 'RFN' ? (
+            <p className="text-xs text-green-600 font-semibold mt-1">
+              ✓ Free cancellation{hotel.cancellationDeadline
+                ? ` until ${new Date(hotel.cancellationDeadline).toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric' })}`
+                : ''}
+            </p>
+          ) : hotel.refundableTag === 'NRFN' ? (
+            <p className="text-xs text-red-500 font-semibold mt-1">✗ Non-refundable</p>
+          ) : null}
           <p className="text-xs text-gray-400 mt-1">Secured by Stripe · Processed by LiteAPI</p>
         </div>
 
@@ -281,7 +332,16 @@ export default function PaymentModal({ hotel, onClose }: PaymentModalProps) {
         )}
 
         {/* Step 2: Confirm Booking */}
-        {step === 'confirm' && (
+        {step === 'confirm' && isLoading && (
+          <div className="p-8 flex flex-col items-center gap-4">
+            <div className="w-10 h-10 border-4 border-teal-500 border-t-transparent rounded-full animate-spin" />
+            <p className="text-sm text-gray-600 text-center">
+              Verifying your special price with the hotel…<br />
+              <span className="text-gray-400 text-xs">This may take up to 20 seconds</span>
+            </p>
+          </div>
+        )}
+        {step === 'confirm' && !isLoading && (
           <div className="p-6 flex flex-col gap-4">
             <div className="bg-gray-50 rounded-xl p-4 text-sm text-gray-700 space-y-2">
               <p>
@@ -334,26 +394,26 @@ export default function PaymentModal({ hotel, onClose }: PaymentModalProps) {
                   Go back
                 </button>
               </div>
-            ) : sdkLoading ? (
-              <div className="flex flex-col items-center gap-4 py-8">
-                <div className="w-10 h-10 border-4 border-teal-500 border-t-transparent rounded-full animate-spin" />
-                <p className="text-sm text-gray-600">Preparing payment form…</p>
-              </div>
             ) : (
               <>
-                <p className="text-sm text-gray-500 text-center mb-5">
-                  Enter your card details below. Your payment is processed securely by Stripe.
-                </p>
-                <p className="text-xs text-gray-400 text-center mt-5">
-                  🔒 Your card information is encrypted and never stored on our servers.
-                </p>
+                {sdkLoading && (
+                  <div className="flex flex-col items-center gap-4 py-8">
+                    <div className="w-10 h-10 border-4 border-teal-500 border-t-transparent rounded-full animate-spin" />
+                    <p className="text-sm text-gray-600">Preparing payment form…</p>
+                  </div>
+                )}
+                {/* SDK-only container — no React children so reconciliation never touches SDK-injected DOM */}
+                <div
+                  id="liteapi-payment-form"
+                  style={{ width: '100%', minHeight: '300px', display: 'block' }}
+                />
+                {!sdkLoading && (
+                  <p className="text-xs text-gray-400 text-center mt-4">
+                    🔒 Your card information is encrypted and never stored on our servers.
+                  </p>
+                )}
               </>
             )}
-
-            <div
-              id="liteapi-payment-form"
-              className={`rounded-xl border border-gray-100 bg-gray-50 p-2 ${sdkLoading || sdkError ? 'hidden' : 'min-h-[220px]'}`}
-            />
           </div>
         )}
 

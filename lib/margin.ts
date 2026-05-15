@@ -8,21 +8,21 @@ import { Hotel, SearchConditions } from './types';
  */
 export function calculateMargin(layer: number, conditions: SearchConditions): number {
   const baseMargins: Record<number, number> = {
-    1: 0.07,
-    2: 0.10,
-    3: 0.15,
+    1: 7,
+    2: 10,
+    3: 15,
   };
 
-  let margin = baseMargins[layer] ?? 0.07;
+  let margin = baseMargins[layer] ?? 7;
 
   // 大型犬 + Layer 3 = そのまま 15%
   if (conditions.petSize === 'large' && layer === 3) {
-    margin = 0.15;
+    margin = 15;
   }
 
   // 5人以上 + Layer 3 = そのまま 15%
   if (conditions.guests >= 5 && layer === 3) {
-    margin = 0.15;
+    margin = 15;
   }
 
   return margin;
@@ -33,7 +33,7 @@ export function calculateMargin(layer: number, conditions: SearchConditions): nu
  * LiteAPIに送る金額は整数 (円単位)
  */
 export function calculateFinalPrice(basePrice: number, margin: number): number {
-  return Math.ceil(basePrice * (1 + margin));
+  return Math.ceil(basePrice * (1 + margin / 100));
 }
 
 /**

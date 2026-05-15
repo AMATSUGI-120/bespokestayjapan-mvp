@@ -1,0 +1,678 @@
+[
+  {
+    "liteapi_id": "lpbffda",
+    "name": "Kyoto Machiya Fukune — Private Machiya Suite with Rotenburo Garden Bath",
+    "city": "Kyoto",
+    "area": "Nakagyo-ku",
+    "category_tags": [
+      "private-villa",
+      "private-bath",
+      "luggage-friendly",
+      "English-friendly"
+    ],
+    "revalidation": {
+      "classification": "rates_available_now",
+      "originally_c1_misclassified": true,
+      "original_note": "Was C1 (fixed date 2026-06-15 only) — actually date-dependent (C2). Has rates on other dates.",
+      "best_window": {
+        "label": "jul_01",
+        "checkin": "2026-07-01",
+        "checkout": "2026-07-02",
+        "room_plan_count": 166,
+        "min_price_jpy": 118919.15
+      },
+      "by_date_window": {
+        "ui_default_30d": {
+          "checkin": "2026-06-14",
+          "checkout": "2026-06-15",
+          "http_status": 200,
+          "room_plan_count": 146,
+          "min_price_jpy": 126907.37
+        },
+        "original_c1_dates": {
+          "checkin": "2026-06-15",
+          "checkout": "2026-06-16",
+          "http_status": 200,
+          "room_plan_count": 0,
+          "min_price_jpy": null
+        },
+        "jun_01": {
+          "checkin": "2026-06-01",
+          "checkout": "2026-06-02",
+          "http_status": 200,
+          "room_plan_count": 32,
+          "min_price_jpy": 125252.01
+        },
+        "jul_01": {
+          "checkin": "2026-07-01",
+          "checkout": "2026-07-02",
+          "http_status": 200,
+          "room_plan_count": 166,
+          "min_price_jpy": 118919.15
+        },
+        "jul_15": {
+          "checkin": "2026-07-15",
+          "checkout": "2026-07-16",
+          "http_status": 200,
+          "room_plan_count": 48,
+          "min_price_jpy": 122195.52
+        }
+      }
+    }
+  },
+  {
+    "liteapi_id": "lpb9595",
+    "name": "Kyoto Ryokan Gion Sano — Traditional Ryokan with Elevator and Luggage Storage in Southern Higashiyama",
+    "city": "Kyoto",
+    "area": "Gion / Higashiyama-ku",
+    "category_tags": [
+      "luggage-friendly",
+      "private-bath",
+      "English-friendly",
+      "family-friendly"
+    ],
+    "revalidation": {
+      "classification": "still_external_fallback",
+      "originally_c1_misclassified": false,
+      "original_note": null,
+      "best_window": null,
+      "by_date_window": {
+        "ui_default_30d": {
+          "checkin": "2026-06-14",
+          "checkout": "2026-06-15",
+          "http_status": 200,
+          "room_plan_count": 0,
+          "min_price_jpy": null
+        },
+        "original_c1_dates": {
+          "checkin": "2026-06-15",
+          "checkout": "2026-06-16",
+          "http_status": 200,
+          "room_plan_count": 0,
+          "min_price_jpy": null
+        },
+        "jun_01": {
+          "checkin": "2026-06-01",
+          "checkout": "2026-06-02",
+          "http_status": 200,
+          "room_plan_count": 0,
+          "min_price_jpy": null
+        },
+        "jul_01": {
+          "checkin": "2026-07-01",
+          "checkout": "2026-07-02",
+          "http_status": 200,
+          "room_plan_count": 0,
+          "min_price_jpy": null
+        },
+        "jul_15": {
+          "checkin": "2026-07-15",
+          "checkout": "2026-07-16",
+          "http_status": 200,
+          "room_plan_count": 0,
+          "min_price_jpy": null
+        }
+      }
+    }
+  },
+  {
+    "liteapi_id": "lp1035eb",
+    "name": "Onya Tachibana — Ryokan with Private Hot Tub Bathrooms, 250m from Nijo Station",
+    "city": "Kyoto",
+    "area": "Nijo / Nakagyo Ward",
+    "category_tags": [
+      "private-bath",
+      "tattoo-consideration",
+      "luggage-friendly",
+      "family-friendly"
+    ],
+    "revalidation": {
+      "classification": "still_external_fallback",
+      "originally_c1_misclassified": false,
+      "original_note": null,
+      "best_window": null,
+      "by_date_window": {
+        "ui_default_30d": {
+          "checkin": "2026-06-14",
+          "checkout": "2026-06-15",
+          "http_status": 200,
+          "room_plan_count": 0,
+          "min_price_jpy": null
+        },
+        "original_c1_dates": {
+          "checkin": "2026-06-15",
+          "checkout": "2026-06-16",
+          "http_status": 200,
+          "room_plan_count": 0,
+          "min_price_jpy": null
+        },
+        "jun_01": {
+          "checkin": "2026-06-01",
+          "checkout": "2026-06-02",
+          "http_status": 200,
+          "room_plan_count": 0,
+          "min_price_jpy": null
+        },
+        "jul_01": {
+          "checkin": "2026-07-01",
+          "checkout": "2026-07-02",
+          "http_status": 200,
+          "room_plan_count": 0,
+          "min_price_jpy": null
+        },
+        "jul_15": {
+          "checkin": "2026-07-15",
+          "checkout": "2026-07-16",
+          "http_status": 200,
+          "room_plan_count": 0,
+          "min_price_jpy": null
+        }
+      }
+    }
+  },
+  {
+    "liteapi_id": "lp9fc14",
+    "name": "Kumashu-an Machiya House — Private Kyoto Townhouse with Full Kitchen Near Nijo Castle",
+    "city": "Kyoto",
+    "area": "Nakagyo-ku",
+    "category_tags": [
+      "private-villa",
+      "self-catering",
+      "luggage-friendly",
+      "English-friendly",
+      "family-friendly"
+    ],
+    "revalidation": {
+      "classification": "still_external_fallback",
+      "originally_c1_misclassified": false,
+      "original_note": null,
+      "best_window": null,
+      "by_date_window": {
+        "ui_default_30d": {
+          "checkin": "2026-06-14",
+          "checkout": "2026-06-15",
+          "http_status": 200,
+          "room_plan_count": 0,
+          "min_price_jpy": null
+        },
+        "original_c1_dates": {
+          "checkin": "2026-06-15",
+          "checkout": "2026-06-16",
+          "http_status": 200,
+          "room_plan_count": 0,
+          "min_price_jpy": null
+        },
+        "jun_01": {
+          "checkin": "2026-06-01",
+          "checkout": "2026-06-02",
+          "http_status": 200,
+          "room_plan_count": 0,
+          "min_price_jpy": null
+        },
+        "jul_01": {
+          "checkin": "2026-07-01",
+          "checkout": "2026-07-02",
+          "http_status": 200,
+          "room_plan_count": 0,
+          "min_price_jpy": null
+        },
+        "jul_15": {
+          "checkin": "2026-07-15",
+          "checkout": "2026-07-16",
+          "http_status": 200,
+          "room_plan_count": 0,
+          "min_price_jpy": null
+        }
+      }
+    }
+  },
+  {
+    "liteapi_id": "lp6558f48f",
+    "name": "Ocean Shinsaibashi — Apartment with Full Kitchen and Deep Soaking Bath Near Dotonbori",
+    "city": "Osaka",
+    "area": "Shinsaibashi / Shimanouchi",
+    "category_tags": [
+      "self-catering",
+      "private-bath",
+      "English-friendly",
+      "family-friendly"
+    ],
+    "revalidation": {
+      "classification": "still_external_fallback",
+      "originally_c1_misclassified": false,
+      "original_note": null,
+      "best_window": null,
+      "by_date_window": {
+        "ui_default_30d": {
+          "checkin": "2026-06-14",
+          "checkout": "2026-06-15",
+          "http_status": 200,
+          "room_plan_count": 0,
+          "min_price_jpy": null
+        },
+        "original_c1_dates": {
+          "checkin": "2026-06-15",
+          "checkout": "2026-06-16",
+          "http_status": 200,
+          "room_plan_count": 0,
+          "min_price_jpy": null
+        },
+        "jun_01": {
+          "checkin": "2026-06-01",
+          "checkout": "2026-06-02",
+          "http_status": 200,
+          "room_plan_count": 0,
+          "min_price_jpy": null
+        },
+        "jul_01": {
+          "checkin": "2026-07-01",
+          "checkout": "2026-07-02",
+          "http_status": 200,
+          "room_plan_count": 0,
+          "min_price_jpy": null
+        },
+        "jul_15": {
+          "checkin": "2026-07-15",
+          "checkout": "2026-07-16",
+          "http_status": 200,
+          "room_plan_count": 0,
+          "min_price_jpy": null
+        }
+      }
+    }
+  },
+  {
+    "liteapi_id": "lp6554dfc3",
+    "name": "Koti Sopo Universal Bay 1 by Liaison — Self-Catering Apartment 4 Minutes from Nishikujo Station, 2 Stops to USJ",
+    "city": "Osaka",
+    "area": "Konohana / Nishikujo",
+    "category_tags": [
+      "self-catering",
+      "luggage-friendly",
+      "English-friendly",
+      "family-friendly"
+    ],
+    "revalidation": {
+      "classification": "still_external_fallback",
+      "originally_c1_misclassified": false,
+      "original_note": null,
+      "best_window": null,
+      "by_date_window": {
+        "ui_default_30d": {
+          "checkin": "2026-06-14",
+          "checkout": "2026-06-15",
+          "http_status": 200,
+          "room_plan_count": 0,
+          "min_price_jpy": null
+        },
+        "original_c1_dates": {
+          "checkin": "2026-06-15",
+          "checkout": "2026-06-16",
+          "http_status": 200,
+          "room_plan_count": 0,
+          "min_price_jpy": null
+        },
+        "jun_01": {
+          "checkin": "2026-06-01",
+          "checkout": "2026-06-02",
+          "http_status": 200,
+          "room_plan_count": 0,
+          "min_price_jpy": null
+        },
+        "jul_01": {
+          "checkin": "2026-07-01",
+          "checkout": "2026-07-02",
+          "http_status": 200,
+          "room_plan_count": 0,
+          "min_price_jpy": null
+        },
+        "jul_15": {
+          "checkin": "2026-07-15",
+          "checkout": "2026-07-16",
+          "http_status": 200,
+          "room_plan_count": 0,
+          "min_price_jpy": null
+        }
+      }
+    }
+  },
+  {
+    "liteapi_id": "lp6554ecdb",
+    "name": "Gummi Apartment — Self-Catering Kitchen Near USJ, Konohana-ku Osaka",
+    "city": "Osaka",
+    "area": "Konohana / USJ Area",
+    "category_tags": [
+      "self-catering",
+      "private-bath",
+      "family-friendly"
+    ],
+    "revalidation": {
+      "classification": "still_external_fallback",
+      "originally_c1_misclassified": false,
+      "original_note": null,
+      "best_window": null,
+      "by_date_window": {
+        "ui_default_30d": {
+          "checkin": "2026-06-14",
+          "checkout": "2026-06-15",
+          "http_status": 200,
+          "room_plan_count": 0,
+          "min_price_jpy": null
+        },
+        "original_c1_dates": {
+          "checkin": "2026-06-15",
+          "checkout": "2026-06-16",
+          "http_status": 200,
+          "room_plan_count": 0,
+          "min_price_jpy": null
+        },
+        "jun_01": {
+          "checkin": "2026-06-01",
+          "checkout": "2026-06-02",
+          "http_status": 200,
+          "room_plan_count": 0,
+          "min_price_jpy": null
+        },
+        "jul_01": {
+          "checkin": "2026-07-01",
+          "checkout": "2026-07-02",
+          "http_status": 200,
+          "room_plan_count": 0,
+          "min_price_jpy": null
+        },
+        "jul_15": {
+          "checkin": "2026-07-15",
+          "checkout": "2026-07-16",
+          "http_status": 200,
+          "room_plan_count": 0,
+          "min_price_jpy": null
+        }
+      }
+    }
+  },
+  {
+    "liteapi_id": "lp27ddc7",
+    "name": "ARlis house Shin Osaka North — Apartment Hotel with Full Stocked Kitchen and Private Soaking Bath Near Shin-Osaka",
+    "city": "Osaka",
+    "area": "Shin-Osaka / Higashimikuni",
+    "category_tags": [
+      "self-catering",
+      "food-friendly",
+      "private-bath",
+      "English-friendly",
+      "family-friendly"
+    ],
+    "revalidation": {
+      "classification": "still_external_fallback",
+      "originally_c1_misclassified": false,
+      "original_note": null,
+      "best_window": null,
+      "by_date_window": {
+        "ui_default_30d": {
+          "checkin": "2026-06-14",
+          "checkout": "2026-06-15",
+          "http_status": 200,
+          "room_plan_count": 0,
+          "min_price_jpy": null
+        },
+        "original_c1_dates": {
+          "checkin": "2026-06-15",
+          "checkout": "2026-06-16",
+          "http_status": 200,
+          "room_plan_count": 0,
+          "min_price_jpy": null
+        },
+        "jun_01": {
+          "checkin": "2026-06-01",
+          "checkout": "2026-06-02",
+          "http_status": 200,
+          "room_plan_count": 0,
+          "min_price_jpy": null
+        },
+        "jul_01": {
+          "checkin": "2026-07-01",
+          "checkout": "2026-07-02",
+          "http_status": 200,
+          "room_plan_count": 0,
+          "min_price_jpy": null
+        },
+        "jul_15": {
+          "checkin": "2026-07-15",
+          "checkout": "2026-07-16",
+          "http_status": 200,
+          "room_plan_count": 0,
+          "min_price_jpy": null
+        }
+      }
+    }
+  },
+  {
+    "liteapi_id": "lp2515eb",
+    "name": "AFP Tennoji Apartment — 30-Unit Self-Catering Complex with Full Kitchen and Private Soaking Bath, 1 Min from Showacho Station",
+    "city": "Osaka",
+    "area": "Tennoji / Abeno",
+    "category_tags": [
+      "self-catering",
+      "food-friendly",
+      "private-bath",
+      "luggage-friendly",
+      "English-friendly",
+      "family-friendly"
+    ],
+    "revalidation": {
+      "classification": "still_external_fallback",
+      "originally_c1_misclassified": false,
+      "original_note": null,
+      "best_window": null,
+      "by_date_window": {
+        "ui_default_30d": {
+          "checkin": "2026-06-14",
+          "checkout": "2026-06-15",
+          "http_status": 200,
+          "room_plan_count": 0,
+          "min_price_jpy": null
+        },
+        "original_c1_dates": {
+          "checkin": "2026-06-15",
+          "checkout": "2026-06-16",
+          "http_status": 200,
+          "room_plan_count": 0,
+          "min_price_jpy": null
+        },
+        "jun_01": {
+          "checkin": "2026-06-01",
+          "checkout": "2026-06-02",
+          "http_status": 200,
+          "room_plan_count": 0,
+          "min_price_jpy": null
+        },
+        "jul_01": {
+          "checkin": "2026-07-01",
+          "checkout": "2026-07-02",
+          "http_status": 200,
+          "room_plan_count": 0,
+          "min_price_jpy": null
+        },
+        "jul_15": {
+          "checkin": "2026-07-15",
+          "checkout": "2026-07-16",
+          "http_status": 200,
+          "room_plan_count": 0,
+          "min_price_jpy": null
+        }
+      }
+    }
+  },
+  {
+    "liteapi_id": "lp1a7bcd",
+    "name": "Machi de kurasu Tengachaya-3 — Private Holiday Home with Kitchen and Soaking Bath Near Tengachaya Station",
+    "city": "Osaka",
+    "area": "Nishinari-ku / Tengachaya",
+    "category_tags": [
+      "private-villa",
+      "self-catering",
+      "private-bath",
+      "family-friendly"
+    ],
+    "revalidation": {
+      "classification": "still_external_fallback",
+      "originally_c1_misclassified": false,
+      "original_note": null,
+      "best_window": null,
+      "by_date_window": {
+        "ui_default_30d": {
+          "checkin": "2026-06-14",
+          "checkout": "2026-06-15",
+          "http_status": 200,
+          "room_plan_count": 0,
+          "min_price_jpy": null
+        },
+        "original_c1_dates": {
+          "checkin": "2026-06-15",
+          "checkout": "2026-06-16",
+          "http_status": 200,
+          "room_plan_count": 0,
+          "min_price_jpy": null
+        },
+        "jun_01": {
+          "checkin": "2026-06-01",
+          "checkout": "2026-06-02",
+          "http_status": 200,
+          "room_plan_count": 0,
+          "min_price_jpy": null
+        },
+        "jul_01": {
+          "checkin": "2026-07-01",
+          "checkout": "2026-07-02",
+          "http_status": 200,
+          "room_plan_count": 0,
+          "min_price_jpy": null
+        },
+        "jul_15": {
+          "checkin": "2026-07-15",
+          "checkout": "2026-07-16",
+          "http_status": 200,
+          "room_plan_count": 0,
+          "min_price_jpy": null
+        }
+      }
+    }
+  },
+  {
+    "liteapi_id": "lp1867c6",
+    "name": "i Osaka Traditional — Guesthouse with Kitchen, Private Baths, and On-Site Italian-Korean Restaurant",
+    "city": "Osaka",
+    "area": "Kitakagaya",
+    "category_tags": [
+      "self-catering",
+      "food-friendly",
+      "private-bath",
+      "family-friendly"
+    ],
+    "revalidation": {
+      "classification": "still_external_fallback",
+      "originally_c1_misclassified": false,
+      "original_note": null,
+      "best_window": null,
+      "by_date_window": {
+        "ui_default_30d": {
+          "checkin": "2026-06-14",
+          "checkout": "2026-06-15",
+          "http_status": 200,
+          "room_plan_count": 0,
+          "min_price_jpy": null
+        },
+        "original_c1_dates": {
+          "checkin": "2026-06-15",
+          "checkout": "2026-06-16",
+          "http_status": 200,
+          "room_plan_count": 0,
+          "min_price_jpy": null
+        },
+        "jun_01": {
+          "checkin": "2026-06-01",
+          "checkout": "2026-06-02",
+          "http_status": 200,
+          "room_plan_count": 0,
+          "min_price_jpy": null
+        },
+        "jul_01": {
+          "checkin": "2026-07-01",
+          "checkout": "2026-07-02",
+          "http_status": 200,
+          "room_plan_count": 0,
+          "min_price_jpy": null
+        },
+        "jul_15": {
+          "checkin": "2026-07-15",
+          "checkout": "2026-07-16",
+          "http_status": 200,
+          "room_plan_count": 0,
+          "min_price_jpy": null
+        }
+      }
+    }
+  },
+  {
+    "liteapi_id": "lp5fb6f",
+    "name": "Ryokan Asakusa Shigetsu — Traditional Tokyo Ryokan with Private Bathrooms Near Senso-ji",
+    "city": "Tokyo",
+    "area": "Asakusa / Taito-ku",
+    "category_tags": [
+      "private-bath",
+      "tattoo-consideration",
+      "luggage-friendly",
+      "English-friendly",
+      "access-friendly"
+    ],
+    "revalidation": {
+      "classification": "rates_available_now",
+      "originally_c1_misclassified": true,
+      "original_note": "Was C1 (fixed date 2026-06-15 only) — actually date-dependent (C2). Has rates on other dates.",
+      "best_window": {
+        "label": "ui_default_30d",
+        "checkin": "2026-06-14",
+        "checkout": "2026-06-15",
+        "room_plan_count": 24,
+        "min_price_jpy": 25589.4
+      },
+      "by_date_window": {
+        "ui_default_30d": {
+          "checkin": "2026-06-14",
+          "checkout": "2026-06-15",
+          "http_status": 200,
+          "room_plan_count": 24,
+          "min_price_jpy": 25589.4
+        },
+        "original_c1_dates": {
+          "checkin": "2026-06-15",
+          "checkout": "2026-06-16",
+          "http_status": 200,
+          "room_plan_count": 0,
+          "min_price_jpy": null
+        },
+        "jun_01": {
+          "checkin": "2026-06-01",
+          "checkout": "2026-06-02",
+          "http_status": 200,
+          "room_plan_count": 0,
+          "min_price_jpy": null
+        },
+        "jul_01": {
+          "checkin": "2026-07-01",
+          "checkout": "2026-07-02",
+          "http_status": 200,
+          "room_plan_count": 10,
+          "min_price_jpy": 38048.17
+        },
+        "jul_15": {
+          "checkin": "2026-07-15",
+          "checkout": "2026-07-16",
+          "http_status": 200,
+          "room_plan_count": 14,
+          "min_price_jpy": 55584.87
+        }
+      }
+    }
+  }
+]

@@ -24,6 +24,7 @@ export interface Hotel {
   english_support: boolean;
   access_info: string | null;
   booking_url: string;
+  photo_urls?: string[] | null;
 }
 
 export interface SearchConditions {
@@ -41,6 +42,8 @@ export interface HotelResult extends Hotel {
   finalPrice: number;
   liteapiOfferId: string;
   recommendationReason: string;
+  refundableTag?: string;
+  cancellationDeadline?: string | null;
 }
 
 export interface GuestInfo {
@@ -57,6 +60,8 @@ export interface SearchResult {
   price: number;
   currency: string;
   available: boolean;
+  refundableTag?: string;
+  cancellationDeadline?: string | null;
 }
 
 export interface PrebookResult {

@@ -1,8 +1,40 @@
 @import "tailwindcss";
 
+/* ── Bespoke Stay Japan: Design Tokens ─────────────────────────── */
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  /* Backgrounds */
+  --bsj-bg:          #F8F7F4;   /* warm ivory page background */
+  --bsj-bg-card:     #FFFFFF;   /* card surface */
+  --bsj-bg-subtle:   #EFEDE8;   /* muted section background */
+
+  /* Brand colors */
+  --bsj-primary:     #182436;   /* quiet navy — trust, primary actions */
+  --bsj-primary-hover: #0F1726;
+  --bsj-secondary:   #6D7784;   /* slate — labels, subtle accents */
+  --bsj-accent:      #B8A37A;   /* muted brass — editorial accents */
+
+  /* Text */
+  --bsj-text:        #171717;   /* soft black */
+  --bsj-text-muted:  #5F6368;   /* warm gray */
+  --bsj-text-light:  #8C9095;   /* light gray */
+
+  /* Borders */
+  --bsj-border:      #E2DFD8;
+  --bsj-border-strong: #C9C4BA;
+
+  /* Verification badge colors */
+  --bsj-confirmed:   #2F5F4A;   /* property confirmed */
+  --bsj-confirmed-bg: #EEF3EF;
+  --bsj-sourced:     #52606E;   /* source-backed */
+  --bsj-sourced-bg:  #F1F3F5;
+  --bsj-ask:         #8A6F3A;   /* ask before booking */
+  --bsj-ask-bg:      #F6F1E7;
+  --bsj-unknown:     #7B7F85;   /* not yet checked */
+  --bsj-unknown-bg:  #F3F2EF;
+
+  /* Legacy (keep for LiteAPI payment SDK compatibility) */
+  --background: var(--bsj-bg);
+  --foreground: var(--bsj-text);
 }
 
 @theme inline {
@@ -12,15 +44,40 @@
   --font-mono: var(--font-geist-mono);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
-}
+/* No dark mode override — single-theme design */
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background: var(--bsj-bg);
+  color: var(--bsj-text);
+  font-family: var(--font-geist-sans, 'Inter', system-ui, sans-serif);
+}
+
+::selection {
+  background: #D8D0C1;
+  color: var(--bsj-text);
+}
+
+/* ── LiteAPI Payment SDK (must keep) ───────────────────────────── */
+.lp-submit-button {
+  display: block;
+  width: 100%;
+  padding: 14px;
+  margin-top: 16px;
+  background-color: var(--bsj-primary);
+  color: white;
+  font-size: 16px;
+  font-weight: bold;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  text-align: center;
+}
+
+.lp-submit-button:hover {
+  background-color: var(--bsj-primary-hover);
+}
+
+.lp-submit-button:disabled {
+  background-color: var(--bsj-secondary);
+  cursor: not-allowed;
 }

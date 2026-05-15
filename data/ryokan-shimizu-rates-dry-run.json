@@ -1,0 +1,150 @@
+{
+  "checked_at": "2026-05-14T16:33:16.139238Z",
+  "hotel_id": "lpae62c",
+  "hotel_name": "Ryokan Shimizu",
+  "checkin": "2026-06-15",
+  "checkout": "2026-06-16",
+  "adults": 2,
+  "children": 0,
+  "currency": "JPY",
+  "results_by_nationality": {
+    "US": {
+      "api_ok": true,
+      "error": null,
+      "room_count": 3,
+      "rooms": [
+        {
+          "index": 1,
+          "roomName": "Japanese-Style Twin Room with Private Bathroom - Non-Smoking",
+          "offerId": "3gAWonJzkY-kc3JpZNoBp0daUVRNTUpYR0EzRENOVEZHWTJUT01aV0dVWkdJTlpURzQyRE9PSldNTTNES01SUUc0MkRPTlpXSEUzR0tNUlFHNFpETVpSV01ZM0dJTVJRRzQzVE1PSlhHUTNEUU1SUUc0WURPTVJXSEUzVE1OUlJHNDJETU5KU0dBM0RFTlJSRzQyRE1PQlhHSTNHTU5UR0daU0RFTUJTTVFaREFOVEZHWlRETVpKU01RM1RHTlRFR1pURE1ZUldIRTNHS05SWFBRWVNHTVJRR0kzREFOUlJHVjZERU1CU0dZWURNTUpXUFJTVzRYMlZLTjZGS1UzNEpKSUZTN0JTSUVZRUc3QlVHVVpEUzdESktCVFZLU0Q0R0UzVE9PQlhHNDNEQU5SVEdBMlRDNUxRUEpaU0dOWlJHUVpEUU5CREdJWVRBT0JORzRZVElNUllHUjZGRVJTT1BRWkRBTVJXR0EzRENNWlFHQTJUUzdCU1BSSkRDTUpWR0I2RENNWllHUTJEQ05SREtKSFNHVVNHSllSVEVNQlNHWVdUQU5STkdFWlNBTUJRSEkyVFNJWaNwcmPLQM8XseuFHrilb3JfcHLLAAAAAAAAAAClb3JfY23LQKA2cKPXCj2iY23LQKA2cKPXCj2jcGNkszIwMjYtMDYtMTMgMDA6NTk6MDCjYnJkolJPpG1yaWTAo21ybsCjaGRwwKNmcm6go3Nybtk8SmFwYW5lc2UtU3R5bGUgVHdpbiBSb29tIHdpdGggUHJpdmF0ZSBCYXRocm9vbSAtIE5vbi1TbW9raW5no29jbgGkcHJrc8CjZGV0ywAAAAAAAAAApHNoaWSmNzE0Mjg0o3NpZAKjaGlkp2xwYWU2MmOjb2NjkYGhYQKjY3Vyo0pQWaJnbqJVU6JjaaoyMDI2LTA2LTE1omNvqjIwMjYtMDYtMTajZ2lkoKJjcstALfrhR64Ue6Rzc2lk2TBzZXNzaW9uXzAxOWUyNzUwYmMzZlpoM09hbnMwOGs3Q3Bmajl4TkVTWEhwVlZ3bXajaXNowqNzc3Cgo2lmbcKlaWZjaHLCo2lmcsKlc2VhaWSnbHBhZTYyY6Jua7FsaXRlYXBpb25ib2FyZGluZ6J0eJGEoWnDoWSjVkFUoWHLQJOomZmZmZqhY6NKUFmibHDAo2JrdAU=",
+          "totalPrice": 15919.39,
+          "taxAmount": 1258.15,
+          "taxIncluded": true,
+          "currency": "JPY",
+          "boardType": "RO",
+          "refundableTag": "RFN",
+          "cancelDeadline": "2026-06-13 00:59:00",
+          "cancelPenalty": 15919.39,
+          "cancelTimezone": "GMT",
+          "hasValidOffer": true
+        },
+        {
+          "index": 2,
+          "roomName": "Double Room with Private Bathroom - Non-Smoking",
+          "offerId": "3gAWonJzkY-kc3JpZNoBgEdZMkRNWlJYR1UzREVOVERHWTJURU1CWEdJM0dNTlRHR1pTREVNQlhHNDNEU05aVUdZNERFTUJYR0EzVEVOUlpHNDNETU1KWEdRM0RLTVJRR1laRE1NSlhHUTNEUU5aU0daVERNWlJXTVFaREFNVEVHSVlETVpKV01ZM0dLTVRFRzRaVE1aQldNWTNHRU5SWkdaU1RNTlpTR0I2RENJWlNHQVpETU1CV0dFMlhZTVJRR0kzREFOUlJHWjZHSzNTN0tWSlhZVktUUFJGRkFXTDRHSkFUQVEzNEdRMlRFT0w0TkZJR09WS0lQUVlUT05aWUc0M1RNTUJXR01ZREtNTFZPQjVIR0laWEdFMkRFT0JVRU1aRENNQllGVTNUQ05CU0hBMkhZVVNHSlo2REVNQlNHWVlETU1KVEdBWURLT0w0R042RkVNSlJHVVlIWU1KVkdVM1RJTVpRRU5CRUVJMlNJWkhDR01SUUdJM0MyTUJXRlVZVEdJQlFHQTVES09KRKNwcmPLQNF9OFHrhR-lb3JfcHLLAAAAAAAAAAClb3JfY23LQKI9KPXCj1yiY23LQKI9KPXCj1yjcGNkszIwMjYtMDYtMTMgMDA6NTk6MDCjYnJkokJJpG1yaWTAo21ybsCjaGRwwKNmcm6go3NybtkwRG91YmxlIFJvb20gd2l0aCBQcml2YXRlIEJhdGhyb29tIC0gTm9uLVNtb2tpbmcgo29jbgGkcHJrc8CjZGV0ywAAAAAAAAAApHNoaWSmNzE0Mjg0o3NpZAKjaGlkp2xwYWU2MmOjb2NjkYGhYQKjY3Vyo0pQWaJnbqJVU6JjaaoyMDI2LTA2LTE1omNvqjIwMjYtMDYtMTajZ2lkoKJjcstALfrhR64Ue6Rzc2lk2TBzZXNzaW9uXzAxOWUyNzUwYmMzZlpoM09hbnMwOGs3Q3Bmajl4TkVTWEhwVlZ3bXajaXNowqNzc3Cgo2lmbcKlaWZjaHLCo2lmcsKlc2VhaWSnbHBhZTYyY6Jua7FsaXRlYXBpb25ib2FyZGluZ6J0eJGEoWnDoWSjVkFUoWHLQJYf64UeuFKhY6NKUFmibHDAo2JrdAU=",
+          "totalPrice": 17908.88,
+          "taxAmount": 1415.98,
+          "taxIncluded": true,
+          "currency": "JPY",
+          "boardType": "BI",
+          "refundableTag": "RFN",
+          "cancelDeadline": "2026-06-13 00:59:00",
+          "cancelPenalty": 17908.88,
+          "cancelTimezone": "GMT",
+          "hasValidOffer": true
+        },
+        {
+          "index": 3,
+          "roomName": "Japanese-Style Triple Room with Private Bathroom - Non-Smoking",
+          "offerId": "3gAWonJzkY-kc3JpZNoBrUdaUVRNTUpYR0EzRENOVEZHWTJUT01aV0dVWkdJTlpURzQyRE9PSldNTTNES01SUUc0MkRPTVJXSEUzVEFOVERHWTJURU1CWEdJM0dNTlRHR1pTREVNQlhHNDNEU05aVUdZNERFTUJYR0EzVEVOUlpHNDNETU1KWEdRM0RLTVJRR1laRE1NSlhHUTNEUU5aU0daVERNWlJXTVFaREFNVEVHSVlETVpKV01ZM0dLTVRFRzRaVE1aQldNWTNHRU5SWkdaU1RNTjM0R0VSVEVNQlNHWVlETU1KVlBRWkRBTVJXR0EzRENOVDRNVlhGNlZLVFBSS1ZHN0NLS0JNWFlNU0JHQkJYWU5CVkdJNFhZMktRTTVLVVE3QlJHNDNUUU5aWEdZWURNTVpRR1VZWEs0RDJPTVJUT01KVUdJNERJSVpTR0VZRFFMSlhHRTJERU9CVVBSSkVNVFQ0R0lZREVOUlFHWVlUR01CUUdVNFhZTUw0S0lZVENOSlFQUVlUT01aUUdRMkRJSTJTSjRSVkVSU09FTVpEQU1SV0ZVWURNTEpSR01RREFNQjJHVTRTR6NwcmPLQNNul64UeuGlb3JfcHLLAAAAAAAAAAClb3JfY23LQKRD3Cj1wo-iY23LQKRD3Cj1wo-jcGNkszIwMjYtMDYtMTMgMDA6NTk6MDCjYnJkolJPpG1yaWTAo21ybsCjaGRwwKNmcm6go3Nybtk-SmFwYW5lc2UtU3R5bGUgVHJpcGxlIFJvb20gd2l0aCBQcml2YXRlIEJhdGhyb29tIC0gTm9uLVNtb2tpbmejb2NuAaRwcmtzwKNkZXTLAAAAAAAAAACkc2hpZKY3MTQyODSjc2lkAqNoaWSnbHBhZTYyY6NvY2ORgaFhAqNjdXKjSlBZomduolVTomNpqjIwMjYtMDYtMTWiY2-qMjAyNi0wNi0xNqNnaWSgomNyy0At-uFHrhR7pHNzaWTZMHNlc3Npb25fMDE5ZTI3NTBiYzNmWmgzT2FuczA4azdDcGZqOXhORVNYSHBWVndtdqNpc2jCo3NzcKCjaWZtwqVpZmNocsKjaWZywqVzZWFpZKdscGFlNjJjom5rsWxpdGVhcGlvbmJvYXJkaW5nonR4kYShacOhZKNWQVShYctAmJdHrhR64aFjo0pQWaJscMCjYmt0BQ==",
+          "totalPrice": 19898.37,
+          "taxAmount": 1573.82,
+          "taxIncluded": true,
+          "currency": "JPY",
+          "boardType": "RO",
+          "refundableTag": "RFN",
+          "cancelDeadline": "2026-06-13 00:59:00",
+          "cancelPenalty": 19898.37,
+          "cancelTimezone": "GMT",
+          "hasValidOffer": true
+        }
+      ],
+      "prices": [
+        15919.39,
+        17908.88,
+        19898.37
+      ]
+    },
+    "JP": {
+      "api_ok": true,
+      "error": null,
+      "room_count": 3,
+      "rooms": [
+        {
+          "index": 1,
+          "roomName": "Japanese-Style Twin Room with Private Bathroom - Non-Smoking",
+          "offerId": "3gAWonJzkY-kc3JpZNoBp0daUVRNTUpYR0EzRENOVEZHWTJUT01aV0dVWkdJTlpURzQyRE9PSldNTTNES01SUUc0MkRPTlpXSEUzR0tNUlFHNFpETVpSV01ZM0dJTVJRRzQzVE1PSlhHUTNEUU1SUUc0WURPTVJXSEUzVE1OUlJHNDJETU5KU0dBM0RFTlJSRzQyRE1PQlhHSTNHTU5UR0daU0RFTUJTTVFaREFOVEZHWlRETVpKU01RM1RHTlRFR1pURE1ZUldIRTNHS05SWFBRWVNHTVJRR0kzREFOUlJHVjZERU1CU0dZWURNTUpXUFJTVzRYMlZLTjZFVVVENEpKSUZTN0JTSUVZRUc3QlVHVVpEUzdESktCVFZLU0Q0R0UzVE9PQlhHNDNEQU5SVUdRMlRLV1NXTk5DQ0dOWlJHUVpEUU5CREdJWVRBT0JORzRZVElNUllHUjZGRVJTT1BRWkRBTVJXR0EzRENNWlFHQTJUUzdCU1BSSkRDTUJVR0I2RENNWllHUTJEQ05SREtKSFNHVVNHSllSVEVNQlNHWVdUQU5STkdFWlNBTUJRSEkyVFNJWaNwcmPLQM8XseuFHrilb3JfcHLLAAAAAAAAAAClb3JfY23LQKA2cKPXCj2iY23LQKA2cKPXCj2jcGNkszIwMjYtMDYtMTMgMDA6NTk6MDCjYnJkolJPpG1yaWTAo21ybsCjaGRwwKNmcm6go3Nybtk8SmFwYW5lc2UtU3R5bGUgVHdpbiBSb29tIHdpdGggUHJpdmF0ZSBCYXRocm9vbSAtIE5vbi1TbW9raW5no29jbgGkcHJrc8CjZGV0ywAAAAAAAAAApHNoaWSmNzE0Mjg0o3NpZAKjaGlkp2xwYWU2MmOjb2NjkYGhYQKjY3Vyo0pQWaJnbqJKUKJjaaoyMDI2LTA2LTE1omNvqjIwMjYtMDYtMTajZ2lkoKJjcstALfrhR64Ue6Rzc2lk2TBzZXNzaW9uXzAxOWUyNzUwYzFhOEtPTzl6V3JrMnFSbjYwNWNkdmdDdms2WkppSTSjaXNowqNzc3CrYm9va2luZy5jb22jaWZtwqVpZmNocsKjaWZywqVzZWFpZKdscGFlNjJjom5rsWxpdGVhcGlvbmJvYXJkaW5nonR4kYShacOhZKNWQVShYctAk6iZmZmZmqFjo0pQWaJscMCjYmt0BQ==",
+          "totalPrice": 15919.39,
+          "taxAmount": 1258.15,
+          "taxIncluded": true,
+          "currency": "JPY",
+          "boardType": "RO",
+          "refundableTag": "RFN",
+          "cancelDeadline": "2026-06-13 00:59:00",
+          "cancelPenalty": 15919.39,
+          "cancelTimezone": "GMT",
+          "hasValidOffer": true
+        },
+        {
+          "index": 2,
+          "roomName": "Double Room with Private Bathroom - Non-Smoking",
+          "offerId": "3gAWonJzkY-kc3JpZNoBgEdZMkRNWlJYR1UzREVOVERHWTJURU1CWEdJM0dNTlRHR1pTREVNQlhHNDNEU05aVUdZNERFTUJYR0EzVEVOUlpHNDNETU1KWEdRM0RLTVJRR1laRE1NSlhHUTNEUU5aU0daVERNWlJXTVFaREFNVEVHSVlETVpKV01ZM0dLTVRFRzRaVE1aQldNWTNHRU5SWkdaU1RNTlpTR0I2RENJWlNHQVpETU1CV0dFMlhZTVJRR0kzREFOUlJHWjZHSzNTN0tWSlhZU1NRUFJGRkFXTDRHSkFUQVEzNEdRMlRFT0w0TkZJR09WS0lQUVlUT05aWUc0M1RNTUJXR1EyREtOSzJLWlZVSUlaWEdFMkRFT0JVRU1aRENNQllGVTNUQ05CU0hBMkhZVVNHSlo2REVNQlNHWVlETU1KVEdBWURLT0w0R042RkVNSlFHUVlIWU1KVkdVM1RJTVpRRU5CRUVJMlNJWkhDR01SUUdJM0MyTUJXRlVZVEdJQlFHQTVES09KRKNwcmPLQNF9OFHrhR-lb3JfcHLLAAAAAAAAAAClb3JfY23LQKI9KPXCj1yiY23LQKI9KPXCj1yjcGNkszIwMjYtMDYtMTMgMDA6NTk6MDCjYnJkokJJpG1yaWTAo21ybsCjaGRwwKNmcm6go3NybtkwRG91YmxlIFJvb20gd2l0aCBQcml2YXRlIEJhdGhyb29tIC0gTm9uLVNtb2tpbmcgo29jbgGkcHJrc8CjZGV0ywAAAAAAAAAApHNoaWSmNzE0Mjg0o3NpZAKjaGlkp2xwYWU2MmOjb2NjkYGhYQKjY3Vyo0pQWaJnbqJKUKJjaaoyMDI2LTA2LTE1omNvqjIwMjYtMDYtMTajZ2lkoKJjcstALfrhR64Ue6Rzc2lk2TBzZXNzaW9uXzAxOWUyNzUwYzFhOEtPTzl6V3JrMnFSbjYwNWNkdmdDdms2WkppSTSjaXNowqNzc3CrYm9va2luZy5jb22jaWZtwqVpZmNocsKjaWZywqVzZWFpZKdscGFlNjJjom5rsWxpdGVhcGlvbmJvYXJkaW5nonR4kYShacOhZKNWQVShYctAlh_rhR64UqFjo0pQWaJscMCjYmt0BQ==",
+          "totalPrice": 17908.88,
+          "taxAmount": 1415.98,
+          "taxIncluded": true,
+          "currency": "JPY",
+          "boardType": "BI",
+          "refundableTag": "RFN",
+          "cancelDeadline": "2026-06-13 00:59:00",
+          "cancelPenalty": 17908.88,
+          "cancelTimezone": "GMT",
+          "hasValidOffer": true
+        },
+        {
+          "index": 3,
+          "roomName": "Japanese-Style Triple Room with Private Bathroom - Non-Smoking",
+          "offerId": "3gAWonJzkY-kc3JpZNoBrUdaUVRNTUpYR0EzRENOVEZHWTJUT01aV0dVWkdJTlpURzQyRE9PSldNTTNES01SUUc0MkRPTVJXSEUzVEFOVERHWTJURU1CWEdJM0dNTlRHR1pTREVNQlhHNDNEU05aVUdZNERFTUJYR0EzVEVOUlpHNDNETU1KWEdRM0RLTVJRR1laRE1NSlhHUTNEUU5aU0daVERNWlJXTVFaREFNVEVHSVlETVpKV01ZM0dLTVRFRzRaVE1aQldNWTNHRU5SWkdaU1RNTjM0R0VSVEVNQlNHWVlETU1KVlBRWkRBTVJXR0EzRENOVDRNVlhGNlZLVFBSRkZBN0NLS0JNWFlNU0JHQkJYWU5CVkdJNFhZMktRTTVLVVE3QlJHNDNUUU5aWEdZWURNTkJVR1UyVlVWVExJUVJUT01KVUdJNERJSVpTR0VZRFFMSlhHRTJERU9CVVBSSkVNVFQ0R0lZREVOUlFHWVlUR01CUUdVNFhZTUw0S0lZVEFOQlFQUVlUT01aUUdRMkRJSTJTSjRSVkVSU09FTVpEQU1SV0ZVWURNTEpSR01RREFNQjJHVTRTR6NwcmPLQNNul64UeuGlb3JfcHLLAAAAAAAAAAClb3JfY23LQKRD3Cj1wo-iY23LQKRD3Cj1wo-jcGNkszIwMjYtMDYtMTMgMDA6NTk6MDCjYnJkolJPpG1yaWTAo21ybsCjaGRwwKNmcm6go3Nybtk-SmFwYW5lc2UtU3R5bGUgVHJpcGxlIFJvb20gd2l0aCBQcml2YXRlIEJhdGhyb29tIC0gTm9uLVNtb2tpbmejb2NuAaRwcmtzwKNkZXTLAAAAAAAAAACkc2hpZKY3MTQyODSjc2lkAqNoaWSnbHBhZTYyY6NvY2ORgaFhAqNjdXKjSlBZomduokpQomNpqjIwMjYtMDYtMTWiY2-qMjAyNi0wNi0xNqNnaWSgomNyy0At-uFHrhR7pHNzaWTZMHNlc3Npb25fMDE5ZTI3NTBjMWE4S09POXpXcmsycVJuNjA1Y2R2Z0N2azZaSmlJNKNpc2jCo3NzcKtib29raW5nLmNvbaNpZm3CpWlmY2hywqNpZnLCpXNlYWlkp2xwYWU2MmOibmuxbGl0ZWFwaW9uYm9hcmRpbmeidHiRhKFpw6Fko1ZBVKFhy0CYl0euFHrhoWOjSlBZomxwwKNia3QF",
+          "totalPrice": 19898.37,
+          "taxAmount": 1573.82,
+          "taxIncluded": true,
+          "currency": "JPY",
+          "boardType": "RO",
+          "refundableTag": "RFN",
+          "cancelDeadline": "2026-06-13 00:59:00",
+          "cancelPenalty": 19898.37,
+          "cancelTimezone": "GMT",
+          "hasValidOffer": true
+        }
+      ],
+      "prices": [
+        15919.39,
+        17908.88,
+        19898.37
+      ]
+    }
+  },
+  "summary": {
+    "us_room_count": 3,
+    "jp_room_count": 3,
+    "us_jp_price_diff": false,
+    "valid_offer_count": 3,
+    "cheapest": {
+      "index": 1,
+      "roomName": "Japanese-Style Twin Room with Private Bathroom - Non-Smoking",
+      "offerId": "3gAWonJzkY-kc3JpZNoBp0daUVRNTUpYR0EzRENOVEZHWTJUT01aV0dVWkdJTlpURzQyRE9PSldNTTNES01SUUc0MkRPTlpXSEUzR0tNUlFHNFpETVpSV01ZM0dJTVJRRzQzVE1PSlhHUTNEUU1SUUc0WURPTVJXSEUzVE1OUlJHNDJETU5KU0dBM0RFTlJSRzQyRE1PQlhHSTNHTU5UR0daU0RFTUJTTVFaREFOVEZHWlRETVpKU01RM1RHTlRFR1pURE1ZUldIRTNHS05SWFBRWVNHTVJRR0kzREFOUlJHVjZERU1CU0dZWURNTUpXUFJTVzRYMlZLTjZGS1UzNEpKSUZTN0JTSUVZRUc3QlVHVVpEUzdESktCVFZLU0Q0R0UzVE9PQlhHNDNEQU5SVEdBMlRDNUxRUEpaU0dOWlJHUVpEUU5CREdJWVRBT0JORzRZVElNUllHUjZGRVJTT1BRWkRBTVJXR0EzRENNWlFHQTJUUzdCU1BSSkRDTUpWR0I2RENNWllHUTJEQ05SREtKSFNHVVNHSllSVEVNQlNHWVdUQU5STkdFWlNBTUJRSEkyVFNJWaNwcmPLQM8XseuFHrilb3JfcHLLAAAAAAAAAAClb3JfY23LQKA2cKPXCj2iY23LQKA2cKPXCj2jcGNkszIwMjYtMDYtMTMgMDA6NTk6MDCjYnJkolJPpG1yaWTAo21ybsCjaGRwwKNmcm6go3Nybtk8SmFwYW5lc2UtU3R5bGUgVHdpbiBSb29tIHdpdGggUHJpdmF0ZSBCYXRocm9vbSAtIE5vbi1TbW9raW5no29jbgGkcHJrc8CjZGV0ywAAAAAAAAAApHNoaWSmNzE0Mjg0o3NpZAKjaGlkp2xwYWU2MmOjb2NjkYGhYQKjY3Vyo0pQWaJnbqJVU6JjaaoyMDI2LTA2LTE1omNvqjIwMjYtMDYtMTajZ2lkoKJjcstALfrhR64Ue6Rzc2lk2TBzZXNzaW9uXzAxOWUyNzUwYmMzZlpoM09hbnMwOGs3Q3Bmajl4TkVTWEhwVlZ3bXajaXNowqNzc3Cgo2lmbcKlaWZjaHLCo2lmcsKlc2VhaWSnbHBhZTYyY6Jua7FsaXRlYXBpb25ib2FyZGluZ6J0eJGEoWnDoWSjVkFUoWHLQJOomZmZmZqhY6NKUFmibHDAo2JrdAU=",
+      "totalPrice": 15919.39,
+      "taxAmount": 1258.15,
+      "taxIncluded": true,
+      "currency": "JPY",
+      "boardType": "RO",
+      "refundableTag": "RFN",
+      "cancelDeadline": "2026-06-13 00:59:00",
+      "cancelPenalty": 15919.39,
+      "cancelTimezone": "GMT",
+      "hasValidOffer": true
+    },
+    "refundable_count": 3,
+    "all_nrfn": false,
+    "prebook_ready": true
+  }
+}

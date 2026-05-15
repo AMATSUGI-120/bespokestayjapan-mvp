@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { supabase } from '@/lib/supabase';
 import { searchHotels } from '@/lib/liteapi';
-import { calculateMargin, calculateFinalPrice, generateRecommendationReason } from '@/lib/margin';
+import { calculateMargin, generateRecommendationReason } from '@/lib/margin';
 import { Hotel, SearchConditions, HotelResult } from '@/lib/types';
 
 export async function POST(request: NextRequest) {
@@ -68,39 +68,50 @@ export async function POST(request: NextRequest) {
       return NextResponse.json({ hotels: [] });
     }
 
-    // 3. LiteAPI検索 (またはモック) で価格取得
-    const hotelIds = top3
-      .map((s) => s.hotel.liteapi_id)
-      .filter((id): id is string => id !== null);
+    // 3. ホテルごとに正しいmarginでLiteAPI検索（offerIdにmarginを含めるため個別呼び出し）
+    const results: HotelResult[] = [];
 
-    let liteapiResults: Awaited<ReturnType<typeof searchHotels>> = [];
-    if (hotelIds.length > 0) {
-      liteapiResults = await searchHotels({ hotelIds, checkin, checkout, guests });
-    }
+    for (const { hotel, matchLevel } of top3) {
+      if (!hotel.liteapi_id) continue;
 
-    const liteapiMap = new Map(liteapiResults.map((r) => [r.hotelId, r]));
-
-    // 4. Layer別マージン適用 & 最終価格計算
-    const results: HotelResult[] = top3.map(({ hotel, matchLevel }) => {
-      const liteapiData = hotel.liteapi_id ? liteapiMap.get(hotel.liteapi_id) : undefined;
-      const basePrice = liteapiData?.price ?? 0;
       const margin = calculateMargin(hotel.layer, conditions);
-      const finalPrice = calculateFinalPrice(basePrice, margin);
-      const liteapiOfferId = liteapiData?.offerId ?? '';
-      const recommendationReason = generateRecommendationReason(hotel, matchLevel, conditions);
 
-      return {
+      let liteapiData: Awaited<ReturnType<typeof searchHotels>>[number] | undefined;
+      try {
+        const [result] = await searchHotels({
+          hotelIds: [hotel.liteapi_id],
+          checkin,
+          checkout,
+          guests,
+          margin,
+        });
+        liteapiData = result;
+      } catch {
+        // ホテル単体の失敗は他に影響しない
+      }
+
+      const netPrice = liteapiData?.price ?? 0;
+      const finalPrice = netPrice;
+      const liteapiOfferId = liteapiData?.offerId ?? '';
+      const refundableTag = liteapiData?.refundableTag ?? '';
+      const cancellationDeadline = liteapiData?.cancellationDeadline ?? null;
+
+      console.log(`[PRICE DEBUG] hotel=${hotel.liteapi_id} layer=${hotel.layer} margin=${margin}% (commission) netPrice=${netPrice} offerId=${liteapiOfferId || '(none)'} refundableTag=${refundableTag}`);
+
+      results.push({
         ...hotel,
         matchLevel,
-        basePrice,
+        basePrice: netPrice,
         margin,
         finalPrice,
         liteapiOfferId,
-        recommendationReason,
-      };
-    });
+        refundableTag,
+        cancellationDeadline,
+        recommendationReason: generateRecommendationReason(hotel, matchLevel, conditions),
+      });
+    }
 
-    // 5. 価格が取得できなかったホテルは除外して返却
+    // 4. 価格が取得できなかったホテルは除外して返却
     const validResults = results.filter(
       (r) => r.finalPrice > 0 && r.liteapiOfferId !== ''
     );

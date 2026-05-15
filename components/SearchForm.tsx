@@ -1,12 +1,40 @@
 'use client';
 
 import { useState } from 'react';
+import type { CSSProperties } from 'react';
 import { SearchConditions } from '@/lib/types';
 
 interface SearchFormProps {
   onSearch: (conditions: SearchConditions) => void;
   isLoading?: boolean;
 }
+
+const formStyle: CSSProperties = {
+  backgroundColor: 'transparent',
+  borderTop: '1px solid var(--bsj-border)',
+  borderBottom: '1px solid var(--bsj-border)',
+  padding: '28px 0',
+};
+
+const labelStyle: CSSProperties = {
+  color: 'var(--bsj-text-light)',
+  fontSize: '11px',
+  fontWeight: 600,
+  letterSpacing: '0.12em',
+  lineHeight: 1.4,
+  textTransform: 'uppercase',
+};
+
+const fieldStyle =
+  'mt-2 w-full rounded-[4px] border border-[var(--bsj-border)] bg-[var(--bsj-bg-card)] px-3 py-3 text-sm text-[var(--bsj-text)] outline-none transition-colors focus:border-[var(--bsj-primary)]';
+
+const noteStyle: CSSProperties = {
+  color: 'var(--bsj-text-light)',
+  fontSize: '11px',
+  fontWeight: 500,
+  lineHeight: 1.5,
+  marginTop: '8px',
+};
 
 export default function SearchForm({ onSearch, isLoading }: SearchFormProps) {
   const today = new Date().toISOString().split('T')[0];
@@ -26,15 +54,15 @@ export default function SearchForm({ onSearch, isLoading }: SearchFormProps) {
   };
 
   return (
-    <form onSubmit={handleSubmit} className="bg-white rounded-2xl shadow-lg p-6 md:p-8">
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-4">
+    <form onSubmit={handleSubmit} style={formStyle}>
+      <div className="grid grid-cols-1 gap-x-5 gap-y-6 md:grid-cols-2 lg:grid-cols-5">
         {/* City */}
-        <div className="flex flex-col gap-1">
-          <label className="text-sm font-semibold text-gray-600">City</label>
+        <div>
+          <label style={labelStyle}>City</label>
           <select
             value={conditions.city}
             onChange={(e) => setConditions({ ...conditions, city: e.target.value })}
-            className="border border-gray-200 rounded-lg px-3 py-2.5 text-gray-800 focus:outline-none focus:ring-2 focus:ring-teal-400"
+            className={fieldStyle}
           >
             <option value="Kyoto">Kyoto</option>
             <option value="Osaka">Osaka</option>
@@ -42,9 +70,9 @@ export default function SearchForm({ onSearch, isLoading }: SearchFormProps) {
           </select>
         </div>
 
-        {/* Pet Size */}
-        <div className="flex flex-col gap-1">
-          <label className="text-sm font-semibold text-gray-600">Pet Size</label>
+        {/* First condition filter */}
+        <div>
+          <label style={labelStyle}>Condition detail</label>
           <select
             value={conditions.petSize}
             onChange={(e) =>
@@ -53,22 +81,22 @@ export default function SearchForm({ onSearch, isLoading }: SearchFormProps) {
                 petSize: e.target.value as SearchConditions['petSize'],
               })
             }
-            className="border border-gray-200 rounded-lg px-3 py-2.5 text-gray-800 focus:outline-none focus:ring-2 focus:ring-teal-400"
+            className={fieldStyle}
           >
-            <option value="small">Small (&lt;7kg)</option>
-            <option value="medium">Medium (7-15kg)</option>
-            <option value="large">Large (15kg+)</option>
-            <option value="any">Any Size</option>
+            <option value="small">Companion animal under 7kg</option>
+            <option value="medium">Companion animal 7-15kg</option>
+            <option value="large">Companion animal over 15kg</option>
+            <option value="any">Any companion-animal size</option>
           </select>
         </div>
 
         {/* Guests */}
-        <div className="flex flex-col gap-1">
-          <label className="text-sm font-semibold text-gray-600">Guests</label>
+        <div>
+          <label style={labelStyle}>Guests</label>
           <select
             value={conditions.guests}
             onChange={(e) => setConditions({ ...conditions, guests: Number(e.target.value) })}
-            className="border border-gray-200 rounded-lg px-3 py-2.5 text-gray-800 focus:outline-none focus:ring-2 focus:ring-teal-400"
+            className={fieldStyle}
           >
             {[1, 2, 3, 4, 5].map((n) => (
               <option key={n} value={n}>
@@ -76,41 +104,44 @@ export default function SearchForm({ onSearch, isLoading }: SearchFormProps) {
               </option>
             ))}
           </select>
-          <p className="text-xs font-bold text-gray-600">Currently supporting guests aged 12 and older.</p>
+          <p style={noteStyle}>Guests aged 12 and older.</p>
         </div>
 
         {/* Check-in */}
-        <div className="flex flex-col gap-1">
-          <label className="text-sm font-semibold text-gray-600">Check-in</label>
+        <div>
+          <label style={labelStyle}>Check-in</label>
           <input
             type="date"
             value={conditions.checkin}
             min={today}
             onChange={(e) => setConditions({ ...conditions, checkin: e.target.value })}
-            className="border border-gray-200 rounded-lg px-3 py-2.5 text-gray-800 focus:outline-none focus:ring-2 focus:ring-teal-400"
+            className={fieldStyle}
           />
         </div>
 
         {/* Check-out */}
-        <div className="flex flex-col gap-1">
-          <label className="text-sm font-semibold text-gray-600">Check-out</label>
+        <div>
+          <label style={labelStyle}>Check-out</label>
           <input
             type="date"
             value={conditions.checkout}
             min={conditions.checkin}
             onChange={(e) => setConditions({ ...conditions, checkout: e.target.value })}
-            className="border border-gray-200 rounded-lg px-3 py-2.5 text-gray-800 focus:outline-none focus:ring-2 focus:ring-teal-400"
+            className={fieldStyle}
           />
         </div>
       </div>
 
-      <div className="mt-5 flex justify-center">
+      <div className="mt-8 flex flex-col items-start gap-3 sm:flex-row sm:items-center sm:justify-between">
+        <p className="max-w-md text-sm leading-[1.7] text-[var(--bsj-text-muted)]">
+          Check details before you book. Availability and pricing are confirmed after the search.
+        </p>
         <button
           type="submit"
           disabled={isLoading}
-          className="bg-teal-600 hover:bg-teal-700 disabled:bg-teal-300 text-white font-bold px-10 py-3 rounded-xl transition-colors text-lg shadow-md"
+          className="w-full rounded-[4px] bg-[var(--bsj-primary)] px-6 py-3 text-[12px] font-semibold uppercase tracking-[0.08em] text-white transition-colors hover:bg-[var(--bsj-primary-hover)] disabled:bg-[var(--bsj-secondary)] sm:w-auto"
         >
-          {isLoading ? 'Searching...' : 'Find Pet-Friendly Hotels'}
+          {isLoading ? 'Searching stays' : 'Browse curated stays'}
         </button>
       </div>
     </form>

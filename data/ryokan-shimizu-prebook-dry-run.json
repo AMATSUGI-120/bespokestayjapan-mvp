@@ -1,0 +1,111 @@
+{
+  "meta": {
+    "executed_at": "2026-05-15T01:49:00Z",
+    "hotel_id": "lpae62c",
+    "hotel_name": "Ryokan Shimizu",
+    "checkin": "2026-06-15",
+    "checkout": "2026-06-16",
+    "adults": 2,
+    "children": 0,
+    "currency": "JPY",
+    "guestNationality": "US",
+    "rates_offerId_used": "3gAWonJzkY-kc3JpZNoBp0d...<cheapest: Japanese-Style Twin Room ¥15,919 RO RFN>",
+    "endpoint": "POST /v3.0/rates/prebook",
+    "request_body": {
+      "offerId": "3gAWonJzkY-kc3JpZNoBp0da...(full offerId from rates dry-run)",
+      "usePaymentSdk": true
+    },
+    "note": "book API was NOT called. No reservation confirmed. No charge incurred.",
+    "WARNING": "secretKey and transactionId are MASKED in this file. Full values stored in memory only."
+  },
+  "http_status": 200,
+  "prebook_response": {
+    "prebookId": "8uRuP0kRa",
+    "hotelId": "lpae62c",
+    "currency": "JPY",
+    "checkin": "2026-06-15",
+    "checkout": "2026-06-16",
+    "supplier": "nuitee",
+    "supplierId": 2,
+    "isPackageRate": false,
+    "priceType": "commission",
+    "price": 15919.39,
+    "sellingPriceToUser": 15919.39,
+    "suggestedSellingPrice": 15920.79,
+    "commission": 2075.21,
+    "priceDifferencePercent": 0,
+    "cancellationChanged": true,
+    "boardChanged": false,
+    "transactionId": "tr_ct_C24pyOZJ...m7ks (MASKED)",
+    "secretKey": "pi_3TX2SvA4FXPoRk9Y09ImhE9x_secret_...mVW2 (MASKED)",
+    "paymentTypes": ["NUITEE_PAY", "TRANSACTION_ID", "ACC_CREDIT_CARD", "WALLET"],
+    "guestLevel": 0,
+    "termsAndConditions": "",
+    "roomTypes": [
+      {
+        "rates": [
+          {
+            "rateId": "I5NFCVCNJVFFQR2BGNCEGT...DKOJ2",
+            "name": "Japanese-Style Twin Room with Private Bathroom - Non-Smoking",
+            "occupancyNumber": 1,
+            "maxOccupancy": 2,
+            "adultCount": 2,
+            "childCount": 0,
+            "boardType": "RO",
+            "boardName": "Room Only",
+            "remarks": "",
+            "priceType": "commission",
+            "commission": [
+              { "amount": 2075.21, "currency": "JPY" }
+            ],
+            "retailRate": {
+              "total": [{ "amount": 15919.39, "currency": "JPY" }],
+              "suggestedSellingPrice": [{ "amount": 15920.79, "currency": "JPY", "source": "" }],
+              "initialPrice": null,
+              "taxesAndFees": [
+                { "included": true, "description": "VAT", "amount": 1258.15, "currency": "JPY" }
+              ]
+            },
+            "cancellationPolicies": {
+              "refundableTag": "RFN",
+              "cancelPolicyInfos": [
+                {
+                  "cancelTime": "2026-06-13 01:00:00",
+                  "amount": 15919.39,
+                  "currency": "JPY",
+                  "type": "amount",
+                  "timezone": "GMT"
+                }
+              ],
+              "hotelRemarks": []
+            },
+            "paymentTypes": ["NUITEE_PAY"],
+            "perks": [],
+            "promotions": null
+          }
+        ]
+      }
+    ]
+  },
+  "comparison": {
+    "rates_price": 15919.39,
+    "prebook_price": 15919.39,
+    "price_diff": 0,
+    "rates_boardType": "RO",
+    "prebook_boardType": "RO",
+    "board_changed": false,
+    "rates_cancelDeadline": "2026-06-13 00:59:00 GMT",
+    "prebook_cancelDeadline": "2026-06-13 01:00:00 GMT",
+    "cancellation_changed": true,
+    "cancellation_diff_note": "1-minute shift (00:59 → 01:00). Likely timezone rounding artifact. No material impact on user-facing cancel deadline.",
+    "rates_refundableTag": "RFN",
+    "prebook_refundableTag": "RFN"
+  },
+  "sdk_readiness": {
+    "prebookId_present": true,
+    "secretKey_present": true,
+    "transactionId_present": true,
+    "TRANSACTION_ID_paymentType_available": true,
+    "payment_sdk_ready": true
+  }
+}

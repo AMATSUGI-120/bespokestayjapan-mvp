@@ -13,8 +13,9 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "BespokeStay Japan - Pet-Friendly Hotels",
-  description: "Find verified pet-friendly hotels in Japan. Kyoto, Osaka, Tokyo. Any size dog welcome.",
+  title: "Bespoke Stay Japan | Stays for Real Travel Conditions",
+  description:
+    "Find Japan stays for private villas, tattoo-friendly stays, pet-friendly hotels, luggage-friendly locations, and food-restriction-friendly areas.",
 };
 
 export default function RootLayout({
