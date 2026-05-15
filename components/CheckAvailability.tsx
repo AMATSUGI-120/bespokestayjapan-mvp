@@ -518,16 +518,16 @@ export default function CheckAvailability({
             ))}
           </div>
 
-          <div className="mt-4 flex items-center gap-4">
+          <div className="mt-5">
             <p className="text-[11px] text-[var(--bsj-text-light)]">
               Showing {Math.min(visibleCount, plans.length)} of {plans.length} plan{plans.length !== 1 ? 's' : ''}
             </p>
             {plans.length > visibleCount && (
               <button
                 onClick={() => setVisibleCount((c) => c + PLANS_PAGE_SIZE)}
-                className="text-[11px] font-semibold uppercase tracking-[0.08em] text-[var(--bsj-primary)] transition-colors hover:text-[var(--bsj-primary-hover)]"
+                className="mt-3 w-full rounded-[4px] border border-[var(--bsj-border)] bg-[var(--bsj-bg-card)] px-6 py-3 text-[11px] font-semibold uppercase tracking-[0.08em] text-[var(--bsj-text)] transition-colors hover:border-[var(--bsj-text-light)] hover:text-[var(--bsj-text)] sm:w-[280px]"
               >
-                Show more plans
+                Show {Math.min(PLANS_PAGE_SIZE, plans.length - visibleCount)} more plans
               </button>
             )}
           </div>
