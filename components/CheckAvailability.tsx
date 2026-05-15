@@ -352,7 +352,7 @@ export default function CheckAvailability({
   const confirmedRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    if (prebookStatus === 'success' && confirmedRef.current) {
+    if (prebookStatus === 'loading' && confirmedRef.current) {
       confirmedRef.current.scrollIntoView({ behavior: 'smooth', block: 'start' });
     }
   }, [prebookStatus]);
@@ -532,33 +532,46 @@ export default function CheckAvailability({
             )}
           </div>
 
-          {prebookStatus === 'success' && prebookResult && (
-            <div ref={confirmedRef} style={{ scrollMarginTop: '80px' }}>
-              <BookingConfirmedCard
-                result={prebookResult}
-                checkin={checkin}
-                checkout={checkout}
-                ratesCancelDeadline={selectedRatesCancelDeadline}
-                onProceedToPayment={() => setModalOpen(true)}
-              />
-            </div>
-          )}
-
-          {prebookStatus === 'error' && (
-            <div className="mt-6">
-              <p className="text-[14px] leading-[1.75] text-[var(--bsj-text-muted)]">
-                We could not confirm this plan. Please try another date or use the booking link below.
-              </p>
-              <div className="mt-4">
-                <StayBookingCta bookingUrl={bookingUrl} liteapiId={liteapiId} />
-              </div>
-            </div>
-          )}
-
-          {prebookStatus === 'idle' && (
+          {selectedPlanIndex === null && (
             <p className="mt-4 text-[11px] text-[var(--bsj-text-light)]">
               Final price and cancellation terms are confirmed before payment.
             </p>
+          )}
+
+          {selectedPlanIndex !== null && (
+            <div ref={confirmedRef} style={{ scrollMarginTop: '80px' }}>
+              {prebookStatus === 'loading' && (
+                <div className="mt-6 rounded-[4px] border border-[var(--bsj-border)] bg-[var(--bsj-bg-card)] p-6">
+                  <p className="text-[11px] font-semibold uppercase tracking-[0.14em] text-[var(--bsj-text-light)]">
+                    Confirming your plan…
+                  </p>
+                  <p className="mt-2 text-[13px] leading-[1.7] text-[var(--bsj-text-muted)]">
+                    Checking availability and locking in your rate.
+                  </p>
+                </div>
+              )}
+
+              {prebookStatus === 'success' && prebookResult && (
+                <BookingConfirmedCard
+                  result={prebookResult}
+                  checkin={checkin}
+                  checkout={checkout}
+                  ratesCancelDeadline={selectedRatesCancelDeadline}
+                  onProceedToPayment={() => setModalOpen(true)}
+                />
+              )}
+
+              {prebookStatus === 'error' && (
+                <div className="mt-6">
+                  <p className="text-[14px] leading-[1.75] text-[var(--bsj-text-muted)]">
+                    We could not confirm this plan. Please try another date or use the booking link below.
+                  </p>
+                  <div className="mt-4">
+                    <StayBookingCta bookingUrl={bookingUrl} liteapiId={liteapiId} />
+                  </div>
+                </div>
+              )}
+            </div>
           )}
         </div>
       )}
