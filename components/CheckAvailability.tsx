@@ -1,6 +1,8 @@
 'use client';
 
-import { useState, useCallback } from 'react';
+import { useState, useCallback, useRef, useEffect } from 'react';
+
+const PLANS_PAGE_SIZE = 6;
 import StayBookingCta from './StayBookingCta';
 import StayPaymentModal from './StayPaymentModal';
 
@@ -346,6 +348,14 @@ export default function CheckAvailability({
   >('idle');
   const [prebookResult, setPrebookResult] = useState<PrebookResult | null>(null);
   const [modalOpen, setModalOpen] = useState(false);
+  const [visibleCount, setVisibleCount] = useState(PLANS_PAGE_SIZE);
+  const confirmedRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    if (prebookStatus === 'success' && confirmedRef.current) {
+      confirmedRef.current.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+  }, [prebookStatus]);
 
   const search = useCallback(async () => {
     if (!checkin || !checkout) return;
@@ -355,6 +365,7 @@ export default function CheckAvailability({
     setSelectedRatesCancelDeadline(null);
     setPrebookStatus('idle');
     setPrebookResult(null);
+    setVisibleCount(PLANS_PAGE_SIZE);
 
     try {
       const qs = new URLSearchParams({
@@ -370,7 +381,12 @@ export default function CheckAvailability({
       if (!res.ok || !data.available || data.plans.length === 0) {
         setSearchStatus('unavailable');
       } else {
-        setPlans(data.plans);
+        const sorted = [...data.plans].sort((a, b) => {
+          if (a.totalPrice !== b.totalPrice) return a.totalPrice - b.totalPrice;
+          if (a.refundable !== b.refundable) return a.refundable ? -1 : 1;
+          return 0;
+        });
+        setPlans(sorted);
         setSearchStatus('results');
       }
     } catch {
@@ -490,7 +506,7 @@ export default function CheckAvailability({
       {searchStatus === 'results' && plans.length > 0 && (
         <div className="mt-6">
           <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
-            {plans.map((plan, i) => (
+            {plans.slice(0, visibleCount).map((plan, i) => (
               <PlanCard
                 key={plan.offerId || i}
                 plan={plan}
@@ -502,14 +518,30 @@ export default function CheckAvailability({
             ))}
           </div>
 
+          <div className="mt-4 flex items-center gap-4">
+            <p className="text-[11px] text-[var(--bsj-text-light)]">
+              Showing {Math.min(visibleCount, plans.length)} of {plans.length} plan{plans.length !== 1 ? 's' : ''}
+            </p>
+            {plans.length > visibleCount && (
+              <button
+                onClick={() => setVisibleCount((c) => c + PLANS_PAGE_SIZE)}
+                className="text-[11px] font-semibold uppercase tracking-[0.08em] text-[var(--bsj-primary)] transition-colors hover:text-[var(--bsj-primary-hover)]"
+              >
+                Show more plans
+              </button>
+            )}
+          </div>
+
           {prebookStatus === 'success' && prebookResult && (
-            <BookingConfirmedCard
-              result={prebookResult}
-              checkin={checkin}
-              checkout={checkout}
-              ratesCancelDeadline={selectedRatesCancelDeadline}
-              onProceedToPayment={() => setModalOpen(true)}
-            />
+            <div ref={confirmedRef} style={{ scrollMarginTop: '80px' }}>
+              <BookingConfirmedCard
+                result={prebookResult}
+                checkin={checkin}
+                checkout={checkout}
+                ratesCancelDeadline={selectedRatesCancelDeadline}
+                onProceedToPayment={() => setModalOpen(true)}
+              />
+            </div>
           )}
 
           {prebookStatus === 'error' && (
