@@ -7,6 +7,7 @@ import SiteFooter from '@/components/SiteFooter';
 import { ConditionTag } from '@/components/ConditionTag';
 import StayBookingCta from '@/components/StayBookingCta';
 import CheckAvailability from '@/components/CheckAvailability';
+import HotelDetailViewTracker from '@/components/HotelDetailViewTracker';
 import { supabase } from '@/lib/supabase';
 import { formatCategoryTagLabel, getCategoryTagHref } from '@/lib/category-tags';
 
@@ -184,6 +185,7 @@ export default async function StayDetailPage({ params }: PageProps) {
 
   return (
     <>
+      <HotelDetailViewTracker hotelId={stay.liteapi_id} hotelName={stay.name} city={stay.city} />
       <SiteNav />
 
       <main>
@@ -259,6 +261,7 @@ export default async function StayDetailPage({ params }: PageProps) {
               liteapiId={stay.liteapi_id}
               hotelName={stay.name}
               bookingUrl={stay.booking_url}
+              city={stay.city}
             />
           </div>
         </section>

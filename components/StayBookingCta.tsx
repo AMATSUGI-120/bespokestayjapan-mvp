@@ -1,3 +1,7 @@
+'use client';
+
+import { trackExternalBookingCtaClick } from '@/lib/analytics';
+
 interface StayBookingCtaProps {
   bookingUrl: string | null;
   liteapiId: string;
@@ -28,6 +32,7 @@ export function StayBookingCta({
       href={href}
       target="_blank"
       rel="noreferrer"
+      onClick={() => trackExternalBookingCtaClick({ hotel_id: liteapiId })}
       className={[
         'inline-flex w-full justify-center rounded-[4px] bg-[var(--bsj-primary)] px-5 py-3 text-center text-[12px] font-semibold uppercase tracking-[0.08em] text-white no-underline transition-colors hover:bg-[var(--bsj-primary-hover)]',
         className,

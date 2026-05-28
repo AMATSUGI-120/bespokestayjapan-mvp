@@ -5,6 +5,20 @@ import { useState, useCallback, useRef, useEffect } from 'react';
 const PLANS_PAGE_SIZE = 6;
 import StayBookingCta from './StayBookingCta';
 import StayPaymentModal from './StayPaymentModal';
+import ProductionTestSafetyPanel from './booking/ProductionTestSafetyPanel';
+import type { CancelPolicyInfoInput } from '@/lib/cancellationPolicy';
+import { evaluateCancellationSafety } from '@/lib/cancellationPolicy';
+import {
+  trackCheckAvailabilityClick,
+  trackRatePlansLoaded,
+  trackAvailabilityNoResult,
+  trackAvailabilityError,
+  trackDateValidationError,
+  trackSelectPlanClick,
+  trackPrebookSuccess,
+  trackPrebookFailure,
+  trackProceedToPaymentClick,
+} from '@/lib/analytics';
 
 // ── Types ──────────────────────────────────────────────────────────────────
 
@@ -54,25 +68,47 @@ interface PrebookResult {
   secretKeyPresent?: boolean;
   transactionIdSupported?: boolean;
   paymentTypes?: string[];
+  // Cancellation policy detail fields (added for safety evaluation)
+  refundableTag?: string;
+  cancelPolicyInfos?: CancelPolicyInfoInput[];
 }
 
 interface CheckAvailabilityProps {
   liteapiId: string;
   hotelName: string;
   bookingUrl: string | null;
+  city?: string | null;
 }
 
 // ── Helpers ────────────────────────────────────────────────────────────────
 
+// Timezone-safe local date helpers — treat YYYY-MM-DD as local calendar date
+function todayYMD(): string {
+  const d = new Date();
+  return `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, '0')}-${String(d.getDate()).padStart(2, '0')}`;
+}
+
+function parseLocalDate(ymd: string): Date {
+  const [y, m, day] = ymd.split('-').map(Number);
+  return new Date(y, m - 1, day);
+}
+
+function addDays(ymd: string, n: number): string {
+  const d = parseLocalDate(ymd);
+  d.setDate(d.getDate() + n);
+  return `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, '0')}-${String(d.getDate()).padStart(2, '0')}`;
+}
+
+// Returns true if date string a is strictly after date string b
+function ymdAfter(a: string, b: string): boolean {
+  return parseLocalDate(a).getTime() > parseLocalDate(b).getTime();
+}
+
 function getDefaultDates() {
-  const now = new Date();
-  const ci = new Date(now);
-  ci.setDate(ci.getDate() + 30);
-  const co = new Date(ci);
-  co.setDate(co.getDate() + 1);
+  const today = todayYMD();
   return {
-    checkin: ci.toISOString().slice(0, 10),
-    checkout: co.toISOString().slice(0, 10),
+    checkin: addDays(today, 7),
+    checkout: addDays(today, 8),
   };
 }
 
@@ -222,12 +258,14 @@ function BookingConfirmedCard({
   checkout,
   ratesCancelDeadline,
   onProceedToPayment,
+  children,
 }: {
   result: PrebookResult;
   checkin: string;
   checkout: string;
   ratesCancelDeadline: string | null;
   onProceedToPayment: () => void;
+  children?: React.ReactNode;
 }) {
   const cancelDisplay = toJST(result.cancelDeadline ?? null);
   // Suppress cancellation warning when the shift is a minor rounding artifact (≤5 min)
@@ -314,6 +352,8 @@ function BookingConfirmedCard({
         Final price and cancellation terms are confirmed before payment.
       </p>
 
+      {children}
+
       <button
         onClick={onProceedToPayment}
         className="mt-4 w-full rounded-[4px] bg-[var(--bsj-primary)] px-4 py-3 text-[11px] font-semibold uppercase tracking-[0.08em] text-white transition-colors hover:bg-[var(--bsj-primary-hover)]"
@@ -330,6 +370,7 @@ export default function CheckAvailability({
   liteapiId,
   hotelName,
   bookingUrl,
+  city: _city,
 }: CheckAvailabilityProps) {
   const defaults = getDefaultDates();
   const [checkin, setCheckin] = useState(defaults.checkin);
@@ -349,6 +390,7 @@ export default function CheckAvailability({
   const [prebookResult, setPrebookResult] = useState<PrebookResult | null>(null);
   const [modalOpen, setModalOpen] = useState(false);
   const [visibleCount, setVisibleCount] = useState(PLANS_PAGE_SIZE);
+  const [dateError, setDateError] = useState<string | null>(null);
   const confirmedRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -359,6 +401,18 @@ export default function CheckAvailability({
 
   const search = useCallback(async () => {
     if (!checkin || !checkout) return;
+
+    // Guard: checkout must be strictly after checkin
+    if (!ymdAfter(checkout, checkin)) {
+      const corrected = addDays(checkin, 1);
+      setCheckout(corrected);
+      setDateError('Check-out must be after check-in.');
+      trackDateValidationError({ hotel_id: liteapiId, checkin, checkout });
+      return;
+    }
+    setDateError(null);
+
+    trackCheckAvailabilityClick({ hotel_id: liteapiId, checkin, checkout, adults });
     setSearchStatus('loading');
     setPlans([]);
     setSelectedPlanIndex(null);
@@ -380,6 +434,7 @@ export default function CheckAvailability({
 
       if (!res.ok || !data.available || data.plans.length === 0) {
         setSearchStatus('unavailable');
+        trackAvailabilityNoResult({ hotel_id: liteapiId, checkin, checkout });
       } else {
         const sorted = [...data.plans].sort((a, b) => {
           if (a.totalPrice !== b.totalPrice) return a.totalPrice - b.totalPrice;
@@ -388,9 +443,11 @@ export default function CheckAvailability({
         });
         setPlans(sorted);
         setSearchStatus('results');
+        trackRatePlansLoaded({ hotel_id: liteapiId, plan_count: sorted.length, checkin, checkout });
       }
     } catch {
       setSearchStatus('error');
+      trackAvailabilityError({ hotel_id: liteapiId, checkin, checkout });
     }
   }, [liteapiId, checkin, checkout, adults]);
 
@@ -404,6 +461,15 @@ export default function CheckAvailability({
       setPrebookStatus('loading');
       setPrebookResult(null);
 
+      trackSelectPlanClick({
+        hotel_id: liteapiId,
+        offer_id: plan.offerId,
+        plan_name: plan.planName,
+        price: plan.totalPrice,
+        currency: plan.currency,
+        refundable: plan.refundable,
+      });
+
       try {
         const res = await fetch(`/api/stays/${liteapiId}/prebook`, {
           method: 'POST',
@@ -415,12 +481,29 @@ export default function CheckAvailability({
         if (!res.ok || !data.success) {
           setPrebookStatus('error');
           setPrebookResult(data);
+          trackPrebookFailure({ hotel_id: liteapiId, offer_id: plan.offerId });
         } else {
           setPrebookStatus('success');
           setPrebookResult(data);
+          const safetyResult = evaluateCancellationSafety({
+            refundableTag: data.refundableTag,
+            cancelPolicyInfos: data.cancelPolicyInfos,
+            refundable: data.refundable,
+            cancelDeadline: data.cancelDeadline,
+            cancelTimezone: data.cancelTimezone,
+          });
+          trackPrebookSuccess({
+            hotel_id: liteapiId,
+            offer_id: plan.offerId,
+            final_price: data.totalPrice ?? plan.totalPrice,
+            currency: data.currency ?? plan.currency,
+            refundable: data.refundable ?? plan.refundable,
+            risk_level: safetyResult.riskLevel,
+          });
         }
       } catch {
         setPrebookStatus('error');
+        trackPrebookFailure({ hotel_id: liteapiId, offer_id: plan.offerId });
       }
     },
     [liteapiId, plans]
@@ -449,7 +532,14 @@ export default function CheckAvailability({
             id="ca-checkin"
             type="date"
             value={checkin}
-            onChange={(e) => setCheckin(e.target.value)}
+            onChange={(e) => {
+              const newCheckin = e.target.value;
+              setCheckin(newCheckin);
+              setDateError(null);
+              if (newCheckin && checkout && !ymdAfter(checkout, newCheckin)) {
+                setCheckout(addDays(newCheckin, 1));
+              }
+            }}
             className="rounded-[4px] border border-[var(--bsj-border)] bg-[var(--bsj-bg-card)] px-3 py-2 text-[13px] text-[var(--bsj-text)] focus:outline-none focus:ring-1 focus:ring-[var(--bsj-primary)]"
           />
         </div>
@@ -465,7 +555,11 @@ export default function CheckAvailability({
             id="ca-checkout"
             type="date"
             value={checkout}
-            onChange={(e) => setCheckout(e.target.value)}
+            min={checkin ? addDays(checkin, 1) : undefined}
+            onChange={(e) => {
+              setCheckout(e.target.value);
+              setDateError(null);
+            }}
             className="rounded-[4px] border border-[var(--bsj-border)] bg-[var(--bsj-bg-card)] px-3 py-2 text-[13px] text-[var(--bsj-text)] focus:outline-none focus:ring-1 focus:ring-[var(--bsj-primary)]"
           />
         </div>
@@ -496,6 +590,10 @@ export default function CheckAvailability({
           {searchStatus === 'loading' ? 'Searching…' : 'Search availability'}
         </button>
       </div>
+
+      {dateError && (
+        <p className="mt-2 text-[11px] text-[var(--bsj-ask)]">{dateError}</p>
+      )}
 
       {searchStatus === 'loading' && (
         <p className="mt-6 text-[13px] text-[var(--bsj-text-muted)]">
@@ -577,8 +675,26 @@ export default function CheckAvailability({
                   checkin={checkin}
                   checkout={checkout}
                   ratesCancelDeadline={selectedRatesCancelDeadline}
-                  onProceedToPayment={() => setModalOpen(true)}
-                />
+                  onProceedToPayment={() => {
+                    trackProceedToPaymentClick({
+                      hotel_id: liteapiId,
+                      offer_id: plans[selectedPlanIndex].offerId,
+                      price: prebookResult.totalPrice ?? plans[selectedPlanIndex].totalPrice,
+                      currency: prebookResult.currency ?? plans[selectedPlanIndex].currency,
+                    });
+                    setModalOpen(true);
+                  }}
+                >
+                  <ProductionTestSafetyPanel
+                    evalInput={{
+                      refundableTag: prebookResult.refundableTag,
+                      cancelPolicyInfos: prebookResult.cancelPolicyInfos,
+                      refundable: prebookResult.refundable,
+                      cancelDeadline: prebookResult.cancelDeadline,
+                      cancelTimezone: prebookResult.cancelTimezone,
+                    }}
+                  />
+                </BookingConfirmedCard>
               )}
 
               {prebookStatus === 'error' && (

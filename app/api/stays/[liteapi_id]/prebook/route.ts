@@ -29,9 +29,17 @@ export interface PrebookApiResponse {
   secretKeyPresent?: boolean;
   transactionIdSupported?: boolean;
   paymentTypes?: string[];
+  refundableTag?: string;
+  cancelPolicyInfos?: CancelPolicyInfo[];
 }
 
-type CancelPolicyInfo = { cancelTime?: string; timezone?: string };
+type CancelPolicyInfo = {
+  cancelTime?: string;
+  timezone?: string;
+  amount?: number;
+  currency?: string;
+  type?: string;
+};
 type TaxFee = { amount?: number; currency?: string };
 type RetailRate = { total?: TaxFee[] };
 type Rate = {
@@ -134,6 +142,16 @@ export async function POST(
 
   const paymentTypes = data.paymentTypes ?? [];
 
+  const cancelPolicyInfos: CancelPolicyInfo[] = (policies.cancelPolicyInfos ?? []).map(
+    (p) => ({
+      cancelTime: p.cancelTime,
+      timezone: p.timezone,
+      amount: p.amount,
+      currency: p.currency,
+      type: p.type,
+    })
+  );
+
   return NextResponse.json({
     success: true,
     prebookId,
@@ -152,5 +170,7 @@ export async function POST(
     secretKeyPresent: secretKey.length > 0,
     transactionIdSupported: paymentTypes.includes('TRANSACTION_ID'),
     paymentTypes,
+    refundableTag,
+    cancelPolicyInfos,
   } satisfies PrebookApiResponse);
 }

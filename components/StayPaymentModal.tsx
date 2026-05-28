@@ -1,6 +1,7 @@
 'use client';
 
 import { useState, useEffect, useRef } from 'react';
+import { trackPaymentModalOpen, stopSessionRecording } from '@/lib/analytics';
 
 declare global {
   interface Window {
@@ -64,7 +65,7 @@ function toJST(gmtDateStr: string | null): string | null {
 
 export default function StayPaymentModal({
   hotelName,
-  liteapiId: _liteapiId,
+  liteapiId,
   offerId,
   initialPrice,
   currency,
@@ -94,6 +95,18 @@ export default function StayPaymentModal({
   const sdkInitialized = useRef(false);
 
   const cancelDisplay = toJST(cancelDeadline);
+
+  // Track modal open once on mount
+  useEffect(() => {
+    trackPaymentModalOpen({ hotel_id: liteapiId, offer_id: offerId });
+  }, [liteapiId, offerId]);
+
+  // Stop session recording before the payment SDK renders
+  useEffect(() => {
+    if (step === 'payment') {
+      stopSessionRecording();
+    }
+  }, [step]);
 
   const STEPS: Step[] = ['guest_info', 'confirm', 'payment'];
   const stepIndex = STEPS.indexOf(step);
