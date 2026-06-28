@@ -24,8 +24,8 @@ const brandStyle: CSSProperties = {
 const navLinks = [
   { href: '/stays', label: 'Stays' },
   { href: '/guides', label: 'Guides' },
-  { href: '#how-it-works', label: 'How it works' },
-  { href: '#ask', label: 'Ask for a stay match' },
+  { href: '/#how-it-works', label: 'How it works' },
+  { href: '/#ask', label: 'Ask for a stay match' },
 ];
 
 export function SiteNav({ className }: SiteNavProps) {

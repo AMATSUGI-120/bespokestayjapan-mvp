@@ -13,7 +13,7 @@ const config: StayCategoryConfig = {
   path: '/stays/english-friendly',
 };
 
-export const dynamic = 'force-dynamic';
+export const revalidate = 3600;
 export const metadata = buildCategoryMetadata(config);
 
 export default function EnglishFriendlyPage() {

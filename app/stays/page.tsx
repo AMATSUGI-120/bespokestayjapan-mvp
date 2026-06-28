@@ -12,7 +12,7 @@ export const metadata: Metadata = buildPageMetadata({
   path: '/stays',
 });
 
-export const dynamic = 'force-dynamic';
+export const revalidate = 3600;
 
 interface PublishedStay {
   id: number;

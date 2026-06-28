@@ -23,8 +23,8 @@ const infoLinks: FooterLink[] = [
   { href: '/shinkansen-oversized-luggage-guide', label: 'Shinkansen luggage guide' },
   { href: '/dietary-restrictions-japan', label: 'Dietary restriction guide' },
   { href: '/ryokan-stay-guide', label: 'Ryokan stay guide' },
-  { href: '#how-it-works', label: 'How it works' },
-  { href: '#ask', label: 'Ask for a stay match' },
+  { href: '/#how-it-works', label: 'How it works' },
+  { href: '/#ask', label: 'Ask for a stay match' },
 ];
 
 const footerStyle: CSSProperties = {

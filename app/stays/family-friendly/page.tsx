@@ -13,7 +13,7 @@ const config: StayCategoryConfig = {
   path: '/stays/family-friendly',
 };
 
-export const dynamic = 'force-dynamic';
+export const revalidate = 3600;
 export const metadata = buildCategoryMetadata(config);
 
 export default function FamilyFriendlyPage() {
