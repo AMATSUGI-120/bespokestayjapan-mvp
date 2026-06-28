@@ -61,7 +61,7 @@ export function ConditionTag({
       <Link
         href={href}
         className={[
-          'no-underline transition-colors hover:bg-[var(--bsj-bg-subtle)] hover:underline focus:outline-none focus-visible:underline',
+          'no-underline transition-colors hover:border-[var(--bsj-primary)] hover:bg-[var(--bsj-primary)] hover:text-white active:border-[var(--bsj-primary)] active:bg-[var(--bsj-primary)] active:text-white focus:outline-none focus-visible:border-[var(--bsj-primary)] focus-visible:bg-[var(--bsj-primary)] focus-visible:text-white',
           className,
         ]
           .filter(Boolean)

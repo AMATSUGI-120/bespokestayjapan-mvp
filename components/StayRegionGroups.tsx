@@ -149,7 +149,7 @@ function RegionNavLink({
   return (
     <a
       href={href}
-      className="inline-flex min-h-9 shrink-0 items-center gap-2 rounded-[3px] border border-[var(--bsj-border)] bg-[var(--bsj-bg)] px-3 py-2 text-[11px] font-semibold uppercase tracking-[0.08em] text-[var(--bsj-text-muted)] no-underline transition-colors hover:border-[var(--bsj-border-strong)] hover:bg-[var(--bsj-bg-card)] hover:text-[var(--bsj-text)] active:bg-[var(--bsj-bg-subtle)] focus:outline-none focus-visible:border-[var(--bsj-primary)] focus-visible:text-[var(--bsj-text)]"
+      className="inline-flex min-h-9 shrink-0 items-center gap-2 rounded-[3px] border border-[var(--bsj-border)] bg-[var(--bsj-bg)] px-3 py-2 text-[11px] font-semibold uppercase tracking-[0.08em] text-[var(--bsj-text-muted)] no-underline transition-colors hover:border-[var(--bsj-primary)] hover:bg-[var(--bsj-primary)] hover:text-white active:border-[var(--bsj-primary)] active:bg-[var(--bsj-primary)] active:text-white focus:outline-none focus-visible:border-[var(--bsj-primary)] focus-visible:bg-[var(--bsj-primary)] focus-visible:text-white"
     >
       <span>{label}</span>
       {typeof count === 'number' ? (
@@ -182,7 +182,7 @@ export function StayRegionGroups({
       <div className="mb-10">
         <p className="text-[11px] font-semibold uppercase tracking-[0.14em] text-[var(--bsj-text-light)]">
           {stays.length} published stay{stays.length > 1 ? 's' : ''} across{' '}
-          {groups.length} area{groups.length > 1 ? 's' : ''}
+          {groups.length} prefecture{groups.length > 1 ? 's' : ''}
         </p>
         <nav
           aria-label="Browse stays by prefecture"
