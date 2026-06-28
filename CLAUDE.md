@@ -1,32 +1,77 @@
-# BespokeStay Japan - Project Context
+# CLAUDE.md - Bespoke Stay Japan
 
-## プロジェクト概要
-ペット対応ホテル予約サイト。Next.js + Vercel + LiteAPI + Stripe構成。
+Start with `docs/current-state.md` and `docs/ai-working-rules.md`. They are the
+compact handoff files for the project and should prevent repeated full-codebase
+scans.
 
-## 技術スタック
-- Next.js 16 (App Router)
-- LiteAPI Payment SDK（Stripe経由）
-- Vercel（デプロイ）
-- TypeScript
+## Working Assumption
 
-## 重要な実装メモ
+Bespoke Stay Japan is being rebuilt from a LiteAPI booking MVP into a practical
+Japan stay information database and guide media.
 
-### LiteAPI
-- margin: 15（整数）をRates APIに渡す
-- targetElement: "#liteapi-payment-form"（#必須）
-- apiKey: "live" と publicKey: "live" 両方必要
-- prebookIdの有効期限は数分のため、Payボタン直前にprebook呼び出し
+The site should help foreign travelers and foreign residents compare stay
+conditions that are hard to understand from normal booking sites:
+- Tattoo and bath policies
+- Private bath, room bath, and public bath differences
+- Dietary restriction handling
+- Luggage storage and luggage delivery
+- Pet policies
+- Kitchen, laundry, and long-stay suitability
+- Family suitability
+- English support
+- Verified notes, unverified points, and caution notes
 
-### 決済フロー
-1. Book Now → ゲスト情報入力
-2. Continue to Payment（即時遷移、API呼び出しなし）
-3. Proceed to Payment → prebook API → SDK起動
-4. Pay → /booking/success → /api/book呼び出し
+## Current Technical Direction
 
-### 未解決の問題
-- marginがStripe請求金額に反映されていない（Johnに問い合わせ中）
+- Keep Next.js + Supabase.
+- Keep hotel profile pages.
+- Remove booking-site behavior and booking-first messaging.
+- Use guide pages and condition pages as social/SEO landing pages.
+- Use product kit teasers only where contextually relevant.
 
-### CSP設定
-next.config.tsにStripe・LiteAPIのドメインを明示的に追加済み
+## Boundaries
 
-@AGENTS.md
+Do not change these unless the task explicitly asks:
+- Database schema
+- Supabase table structure
+- Import scripts
+- Seed scripts
+- Live hotel data
+
+Do not add back:
+- LiteAPI booking/search/price flows
+- "Book now" centered UX
+- Price comparison UI
+- Required hotel-photo UI
+- Loud teal CTA styling
+
+## Implementation Style
+
+- Small, reversible changes.
+- Reuse existing components and helpers.
+- Keep mobile readable first.
+- Prefer text, icons, labels, and source-backed notes.
+- Avoid broad refactors unless needed for the requested change.
+
+## Research And Content Style
+
+For guide pages, write for practical foreign travelers. Avoid overclaiming.
+Mention that hotel rules can change and that users should confirm directly
+before booking when the issue matters.
+
+Product links can be planned around:
+- Kansai Tattoo-Friendly Stay Kit
+- Private Bath Stay Map
+- Dietary Restriction Travel Kit
+- Luggage-Free Travel Kit
+- Family Stay Planning Kit
+- Pet-Friendly Stay Checklist
+- Long-Stay Japan Hotel Checklist
+
+## Token Hygiene
+
+- Read `docs/current-state.md` and `docs/ai-working-rules.md` first.
+- Use `rg` for targeted discovery.
+- Avoid opening large generated data files.
+- Avoid reading build outputs or dependency folders.
+- Summarize findings before making broad edits.

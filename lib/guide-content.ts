@@ -194,6 +194,44 @@ Thank you.`,
           'Couples or solo travelers who prefer quiet private bathing.',
         ],
       },
+      {
+        title: 'Sample message to confirm bath details',
+        body: [
+          'If the bath setup is the reason you are choosing a stay, ask the property to separate the room bath, private reservable bath, and public bath in the answer.',
+        ],
+        template: {
+          title: 'Private bath and room bath check',
+          intro: 'Use this before booking a room where the bath type matters for privacy, tattoos, family use, or comfort.',
+          messages: [
+            {
+              label: 'English',
+              text: `Hello,
+I am considering staying at your property and would like to confirm the bath facilities before booking.
+
+Could you please tell me:
+- Does the room have its own private bath?
+- Is there a private or family bath that can be reserved?
+- Is there a public bath or large shared bath?
+- If the private bath requires a reservation or extra fee, how does it work?
+
+Thank you.`,
+            },
+            {
+              label: 'Japanese',
+              text: `宿泊を検討しています。
+予約前にお風呂の設備について確認したいです。
+
+以下について教えていただけますか？
+・客室内に専用のお風呂はありますか？
+・貸切風呂または家族風呂はありますか？
+・大浴場などの共用のお風呂はありますか？
+・貸切風呂に予約や追加料金が必要な場合、利用方法を教えてください。
+
+よろしくお願いいたします。`,
+            },
+          ],
+        },
+      },
     ],
     relatedStays: [
       { href: '/stays/private-bath', label: 'Private bath stay profiles' },
@@ -290,6 +328,44 @@ Thank you.`,
           'Do not send items you may need immediately: passport, medication, valuables, chargers, a change of clothes, and anything needed for check-in or the next morning.',
         ],
       },
+      {
+        title: 'Sample message to confirm luggage delivery',
+        body: [
+          'Before sending luggage to a hotel, confirm that the property can receive it, what name should be written on the label, and whether there are date or storage limits.',
+        ],
+        template: {
+          title: 'Hotel luggage receiving check',
+          intro: 'Use this when you want to send luggage before arrival or forward it to your next stay.',
+          messages: [
+            {
+              label: 'English',
+              text: `Hello,
+I have a reservation at your property and would like to confirm your luggage delivery policy.
+
+Could you please tell me:
+- Can you receive my luggage before check-in?
+- What name, reservation number, and arrival date should I write on the delivery label?
+- Is there any limit on how early the luggage can arrive?
+- Can the front desk also help send luggage to my next hotel?
+
+Thank you.`,
+            },
+            {
+              label: 'Japanese',
+              text: `予約済みです。
+荷物配送について確認したいです。
+
+以下について教えていただけますか？
+・チェックイン前に荷物を受け取っていただくことは可能ですか？
+・配送伝票には、氏名、予約番号、到着日など何を書けばよいですか？
+・荷物が到着してよい日は何日前からですか？
+・次のホテルへの発送手配もフロントで可能ですか？
+
+よろしくお願いいたします。`,
+            },
+          ],
+        },
+      },
     ],
     relatedStays: [
       { href: '/stays/luggage-friendly', label: 'Luggage-friendly stay profiles' },
@@ -335,6 +411,48 @@ Thank you.`,
         body: [
           'For longer stays or strict restrictions, a stay with a kitchen, nearby supermarket, or apartment-style setup may reduce risk and stress.',
         ],
+      },
+      {
+        title: 'Sample message to confirm meal support',
+        body: [
+          'For allergies, halal, vegan, vegetarian, or other dietary needs, contact the property before choosing a meal plan. Keep the message specific and ask what they cannot do as well as what they can do.',
+        ],
+        template: {
+          title: 'Dietary restriction and hotel meal check',
+          intro: 'Use this before relying on hotel breakfast, dinner, or ryokan meals.',
+          messages: [
+            {
+              label: 'English',
+              text: `Hello,
+I am considering staying at your property and would like to confirm meal support before booking.
+
+I need to avoid: [write your restriction here].
+
+Could you please tell me:
+- Can your breakfast or dinner accommodate this restriction?
+- Is cross-contact a concern in your kitchen?
+- Are there any dishes, sauces, soup bases, or seasonings I should be careful about?
+- If accommodation is not possible, can I book without meals?
+
+Thank you.`,
+            },
+            {
+              label: 'Japanese',
+              text: `宿泊を検討しています。
+予約前に食事対応について確認したいです。
+
+避ける必要があるもの：［ここに内容を記入］
+
+以下について教えていただけますか？
+・朝食または夕食で対応可能ですか？
+・厨房内での混入の可能性はありますか？
+・注意すべき料理、ソース、出汁、調味料はありますか？
+・対応が難しい場合、素泊まりで予約できますか？
+
+よろしくお願いいたします。`,
+            },
+          ],
+        },
       },
     ],
     relatedStays: [
