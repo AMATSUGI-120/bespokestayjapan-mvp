@@ -213,7 +213,7 @@ export function PropertyCard({
   return (
     <article
       className={[
-        'group min-w-0 overflow-hidden border border-[var(--bsj-border)] rounded-[6px] bg-[var(--bsj-bg)] transition-colors hover:border-[var(--bsj-primary)] active:border-[var(--bsj-primary)]',
+        'group min-w-0 overflow-hidden border border-[var(--bsj-border)] rounded-[6px] bg-[var(--bsj-bg)] transition-colors hover:border-[var(--bsj-border-strong)]',
         className,
       ].filter(Boolean).join(' ')}
       style={{ display: 'flex', flexDirection: 'column', height: '100%' }}
@@ -238,7 +238,7 @@ export function PropertyCard({
           <a
             href={ctaHref}
             style={nameLinkStyle}
-            className="rounded-[3px] transition-colors hover:bg-[var(--bsj-bg-subtle)] hover:underline active:bg-[var(--bsj-primary)] active:text-white focus:outline-none focus-visible:bg-[var(--bsj-bg-subtle)] focus-visible:underline group-hover:underline"
+            className="hover:underline focus:outline-none focus-visible:underline group-hover:underline"
           >
             {displayName}
           </a>
@@ -279,7 +279,7 @@ export function PropertyCard({
         {showCta && (
           <a
             href={ctaHref}
-            className="rounded-[3px] px-1 transition-colors hover:bg-[var(--bsj-primary)] hover:text-white active:bg-[var(--bsj-primary)] active:text-white focus:outline-none focus-visible:bg-[var(--bsj-primary)] focus-visible:text-white"
+            className="hover:underline focus:outline-none focus-visible:underline"
             style={ctaStyle}
           >
             {ctaLabel} →
