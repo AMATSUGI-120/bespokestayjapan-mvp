@@ -1,7 +1,7 @@
 'use client';
 
 import Link from 'next/link';
-import { useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import type { CSSProperties } from 'react';
 
 export interface SiteNavProps {
@@ -15,12 +15,6 @@ const navStyle: CSSProperties = {
   zIndex: 50,
 };
 
-const brandStyle: CSSProperties = {
-  color: 'var(--bsj-text)',
-  letterSpacing: '0.04em',
-  textTransform: 'uppercase',
-};
-
 const navLinks = [
   { href: '/stays', label: 'Stays' },
   { href: '/guides', label: 'Guides' },
@@ -30,15 +24,53 @@ const navLinks = [
 
 export function SiteNav({ className }: SiteNavProps) {
   const [menuOpen, setMenuOpen] = useState(false);
-  const rootClassName = ['w-full', className].filter(Boolean).join(' ');
+  const [hiddenOnMobile, setHiddenOnMobile] = useState(false);
+  const lastScrollY = useRef(0);
+  const rootClassName = [
+    'w-full transition-transform duration-200 ease-out motion-reduce:transition-none',
+    hiddenOnMobile && !menuOpen ? 'max-sm:-translate-y-full' : 'translate-y-0',
+    className,
+  ].filter(Boolean).join(' ');
+
+  useEffect(() => {
+    lastScrollY.current = window.scrollY;
+
+    function handleScroll() {
+      if (window.matchMedia('(min-width: 640px)').matches) {
+        setHiddenOnMobile(false);
+        lastScrollY.current = window.scrollY;
+        return;
+      }
+
+      const currentScrollY = window.scrollY;
+      const delta = currentScrollY - lastScrollY.current;
+
+      if (currentScrollY < 80 || menuOpen) {
+        setHiddenOnMobile(false);
+      } else if (delta > 8) {
+        setHiddenOnMobile(true);
+      } else if (delta < -8) {
+        setHiddenOnMobile(false);
+      }
+
+      lastScrollY.current = currentScrollY;
+    }
+
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    window.addEventListener('resize', handleScroll);
+
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+      window.removeEventListener('resize', handleScroll);
+    };
+  }, [menuOpen]);
 
   return (
     <nav className={rootClassName} style={navStyle} aria-label="Site navigation">
       <div className="mx-auto flex h-16 max-w-[1280px] items-center justify-between px-6 md:h-[72px] md:px-8">
         <a
           href="/"
-          className="rounded-[3px] px-2 py-2 text-[12px] font-semibold leading-none no-underline transition-colors hover:bg-[var(--bsj-bg-subtle)] focus:outline-none focus-visible:bg-[var(--bsj-bg-subtle)] md:text-[13px]"
-          style={brandStyle}
+          className="rounded-[3px] border border-transparent px-2 py-2 text-[12px] font-semibold uppercase leading-none tracking-[0.04em] text-[var(--bsj-text)] no-underline transition-colors hover:border-[var(--bsj-primary)] hover:bg-[var(--bsj-primary)] hover:text-white active:border-[var(--bsj-primary)] active:bg-[var(--bsj-primary)] active:text-white focus:outline-none focus-visible:border-[var(--bsj-primary)] focus-visible:bg-[var(--bsj-primary)] focus-visible:text-white md:text-[13px]"
         >
           Bespoke Stay Japan
         </a>
