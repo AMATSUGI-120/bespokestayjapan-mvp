@@ -112,6 +112,34 @@ export function GuidePage({ guide }: { guide: GuidePageContent }) {
                         ))}
                       </ul>
                     ) : null}
+
+                    {section.template ? (
+                      <div className="mt-7 border border-[var(--bsj-border)] bg-[var(--bsj-bg)] p-5 md:p-6">
+                        <p className="text-[11px] font-semibold uppercase tracking-[0.14em] text-[var(--bsj-text-light)]">
+                          Message template
+                        </p>
+                        <h3 className="mt-3 text-[20px] font-medium leading-[1.25] tracking-[0] text-[var(--bsj-text)]">
+                          {section.template.title}
+                        </h3>
+                        {section.template.intro ? (
+                          <p className="mt-3 text-[13px] leading-[1.7] text-[var(--bsj-text-muted)]">
+                            {section.template.intro}
+                          </p>
+                        ) : null}
+                        <div className="mt-5 grid gap-5">
+                          {section.template.messages.map((message) => (
+                            <div key={message.label}>
+                              <p className="text-[10px] font-semibold uppercase tracking-[0.12em] text-[var(--bsj-text-light)]">
+                                {message.label}
+                              </p>
+                              <pre className="mt-2 whitespace-pre-wrap break-words border-t border-[var(--bsj-border)] pt-3 font-sans text-[13px] leading-[1.75] text-[var(--bsj-text-muted)]">
+                                {message.text}
+                              </pre>
+                            </div>
+                          ))}
+                        </div>
+                      </div>
+                    ) : null}
                   </section>
                 ))}
               </div>

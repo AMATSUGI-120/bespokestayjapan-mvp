@@ -10,6 +10,14 @@ export interface GuideSection {
   title: string;
   body?: string[];
   bullets?: string[];
+  template?: {
+    title: string;
+    intro?: string;
+    messages: Array<{
+      label: string;
+      text: string;
+    }>;
+  };
 }
 
 export interface GuidePageContent {
@@ -90,6 +98,48 @@ export const guidePages: Record<string, GuidePageContent> = {
           'If your tattoo is large, visible, or difficult to cover, do not rely on sticker-friendly wording without asking.',
           'If the stay is expensive or hard to replace, keep the property answer with your trip notes.',
         ],
+      },
+      {
+        title: 'Sample message to send a hotel',
+        body: [
+          'If the bath policy is important to your stay, send a short message before choosing a room. Keep the question specific: public bath, private bath, and in-room bath can have different rules.',
+        ],
+        template: {
+          title: 'Tattoo and bath policy check',
+          intro: 'You can adapt this message when contacting a hotel, ryokan, or machiya operator.',
+          messages: [
+            {
+              label: 'English',
+              text: `Hello,
+I am considering staying at your property.
+I have visible tattoos and would like to confirm the bathing policy before I choose a room.
+
+Could guests with tattoos use:
+- the public bath / large bath?
+- a private reservable bath?
+- the in-room bath?
+
+If tattoos must be covered, are tattoo cover stickers accepted?
+
+Thank you.`,
+            },
+            {
+              label: 'Japanese',
+              text: `宿泊を検討しています。
+タトゥーが見える場所にあるため、宿泊前に浴場利用のルールを確認したいです。
+
+タトゥーがある宿泊者は、
+・大浴場
+・貸切風呂
+・客室内のお風呂
+を利用できますか？
+
+タトゥーを隠す必要がある場合、カバーシールの利用は可能ですか？
+
+よろしくお願いいたします。`,
+            },
+          ],
+        },
       },
     ],
     relatedStays: [
