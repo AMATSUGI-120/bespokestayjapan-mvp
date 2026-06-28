@@ -142,6 +142,46 @@ export function GuidePage({ guide }: { guide: GuidePageContent }) {
                   <p className="mt-4 text-[14px] leading-[1.8] text-[var(--bsj-text-muted)]">
                     {product.description}
                   </p>
+                  {(product.formatLabel || product.priceLabel) ? (
+                    <div className="mt-5 grid gap-3 border-t border-[var(--bsj-border)] pt-4">
+                      {product.formatLabel ? (
+                        <p className="text-[12px] leading-[1.6] text-[var(--bsj-text-muted)]">
+                          <span className="font-semibold uppercase tracking-[0.08em] text-[var(--bsj-text-light)]">
+                            Format
+                          </span>
+                          <br />
+                          {product.formatLabel}
+                        </p>
+                      ) : null}
+                      {product.priceLabel ? (
+                        <p className="text-[12px] leading-[1.6] text-[var(--bsj-text-muted)]">
+                          <span className="font-semibold uppercase tracking-[0.08em] text-[var(--bsj-text-light)]">
+                            Status
+                          </span>
+                          <br />
+                          {product.priceLabel}
+                        </p>
+                      ) : null}
+                    </div>
+                  ) : null}
+                  {product.includes?.length ? (
+                    <div className="mt-5 border-t border-[var(--bsj-border)] pt-4">
+                      <p className="text-[11px] font-semibold uppercase tracking-[0.14em] text-[var(--bsj-text-light)]">
+                        Planned contents
+                      </p>
+                      <ul className="mt-3 space-y-2">
+                        {product.includes.map((item) => (
+                          <li
+                            key={item}
+                            className="flex gap-2 text-[12px] leading-[1.6] text-[var(--bsj-text-muted)]"
+                          >
+                            <span className="mt-[0.7em] h-px w-4 shrink-0 bg-[var(--bsj-accent)]" />
+                            <span>{item}</span>
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+                  ) : null}
                   {product.purchaseUrl ? (
                     <a
                       href={product.purchaseUrl}
