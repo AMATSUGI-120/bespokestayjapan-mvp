@@ -1,12 +1,8 @@
 import type { Metadata } from 'next';
 import SiteNav from '@/components/SiteNav';
 import SiteFooter from '@/components/SiteFooter';
-import { PropertyCard } from '@/components/PropertyCard';
-import type { ConditionTagVariant } from '@/components/ConditionTag';
-import type { VerificationVariant } from '@/components/VerificationBadge';
+import { StayRegionGroups } from '@/components/StayRegionGroups';
 import { supabase } from '@/lib/supabase';
-import { formatCategoryTagLabel, getCategoryTagHref, normalizeCategoryTags } from '@/lib/category-tags';
-import { getHotelProfileHref } from '@/lib/hotel-slug';
 import { buildPageMetadata } from '@/lib/seo';
 
 export const metadata: Metadata = buildPageMetadata({
@@ -28,32 +24,6 @@ interface PublishedStay {
   short_description: string | null;
   best_for: string | null;
   caution_notes: string | null;
-}
-
-interface StayCardTag {
-  label: string;
-  variant?: ConditionTagVariant;
-  href?: string | null;
-}
-
-function buildRegion(stay: PublishedStay): string {
-  return [stay.area, stay.city].filter(Boolean).join(', ');
-}
-
-function buildTags(tags: string[] | null): StayCardTag[] {
-  return normalizeCategoryTags(tags)
-    .slice(0, 3)
-    .map((tag) => ({
-      label: formatCategoryTagLabel(tag),
-      variant: 'facility' as ConditionTagVariant,
-      href: getCategoryTagHref(tag),
-    }));
-}
-
-function buildEditorialNote(stay: PublishedStay): string {
-  if (stay.short_description) return stay.short_description;
-  if (stay.best_for) return stay.best_for;
-  return 'A published stay selected for practical travel conditions in Japan.';
 }
 
 async function getPublishedStays(): Promise<PublishedStay[]> {
@@ -106,39 +76,11 @@ export default async function StaysPage() {
           style={{ backgroundColor: 'var(--bsj-bg-subtle)' }}
         >
           <div className="mx-auto max-w-[1180px]">
-            {stays.length > 0 ? (
-              <>
-                <p className="mb-8 text-[11px] font-semibold uppercase tracking-[0.14em] text-[var(--bsj-text-light)]">
-                  {stays.length} published stay{stays.length > 1 ? 's' : ''}
-                </p>
-                <div className="grid grid-cols-1 gap-10 sm:grid-cols-2 lg:grid-cols-3">
-                  {stays.map((stay) => (
-                    <PropertyCard
-                      key={stay.id}
-                      stayType={stay.type ?? 'Stay'}
-                      verificationVariant={'source-backed' as VerificationVariant}
-                      name={stay.name}
-                      region={buildRegion(stay)}
-                      tags={buildTags(stay.category_tags)}
-                      editorialNote={buildEditorialNote(stay)}
-                      bestFor={stay.best_for}
-                      goodToKnow={stay.caution_notes}
-                      ctaHref={getHotelProfileHref(stay)}
-                      ctaLabel="Read stay note"
-                    />
-                  ))}
-                </div>
-              </>
-            ) : (
-              <div className="border-t border-[var(--bsj-border)] py-16 text-center">
-                <p className="text-xl font-medium text-[var(--bsj-text)]">
-                  No published stays are ready yet.
-                </p>
-                <p className="mt-3 text-sm leading-[1.7] text-[var(--bsj-text-muted)]">
-                  Published stay profiles will appear here once they are available.
-                </p>
-              </div>
-            )}
+            <StayRegionGroups
+              stays={stays}
+              emptyTitle="No published stays are ready yet."
+              emptyDescription="Published stay profiles will appear here once they are available."
+            />
           </div>
         </section>
       </main>
