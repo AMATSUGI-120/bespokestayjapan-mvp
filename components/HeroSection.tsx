@@ -54,9 +54,7 @@ const subtextStyle: CSSProperties = {
 };
 
 const primaryCtaStyle: CSSProperties = {
-  backgroundColor: 'var(--bsj-primary)',
   borderRadius: '4px',
-  color: 'white',
   display: 'inline-block',
   fontSize: '12px',
   fontWeight: 600,
@@ -67,7 +65,6 @@ const primaryCtaStyle: CSSProperties = {
 };
 
 const secondaryCtaStyle: CSSProperties = {
-  color: 'var(--bsj-primary)',
   fontSize: '13px',
   fontWeight: 600,
   textDecoration: 'none',
@@ -165,10 +162,18 @@ export function HeroSection({ className }: HeroSectionProps) {
           </p>
 
           <div className="flex flex-col sm:flex-row items-start sm:items-center gap-5 mt-9">
-            <a href="#featured-stays" style={primaryCtaStyle}>
+            <a
+              href="#featured-stays"
+              style={primaryCtaStyle}
+              className="bg-[var(--bsj-primary)] text-white transition-colors hover:bg-[var(--bsj-primary-hover)] active:bg-[var(--bsj-text)] focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--bsj-accent)] focus-visible:ring-offset-2 focus-visible:ring-offset-[var(--bsj-bg)]"
+            >
               View curated stays
             </a>
-            <a href="#ask" style={secondaryCtaStyle} className="text-[13px]">
+            <a
+              href="#ask"
+              style={secondaryCtaStyle}
+              className="rounded-[3px] px-1 py-2 text-[var(--bsj-primary)] transition-colors hover:bg-[var(--bsj-bg-subtle)] hover:text-[var(--bsj-primary-hover)] hover:underline active:bg-[var(--bsj-border)] focus:outline-none focus-visible:bg-[var(--bsj-bg-subtle)] focus-visible:underline"
+            >
               Ask for a stay match
             </a>
           </div>

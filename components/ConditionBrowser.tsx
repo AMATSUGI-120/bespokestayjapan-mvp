@@ -198,7 +198,7 @@ export function ConditionBrowser({ className }: ConditionBrowserProps) {
               key={condition.id}
               href={condition.href}
               style={entryStyle}
-              className="group hover:[color:var(--bsj-text)]"
+              className="group -mx-3 rounded-[4px] px-3 transition-colors hover:bg-[var(--bsj-bg-subtle)] active:bg-[var(--bsj-border)] focus:outline-none focus-visible:bg-[var(--bsj-bg-subtle)]"
             >
               <div style={entryMetaStyle}>
                 <span style={entryNumStyle}>
@@ -208,12 +208,12 @@ export function ConditionBrowser({ className }: ConditionBrowserProps) {
               </div>
               <span
                 style={entryTitleStyle}
-                className="group-hover:[color:var(--bsj-primary)] transition-colors"
+                className="transition-colors group-hover:underline"
               >
                 {condition.title}
               </span>
               <span style={entryDescStyle}>{condition.description}</span>
-              <span style={entryCtaStyle}>View guide</span>
+              <span className="transition-colors group-hover:text-[var(--bsj-primary-hover)] group-hover:underline" style={entryCtaStyle}>View guide</span>
             </Link>
           ))}
         </div>

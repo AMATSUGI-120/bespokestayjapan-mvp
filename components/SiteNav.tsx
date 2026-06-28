@@ -35,13 +35,13 @@ export function SiteNav({ className }: SiteNavProps) {
   return (
     <nav className={rootClassName} style={navStyle} aria-label="Site navigation">
       <div className="mx-auto flex h-16 max-w-[1280px] items-center justify-between px-6 md:h-[72px] md:px-8">
-        <Link
+        <a
           href="/"
-          className="text-[12px] font-semibold leading-none no-underline md:text-[13px]"
+          className="rounded-[3px] px-2 py-2 text-[12px] font-semibold leading-none no-underline transition-colors hover:bg-[var(--bsj-bg-subtle)] focus:outline-none focus-visible:bg-[var(--bsj-bg-subtle)] md:text-[13px]"
           style={brandStyle}
         >
           Bespoke Stay Japan
-        </Link>
+        </a>
 
         {/* Desktop nav */}
         <div className="hidden items-center gap-8 sm:flex">
@@ -49,7 +49,7 @@ export function SiteNav({ className }: SiteNavProps) {
             <Link
               key={link.href}
               href={link.href}
-              className="text-[12px] leading-none text-[var(--bsj-text-muted)] no-underline transition-colors hover:text-[var(--bsj-text)]"
+              className="rounded-[3px] px-2 py-2 text-[12px] leading-none text-[var(--bsj-text-muted)] no-underline transition-colors hover:bg-[var(--bsj-bg-subtle)] hover:text-[var(--bsj-text)] active:bg-[var(--bsj-bg)] focus:outline-none focus-visible:bg-[var(--bsj-bg-subtle)] focus-visible:text-[var(--bsj-text)]"
             >
               {link.label}
             </Link>
@@ -58,7 +58,7 @@ export function SiteNav({ className }: SiteNavProps) {
 
         {/* Mobile hamburger button */}
         <button
-          className="flex sm:hidden items-center justify-center -mr-1 p-2 text-[var(--bsj-text-muted)]"
+          className="flex sm:hidden items-center justify-center -mr-1 rounded-[3px] p-2 text-[var(--bsj-text-muted)] transition-colors hover:bg-[var(--bsj-bg-subtle)] hover:text-[var(--bsj-text)] active:bg-[var(--bsj-bg)] focus:outline-none focus-visible:bg-[var(--bsj-bg-subtle)] focus-visible:text-[var(--bsj-text)]"
           onClick={() => setMenuOpen((o) => !o)}
           aria-label={menuOpen ? 'Close menu' : 'Open menu'}
           aria-expanded={menuOpen}
@@ -95,7 +95,7 @@ export function SiteNav({ className }: SiteNavProps) {
               key={link.href}
               href={link.href}
               onClick={() => setMenuOpen(false)}
-              className="block border-b border-[var(--bsj-border)] py-3.5 text-[13px] text-[var(--bsj-text-muted)] no-underline last:border-0 hover:text-[var(--bsj-text)]"
+              className="block border-b border-[var(--bsj-border)] px-2 py-3.5 text-[13px] text-[var(--bsj-text-muted)] no-underline transition-colors last:border-0 hover:bg-[var(--bsj-bg-subtle)] hover:text-[var(--bsj-text)] active:bg-[var(--bsj-bg)] focus:outline-none focus-visible:bg-[var(--bsj-bg-subtle)] focus-visible:text-[var(--bsj-text)]"
             >
               {link.label}
             </Link>

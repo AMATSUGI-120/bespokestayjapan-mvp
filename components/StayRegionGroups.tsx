@@ -38,17 +38,24 @@ interface StayRegionGroup {
   stays: StayRegionItem[];
 }
 
-const REGION_PRIORITY = [
+const AREA_PRIORITY = [
   'Kyoto',
+  'Kyoto Prefecture',
   'Osaka',
+  'Osaka Prefecture',
   'Nara',
-  'Kobe',
+  'Nara Prefecture',
+  'Hyogo',
+  'Hyogo Prefecture',
   'Tokyo',
-  'Hakone',
-  'Yokohama',
+  'Tokyo Prefecture',
+  'Kanagawa',
+  'Kanagawa Prefecture',
   'Fukuoka',
-  'Sapporo',
+  'Fukuoka Prefecture',
+  'Hokkaido',
   'Okinawa',
+  'Okinawa Prefecture',
   'Other areas',
 ];
 
@@ -62,7 +69,7 @@ function buildRegion(stay: StayRegionItem): string {
 }
 
 function buildRegionGroupLabel(stay: StayRegionItem): string {
-  return cleanText(stay.city) ?? cleanText(stay.area) ?? 'Other areas';
+  return cleanText(stay.area) ?? cleanText(stay.city) ?? 'Other areas';
 }
 
 function buildTags(tags: string[] | null): StayCardTag[] {
@@ -91,8 +98,8 @@ function slugifyRegion(label: string): string {
 }
 
 function sortRegionLabels(a: string, b: string): number {
-  const aIndex = REGION_PRIORITY.indexOf(a);
-  const bIndex = REGION_PRIORITY.indexOf(b);
+  const aIndex = AREA_PRIORITY.indexOf(a);
+  const bIndex = AREA_PRIORITY.indexOf(b);
 
   if (aIndex !== -1 || bIndex !== -1) {
     if (aIndex === -1) return 1;
@@ -132,7 +139,7 @@ function RegionNavLink({
   return (
     <a
       href={href}
-      className="inline-flex min-h-9 shrink-0 items-center gap-2 rounded-[3px] border border-[var(--bsj-border)] bg-[var(--bsj-bg)] px-3 py-2 text-[11px] font-semibold uppercase tracking-[0.08em] text-[var(--bsj-text-muted)] no-underline transition-colors hover:border-[var(--bsj-border-strong)] hover:text-[var(--bsj-text)]"
+      className="inline-flex min-h-9 shrink-0 items-center gap-2 rounded-[3px] border border-[var(--bsj-border)] bg-[var(--bsj-bg)] px-3 py-2 text-[11px] font-semibold uppercase tracking-[0.08em] text-[var(--bsj-text-muted)] no-underline transition-colors hover:border-[var(--bsj-border-strong)] hover:bg-[var(--bsj-bg-card)] hover:text-[var(--bsj-text)] active:bg-[var(--bsj-bg-subtle)] focus:outline-none focus-visible:border-[var(--bsj-primary)] focus-visible:text-[var(--bsj-text)]"
     >
       <span>{label}</span>
       {typeof count === 'number' ? (
@@ -165,10 +172,10 @@ export function StayRegionGroups({
       <div className="mb-10">
         <p className="text-[11px] font-semibold uppercase tracking-[0.14em] text-[var(--bsj-text-light)]">
           {stays.length} published stay{stays.length > 1 ? 's' : ''} across{' '}
-          {groups.length} region{groups.length > 1 ? 's' : ''}
+          {groups.length} area{groups.length > 1 ? 's' : ''}
         </p>
         <nav
-          aria-label="Browse stays by region"
+          aria-label="Browse stays by prefecture or area"
           className="-mx-6 mt-5 overflow-x-auto px-6 [scrollbar-width:none] md:mx-0 md:px-0"
         >
           <div className="flex min-w-max gap-2">
@@ -195,7 +202,7 @@ export function StayRegionGroups({
             <div className="mb-7 flex flex-wrap items-end justify-between gap-3">
               <div>
                 <p className="text-[10px] font-semibold uppercase tracking-[0.14em] text-[var(--bsj-text-light)]">
-                  Region
+                  Prefecture / area
                 </p>
                 <h2 className="mt-2 text-[28px] font-medium tracking-[0] text-[var(--bsj-text)]">
                   {group.label}
