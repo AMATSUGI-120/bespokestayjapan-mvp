@@ -30,6 +30,7 @@ const bodyStyle: CSSProperties = {
   display: 'flex',
   flexDirection: 'column',
   flex: '1 1 auto',
+  minWidth: 0,
 };
 
 const stayTypeStyle: CSSProperties = {
@@ -212,7 +213,7 @@ export function PropertyCard({
   return (
     <article
       className={[
-        'group border border-[var(--bsj-border)] rounded-[6px] bg-[var(--bsj-bg)] transition-colors hover:border-[var(--bsj-border-strong)]',
+        'group min-w-0 overflow-hidden border border-[var(--bsj-border)] rounded-[6px] bg-[var(--bsj-bg)] transition-colors hover:border-[var(--bsj-border-strong)]',
         className,
       ].filter(Boolean).join(' ')}
       style={{ display: 'flex', flexDirection: 'column', height: '100%' }}

@@ -60,8 +60,11 @@ export function VerificationBadge({
     fontWeight: 600,
     letterSpacing: '0.06em',
     lineHeight: 1.3,
+    maxWidth: '100%',
+    overflowWrap: 'anywhere',
+    textAlign: 'right',
     textTransform: 'uppercase',
-    whiteSpace: 'nowrap',
+    whiteSpace: 'normal',
   };
 
   return (

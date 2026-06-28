@@ -49,8 +49,11 @@ export function ConditionTag({
     fontWeight: 600,
     letterSpacing: '0.08em',
     lineHeight: 1.3,
+    maxWidth: '100%',
+    overflowWrap: 'anywhere',
+    textAlign: 'left',
     textTransform: 'uppercase',
-    whiteSpace: 'nowrap',
+    whiteSpace: 'normal',
   };
 
   if (href) {
