@@ -11,7 +11,6 @@ export interface SiteNavProps {
 const navStyle: CSSProperties = {
   backgroundColor: 'var(--bsj-bg-card)',
   borderBottom: '1px solid var(--bsj-border)',
-  position: 'relative',
   zIndex: 50,
 };
 
@@ -27,7 +26,7 @@ export function SiteNav({ className }: SiteNavProps) {
   const [hiddenOnMobile, setHiddenOnMobile] = useState(false);
   const lastScrollY = useRef(0);
   const rootClassName = [
-    'w-full transition-transform duration-200 ease-out motion-reduce:transition-none',
+    'w-full max-sm:sticky max-sm:top-0 sm:relative transition-transform duration-200 ease-out motion-reduce:transition-none',
     hiddenOnMobile && !menuOpen ? 'max-sm:-translate-y-full' : 'translate-y-0',
     className,
   ].filter(Boolean).join(' ');
