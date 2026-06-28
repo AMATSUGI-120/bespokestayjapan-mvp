@@ -7,6 +7,7 @@ import SiteFooter from '@/components/SiteFooter';
 import { ConditionTag } from '@/components/ConditionTag';
 import ExternalSourceLink from '@/components/ExternalSourceLink';
 import HotelDetailViewTracker from '@/components/HotelDetailViewTracker';
+import { guidePages, type GuideLink } from '@/lib/guide-content';
 import { supabase } from '@/lib/supabase';
 import { formatCategoryTagLabel, getCategoryTagHref, normalizeCategoryTags } from '@/lib/category-tags';
 import { createHotelSlug } from '@/lib/hotel-slug';
@@ -137,6 +138,32 @@ function pickRelatedProduct(tags: string[]): Product | null {
   return productKey ? getProduct(productKey) : null;
 }
 
+function getRelatedGuides(tags: string[]): GuideLink[] {
+  const tagSet = new Set(tags);
+  const guides: GuideLink[] = [];
+  const addGuide = (key: keyof typeof guidePages, label?: string) => {
+    const guide = guidePages[key];
+    if (!guide || guides.some((item) => item.href === guide.path)) return;
+    guides.push({ href: guide.path, label: label ?? guide.title });
+  };
+
+  if (tagSet.has('tattoo-friendly') || tagSet.has('tattoo-consideration')) {
+    addGuide('tattoo-friendly-stays-kansai');
+  }
+  if (tagSet.has('private-bath')) {
+    addGuide('private-bath-stays-kansai');
+  }
+  if (tagSet.has('luggage-friendly') || tagSet.has('access-friendly')) {
+    addGuide('shinkansen-oversized-luggage-guide');
+    addGuide('japan-luggage-delivery-guide');
+  }
+  if (tagSet.has('food-friendly') || tagSet.has('self-catering')) {
+    addGuide('dietary-restrictions-japan');
+  }
+
+  return guides.slice(0, 4);
+}
+
 function parseSources(sourceUrls: string | null): string[] {
   return (sourceUrls ?? '')
     .split(/\s*\|\s*|\n+/)
@@ -242,6 +269,7 @@ export default async function HotelProfilePage({ params }: PageProps) {
   const { title, subtitle } = splitProfileTitle(stay.name);
   const hotelId = String(stay.id);
   const relatedProduct = pickRelatedProduct(normalizedTags);
+  const relatedGuides = getRelatedGuides(normalizedTags);
 
   return (
     <>
@@ -425,6 +453,25 @@ export default async function HotelProfilePage({ params }: PageProps) {
                         {relatedProduct.statusLabel}
                       </p>
                     )}
+                  </div>
+                ) : null}
+
+                {relatedGuides.length > 0 ? (
+                  <div className="mt-8 border-t border-[var(--bsj-border)] pt-6">
+                    <p className="text-[11px] font-semibold uppercase tracking-[0.14em] text-[var(--bsj-text-light)]">
+                      Related guides
+                    </p>
+                    <div className="mt-4 flex flex-col gap-3">
+                      {relatedGuides.map((guide) => (
+                        <Link
+                          key={guide.href}
+                          href={guide.href}
+                          className="border-b border-[var(--bsj-border)] pb-3 text-sm leading-[1.5] text-[var(--bsj-text-muted)] no-underline transition-colors last:border-0 last:pb-0 hover:text-[var(--bsj-text)]"
+                        >
+                          {guide.label}
+                        </Link>
+                      ))}
+                    </div>
                   </div>
                 ) : null}
 
