@@ -270,6 +270,7 @@ export default async function HotelProfilePage({ params }: PageProps) {
   const hotelId = String(stay.id);
   const relatedProduct = pickRelatedProduct(normalizedTags);
   const relatedGuides = getRelatedGuides(normalizedTags);
+  const primarySourceUrl = stay.booking_url;
 
   return (
     <>
@@ -415,17 +416,17 @@ export default async function HotelProfilePage({ params }: PageProps) {
             <aside className="lg:pt-8">
               <div className="sticky top-8 border-t border-[var(--bsj-border)] py-6">
                 <h2 className="text-[11px] font-semibold uppercase tracking-[0.14em] text-[var(--bsj-text-light)]">
-                  Source check
+                  Official details
                 </h2>
                 <p className="mt-4 text-sm leading-[1.75] text-[var(--bsj-text-muted)]">
-                  Use the source page to confirm current policies, room details, and
-                  availability before relying on this profile.
+                  Use the linked source to confirm current policies, room details,
+                  fees, and contact information before relying on this profile.
                 </p>
 
                 <ExternalSourceLink
-                  sourceUrl={stay.booking_url}
+                  sourceUrl={primarySourceUrl}
                   hotelId={hotelId}
-                  className="mt-6"
+                  className="mt-5"
                 />
 
                 {relatedProduct ? (

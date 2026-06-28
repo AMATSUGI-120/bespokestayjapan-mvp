@@ -6,6 +6,7 @@ interface ExternalSourceLinkProps {
   sourceUrl: string | null;
   hotelId: string;
   className?: string;
+  label?: string;
 }
 
 function resolveExternalSourceUrl({
@@ -21,6 +22,7 @@ export function ExternalSourceLink({
   sourceUrl,
   hotelId,
   className,
+  label = 'Open official / source page',
 }: ExternalSourceLinkProps) {
   const href = resolveExternalSourceUrl({ sourceUrl, hotelId });
 
@@ -33,13 +35,13 @@ export function ExternalSourceLink({
       rel="noreferrer"
       onClick={() => trackExternalSourceLinkClick({ hotel_id: hotelId })}
       className={[
-        'inline-flex w-full justify-center border-t border-[var(--bsj-border)] px-0 py-4 text-center text-[11px] font-semibold uppercase tracking-[0.1em] text-[var(--bsj-primary)] no-underline transition-colors hover:text-[var(--bsj-primary-hover)] hover:underline',
+        'inline-flex min-h-10 items-center border border-[var(--bsj-border-strong)] px-4 py-2 text-[12px] font-semibold uppercase tracking-[0.08em] text-[var(--bsj-text)] no-underline transition-colors hover:bg-[var(--bsj-bg)]',
         className,
       ]
         .filter(Boolean)
         .join(' ')}
     >
-      View source page
+      {label}
     </a>
   );
 }
