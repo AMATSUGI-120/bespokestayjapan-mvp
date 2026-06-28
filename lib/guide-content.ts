@@ -32,38 +32,63 @@ export const guidePages: Record<string, GuidePageContent> = {
     description:
       'A practical guide to finding stays around Osaka, Kyoto, Nara, and Kobe where tattooed travelers can plan bathing and hotel communication with fewer surprises.',
     intro: [
-      'Tattoo policies in Japan are not always visible in English, and the phrase "tattoo-friendly" can mean different things depending on the property. Some hotels allow tattoos in all baths, some allow them only if covered, and some recommend private or in-room bathing instead.',
-      'This guide is designed as a planning layer before you choose a hotel: understand the bath type, confirm the policy, then compare stays that match your comfort level.',
+      'If you travel with tattoos in Japan, the hard part is often not finding a hotel room. It is understanding what you can use once you arrive: the public bath, the large bath, a private reservable bath, an in-room bath, or none of those.',
+      'Kansai has many excellent places to stay, but tattoo policies are still uneven and English listings often compress important bath details into vague phrases. This guide helps you read those phrases more carefully before choosing a stay in Osaka, Kyoto, Nara, or Kobe.',
+      'Use it as a planning checklist, not a guarantee. If a bath experience is important to your trip, confirm the current rule directly with the property before relying on it.',
     ],
     productKey: 'kansai-tattoo-friendly-stay-kit',
     sections: [
       {
-        title: 'What to check first',
+        title: 'Why tattoo-friendly stays are hard to compare',
         bullets: [
-          'Whether the property has a public bath, private reservable bath, in-room bath, or no shared bathing area.',
-          'Whether tattoo rules apply only to the public bath or to the entire facility.',
-          'Whether tattoo cover stickers are accepted, required, or not enough.',
-          'Whether the policy is written by the property or inferred from third-party listings.',
+          'A hotel can be easy to book but still have restrictions in the shared bath.',
+          'Some properties allow tattoos only if covered with a sticker or bandage.',
+          'Some listings mention a private bath, but do not clearly say whether it is in the room or reservable by time slot.',
+          'A policy may apply to the public bath only, while the guest room bath is unaffected.',
+          'Rules can change, especially when the information comes from third-party listings or older reviews.',
         ],
       },
       {
-        title: 'Bath types matter',
+        title: 'Know the bath types before you compare hotels',
         body: [
-          'A private bath and an in-room bath are not the same. A private bath is usually a reservable shared facility used alone for a set time. An in-room bath is inside the guest room. A public bath or large bath is shared with other guests and is where tattoo rules are most likely to matter.',
+          'A public bath or large bath is shared with other guests. This is where tattoo rules most often matter, and where you should check the property policy carefully.',
+          'A private bath is usually a bath facility that guests reserve and use privately for a limited time. It may still be outside your room, and it may require a reservation, extra fee, or specific time slot.',
+          'An in-room bath is inside your guest room. For tattooed travelers, this is usually the lowest-friction bathing option, but it may not offer the same experience as an onsen or large bath.',
         ],
       },
       {
-        title: 'How BSJ treats tattoo information',
+        title: 'What tattoo-friendly can mean',
         body: [
-          'BSJ separates clear tattoo-friendly notes from softer tattoo-consideration notes. If a stay looks useful but the policy is conditional, it should be treated as "check before planning" rather than a guarantee.',
+          'The phrase "tattoo-friendly" is useful, but it is not always precise. It may mean tattoos are allowed in the public bath, tattoos are allowed only when covered, the property has a private bath option, or guests with tattoos have reported no issues.',
+          'BSJ separates stronger tattoo-friendly signals from tattoo-consideration notes. Tattoo-consideration means the stay may still be useful, but the bath rule is conditional, incomplete, or important enough to confirm before planning around it.',
         ],
       },
       {
-        title: 'Before you choose a stay',
+        title: 'What to ask before choosing a stay',
         bullets: [
-          'Ask the property directly if the bath policy is central to your stay decision.',
-          'Mention the size and visibility of tattoos if needed.',
-          'Confirm whether the answer applies to public baths, private baths, and in-room baths separately.',
+          'Can guests with visible tattoos use the public bath or large bath?',
+          'If tattoos must be covered, are cover stickers accepted and are there size limits?',
+          'Is there a private bath, family bath, or reservable bath that tattooed guests can use?',
+          'Is the private bath inside the room, or is it a shared facility reserved by time slot?',
+          'Does the policy apply to all guests, or only to the bathing area?',
+          'Can the property confirm the answer in writing before your stay?',
+        ],
+      },
+      {
+        title: 'Kansai planning notes',
+        body: [
+          'Osaka is often practical for first-time visitors because transport is straightforward and many city hotels are easier to compare by station access, luggage support, and bath type. Kyoto has strong ryokan and machiya options, but bath wording can be more important because traditional stays may rely more heavily on shared or reservable baths.',
+          'Nara and Kobe can work well as quieter additions to a Kansai trip, but the number of clearly documented tattoo-related stay options may be smaller. If bathing is central to your plan, compare the bath setup first, then compare location.',
+        ],
+      },
+      {
+        title: 'A simple decision path',
+        bullets: [
+          'If you want the lowest-friction option, prioritize an in-room bath or apartment-style stay.',
+          'If you want a ryokan or onsen-style experience, look for a private bath or a clearly written tattoo policy.',
+          'If the listing only says "public bath" or "large bath," assume you need to confirm the tattoo rule.',
+          'If your tattoo is large, visible, or difficult to cover, do not rely on sticker-friendly wording without asking.',
+          'If the stay is expensive or hard to replace, keep the property answer with your trip notes.',
         ],
       },
     ],
@@ -76,6 +101,11 @@ export const guidePages: Record<string, GuidePageContent> = {
       {
         href: 'https://www.japan.travel/en/guide/onsen/',
         label: 'Japan National Tourism Organization: Onsen guide',
+        external: true,
+      },
+      {
+        href: 'https://time.com/4263931/japan-spa-onsen-tattoo-tourists/',
+        label: 'TIME: Japan Tourism Agency tattoo guidance report',
         external: true,
       },
     ],
