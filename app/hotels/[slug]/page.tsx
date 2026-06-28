@@ -91,6 +91,19 @@ function firstSentence(value: string | null | undefined): string | null {
   return sentence && sentence.length > 0 ? sentence : text;
 }
 
+function firstSentences(value: string | null | undefined, maxSentences: number): string | null {
+  const text = cleanText(value);
+  if (!text) return null;
+
+  const sentences = text.match(/[^.!?]+[.!?](?:\s|$)|[^.!?]+$/g)
+    ?.map((sentence) => sentence.trim())
+    .filter(Boolean);
+
+  if (!sentences || sentences.length === 0) return text;
+
+  return sentences.slice(0, maxSentences).join(' ');
+}
+
 function buildRegion(stay: StayDetail): string {
   return [stay.area, stay.city].filter(Boolean).join(', ');
 }
@@ -224,6 +237,7 @@ export default async function HotelProfilePage({ params }: PageProps) {
   const shortDescription = cleanText(stay.short_description);
   const bestFor = cleanText(stay.best_for);
   const cautionNote = cleanText(stay.caution_notes);
+  const cautionSummary = firstSentences(stay.caution_notes, 2);
   const verifiedNote = firstSentence(stay.verified_notes);
   const { title, subtitle } = splitProfileTitle(stay.name);
   const hotelId = String(stay.id);
@@ -300,13 +314,13 @@ export default async function HotelProfilePage({ params }: PageProps) {
                       </dd>
                     </div>
                   )}
-                  {cautionNote && (
+                  {cautionSummary && (
                     <div>
                       <dt className="text-[10px] font-semibold uppercase tracking-[0.12em] text-[var(--bsj-text-light)]">
                         Good to know
                       </dt>
                       <dd className="mt-1 text-sm leading-[1.6] text-[var(--bsj-text-muted)]">
-                        {cautionNote}
+                        {cautionSummary}
                       </dd>
                     </div>
                   )}
@@ -340,6 +354,7 @@ export default async function HotelProfilePage({ params }: PageProps) {
               <TextSection title="Bath" value={stay.bath_summary} />
               <TextSection title="English support" value={stay.english_support_summary} />
               <TextSection title="Rules" value={stay.rules_summary} />
+              <TextSection title="Good to know" value={stay.caution_notes} />
 
               {cleanText(stay.verified_notes) && (
                 <DetailSection title="Verified notes">
