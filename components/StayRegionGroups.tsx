@@ -40,24 +40,31 @@ interface StayRegionGroup {
 
 const AREA_PRIORITY = [
   'Kyoto',
-  'Kyoto Prefecture',
   'Osaka',
-  'Osaka Prefecture',
   'Nara',
-  'Nara Prefecture',
   'Hyogo',
-  'Hyogo Prefecture',
   'Tokyo',
-  'Tokyo Prefecture',
   'Kanagawa',
-  'Kanagawa Prefecture',
   'Fukuoka',
-  'Fukuoka Prefecture',
   'Hokkaido',
   'Okinawa',
-  'Okinawa Prefecture',
   'Other areas',
 ];
+
+const CITY_TO_PREFECTURE: Record<string, string> = {
+  Kyoto: 'Kyoto',
+  Osaka: 'Osaka',
+  'Izumi-Sano': 'Osaka',
+  Izumisano: 'Osaka',
+  Nara: 'Nara',
+  Kobe: 'Hyogo',
+  Tokyo: 'Tokyo',
+  Hakone: 'Kanagawa',
+  Yokohama: 'Kanagawa',
+  Fukuoka: 'Fukuoka',
+  Sapporo: 'Hokkaido',
+  Okinawa: 'Okinawa',
+};
 
 function cleanText(value: string | null | undefined): string | null {
   const trimmed = value?.trim();
@@ -69,7 +76,10 @@ function buildRegion(stay: StayRegionItem): string {
 }
 
 function buildRegionGroupLabel(stay: StayRegionItem): string {
-  return cleanText(stay.area) ?? cleanText(stay.city) ?? 'Other areas';
+  const city = cleanText(stay.city);
+  if (city && CITY_TO_PREFECTURE[city]) return CITY_TO_PREFECTURE[city];
+
+  return city ?? cleanText(stay.area) ?? 'Other areas';
 }
 
 function buildTags(tags: string[] | null): StayCardTag[] {
@@ -175,7 +185,7 @@ export function StayRegionGroups({
           {groups.length} area{groups.length > 1 ? 's' : ''}
         </p>
         <nav
-          aria-label="Browse stays by prefecture or area"
+          aria-label="Browse stays by prefecture"
           className="-mx-6 mt-5 overflow-x-auto px-6 [scrollbar-width:none] md:mx-0 md:px-0"
         >
           <div className="flex min-w-max gap-2">
@@ -202,7 +212,7 @@ export function StayRegionGroups({
             <div className="mb-7 flex flex-wrap items-end justify-between gap-3">
               <div>
                 <p className="text-[10px] font-semibold uppercase tracking-[0.14em] text-[var(--bsj-text-light)]">
-                  Prefecture / area
+                  Prefecture
                 </p>
                 <h2 className="mt-2 text-[28px] font-medium tracking-[0] text-[var(--bsj-text)]">
                   {group.label}

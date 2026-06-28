@@ -47,6 +47,7 @@ These columns help identify, dedupe, and route hotel candidates.
 | `hotel_name` | Original hotel/property name from research source. |
 | `city` | City used for filtering and display. |
 | `area` | Neighborhood, ward, district, station area, or region. |
+| `prefecture` | Recommended future field for stable prefecture-level grouping. Not required by the current DB yet. |
 | `address` | Address when available. |
 | `source_query` | Search/query/source batch that produced the candidate. |
 | `dedupe_key` | Stable dedupe key. Prefer non-LiteAPI keys going forward. |
