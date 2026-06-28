@@ -173,7 +173,7 @@ function convertRow(row) {
     source_urls:              str(row.listing_source_urls),
     final_publication_status: str(row.final_publication_status),
     final_listing_priority:   str(row.final_listing_priority),
-    is_published:             false,
+    is_published:             str(row.final_publication_status) === 'ready_for_listing',
   };
 }
 
@@ -202,6 +202,7 @@ function buildPreview(hotels, skipped, warnings) {
   lines.push('## サマリー');
   lines.push('');
   lines.push(`- 出力件数: **${hotels.length}件**`);
+  lines.push(`- 公開対象件数: **${hotels.filter(h => h.is_published === true).length}件**`);
   lines.push(`- スキップ件数: ${skipped.length}件`);
   lines.push(`- バリデーション警告: ${warnings.length}件`);
   lines.push('');
