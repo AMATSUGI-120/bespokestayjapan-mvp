@@ -187,6 +187,23 @@ Thank you.`,
         ],
       },
       {
+        title: 'What to compare before choosing',
+        bullets: [
+          'Whether the bath is inside the room or in a separate shared facility.',
+          'Whether a private bath is guaranteed, first-come-first-served, or reservation-only.',
+          'Whether private bath use has a time limit, extra fee, or check-in-day restriction.',
+          'Whether the bath uses hot spring water, regular heated water, or a standard unit bath.',
+          'Whether guests with tattoos, children, or mobility concerns can use the facility comfortably.',
+        ],
+      },
+      {
+        title: 'Common planning mistakes',
+        body: [
+          'The most common mistake is treating every "private bath" mention as the same. A room with its own bath, a reservable family bath, and a public bath with private-use hours are different stay experiences.',
+          'Another mistake is checking bath details after choosing the hotel. If the bath is central to the trip, compare bath type before comparing room style, price, or decoration.',
+        ],
+      },
+      {
         title: 'Best fit travelers',
         bullets: [
           'Tattooed travelers who want fewer public-bath concerns.',
@@ -265,6 +282,22 @@ Thank you.`,
           'Whether your seat reservation includes oversized baggage space when needed.',
           'Whether station transfers require stairs, long walks, or crowded local lines.',
           'Whether your hotel can receive luggage delivery before arrival.',
+        ],
+      },
+      {
+        title: 'Why this affects where you stay',
+        body: [
+          'Large luggage is not only a train-seat issue. The difficult part is often the full movement chain: hotel to station, local train to Shinkansen platform, arrival station to the next hotel, and any stair-heavy transfer in between.',
+          'A slightly less central hotel can be easier if it has elevator access, luggage delivery support, and a simple route from the station. A more central hotel can still be stressful if reaching it requires multiple crowded transfers.',
+        ],
+      },
+      {
+        title: 'When to reserve luggage space',
+        bullets: [
+          'Reserve oversized baggage space when your luggage size falls under the train operator rule for the relevant route.',
+          'Reserve early during peak travel periods, weekends, and major holiday seasons.',
+          'Do not assume an empty space will be available without the correct reservation.',
+          'If your route changes, re-check whether the same baggage rule applies on the new train.',
         ],
       },
       {
@@ -398,6 +431,22 @@ Thank you.`,
           'Whether breakfast, dinner, or both are affected.',
           'Whether cross-contact is a concern for your situation.',
           'Whether the answer applies to every restaurant or only one meal venue.',
+        ],
+      },
+      {
+        title: 'Why Japanese hotel wording can be hard to read',
+        body: [
+          'Some hotels can remove obvious ingredients but cannot guarantee cross-contact. Some ryokan can adjust a few items but cannot rebuild a fixed-course dinner. Some properties may understand vegetarian or vegan wording differently from travelers outside Japan.',
+          'For serious allergies, religious dietary needs, or strict vegan requirements, vague phrases such as "please tell us in advance" are not enough. Ask what they can do, what they cannot do, and whether the kitchen can handle your level of restriction.',
+        ],
+      },
+      {
+        title: 'Lower-risk stay choices',
+        bullets: [
+          'A room-only plan can be safer when meal support is unclear.',
+          'A stay near supermarkets, convenience stores, or restaurants with clear menus gives more backup options.',
+          'Apartment-style stays with a kitchen can reduce dependence on hotel meals.',
+          'English-friendly properties may reduce communication friction, but they still need specific questions.',
         ],
       },
       {
