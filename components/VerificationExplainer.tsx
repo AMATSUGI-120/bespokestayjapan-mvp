@@ -27,9 +27,9 @@ const STAGES: VerificationStage[] = [
     body: 'Information comes from official listings, tourism board records, or other reliable public sources.',
   },
   {
-    badge: 'ask-before-booking',
-    heading: 'Ask before booking',
-    body: "Policy isn't clear from public sources. Contact the property before you commit.",
+    badge: 'check-before-planning',
+    heading: 'Check before planning',
+    body: "Policy isn't clear from public sources. Contact the property before you plan around it.",
   },
   {
     badge: 'not-yet-checked',

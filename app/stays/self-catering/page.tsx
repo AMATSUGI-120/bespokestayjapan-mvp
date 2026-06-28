@@ -10,6 +10,7 @@ const config: StayCategoryConfig = {
   description:
     'Published stays with self-catering context, useful for longer trips, families, dietary needs, or travelers who want more control over meals.',
   tags: ['self-catering'],
+  path: '/stays/self-catering',
 };
 
 export const dynamic = 'force-dynamic';

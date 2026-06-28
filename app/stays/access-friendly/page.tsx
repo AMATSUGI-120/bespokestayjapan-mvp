@@ -8,8 +8,9 @@ const config: StayCategoryConfig = {
   title: 'Access-Friendly Stays',
   eyebrow: 'ACCESS NOTES',
   description:
-    'Stays with clearer access information, elevator details, station proximity, or easier movement with luggage. Always confirm accessibility details directly before booking.',
+    'Stays with clearer access information, elevator details, station proximity, or easier movement with luggage. Always confirm accessibility details directly before planning around them.',
   tags: ['access-friendly'],
+  path: '/stays/access-friendly',
 };
 
 export const dynamic = 'force-dynamic';

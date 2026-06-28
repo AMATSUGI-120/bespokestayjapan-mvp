@@ -10,6 +10,7 @@ const config: StayCategoryConfig = {
   description:
     'Published stays tagged for family-friendly travel, with practical notes that can make planning across Japan easier.',
   tags: ['family-friendly'],
+  path: '/stays/family-friendly',
 };
 
 export const dynamic = 'force-dynamic';

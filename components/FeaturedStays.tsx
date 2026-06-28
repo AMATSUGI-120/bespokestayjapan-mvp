@@ -2,14 +2,14 @@ import type { CSSProperties } from 'react';
 import { PropertyCard } from './PropertyCard';
 import type { VerificationVariant } from './VerificationBadge';
 import type { ConditionTagVariant } from './ConditionTag';
-import { formatCategoryTagLabel, getCategoryTagHref } from '@/lib/category-tags';
+import { formatCategoryTagLabel, getCategoryTagHref, normalizeCategoryTags } from '@/lib/category-tags';
+import { getHotelProfileHref } from '@/lib/hotel-slug';
 
 // ── Types ─────────────────────────────────────────────────────────────────────
 
 export interface FeaturedHotelData {
   id: number;
   name: string;
-  liteapi_id: string | null;
   city: string;
   area: string;
   type: string;
@@ -18,9 +18,10 @@ export interface FeaturedHotelData {
   pet_cats: boolean;
   pet_notes: string | null;
   access_info: string | null;
-  photo_urls: string[];
   english_support: boolean;
   category_tags: string[] | null;
+  short_description: string | null;
+  best_for: string | null;
   caution_notes: string | null;
 }
 
@@ -33,8 +34,7 @@ interface ConditionTagData {
 // ── Helpers ───────────────────────────────────────────────────────────────────
 
 function buildTags(hotel: FeaturedHotelData): ConditionTagData[] {
-  const categoryTags = (hotel.category_tags ?? [])
-    .filter((tag): tag is string => typeof tag === 'string' && tag.trim().length > 0)
+  const categoryTags = normalizeCategoryTags(hotel.category_tags)
     .map((tag) => ({
       label: formatCategoryTagLabel(tag),
       variant: 'facility' as ConditionTagVariant,
@@ -70,6 +70,8 @@ function buildTags(hotel: FeaturedHotelData): ConditionTagData[] {
 }
 
 function buildNote(hotel: FeaturedHotelData): string {
+  if (hotel.short_description) return hotel.short_description;
+  if (hotel.best_for) return hotel.best_for;
   if (hotel.pet_notes) return hotel.pet_notes;
   if (hotel.access_info) return hotel.access_info;
   return `${hotel.type} in ${[hotel.area, hotel.city].filter(Boolean).join(', ')}. Condition notes are being added as we verify this property.`;
@@ -84,8 +86,6 @@ function buildRegion(hotel: FeaturedHotelData): string {
 
 const EXAMPLE_CARDS = [
   {
-    imageUrl: 'https://images.unsplash.com/photo-1537640538966-79f369143f8f?w=800&q=80',
-    imageAlt: 'Example of a forested ryokan setting — illustrative only',
     stayType: 'Ryokan',
     verificationVariant: 'not-yet-checked' as VerificationVariant,
     name: 'Private Villa Example — Hakone Area',
@@ -99,10 +99,8 @@ const EXAMPLE_CARDS = [
     ctaHref: '/stays/private-villas',
   },
   {
-    imageUrl: 'https://images.unsplash.com/photo-1584132967334-10e028bd69f7?w=800&q=80',
-    imageAlt: 'Example of a Japanese countryside inn interior — illustrative only',
     stayType: 'Guest house',
-    verificationVariant: 'ask-before-booking' as VerificationVariant,
+    verificationVariant: 'check-before-planning' as VerificationVariant,
     name: 'Countryside Inn Example — Nagano',
     region: 'Nagano Prefecture',
     tags: [
@@ -110,14 +108,12 @@ const EXAMPLE_CARDS = [
       { label: 'Scenic area', variant: 'access' as ConditionTagVariant },
     ],
     editorialNote:
-      'Tattoo and pet policies not confirmed from public sources for this example. We recommend asking before booking.',
+      'Tattoo and pet policies not confirmed from public sources for this example. We recommend checking directly before planning around them.',
     ctaHref: '/stays/tattoo-friendly',
   },
   {
-    imageUrl: 'https://images.unsplash.com/photo-1528360983277-13d401cdc186?w=800&q=80',
-    imageAlt: 'Example of a city hotel corridor — illustrative only',
     stayType: 'Hotel',
-    verificationVariant: 'ask-before-booking' as VerificationVariant,
+    verificationVariant: 'check-before-planning' as VerificationVariant,
     name: 'City Hotel Example — Kyoto',
     region: 'Kyoto',
     tags: [
@@ -179,16 +175,15 @@ export function FeaturedStays({ hotels, className }: FeaturedStaysProps) {
 
   const cards = hasRealData
     ? hotels.slice(0, 3).map(hotel => ({
-        imageUrl: hotel.photo_urls[0],
-        imageAlt: `${hotel.name} — ${hotel.type} in ${hotel.city}`,
         stayType: hotel.type,
         verificationVariant: 'source-backed' as VerificationVariant,
         name: hotel.name,
         region: buildRegion(hotel),
         tags: buildTags(hotel),
         editorialNote: buildNote(hotel),
+        bestFor: hotel.best_for,
         goodToKnow: hotel.caution_notes,
-        ctaHref: hotel.liteapi_id ? `/stays/${hotel.liteapi_id}` : '/stays',
+        ctaHref: getHotelProfileHref(hotel),
       }))
     : EXAMPLE_CARDS;
 

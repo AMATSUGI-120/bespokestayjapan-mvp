@@ -1,8 +1,16 @@
 import { supabase } from '@/lib/supabase';
 import HomeClient from './HomeClient';
 import type { FeaturedHotelData } from '@/components/FeaturedStays';
+import { buildPageMetadata } from '@/lib/seo';
 
 export const dynamic = 'force-dynamic';
+
+export const metadata = buildPageMetadata({
+  title: 'Find Japan stays that fit your real travel needs',
+  description:
+    'Browse researched Japan stay profiles for tattoo and bath notes, luggage support, self-catering, food needs, family travel, pets, English support, and access details.',
+  path: '/',
+});
 
 const DEPRIORITIZE_NAMES = [
   'mandarin oriental',
@@ -25,38 +33,25 @@ export default async function HomePage() {
     const { data } = await supabase
       .from('hotels')
       .select(
-        'id, name, liteapi_id, city, area, type, amenities, pet_dogs, pet_cats, pet_notes, access_info, photo_urls, english_support, category_tags, caution_notes'
+        'id, name, city, area, type, amenities, pet_dogs, pet_cats, pet_notes, access_info, english_support, category_tags, short_description, best_for, caution_notes'
       )
-      .eq('is_published', true)
-      .not('liteapi_id', 'is', null)
-      .not('photo_urls', 'is', null);
+      .eq('is_published', true);
 
-    const withPhotos = (data ?? []).filter(
-      (h: { photo_urls: unknown }) =>
-        Array.isArray(h.photo_urls) && (h.photo_urls as string[]).length > 0
-    );
+    const publishedHotels = data ?? [];
 
-    withPhotos.sort(
+    publishedHotels.sort(
       (a: { name: string; city: string }, b: { name: string; city: string }) =>
         hotelPriority(a.name, a.city) - hotelPriority(b.name, b.city)
     );
 
-    featuredHotels = withPhotos.slice(0, 6) as FeaturedHotelData[];
+    featuredHotels = publishedHotels.slice(0, 6) as FeaturedHotelData[];
   } catch {
     // silently fall back to example cards
   }
 
-  const heroHotel = featuredHotels[0] ?? null;
-  const heroImageUrl = heroHotel?.photo_urls?.[0] ?? null;
-  const heroImageAlt = heroHotel
-    ? `${heroHotel.name} — ${heroHotel.type} in ${heroHotel.city}`
-    : undefined;
-
   return (
     <HomeClient
       initialFeaturedHotels={featuredHotels}
-      heroImageUrl={heroImageUrl}
-      heroImageAlt={heroImageAlt}
     />
   );
 }

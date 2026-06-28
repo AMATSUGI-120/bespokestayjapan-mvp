@@ -32,7 +32,7 @@ const CONDITIONS: Condition[] = [
   },
   {
     id: 'tattoo-consideration',
-    label: 'Ask before booking',
+    label: 'Check before planning',
     title: 'Tattoo-Consideration Stays',
     description:
       'Potentially useful stays where bath or onsen policies need closer confirmation.',
@@ -75,7 +75,7 @@ const CONDITIONS: Condition[] = [
     label: 'Language support',
     title: 'English-Friendly Stays',
     description:
-      'Stays with clearer international booking information or guest support.',
+      'Stays with clearer international information or guest support.',
     href: '/stays/english-friendly',
   },
   {
@@ -91,7 +91,7 @@ const CONDITIONS: Condition[] = [
     label: 'Traveling with pets',
     title: 'Pet-Friendly Stays',
     description:
-      'Pet-friendly hotels and stays with clearer rules before you book.',
+      'Pet-friendly hotels and stays with clearer rules before you plan.',
     href: '/stays/pet-friendly',
   },
 ];

@@ -8,8 +8,9 @@
  *
  * Usage:
  *   node scripts/import-supabase-hotels.js --dry-run          # preview only
- *   node scripts/import-supabase-hotels.js --liteapi-id=lp656a1148 --dry-run
- *   node scripts/import-supabase-hotels.js --liteapi-id=lp656a1148   # single upsert
+ *   node scripts/import-supabase-hotels.js --hotel-key=kyoto-kumashu-an-machiya-house --dry-run
+ *   node scripts/import-supabase-hotels.js --hotel-key=kyoto-kumashu-an-machiya-house   # single upsert
+ *   node scripts/import-supabase-hotels.js --liteapi-id=lp656a1148 --dry-run             # legacy alias
  *   node scripts/import-supabase-hotels.js                    # full upsert (all hotels)
  *
  * Environment (reads from .env.local):
@@ -39,9 +40,14 @@ function loadEnv() {
 // ─── CLI args ─────────────────────────────────────────────────────────────────
 function parseArgs() {
   const args = process.argv.slice(2);
+  const hotelKey =
+    (args.find(a => a.startsWith('--hotel-key=')) ?? '').split('=')[1] ??
+    (args.find(a => a.startsWith('--liteapi-id=')) ?? '').split('=')[1] ??
+    null;
+
   return {
-    dryRun:    args.includes('--dry-run'),
-    liteapiId: (args.find(a => a.startsWith('--liteapi-id=')) ?? '').split('=')[1] ?? null,
+    dryRun: args.includes('--dry-run'),
+    hotelKey,
   };
 }
 
@@ -54,12 +60,13 @@ const UPDATE_FIELDS = [
   'verified_notes', 'caution_notes', 'category_tags', 'source_urls',
   'final_publication_status', 'final_listing_priority',
 ];
-// Never updated: id, created_at, photo_urls, is_published, published_at
+// Never updated: id, created_at, is_published, published_at
 
 // ─── Build payloads ───────────────────────────────────────────────────────────
 function buildInsertPayload(hotel) {
   const now = new Date().toISOString();
   const payload = {
+    // DB compatibility field. JSON uses hotel_key or legacy liteapi_id here.
     liteapi_id:        hotel.liteapi_id,
     is_published:      false,
     created_at:        now,
@@ -97,7 +104,7 @@ function makeClient() {
   return createClient(url, svcKey, { auth: { persistSession: false } });
 }
 
-// ─── Fetch existing liteapi_ids from hotels ───────────────────────────────────
+// ─── Fetch existing compatibility IDs from hotels ─────────────────────────────
 async function fetchExisting(supabase, ids) {
   const { data, error } = await supabase
     .from('hotels')
@@ -110,7 +117,7 @@ async function fetchExisting(supabase, ids) {
 // ─── Main ─────────────────────────────────────────────────────────────────────
 async function main() {
   loadEnv();
-  const { dryRun, liteapiId } = parseArgs();
+  const { dryRun, hotelKey } = parseArgs();
 
   // Load JSON
   const jsonPath = path.join(process.cwd(), 'data', 'supabase-hotels-import.json');
@@ -120,14 +127,14 @@ async function main() {
   }
   let hotels = JSON.parse(fs.readFileSync(jsonPath, 'utf-8'));
 
-  // --liteapi-id filter
-  if (liteapiId) {
-    hotels = hotels.filter(h => h.liteapi_id === liteapiId);
+  // --hotel-key filter. --liteapi-id remains supported as a legacy alias.
+  if (hotelKey) {
+    hotels = hotels.filter(h => h.liteapi_id === hotelKey);
     if (hotels.length === 0) {
-      console.error(`ERROR: liteapi_id "${liteapiId}" not found in JSON.`);
+      console.error(`ERROR: hotel key "${hotelKey}" not found in JSON.`);
       process.exit(1);
     }
-    console.log(`\n--liteapi-id filter: processing 1 hotel (${liteapiId})`);
+    console.log(`\n--hotel-key filter: processing 1 hotel (${hotelKey})`);
   }
 
   console.log(`\nMode     : ${dryRun ? 'DRY-RUN (no writes)' : 'LIVE'}`);
@@ -213,7 +220,8 @@ async function main() {
   // ── Post-import SQL hint
   console.log('\n─── POST-IMPORT CHECK SQL ──────────────────────────────────────────────');
   console.log(`
-Run this in Supabase SQL Editor to verify category_tags are stored as arrays:
+Run this in Supabase SQL Editor to verify category_tags are stored as arrays.
+The DB column is still named liteapi_id for compatibility, but values may be hotel_key:
 
   SELECT
     liteapi_id,

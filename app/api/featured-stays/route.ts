@@ -29,28 +29,23 @@ export async function GET() {
     const { data, error } = await supabase
       .from('hotels')
       .select(
-        'id, name, liteapi_id, city, area, type, amenities, pet_dogs, pet_cats, pet_notes, access_info, photo_urls, english_support, category_tags, caution_notes'
+        'id, name, city, area, type, amenities, pet_dogs, pet_cats, pet_notes, access_info, english_support, category_tags, short_description, best_for, caution_notes'
       )
-      .eq('is_published', true)
-      .not('liteapi_id', 'is', null)
-      .not('photo_urls', 'is', null);
+      .eq('is_published', true);
 
     if (error) {
       console.error('[featured-stays] Supabase error:', error.message);
       return NextResponse.json({ hotels: [] });
     }
 
-    const withPhotos = (data ?? []).filter(
-      (h: { photo_urls: unknown }) =>
-        Array.isArray(h.photo_urls) && (h.photo_urls as string[]).length > 0
-    );
+    const publishedHotels = data ?? [];
 
-    withPhotos.sort(
+    publishedHotels.sort(
       (a: { name: string; city: string }, b: { name: string; city: string }) =>
         hotelPriority(a.name, a.city) - hotelPriority(b.name, b.city)
     );
 
-    return NextResponse.json({ hotels: withPhotos.slice(0, 6) });
+    return NextResponse.json({ hotels: publishedHotels.slice(0, 6) });
   } catch (err) {
     console.error('[featured-stays] Unexpected error:', err);
     return NextResponse.json({ hotels: [] });

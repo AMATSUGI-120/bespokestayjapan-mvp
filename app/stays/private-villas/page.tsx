@@ -10,6 +10,7 @@ const config: StayCategoryConfig = {
   description:
     'Published private-villa stays for travelers who want more privacy, more control over shared spaces, or a quieter base in Japan.',
   tags: ['private-villa'],
+  path: '/stays/private-villas',
 };
 
 export const dynamic = 'force-dynamic';

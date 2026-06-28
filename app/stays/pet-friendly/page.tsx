@@ -8,8 +8,9 @@ const config: StayCategoryConfig = {
   title: 'Pet-Friendly Stays',
   eyebrow: 'Traveling with pets',
   description:
-    'Published stays with companion-animal policies, size notes, fees, or booking details that are easier to compare before you commit.',
+    'Published stays with companion-animal policies, size notes, fees, or practical details that are easier to compare before you plan.',
   tags: ['pet-friendly'],
+  path: '/stays/pet-friendly',
 };
 
 export const dynamic = 'force-dynamic';

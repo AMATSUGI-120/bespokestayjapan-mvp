@@ -3,7 +3,7 @@ import type { CSSProperties } from 'react';
 export type VerificationVariant =
   | 'property-confirmed'
   | 'source-backed'
-  | 'ask-before-booking'
+  | 'check-before-planning'
   | 'not-yet-checked';
 
 export interface VerificationBadgeProps {
@@ -29,8 +29,8 @@ const verificationBadgeConfig: Record<VerificationVariant, VerificationBadgeConf
     color: 'var(--bsj-sourced)',
     backgroundColor: 'var(--bsj-sourced-bg)',
   },
-  'ask-before-booking': {
-    label: 'Ask before booking',
+  'check-before-planning': {
+    label: 'Check before planning',
     color: 'var(--bsj-ask)',
     backgroundColor: 'var(--bsj-ask-bg)',
   },

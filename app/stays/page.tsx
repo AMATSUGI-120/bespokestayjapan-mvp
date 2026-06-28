@@ -5,13 +5,16 @@ import { PropertyCard } from '@/components/PropertyCard';
 import type { ConditionTagVariant } from '@/components/ConditionTag';
 import type { VerificationVariant } from '@/components/VerificationBadge';
 import { supabase } from '@/lib/supabase';
-import { formatCategoryTagLabel, getCategoryTagHref } from '@/lib/category-tags';
+import { formatCategoryTagLabel, getCategoryTagHref, normalizeCategoryTags } from '@/lib/category-tags';
+import { getHotelProfileHref } from '@/lib/hotel-slug';
+import { buildPageMetadata } from '@/lib/seo';
 
-export const metadata: Metadata = {
-  title: 'Stays | Bespoke Stay Japan',
+export const metadata: Metadata = buildPageMetadata({
+  title: 'Stays',
   description:
-    'Curated places in Japan where practical details are easier to compare.',
-};
+    'Curated Japan stay profiles where practical details are easier to compare, including bath rules, luggage support, self-catering, pets, family needs, and English support.',
+  path: '/stays',
+});
 
 export const dynamic = 'force-dynamic';
 
@@ -21,8 +24,6 @@ interface PublishedStay {
   city: string | null;
   area: string | null;
   type: string | null;
-  liteapi_id: string | null;
-  photo_urls: string[] | null;
   category_tags: string[] | null;
   short_description: string | null;
   best_for: string | null;
@@ -40,8 +41,7 @@ function buildRegion(stay: PublishedStay): string {
 }
 
 function buildTags(tags: string[] | null): StayCardTag[] {
-  return (tags ?? [])
-    .filter((tag): tag is string => typeof tag === 'string' && tag.trim().length > 0)
+  return normalizeCategoryTags(tags)
     .slice(0, 3)
     .map((tag) => ({
       label: formatCategoryTagLabel(tag),
@@ -60,10 +60,9 @@ async function getPublishedStays(): Promise<PublishedStay[]> {
   const { data, error } = await supabase
     .from('hotels')
     .select(
-      'id, name, city, area, type, liteapi_id, photo_urls, category_tags, short_description, best_for, caution_notes'
+      'id, name, city, area, type, category_tags, short_description, best_for, caution_notes'
     )
     .eq('is_published', true)
-    .not('photo_urls', 'is', null)
     .order('published_at', { ascending: false, nullsFirst: false });
 
   if (error) {
@@ -71,13 +70,7 @@ async function getPublishedStays(): Promise<PublishedStay[]> {
     return [];
   }
 
-  return (data ?? []).filter(
-    (stay): stay is PublishedStay =>
-      Array.isArray(stay.photo_urls) &&
-      stay.photo_urls.length > 0 &&
-      typeof stay.photo_urls[0] === 'string' &&
-      stay.photo_urls[0].length > 0
-  );
+  return (data ?? []) as PublishedStay[];
 }
 
 export default async function StaysPage() {
@@ -122,18 +115,16 @@ export default async function StaysPage() {
                   {stays.map((stay) => (
                     <PropertyCard
                       key={stay.id}
-                      imageUrl={stay.photo_urls![0]}
-                      imageAlt={`${stay.name} in ${buildRegion(stay) || 'Japan'}`}
                       stayType={stay.type ?? 'Stay'}
                       verificationVariant={'source-backed' as VerificationVariant}
                       name={stay.name}
                       region={buildRegion(stay)}
                       tags={buildTags(stay.category_tags)}
                       editorialNote={buildEditorialNote(stay)}
+                      bestFor={stay.best_for}
                       goodToKnow={stay.caution_notes}
-                      ctaHref={stay.liteapi_id ? `/stays/${stay.liteapi_id}` : '/stays'}
+                      ctaHref={getHotelProfileHref(stay)}
                       ctaLabel="Read stay note"
-                      referenceLabel={stay.liteapi_id ? `Ref ${stay.liteapi_id}` : null}
                     />
                   ))}
                 </div>
@@ -144,7 +135,7 @@ export default async function StaysPage() {
                   No published stays are ready yet.
                 </p>
                 <p className="mt-3 text-sm leading-[1.7] text-[var(--bsj-text-muted)]">
-                  Published stays with photography will appear here once they are available.
+                  Published stay profiles will appear here once they are available.
                 </p>
               </div>
             )}

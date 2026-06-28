@@ -8,8 +8,9 @@ const config: StayCategoryConfig = {
   title: 'Private-Bath Stays',
   eyebrow: 'Bath privacy',
   description:
-    'Published stays with private-bath context, useful for travelers who prefer privacy or need clearer bath access before booking.',
+    'Published stays with private-bath context, useful for travelers who prefer privacy or need clearer bath access before planning.',
   tags: ['private-bath'],
+  path: '/stays/private-bath',
 };
 
 export const dynamic = 'force-dynamic';

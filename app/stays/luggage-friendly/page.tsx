@@ -10,6 +10,7 @@ const config: StayCategoryConfig = {
   description:
     'Published stays where luggage storage, station access, transfers, or room setup may make travel across Japan easier to manage.',
   tags: ['luggage-friendly'],
+  path: '/stays/luggage-friendly',
 };
 
 export const dynamic = 'force-dynamic';

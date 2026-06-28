@@ -5,13 +5,21 @@ import { PropertyCard } from '@/components/PropertyCard';
 import type { ConditionTagVariant } from '@/components/ConditionTag';
 import type { VerificationVariant } from '@/components/VerificationBadge';
 import { supabase } from '@/lib/supabase';
-import { formatCategoryTagLabel, getCategoryTagHref } from '@/lib/category-tags';
+import {
+  formatCategoryTagLabel,
+  getCategoryTagHref,
+  getCategoryTagQueryValues,
+  normalizeCategoryTags,
+} from '@/lib/category-tags';
+import { getHotelProfileHref } from '@/lib/hotel-slug';
+import { buildPageMetadata } from '@/lib/seo';
 
 export interface StayCategoryConfig {
   title: string;
   eyebrow?: string;
   description: string;
   tags: string[];
+  path?: string;
 }
 
 interface CategoryStay {
@@ -20,8 +28,6 @@ interface CategoryStay {
   city: string | null;
   area: string | null;
   type: string | null;
-  liteapi_id: string | null;
-  photo_urls: string[] | null;
   category_tags: string[] | null;
   short_description: string | null;
   best_for: string | null;
@@ -37,10 +43,11 @@ interface StayCardTag {
 }
 
 export function buildCategoryMetadata(config: StayCategoryConfig): Metadata {
-  return {
-    title: `${config.title} | Bespoke Stay Japan`,
+  return buildPageMetadata({
+    title: config.title,
     description: config.description,
-  };
+    path: config.path ?? '/stays',
+  });
 }
 
 function buildRegion(stay: CategoryStay): string {
@@ -48,8 +55,7 @@ function buildRegion(stay: CategoryStay): string {
 }
 
 function buildTags(tags: string[] | null): StayCardTag[] {
-  return (tags ?? [])
-    .filter((tag): tag is string => typeof tag === 'string' && tag.trim().length > 0)
+  return normalizeCategoryTags(tags)
     .slice(0, 3)
     .map((tag) => ({
       label: formatCategoryTagLabel(tag),
@@ -78,11 +84,9 @@ async function getStaysForTag(tag: string): Promise<CategoryStay[]> {
   const { data, error } = await supabase
     .from('hotels')
     .select(
-      'id, name, city, area, type, liteapi_id, photo_urls, category_tags, short_description, best_for, caution_notes, published_at, updated_at'
+      'id, name, city, area, type, category_tags, short_description, best_for, caution_notes, published_at, updated_at'
     )
     .eq('is_published', true)
-    .not('liteapi_id', 'is', null)
-    .not('photo_urls', 'is', null)
     .contains('category_tags', [tag])
     .order('published_at', { ascending: false, nullsFirst: false });
 
@@ -91,17 +95,12 @@ async function getStaysForTag(tag: string): Promise<CategoryStay[]> {
     return [];
   }
 
-  return ((data ?? []) as unknown as CategoryStay[]).filter(
-    (stay) =>
-      Array.isArray(stay.photo_urls) &&
-      stay.photo_urls.length > 0 &&
-      typeof stay.photo_urls[0] === 'string' &&
-      stay.photo_urls[0].length > 0
-  );
+  return (data ?? []) as unknown as CategoryStay[];
 }
 
 async function getCategoryStays(tags: string[]): Promise<CategoryStay[]> {
-  const results = await Promise.all(tags.map((tag) => getStaysForTag(tag)));
+  const queryTags = Array.from(new Set(tags.flatMap((tag) => getCategoryTagQueryValues(tag))));
+  const results = await Promise.all(queryTags.map((tag) => getStaysForTag(tag)));
   const unique = new Map<number, CategoryStay>();
 
   for (const stay of results.flat()) {
@@ -146,7 +145,7 @@ export async function CategoryStayPage({
                   key={tag}
                   className="rounded-[3px] border border-[var(--bsj-border)] px-2 py-1 text-[10px] font-semibold uppercase tracking-[0.08em] text-[var(--bsj-text-muted)]"
                 >
-                  {tag.replace(/-/g, ' ')}
+                  {formatCategoryTagLabel(tag)}
                 </span>
               ))}
             </div>
@@ -167,18 +166,16 @@ export async function CategoryStayPage({
                   {stays.map((stay) => (
                     <PropertyCard
                       key={stay.id}
-                      imageUrl={stay.photo_urls![0]}
-                      imageAlt={`${stay.name} in ${buildRegion(stay) || 'Japan'}`}
                       stayType={stay.type ?? 'Stay'}
                       verificationVariant={'source-backed' as VerificationVariant}
                       name={stay.name}
                       region={buildRegion(stay)}
                       tags={buildTags(stay.category_tags)}
                       editorialNote={buildEditorialNote(stay)}
+                      bestFor={stay.best_for}
                       goodToKnow={stay.caution_notes}
-                      ctaHref={stay.liteapi_id ? `/stays/${stay.liteapi_id}` : '/stays'}
+                      ctaHref={getHotelProfileHref(stay)}
                       ctaLabel="Read stay note"
-                      referenceLabel={stay.liteapi_id ? `Ref ${stay.liteapi_id}` : null}
                     />
                   ))}
                 </div>
@@ -189,7 +186,7 @@ export async function CategoryStayPage({
                   No published stays yet for this condition.
                 </p>
                 <p className="mt-3 text-sm leading-[1.7] text-[var(--bsj-text-muted)]">
-                  Published stays with photography will appear here once they are available.
+                  Published stay profiles will appear here once they are available.
                 </p>
               </div>
             )}

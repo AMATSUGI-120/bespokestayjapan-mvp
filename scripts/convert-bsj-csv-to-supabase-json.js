@@ -85,13 +85,27 @@ function parseCategoryTags(raw) {
   const seen = new Set();
   const result = [];
   for (const t of raw.split('|')) {
-    const tag = t.trim();
-    if (tag && !seen.has(tag)) {
-      seen.add(tag);
-      result.push(tag);
+    for (const tag of normalizeCategoryTag(t)) {
+      if (tag && !seen.has(tag)) {
+        seen.add(tag);
+        result.push(tag);
+      }
     }
   }
   return result;
+}
+
+const TAG_ALIASES = {
+  'English-friendly': ['english-friendly'],
+  'private-villas': ['private-villa'],
+  'tattoo-friendly-private-bath': ['tattoo-friendly', 'private-bath'],
+};
+
+function normalizeCategoryTag(raw) {
+  const trimmed = str(raw);
+  if (!trimmed) return [];
+  const lower = trimmed.toLowerCase();
+  return TAG_ALIASES[trimmed] ?? TAG_ALIASES[lower] ?? [lower];
 }
 
 function firstUrl(urlsString) {
@@ -101,6 +115,18 @@ function firstUrl(urlsString) {
 
 function str(val) {
   return (val ?? '').trim();
+}
+
+function stableHotelKey(row) {
+  return str(row.hotel_key) || str(row.liteapi_id);
+}
+
+function externalSourceUrl(row) {
+  return (
+    firstUrl(row.listing_source_urls) ||
+    str(row.official_site_url) ||
+    firstUrl(row.official_source_urls)
+  );
 }
 
 // Count non-empty listing_* fields — used for duplicate resolution
@@ -118,8 +144,11 @@ function listingFieldCount(row) {
 
 // ─── Row conversion ───────────────────────────────────────────────────────────
 function convertRow(row) {
+  const stableKey = stableHotelKey(row);
+
   return {
-    liteapi_id:               str(row.liteapi_id),
+    // DB compatibility field. New sheets should provide hotel_key; legacy sheets use liteapi_id.
+    liteapi_id:               stableKey,
     name:                     str(row.listing_title),
     city:                     str(row.city),
     area:                     str(row.area),
@@ -127,7 +156,7 @@ function convertRow(row) {
     type:                     'Hotel',
     layer:                    2,
     recommended_margin:       0.15,
-    booking_url:              firstUrl(row.listing_source_urls),
+    booking_url:              externalSourceUrl(row),
     short_description:        str(row.listing_short_description),
     key_highlights:           str(row.listing_key_highlights),
     best_for:                 str(row.listing_best_for),
@@ -153,7 +182,8 @@ function validate(obj) {
   const warnings = [];
   for (const field of ['liteapi_id', 'name', 'city', 'area', 'booking_url', 'short_description']) {
     if (!obj[field] || !obj[field].trim()) {
-      warnings.push(`(${obj.liteapi_id || '?'}): required field "${field}" is empty`);
+      const label = field === 'liteapi_id' ? 'stable hotel key' : field;
+      warnings.push(`(${obj.liteapi_id || '?'}): required field "${label}" is empty`);
     }
   }
   if (!Array.isArray(obj.category_tags) || obj.category_tags.length === 0) {
@@ -192,7 +222,7 @@ function buildPreview(hotels, skipped, warnings) {
 
   lines.push('## 出力ホテル一覧');
   lines.push('');
-  lines.push('| # | liteapi_id | name | city | area | category_tags | booking_url | priority |');
+  lines.push('| # | stable_id | name | city | area | category_tags | external_source | priority |');
   lines.push('|---|---|---|---|---|---|---|---|');
   hotels.forEach((h, i) => {
     const tags = h.category_tags.join(', ');
@@ -226,12 +256,12 @@ function main() {
   const skipped  = [];
   const warnings = [];
   const hotels   = [];
-  const seenIds  = new Map(); // liteapi_id → index in hotels[]
+  const seenIds  = new Map(); // stable hotel key → index in hotels[]
 
   for (let i = 0; i < allRows.length; i++) {
     const row    = allRows[i];
     const rowNum = i + 2; // row 1 = header
-    const id     = str(row.liteapi_id);
+    const id     = stableHotelKey(row);
     const status = str(row.final_publication_status);
 
     // ── Filter
@@ -240,7 +270,7 @@ function main() {
       continue;
     }
     if (!id) {
-      skipped.push(`Row ${rowNum}: liteapi_id empty`);
+      skipped.push(`Row ${rowNum}: hotel_key/liteapi_id empty`);
       continue;
     }
     if (!str(row.listing_title)) {
@@ -262,16 +292,16 @@ function main() {
       const existingCount = listingFieldCount(allRows[existingIdx]);
       const currentCount  = listingFieldCount(row);
       if (currentCount > existingCount) {
-        const msg = `DUPLICATE liteapi_id "${id}": row ${rowNum} replaces earlier row (${currentCount} vs ${existingCount} listing fields filled)`;
+        const msg = `DUPLICATE stable hotel key "${id}": row ${rowNum} replaces earlier row (${currentCount} vs ${existingCount} listing fields filled)`;
         console.warn(`⚠ ${msg}`);
         warnings.push(msg);
         hotels[existingIdx] = convertRow(row);
         skipped.push(`Row ${existingIdx + 2} (${id}): superseded by row ${rowNum} (more listing fields)`);
       } else {
-        const msg = `DUPLICATE liteapi_id "${id}": row ${rowNum} skipped — earlier row kept (${existingCount} vs ${currentCount} listing fields)`;
+        const msg = `DUPLICATE stable hotel key "${id}": row ${rowNum} skipped — earlier row kept (${existingCount} vs ${currentCount} listing fields)`;
         console.warn(`⚠ ${msg}`);
         warnings.push(msg);
-        skipped.push(`Row ${rowNum} (${id}): duplicate liteapi_id — earlier row kept`);
+        skipped.push(`Row ${rowNum} (${id}): duplicate stable hotel key — earlier row kept`);
       }
       continue;
     }

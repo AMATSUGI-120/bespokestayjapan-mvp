@@ -1,7 +1,6 @@
 export interface Hotel {
   id: number;
   name: string;
-  liteapi_id: string | null;
   city: string;
   area: string;
   type: string;
@@ -24,58 +23,4 @@ export interface Hotel {
   english_support: boolean;
   access_info: string | null;
   booking_url: string;
-  photo_urls?: string[] | null;
-}
-
-export interface SearchConditions {
-  city: string;
-  petSize: 'small' | 'medium' | 'large' | 'any';
-  guests: number;
-  checkin: string;
-  checkout: string;
-}
-
-export interface HotelResult extends Hotel {
-  matchLevel: 100 | 80 | 60;
-  basePrice: number;
-  margin: number;
-  finalPrice: number;
-  liteapiOfferId: string;
-  recommendationReason: string;
-  refundableTag?: string;
-  cancellationDeadline?: string | null;
-}
-
-export interface GuestInfo {
-  firstName: string;
-  lastName: string;
-  email: string;
-  phone: string;
-}
-
-export interface SearchResult {
-  hotelId: string;
-  name: string;
-  offerId: string;
-  price: number;
-  currency: string;
-  available: boolean;
-  refundableTag?: string;
-  cancellationDeadline?: string | null;
-}
-
-export interface PrebookResult {
-  prebookId: string;
-  status: string;
-  totalPrice: number;
-  currency: string;
-  secretKey: string;
-  transactionId: string;
-}
-
-export interface BookingResult {
-  bookingId: string;
-  paymentUrl: string;
-  confirmationNumber: string;
-  totalPrice: number;
 }

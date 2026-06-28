@@ -6,10 +6,11 @@ import {
 
 const config: StayCategoryConfig = {
   title: 'Tattoo-Consideration Stays',
-  eyebrow: 'Ask before booking',
+  eyebrow: 'Check before planning',
   description:
-    'Published stays that may still work for tattooed travelers, but where bath access, public onsen rules, or property policy should be checked carefully before booking.',
+    'Published stays that may still work for tattooed travelers, but where bath access, public onsen rules, or property policy should be checked carefully before planning around them.',
   tags: ['tattoo-consideration'],
+  path: '/stays/tattoo-consideration',
 };
 
 export const dynamic = 'force-dynamic';

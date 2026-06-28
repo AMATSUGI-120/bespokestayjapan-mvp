@@ -1,8 +1,6 @@
 import type { CSSProperties } from 'react';
 
 export interface HeroSectionProps {
-  imageUrl?: string | null;
-  imageAlt?: string;
   className?: string;
 }
 
@@ -11,36 +9,13 @@ const sectionStyle: CSSProperties = {
   padding: '56px 24px 72px',
 };
 
-/* Image column — dominant, left side on desktop */
-const imgWrapperStyle: CSSProperties = {
-  borderRadius: '6px',
-  overflow: 'hidden',
-  minHeight: '360px',
-  flexShrink: 0,
-};
-
-const imgStyle: CSSProperties = {
-  width: '100%',
-  height: '100%',
-  objectFit: 'cover',
-  display: 'block',
-};
-
-/* Placeholder when no image */
-const placeholderStyle: CSSProperties = {
-  width: '100%',
-  height: '100%',
-  minHeight: '420px',
-  backgroundColor: 'var(--bsj-bg-card)',
+const guidePanelStyle: CSSProperties = {
+  backgroundColor: 'var(--bsj-bg-subtle)',
   border: '1px solid var(--bsj-border)',
   borderRadius: '6px',
-  display: 'flex',
-  flexDirection: 'column',
-  alignItems: 'center',
-  justifyContent: 'center',
-  gap: '12px',
-  textAlign: 'center',
-  padding: '32px',
+  display: 'grid',
+  gap: '1px',
+  overflow: 'hidden',
 };
 
 /* Text column */
@@ -98,20 +73,61 @@ const secondaryCtaStyle: CSSProperties = {
   textDecoration: 'none',
 };
 
-const placeholderTextStyle: CSSProperties = {
-  color: 'var(--bsj-text-muted)',
-  fontSize: '13px',
-  fontWeight: 600,
+const guideTileStyle: CSSProperties = {
+  backgroundColor: 'var(--bsj-bg)',
+  minHeight: '138px',
+  padding: '20px',
 };
 
-const placeholderNoteStyle: CSSProperties = {
+const guideCodeStyle: CSSProperties = {
   color: 'var(--bsj-text-light)',
+  display: 'block',
   fontSize: '11px',
-  lineHeight: 1.5,
-  maxWidth: '180px',
+  fontWeight: 700,
+  letterSpacing: '0.12em',
+  lineHeight: 1.4,
+  textTransform: 'uppercase',
 };
 
-export function HeroSection({ imageUrl, imageAlt, className }: HeroSectionProps) {
+const guideTitleStyle: CSSProperties = {
+  color: 'var(--bsj-text)',
+  fontSize: '17px',
+  fontWeight: 500,
+  lineHeight: 1.35,
+  marginTop: '20px',
+};
+
+const guideTextStyle: CSSProperties = {
+  color: 'var(--bsj-text-muted)',
+  fontSize: '12px',
+  lineHeight: 1.65,
+  marginTop: '8px',
+};
+
+const GUIDE_TILES = [
+  {
+    code: 'TAT',
+    title: 'Bath rules',
+    text: 'Tattoo notes, private bath options, and what still needs direct confirmation.',
+  },
+  {
+    code: 'BAG',
+    title: 'Luggage flow',
+    text: 'Station proximity, storage, delivery timing, and large-bag practicality.',
+  },
+  {
+    code: 'FOOD',
+    title: 'Diet needs',
+    text: 'Food restriction notes, breakfast caveats, and nearby area suitability.',
+  },
+  {
+    code: 'LONG',
+    title: 'Longer stays',
+    text: 'Kitchen, laundry, room layout, and everyday comfort for slower travel.',
+  },
+];
+
+export function HeroSection({ className }: HeroSectionProps) {
   return (
     <section
       className={['', className].filter(Boolean).join(' ')}
@@ -121,39 +137,18 @@ export function HeroSection({ imageUrl, imageAlt, className }: HeroSectionProps)
         className="mx-auto flex flex-col lg:flex-row items-stretch gap-9 lg:gap-16"
         style={{ maxWidth: '1280px' }}
       >
-        {/* Left: real hotel image — dominant */}
-        <div
-          className="w-full lg:w-[62%] aspect-[4/3] lg:aspect-auto lg:min-h-[560px]"
-          style={imgWrapperStyle}
-        >
-          {imageUrl ? (
-            <img
-              src={imageUrl}
-              alt={imageAlt ?? 'A Japan stay — hotel or ryokan interior'}
-              style={imgStyle}
-              fetchPriority="high"
-              loading="eager"
-            />
-          ) : (
-            /* TODO: Replace with owned/licensed stay photography once photo seeding is live */
-            <div style={placeholderStyle}>
-              <svg
-                width="32" height="32" viewBox="0 0 24 24" fill="none"
-                stroke="var(--bsj-border-strong)" strokeWidth="1.25"
-                strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"
-              >
-                <path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z" />
-                <circle cx="12" cy="13" r="4" />
-              </svg>
-              <p style={placeholderTextStyle}>Stay photography coming soon</p>
-              <p style={placeholderNoteStyle}>
-                Hero image will be replaced with licensed stay photography
-              </p>
-            </div>
-          )}
+        <div className="w-full lg:w-[58%]" style={guidePanelStyle}>
+          <div className="grid grid-cols-1 sm:grid-cols-2">
+            {GUIDE_TILES.map((tile) => (
+              <div key={tile.code} style={guideTileStyle}>
+                <span style={guideCodeStyle}>{tile.code}</span>
+                <p style={guideTitleStyle}>{tile.title}</p>
+                <p style={guideTextStyle}>{tile.text}</p>
+              </div>
+            ))}
+          </div>
         </div>
 
-        {/* Right: editorial copy — no background box */}
         <div className="lg:pl-4" style={textColStyle}>
           <p style={eyebrowStyle}>Curated Japan stays</p>
 

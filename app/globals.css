@@ -27,12 +27,12 @@
   --bsj-confirmed-bg: #EEF3EF;
   --bsj-sourced:     #52606E;   /* source-backed */
   --bsj-sourced-bg:  #F1F3F5;
-  --bsj-ask:         #8A6F3A;   /* ask before booking */
+  --bsj-ask:         #8A6F3A;   /* check before planning */
   --bsj-ask-bg:      #F6F1E7;
   --bsj-unknown:     #7B7F85;   /* not yet checked */
   --bsj-unknown-bg:  #F3F2EF;
 
-  /* Legacy (keep for LiteAPI payment SDK compatibility) */
+  /* Legacy app color aliases */
   --background: var(--bsj-bg);
   --foreground: var(--bsj-text);
 }
@@ -55,29 +55,4 @@ body {
 ::selection {
   background: #D8D0C1;
   color: var(--bsj-text);
-}
-
-/* ── LiteAPI Payment SDK (must keep) ───────────────────────────── */
-.lp-submit-button {
-  display: block;
-  width: 100%;
-  padding: 14px;
-  margin-top: 16px;
-  background-color: var(--bsj-primary);
-  color: white;
-  font-size: 16px;
-  font-weight: bold;
-  border: none;
-  border-radius: 8px;
-  cursor: pointer;
-  text-align: center;
-}
-
-.lp-submit-button:hover {
-  background-color: var(--bsj-primary-hover);
-}
-
-.lp-submit-button:disabled {
-  background-color: var(--bsj-secondary);
-  cursor: not-allowed;
 }

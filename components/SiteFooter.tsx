@@ -19,6 +19,10 @@ const staysLinks: FooterLink[] = [
 ];
 
 const infoLinks: FooterLink[] = [
+  { href: '/tattoo-friendly-stays-kansai', label: 'Tattoo stay guide' },
+  { href: '/shinkansen-oversized-luggage-guide', label: 'Shinkansen luggage guide' },
+  { href: '/dietary-restrictions-japan', label: 'Dietary restriction guide' },
+  { href: '/ryokan-stay-guide', label: 'Ryokan stay guide' },
   { href: '#how-it-works', label: 'How it works' },
   { href: '#ask', label: 'Ask for a stay match' },
 ];
@@ -101,11 +105,11 @@ export function SiteFooter({ className }: SiteFooterProps) {
         <div style={bottomBarStyle}>
           <p>
             Stay conditions can change. Always confirm final details with the property
-            before booking.
+            before planning around them.
           </p>
           <p style={{ marginTop: '6px' }}>
-            © 2025 Bespoke Stay Japan. Hotel availability and pricing are powered by
-            LiteAPI.
+            © 2025 Bespoke Stay Japan. Stay information is researched from public
+            sources and property policies where available.
           </p>
         </div>
       </div>
