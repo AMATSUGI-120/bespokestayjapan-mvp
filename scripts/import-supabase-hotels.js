@@ -60,15 +60,17 @@ const UPDATE_FIELDS = [
   'verified_notes', 'caution_notes', 'category_tags', 'source_urls',
   'final_publication_status', 'final_listing_priority',
 ];
-// Never updated: id, created_at, is_published, published_at
+// Never updated: id, created_at
 
 // ─── Build payloads ───────────────────────────────────────────────────────────
 function buildInsertPayload(hotel) {
   const now = new Date().toISOString();
+  const isPublished = hotel.is_published === true;
   const payload = {
     // DB compatibility field. JSON uses hotel_key or legacy liteapi_id here.
     liteapi_id:        hotel.liteapi_id,
-    is_published:      false,
+    is_published:      isPublished,
+    published_at:      isPublished ? now : null,
     created_at:        now,
     updated_at:        now,
   };
@@ -78,8 +80,14 @@ function buildInsertPayload(hotel) {
   return payload;
 }
 
-function buildUpdatePayload(hotel) {
-  const payload = { updated_at: new Date().toISOString() };
+function buildUpdatePayload(hotel, existing) {
+  const now = new Date().toISOString();
+  const isPublished = hotel.is_published === true;
+  const payload = {
+    is_published: isPublished,
+    published_at: isPublished ? (existing?.published_at ?? now) : null,
+    updated_at: now,
+  };
   for (const f of UPDATE_FIELDS) {
     payload[f] = hotel[f] ?? defaultVal(f);
   }
@@ -108,10 +116,10 @@ function makeClient() {
 async function fetchExisting(supabase, ids) {
   const { data, error } = await supabase
     .from('hotels')
-    .select('liteapi_id')
+    .select('liteapi_id, is_published, published_at')
     .in('liteapi_id', ids);
   if (error) throw new Error(`Failed to fetch existing hotels: ${error.message}`);
-  return new Set((data ?? []).map(r => r.liteapi_id));
+  return new Map((data ?? []).map(r => [r.liteapi_id, r]));
 }
 
 // ─── Main ─────────────────────────────────────────────────────────────────────
@@ -145,10 +153,10 @@ async function main() {
 
   // Determine INSERT vs UPDATE for all hotels
   const allIds    = hotels.map(h => h.liteapi_id);
-  const existingIds = await fetchExisting(supabase, allIds);
+  const existingById = await fetchExisting(supabase, allIds);
 
-  const toInsert = hotels.filter(h => !existingIds.has(h.liteapi_id));
-  const toUpdate = hotels.filter(h =>  existingIds.has(h.liteapi_id));
+  const toInsert = hotels.filter(h => !existingById.has(h.liteapi_id));
+  const toUpdate = hotels.filter(h =>  existingById.has(h.liteapi_id));
 
   console.log(`\n  INSERT : ${toInsert.length} hotels (new)`);
   console.log(`  UPDATE : ${toUpdate.length} hotels (existing)`);
@@ -157,12 +165,13 @@ async function main() {
   if (dryRun) {
     console.log('\n─── DRY-RUN PREVIEW ───────────────────────────────────────────────────\n');
     for (const h of hotels) {
-      const action = existingIds.has(h.liteapi_id) ? 'UPDATE' : 'INSERT';
+      const action = existingById.has(h.liteapi_id) ? 'UPDATE' : 'INSERT';
       const tags   = Array.isArray(h.category_tags) ? h.category_tags.join(', ') : String(h.category_tags);
       console.log(`[${action}] ${h.liteapi_id}`);
       console.log(`        name : ${h.name}`);
       console.log(`        city : ${h.city}  area : ${h.area}`);
       console.log(`        tags : ${tags}`);
+      console.log(`        published : ${h.is_published === true}`);
       console.log('');
     }
     console.log('─── DRY-RUN COMPLETE (nothing written) ─────────────────────────────────');
@@ -191,7 +200,7 @@ async function main() {
 
   // UPDATE existing hotels
   for (const hotel of toUpdate) {
-    const payload = buildUpdatePayload(hotel);
+    const payload = buildUpdatePayload(hotel, existingById.get(hotel.liteapi_id));
     const { error } = await supabase
       .from('hotels')
       .update(payload)
