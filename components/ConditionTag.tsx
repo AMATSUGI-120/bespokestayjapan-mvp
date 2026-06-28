@@ -57,16 +57,23 @@ export function ConditionTag({
   };
 
   if (href) {
+    const linkStyle: CSSProperties = {
+      ...style,
+      border: undefined,
+      backgroundColor: undefined,
+      color: undefined,
+    };
+
     return (
       <Link
         href={href}
         className={[
-          'no-underline transition-colors hover:border-[var(--bsj-primary)] hover:bg-[var(--bsj-primary)] hover:text-white active:border-[var(--bsj-primary)] active:bg-[var(--bsj-primary)] active:text-white focus:outline-none focus-visible:border-[var(--bsj-primary)] focus-visible:bg-[var(--bsj-primary)] focus-visible:text-white',
+          'border border-[var(--bsj-border)] text-[var(--bsj-primary)] no-underline transition-colors hover:border-[var(--bsj-primary)] hover:bg-[var(--bsj-primary)] hover:text-white active:border-[var(--bsj-primary)] active:bg-[var(--bsj-primary)] active:text-white focus:outline-none focus-visible:border-[var(--bsj-primary)] focus-visible:bg-[var(--bsj-primary)] focus-visible:text-white',
           className,
         ]
           .filter(Boolean)
           .join(' ')}
-        style={style}
+        style={linkStyle}
       >
         {label}
       </Link>
