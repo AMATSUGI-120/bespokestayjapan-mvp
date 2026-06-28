@@ -4,6 +4,22 @@ Bespoke Stay Japan is a researched Japan stay information database for travelers
 
 It is not a booking-first hotel site. The core product is structured stay information: tattoo and bath notes, luggage support, kitchen/self-catering context, pet policies, family suitability, English support, access notes, verified sources, and planning caveats.
 
+## Project Direction
+
+The current `main` branch is the information DB/media version of Bespoke Stay Japan.
+
+The product direction is to help foreign travelers and foreign residents compare Japan stays by real constraints, not to operate a booking engine. Public pages are designed around researched hotel profiles, condition-based stay lists, practical guide articles, source links, and future downloadable planning kits.
+
+## Portfolio Snapshot
+
+An earlier version of this project implemented a LiteAPI hotel booking MVP. That booking-oriented version is preserved separately for portfolio/reference purposes:
+
+- Release: [LiteAPI Hotel Booking MVP](https://github.com/AMATSUGI-120/bespokestayjapan-mvp/releases/tag/portfolio-liteapi-booking-mvp)
+- Branch: [`portfolio/liteapi-booking-mvp`](https://github.com/AMATSUGI-120/bespokestayjapan-mvp/tree/portfolio/liteapi-booking-mvp)
+- Tag: `portfolio-liteapi-booking-mvp`
+
+That snapshot included hotel search, rates/prebook/booking API routes, booking success/cancel pages, payment UI, production safety checks, and analytics. Those flows are intentionally removed from `main` after the project pivot.
+
 ## Bespoke Stay Japan Notes
 
 - Hotel research sheet standard: [docs/bsj-hotel-sheet-schema.md](docs/bsj-hotel-sheet-schema.md)
@@ -79,7 +95,3 @@ npm run build
 - Do not rely on hotel photos as a required UI element.
 - Keep public copy grounded in `listing_*` sheet fields.
 - Keep raw research prompts, manual memos, and unresolved internal notes out of public UI.
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
