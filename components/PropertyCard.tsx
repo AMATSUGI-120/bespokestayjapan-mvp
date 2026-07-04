@@ -142,9 +142,9 @@ const conditionIconStyle: CSSProperties = {
   borderRadius: '999px',
   color: 'var(--bsj-text-muted)',
   display: 'inline-flex',
-  height: '36px',
+  height: '44px',
   justifyContent: 'center',
-  width: '36px',
+  width: '44px',
 };
 
 const referenceStyle: CSSProperties = {
@@ -200,7 +200,7 @@ export function PropertyCard({
           <div className="mt-5 flex flex-wrap gap-1.5" aria-hidden="true">
             {iconTags.map((tag, index) => (
               <span key={`${tag.label}-${index}`} style={conditionIconStyle}>
-                <ConditionIcon name={tag.label} width={20} height={20} />
+                <ConditionIcon name={tag.label} width={26} height={26} />
               </span>
             ))}
           </div>

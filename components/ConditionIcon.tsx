@@ -95,23 +95,37 @@ export function ConditionIcon({
       {title ? <title>{title}</title> : null}
       {iconName === 'tattoo-friendly' ? (
         <>
-          <rect x="3.8" y="6" width="12.8" height="12" rx="2.2" />
-          <path d="M6.4 9h7.4" />
-          <path d="M8.1 9v6" />
-          <path d="M11.9 9 10 15" />
-          <path d="m10.9 12.4 2.4 2.6" />
-          <path d="m16.2 6.2 1.5 1.5 2.8-3.1" />
+          <rect x="3.2" y="6.2" width="14.2" height="11.6" rx="2.1" />
+          <text
+            x="5.2"
+            y="14.4"
+            fill="currentColor"
+            stroke="none"
+            fontSize="5.4"
+            fontWeight="700"
+            letterSpacing=".15"
+          >
+            TAT
+          </text>
+          <path d="m16.7 5.6 1.5 1.5 2.8-3.1" />
         </>
       ) : null}
       {iconName === 'tattoo-consideration' ? (
         <>
-          <rect x="3.8" y="6" width="12.8" height="12" rx="2.2" />
-          <path d="M6.4 9h7.4" />
-          <path d="M8.1 9v6" />
-          <path d="M11.9 9 10 15" />
-          <path d="m10.9 12.4 2.4 2.6" />
-          <path d="M18.7 5.1c0-.9.7-1.6 1.6-1.6s1.6.6 1.6 1.5c0 1.3-1.5 1.3-1.5 2.5" />
-          <path d="M20.4 10h.01" />
+          <rect x="3.2" y="6.2" width="14.2" height="11.6" rx="2.1" />
+          <text
+            x="5.2"
+            y="14.4"
+            fill="currentColor"
+            stroke="none"
+            fontSize="5.4"
+            fontWeight="700"
+            letterSpacing=".15"
+          >
+            TAT
+          </text>
+          <path d="M19.3 5.1c0-.9.7-1.6 1.6-1.6s1.6.6 1.6 1.5c0 1.3-1.5 1.3-1.5 2.5" />
+          <path d="M21 10h.01" />
         </>
       ) : null}
       {iconName === 'private-bath' ? (
@@ -172,10 +186,13 @@ export function ConditionIcon({
       ) : null}
       {iconName === 'food-friendly' ? (
         <>
-          <circle cx="10.2" cy="12.7" r="5.2" />
-          <circle cx="10.2" cy="12.7" r="2.2" />
-          <path d="M18.2 5.2c-3.1.4-5.2 2.5-5.2 5.3 3 .3 5.6-1.9 6.1-5.1l-.9-.2Z" />
-          <path d="M13.2 10.1c1.4.6 3.2 2.1 4.1 4" />
+          <path d="M6.5 4.2v7.2" />
+          <path d="M9.5 4.2v7.2" />
+          <path d="M6.5 7.8h3" />
+          <path d="M8 11.4v8.4" />
+          <path d="M16.6 4.2v15.6" />
+          <path d="M14.2 4.6c0 3.3.7 5.3 2.4 6" />
+          <path d="M18.9 4.6c0 3.3-.7 5.3-2.3 6" />
         </>
       ) : null}
       {iconName === 'access-friendly' ? (

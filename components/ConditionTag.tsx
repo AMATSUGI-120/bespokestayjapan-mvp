@@ -77,7 +77,7 @@ export function ConditionTag({
           .join(' ')}
         style={linkStyle}
       >
-        <ConditionIcon name={label} width={14} height={14} aria-hidden="true" />
+        <ConditionIcon name={label} width={16} height={16} aria-hidden="true" />
         {label}
       </Link>
     );
@@ -85,7 +85,7 @@ export function ConditionTag({
 
   return (
     <span className={className} style={style}>
-      <ConditionIcon name={label} width={14} height={14} aria-hidden="true" />
+      <ConditionIcon name={label} width={16} height={16} aria-hidden="true" />
       {label}
     </span>
   );

@@ -205,8 +205,8 @@ export function ConditionBrowser({ className }: ConditionBrowserProps) {
                 <span style={entryNumStyle}>
                   {String(i + 1).padStart(2, '0')}
                 </span>
-                <span className="inline-flex h-7 w-7 items-center justify-center rounded-full border border-[var(--bsj-border)] text-[var(--bsj-text-muted)] transition-colors group-hover:border-[var(--bsj-border-strong)] group-hover:text-[var(--bsj-text)]">
-                  <ConditionIcon name={condition.id} width={15} height={15} />
+                <span className="inline-flex h-9 w-9 items-center justify-center rounded-full border border-[var(--bsj-border)] text-[var(--bsj-text-muted)] transition-colors group-hover:border-[var(--bsj-border-strong)] group-hover:text-[var(--bsj-text)]">
+                  <ConditionIcon name={condition.id} width={23} height={23} />
                 </span>
                 <span style={entryLabelStyle}>{condition.label}</span>
               </div>
