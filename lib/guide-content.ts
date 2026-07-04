@@ -4,6 +4,7 @@ export interface GuideLink {
   href: string;
   label: string;
   external?: boolean;
+  sponsored?: boolean;
 }
 
 export interface GuideSection {
@@ -29,8 +30,48 @@ export interface GuidePageContent {
   productKey?: ProductKey;
   sections: GuideSection[];
   relatedStays?: GuideLink[];
+  serviceLinks?: GuideLink[];
   sourceLinks?: GuideLink[];
 }
+
+const affiliateServiceLinks = {
+  airaloJapan: {
+    href: 'https://airalo.tpk.mx/ztsQtMmA',
+    label: 'Compare Japan eSIMs on Airalo',
+    external: true,
+    sponsored: true,
+  },
+  sailyJapan: {
+    href: 'https://saily.tpk.mx/5RWqVnM8',
+    label: 'Check Japan eSIM plans on Saily',
+    external: true,
+    sponsored: true,
+  },
+  yesimJapan: {
+    href: 'https://yesim.tpk.mx/oj7KCPUG',
+    label: 'Check Japan eSIM plans on Yesim',
+    external: true,
+    sponsored: true,
+  },
+  radicalStorageJapan: {
+    href: 'https://radicalstorage.tpk.mx/bz9wL4jy',
+    label: 'Find luggage storage with Radical Storage',
+    external: true,
+    sponsored: true,
+  },
+  kiwitaxiJapan: {
+    href: 'https://kiwitaxi.tpk.mx/0f91KlnQ',
+    label: 'Check private transfer options on Kiwitaxi',
+    external: true,
+    sponsored: true,
+  },
+  klookJapanActivities: {
+    href: 'https://klook.tpk.mx/zakGjLwG',
+    label: 'Browse Japan activities on Klook',
+    external: true,
+    sponsored: true,
+  },
+} satisfies Record<string, GuideLink>;
 
 export const guidePages: Record<string, GuidePageContent> = {
   'tattoo-friendly-stays-kansai': {
@@ -147,6 +188,7 @@ Thank you.`,
       { href: '/stays/tattoo-consideration', label: 'Tattoo consideration notes' },
       { href: '/stays/private-bath', label: 'Private bath stays' },
     ],
+    serviceLinks: [affiliateServiceLinks.klookJapanActivities],
     sourceLinks: [
       {
         href: 'https://www.japan.travel/en/guide/onsen/',
@@ -255,6 +297,7 @@ Thank you.`,
       { href: '/stays/tattoo-friendly', label: 'Tattoo-friendly stays' },
       { href: '/stays/family-friendly', label: 'Family-friendly stays' },
     ],
+    serviceLinks: [affiliateServiceLinks.klookJapanActivities],
     sourceLinks: [
       {
         href: 'https://www.japan.travel/en/guide/onsen/',
@@ -316,6 +359,10 @@ Thank you.`,
     relatedStays: [
       { href: '/stays/luggage-friendly', label: 'Luggage-friendly stays' },
       { href: '/stays/access-friendly', label: 'Access-friendly stays' },
+    ],
+    serviceLinks: [
+      affiliateServiceLinks.radicalStorageJapan,
+      affiliateServiceLinks.kiwitaxiJapan,
     ],
     sourceLinks: [
       {
@@ -403,6 +450,10 @@ Thank you.`,
     relatedStays: [
       { href: '/stays/luggage-friendly', label: 'Luggage-friendly stay profiles' },
       { href: '/stays/access-friendly', label: 'Access-friendly stays' },
+    ],
+    serviceLinks: [
+      affiliateServiceLinks.radicalStorageJapan,
+      affiliateServiceLinks.kiwitaxiJapan,
     ],
     sourceLinks: [
       {
@@ -559,6 +610,7 @@ Thank you.`,
       { href: '/stays/tattoo-friendly', label: 'Tattoo-friendly stays' },
       { href: '/stays/food-friendly', label: 'Food-friendly stays' },
     ],
+    serviceLinks: [affiliateServiceLinks.klookJapanActivities],
     sourceLinks: [
       {
         href: 'https://www.japan.travel/en/guide/ryokan/',
@@ -606,6 +658,11 @@ Thank you.`,
       { href: '/stays/access-friendly', label: 'Access-friendly stays' },
       { href: '/stays/luggage-friendly', label: 'Luggage-friendly stays' },
       { href: '/stays/family-friendly', label: 'Family-friendly stays' },
+    ],
+    serviceLinks: [
+      affiliateServiceLinks.airaloJapan,
+      affiliateServiceLinks.sailyJapan,
+      affiliateServiceLinks.yesimJapan,
     ],
     sourceLinks: [
       {

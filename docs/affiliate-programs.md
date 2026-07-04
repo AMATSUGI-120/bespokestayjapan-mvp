@@ -78,6 +78,17 @@ Hotel ID 3 / Riverside Arashiyama / Klook / https://klook.tpk.mx/ZFwA8IjQ
 
 See `docs/hotel-external-link-audit.md` for the ongoing hotel-by-hotel audit.
 
+Current guide/service affiliate links:
+
+| Service | URL | Primary placement |
+| --- | --- | --- |
+| Airalo Japan eSIM | `https://airalo.tpk.mx/ztsQtMmA` | IC card / connectivity planning context |
+| Saily Japan eSIM | `https://saily.tpk.mx/5RWqVnM8` | IC card / connectivity planning context |
+| Yesim Japan eSIM | `https://yesim.tpk.mx/oj7KCPUG` | IC card / connectivity planning context |
+| Radical Storage Japan | `https://radicalstorage.tpk.mx/bz9wL4jy` | Luggage storage / hands-light travel context |
+| Kiwitaxi Japan | `https://kiwitaxi.tpk.mx/0f91KlnQ` | Airport or private transfer context |
+| Klook Japan activities | `https://klook.tpk.mx/zakGjLwG` | Japan activities / bath, ryokan, local experience context |
+
 ## Compliance Notes
 
 - Use `rel="sponsored"` for affiliate links.

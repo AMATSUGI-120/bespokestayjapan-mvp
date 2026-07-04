@@ -17,7 +17,7 @@ function LinkList({ links }: { links: GuideLink[] }) {
               key={link.href}
               href={link.href}
               target="_blank"
-              rel="noreferrer"
+              rel={link.sponsored ? 'noreferrer sponsored' : 'noreferrer'}
               className={className}
             >
               {link.label}
@@ -222,6 +222,25 @@ export function GuidePage({ guide }: { guide: GuidePageContent }) {
                   ) : null}
                   <p className="mt-5 border-t border-[var(--bsj-border)] pt-4 text-[12px] leading-[1.7] text-[var(--bsj-text-light)]">
                     {product.statusLabel}
+                  </p>
+                </section>
+              ) : null}
+
+              {guide.serviceLinks?.length ? (
+                <section className="border border-[var(--bsj-border)] bg-[var(--bsj-bg)] p-6">
+                  <h2 className="text-[13px] font-semibold uppercase tracking-[0.14em] text-[var(--bsj-text)]">
+                    Related travel tools
+                  </h2>
+                  <p className="mt-3 text-[12px] leading-[1.7] text-[var(--bsj-text-muted)]">
+                    Optional services that may help with the practical side of this
+                    topic. Check terms, availability, and suitability directly.
+                  </p>
+                  <div className="mt-5">
+                    <LinkList links={guide.serviceLinks} />
+                  </div>
+                  <p className="mt-4 text-[11px] leading-[1.6] text-[var(--bsj-text-light)]">
+                    Some links may be affiliate links. BSJ only includes them when they
+                    fit the guide topic.
                   </p>
                 </section>
               ) : null}
