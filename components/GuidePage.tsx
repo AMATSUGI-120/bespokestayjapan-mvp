@@ -156,6 +156,78 @@ export function GuidePage({ guide }: { guide: GuidePageContent }) {
                   </div>
                 </section>
               ) : null}
+
+              {(guide.relatedStays?.length || guide.serviceLinks?.length || product) ? (
+                <section className="mt-12 border-t border-[var(--bsj-border)] pt-10">
+                  <p className="text-[11px] font-semibold uppercase tracking-[0.16em] text-[var(--bsj-text-light)]">
+                    Planning next steps
+                  </p>
+                  <h2 className="mt-3 text-[24px] font-medium tracking-[0] text-[var(--bsj-text)]">
+                    Turn this guide into a stay shortlist
+                  </h2>
+                  <p className="mt-4 max-w-2xl text-[14px] leading-[1.8] text-[var(--bsj-text-muted)]">
+                    Use the guide notes to compare stay profiles, confirm the details that
+                    matter for your trip, and keep optional travel tools separate from the
+                    final booking decision.
+                  </p>
+
+                  <div className="mt-7 grid gap-4 md:grid-cols-3">
+                    {guide.relatedStays?.length ? (
+                      <div className="border border-[var(--bsj-border)] bg-[var(--bsj-bg)] p-5">
+                        <p className="text-[11px] font-semibold uppercase tracking-[0.14em] text-[var(--bsj-text-light)]">
+                          Compare stays
+                        </p>
+                        <div className="mt-4 flex flex-col gap-3">
+                          {guide.relatedStays.slice(0, 3).map((link) => (
+                            <Link
+                              key={link.href}
+                              href={link.href}
+                              className="text-[13px] leading-[1.5] text-[var(--bsj-text)] no-underline transition-colors hover:text-[var(--bsj-primary-hover)] hover:underline"
+                            >
+                              {link.label}
+                            </Link>
+                          ))}
+                        </div>
+                      </div>
+                    ) : null}
+
+                    {product ? (
+                      <div className="border border-[var(--bsj-border)] bg-[var(--bsj-bg)] p-5">
+                        <p className="text-[11px] font-semibold uppercase tracking-[0.14em] text-[var(--bsj-text-light)]">
+                          Planning kit
+                        </p>
+                        <h3 className="mt-3 text-[17px] font-medium leading-[1.3] text-[var(--bsj-text)]">
+                          {product.title}
+                        </h3>
+                        <p className="mt-3 text-[12px] leading-[1.7] text-[var(--bsj-text-muted)]">
+                          {product.statusLabel}
+                        </p>
+                      </div>
+                    ) : null}
+
+                    {guide.serviceLinks?.length ? (
+                      <div className="border border-[var(--bsj-border)] bg-[var(--bsj-bg)] p-5">
+                        <p className="text-[11px] font-semibold uppercase tracking-[0.14em] text-[var(--bsj-text-light)]">
+                          Related tools
+                        </p>
+                        <div className="mt-4 flex flex-col gap-3">
+                          {guide.serviceLinks.slice(0, 3).map((link) => (
+                            <a
+                              key={link.href}
+                              href={link.href}
+                              target="_blank"
+                              rel={link.sponsored ? 'noreferrer sponsored' : 'noreferrer'}
+                              className="text-[13px] leading-[1.5] text-[var(--bsj-text)] no-underline transition-colors hover:text-[var(--bsj-primary-hover)] hover:underline"
+                            >
+                              {link.label}
+                            </a>
+                          ))}
+                        </div>
+                      </div>
+                    ) : null}
+                  </div>
+                </section>
+              ) : null}
             </article>
 
             <aside className="space-y-6 lg:sticky lg:top-8 lg:self-start">
