@@ -49,6 +49,30 @@ Do not reintroduce booking-engine framing unless explicitly requested.
 
 Hotel pages should read as researched stay profiles, not reservation pages.
 
+## Booking Support Boundary
+
+BSJ must not be designed as a reservation agency unless the user explicitly
+decides to pursue the required legal/commercial setup.
+
+Do not introduce:
+- Booking on behalf of users.
+- Filling reservation forms for users.
+- Taking payment for accommodation.
+- Handling booking changes, cancellations, or confirmations.
+- "We will book this stay for you" style service copy.
+- User flows that make BSJ the intermediary for a hotel reservation contract.
+
+Allowed direction:
+- Research, translation support, checklists, comparison sheets, maps, and
+  inquiry templates that help users make their own booking decisions.
+- Japanese-only OTA links, such as Rakuten Travel or Jalan, as reference links
+  or "Japanese booking reference" links when useful.
+- Referrals to official hotel sites, OTAs, or properly registered travel
+  businesses.
+
+See `docs/booking-support-policy.md` before creating service pages, product
+funnels, hotel CTAs, or concierge-style copy.
+
 ## Data Rules
 
 - Show only published hotels: `is_published = true`.

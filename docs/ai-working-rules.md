@@ -23,6 +23,8 @@ Keep the product focused on:
 - Guide articles for SEO, Threads, and Pinterest
 - Future practical digital products
 
+For booking-support boundaries, read `docs/booking-support-policy.md`.
+
 ## Protected Areas
 
 Do not change these unless the user explicitly asks:
@@ -42,9 +44,34 @@ Do not rebuild or expand:
 - Prebook/book/payment flows
 - Booking-first CTAs
 - Travel comparison UI
+- Reservation agency or booking-on-behalf-of-user flows
 
 Legacy code can be removed or redirected when it blocks the new information DB
 direction, but preserve portfolio references where noted.
+
+## Booking Support Rules
+
+BSJ can help travelers understand and compare Japanese stays, including
+Japanese-only listings, but it should not act as the booking intermediary.
+
+Allowed:
+- Explain Japanese booking-site information in English.
+- Provide hotel inquiry templates.
+- Provide booking checklists and comparison sheets.
+- Link to official sites, OTAs, Japanese booking references, Google Maps, and
+  related services.
+- Sell planning kits that help users make their own decisions.
+
+Avoid:
+- "We book for you" service copy.
+- Taking traveler personal data for reservation submission.
+- Entering booking forms on behalf of users.
+- Handling accommodation payments, changes, cancellations, or confirmations.
+- Copy that implies BSJ guarantees a room, rate, booking result, or hotel
+  acceptance.
+
+When unsure, frame the feature as research, translation support, comparison, or
+pre-booking preparation rather than reservation handling.
 
 ## Design Rules
 
@@ -71,6 +98,8 @@ Use careful language:
 - Important details should be confirmed directly before booking.
 - Accessibility, tattoo policy, dietary support, and pet rules should not be
   overstated.
+- Japanese-only booking links should be described as references, not as the main
+  foreign-traveler booking path unless the user experience has been verified.
 
 Prefer useful content even when a product teaser is present.
 
