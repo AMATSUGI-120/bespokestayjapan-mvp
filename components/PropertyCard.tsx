@@ -1,6 +1,7 @@
 import type { CSSProperties } from 'react';
 import { VerificationBadge, VerificationVariant } from './VerificationBadge';
 import { ConditionTag, ConditionTagVariant } from './ConditionTag';
+import { ConditionIcon } from './ConditionIcon';
 
 interface ConditionTagData {
   label: string;
@@ -141,13 +142,9 @@ const conditionIconStyle: CSSProperties = {
   borderRadius: '999px',
   color: 'var(--bsj-text-muted)',
   display: 'inline-flex',
-  fontSize: '10px',
-  fontWeight: 700,
-  height: '28px',
+  height: '32px',
   justifyContent: 'center',
-  letterSpacing: '0.04em',
-  minWidth: '28px',
-  padding: '0 8px',
+  width: '32px',
 };
 
 const referenceStyle: CSSProperties = {
@@ -162,31 +159,6 @@ const referenceStyle: CSSProperties = {
 
 function getDisplayName(name: string): string {
   return name.split(/\s+—\s+/)[0]?.trim() || name;
-}
-
-function getConditionCode(label: string): string {
-  const normalized = label.toLowerCase();
-
-  if (normalized.includes('tattoo')) return 'TAT';
-  if (normalized.includes('bath') || normalized.includes('onsen')) return 'BTH';
-  if (normalized.includes('luggage') || normalized.includes('station')) return 'BAG';
-  if (normalized.includes('kitchen') || normalized.includes('catering')) return 'KIT';
-  if (normalized.includes('english')) return 'EN';
-  if (normalized.includes('family') || normalized.includes('child')) return 'FAM';
-  if (normalized.includes('pet') || normalized.includes('dog') || normalized.includes('cat')) return 'PET';
-  if (normalized.includes('food') || normalized.includes('diet')) return 'FOOD';
-  if (normalized.includes('access') || normalized.includes('elevator')) return 'ACC';
-  if (normalized.includes('villa')) return 'VIL';
-
-  return label
-    .replace(/[^a-zA-Z0-9\s-]/g, '')
-    .split(/[\s-]+/)
-    .filter(Boolean)
-    .slice(0, 2)
-    .map((part) => part[0])
-    .join('')
-    .toUpperCase()
-    .slice(0, 3) || 'ST';
 }
 
 export function PropertyCard({
@@ -207,7 +179,7 @@ export function PropertyCard({
   const trimmedGoodToKnow = goodToKnow?.trim();
   const trimmedBestFor = bestFor?.trim();
   const trimmedReferenceLabel = referenceLabel?.trim();
-  const conditionCodes = tags.slice(0, 4).map((tag) => getConditionCode(tag.label));
+  const iconTags = tags.slice(0, 4);
   const displayName = getDisplayName(name);
 
   return (
@@ -224,11 +196,11 @@ export function PropertyCard({
           <VerificationBadge variant={verificationVariant} />
         </div>
 
-        {conditionCodes.length > 0 && (
+        {iconTags.length > 0 && (
           <div className="mt-5 flex flex-wrap gap-1.5" aria-hidden="true">
-            {conditionCodes.map((code, index) => (
-              <span key={`${code}-${index}`} style={conditionIconStyle}>
-                {code}
+            {iconTags.map((tag, index) => (
+              <span key={`${tag.label}-${index}`} style={conditionIconStyle}>
+                <ConditionIcon name={tag.label} width={16} height={16} />
               </span>
             ))}
           </div>

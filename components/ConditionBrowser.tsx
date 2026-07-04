@@ -1,5 +1,6 @@
 import Link from 'next/link';
 import type { CSSProperties } from 'react';
+import { ConditionIcon } from './ConditionIcon';
 
 export interface ConditionBrowserProps {
   className?: string;
@@ -203,6 +204,9 @@ export function ConditionBrowser({ className }: ConditionBrowserProps) {
               <div style={entryMetaStyle}>
                 <span style={entryNumStyle}>
                   {String(i + 1).padStart(2, '0')}
+                </span>
+                <span className="inline-flex h-7 w-7 items-center justify-center rounded-full border border-[var(--bsj-border)] text-[var(--bsj-text-muted)] transition-colors group-hover:border-[var(--bsj-border-strong)] group-hover:text-[var(--bsj-text)]">
+                  <ConditionIcon name={condition.id} width={15} height={15} />
                 </span>
                 <span style={entryLabelStyle}>{condition.label}</span>
               </div>

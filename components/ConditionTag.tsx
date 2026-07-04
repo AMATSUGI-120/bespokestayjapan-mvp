@@ -1,5 +1,6 @@
 import Link from 'next/link';
 import type { CSSProperties } from 'react';
+import { ConditionIcon } from './ConditionIcon';
 
 export type ConditionTagVariant = 'facility' | 'access' | 'stay-type';
 
@@ -39,6 +40,7 @@ export function ConditionTag({
   const style: CSSProperties = {
     display: 'inline-flex',
     alignItems: 'center',
+    gap: '5px',
     width: 'fit-content',
     padding: '3px 8px',
     borderRadius: '3px',
@@ -75,6 +77,7 @@ export function ConditionTag({
           .join(' ')}
         style={linkStyle}
       >
+        <ConditionIcon name={label} width={13} height={13} aria-hidden="true" />
         {label}
       </Link>
     );
@@ -82,6 +85,7 @@ export function ConditionTag({
 
   return (
     <span className={className} style={style}>
+      <ConditionIcon name={label} width={13} height={13} aria-hidden="true" />
       {label}
     </span>
   );
