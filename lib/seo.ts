@@ -1,7 +1,7 @@
 import type { Metadata } from 'next';
 
 export const SITE_NAME = 'Bespoke Stay Japan';
-export const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? 'https://www.bespokestayjapan.com';
+export const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? 'https://bespokestayjapan.com';
 
 export const DEFAULT_DESCRIPTION =
   'A researched Japan stay guide for travelers with practical needs: tattoo and bath notes, luggage support, self-catering, pets, family travel, English support, and access details.';
