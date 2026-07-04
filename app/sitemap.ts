@@ -17,6 +17,7 @@ const staticPaths = [
   '/stays/tattoo-consideration',
   '/stays/tattoo-friendly',
   '/guides',
+  '/free-kansai-tattoo-stay-kit',
   ...Object.values(guidePages).map((guide) => guide.path),
 ];
 
@@ -30,4 +31,3 @@ export default function sitemap(): MetadataRoute.Sitemap {
     priority: path === '/' ? 1 : path === '/stays' || path === '/guides' ? 0.8 : 0.6,
   }));
 }
-

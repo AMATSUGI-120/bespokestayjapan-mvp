@@ -184,6 +184,7 @@ Thank you.`,
       },
     ],
     relatedStays: [
+      { href: '/free-kansai-tattoo-stay-kit', label: 'Free Kansai tattoo stay starter kit' },
       { href: '/stays/tattoo-friendly', label: 'Tattoo-friendly stay profiles' },
       { href: '/stays/tattoo-consideration', label: 'Tattoo consideration notes' },
       { href: '/stays/private-bath', label: 'Private bath stays' },
