@@ -5,6 +5,7 @@ export type ExternalLinkProvider =
   | 'trip'
   | 'expedia'
   | 'hotels'
+  | 'klook'
   | 'rakuten'
   | 'jalan'
   | 'google_maps'
@@ -31,6 +32,7 @@ const AFFILIATE_LINK_OVERRIDES: Record<string, AffiliateOverride> = {
   // Add Travelpayouts, OTA, or direct affiliate links here by hotel id.
   // Example:
   // '123': { href: 'https://...', provider: 'agoda' },
+  '3': { href: 'https://klook.tpk.mx/ZFwA8IjQ', provider: 'klook' },
 };
 
 function normalizeExternalUrl(sourceUrl: string | null | undefined): string | null {
@@ -52,6 +54,7 @@ function getExternalLinkProvider(url: string): ExternalLinkProvider {
   if (hostname.includes('trip.com')) return 'trip';
   if (hostname.includes('expedia.')) return 'expedia';
   if (hostname.includes('hotels.com')) return 'hotels';
+  if (hostname.includes('klook.com')) return 'klook';
   if (hostname.includes('travel.rakuten.')) return 'rakuten';
   if (hostname.includes('jalan.net')) return 'jalan';
   if (hostname.includes('google.') || hostname.includes('goo.gl')) return 'google_maps';
@@ -68,6 +71,7 @@ function getExternalLinkLabel(provider: ExternalLinkProvider, isAffiliate: boole
     case 'trip':
     case 'expedia':
     case 'hotels':
+    case 'klook':
     case 'rakuten':
     case 'jalan':
       return 'Check booking options';

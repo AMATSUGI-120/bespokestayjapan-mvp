@@ -44,10 +44,10 @@ Confirmed visible program terms in Travelpayouts:
 | Program | Status / Notes | Visible reward |
 | --- | --- | --- |
 | Booking.com | Connection request shown as declined when generating a link | 3-5%, flights EUR 1.5 |
-| Trip.com | Visible in catalog | 1-5.5% |
+| Trip.com | Connection request shown as declined when generating a link | 1-5.5% |
 | Agoda | Visible in catalog | 6% |
-| Expedia | Visible in catalog | 1.35-3.6% |
-| Hotels.com | Visible in catalog | 1.35-3.6% |
+| Expedia | Connection request shown as declined when generating a link | 1.35-3.6% |
+| Hotels.com | Connection request shown as declined when generating a link | 1.35-3.6% |
 | GetYourGuide | Visible in catalog | 8% |
 | Viator | Visible in catalog | 8% |
 | Klook | Available in My Programs | 2-5%; temporary higher rates were visible |
@@ -70,6 +70,14 @@ Confirmed visible program terms in Travelpayouts:
    - Activities: Klook, GetYourGuide, Viator
 4. Re-check hotel programs before placing hotel OTA affiliate links.
 
+Current first hotel affiliate override:
+
+```txt
+Hotel ID 3 / Riverside Arashiyama / Klook / https://klook.tpk.mx/ZFwA8IjQ
+```
+
+See `docs/hotel-external-link-audit.md` for the ongoing hotel-by-hotel audit.
+
 ## Compliance Notes
 
 - Use `rel="sponsored"` for affiliate links.
@@ -77,3 +85,5 @@ Confirmed visible program terms in Travelpayouts:
 - Keep hotel notes and caveats visible before external booking links.
 - Do not use Booking.com links through Travelpayouts while the connection is
   declined.
+- Do not use Trip.com, Expedia, or Hotels.com through Travelpayouts while their
+  connection requests are declined.
