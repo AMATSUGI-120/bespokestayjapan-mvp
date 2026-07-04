@@ -82,7 +82,7 @@ export function ConditionIcon({
     viewBox: '0 0 24 24',
     fill: 'none',
     stroke: 'currentColor',
-    strokeWidth: 1.65,
+    strokeWidth: 1.85,
     strokeLinecap: 'round' as const,
     strokeLinejoin: 'round' as const,
     'aria-hidden': title ? undefined : true,
@@ -95,19 +95,23 @@ export function ConditionIcon({
       {title ? <title>{title}</title> : null}
       {iconName === 'tattoo-friendly' ? (
         <>
-          <path d="M9 5.8c2.7-.7 5.4.9 6.1 3.6l1.2 4.7c.5 2-.6 4-2.6 4.5l-1.6.4c-2 .5-4-.7-4.5-2.7L6.4 12c-.7-2.7.9-5.5 2.6-6.2Z" />
-          <path d="M10.1 10.4c1.2-.8 2.9-.4 3.6.9" />
-          <path d="M10.4 13.7c.9.6 2.2.5 3-.3" />
-          <path d="m15.9 5.4 1.2 1.2 2.3-2.6" />
+          <rect x="3.8" y="6" width="12.8" height="12" rx="2.2" />
+          <path d="M6.4 9h7.4" />
+          <path d="M8.1 9v6" />
+          <path d="M11.9 9 10 15" />
+          <path d="m10.9 12.4 2.4 2.6" />
+          <path d="m16.2 6.2 1.5 1.5 2.8-3.1" />
         </>
       ) : null}
       {iconName === 'tattoo-consideration' ? (
         <>
-          <path d="M9 5.8c2.7-.7 5.4.9 6.1 3.6l1.2 4.7c.5 2-.6 4-2.6 4.5l-1.6.4c-2 .5-4-.7-4.5-2.7L6.4 12c-.7-2.7.9-5.5 2.6-6.2Z" />
-          <path d="M10.1 10.4c1.2-.8 2.9-.4 3.6.9" />
-          <path d="M10.4 13.7c.9.6 2.2.5 3-.3" />
-          <path d="M18.3 5.2c0-1 .7-1.7 1.7-1.7s1.7.6 1.7 1.5c0 1.4-1.6 1.4-1.6 2.6" />
-          <path d="M20.1 10.2h.01" />
+          <rect x="3.8" y="6" width="12.8" height="12" rx="2.2" />
+          <path d="M6.4 9h7.4" />
+          <path d="M8.1 9v6" />
+          <path d="M11.9 9 10 15" />
+          <path d="m10.9 12.4 2.4 2.6" />
+          <path d="M18.7 5.1c0-.9.7-1.6 1.6-1.6s1.6.6 1.6 1.5c0 1.3-1.5 1.3-1.5 2.5" />
+          <path d="M20.4 10h.01" />
         </>
       ) : null}
       {iconName === 'private-bath' ? (
@@ -168,12 +172,10 @@ export function ConditionIcon({
       ) : null}
       {iconName === 'food-friendly' ? (
         <>
-          <path d="M6.5 4v7" />
-          <path d="M9.5 4v7" />
-          <path d="M6.5 7.5h3" />
-          <path d="M8 11v9" />
-          <path d="M17 5c-3.2.4-5.3 2.5-5.3 5.5 3.2.2 5.8-1.9 6.3-5.3L17 5Z" />
-          <path d="M12.4 10.1c1.7.5 3.6 2.2 4.4 4.4" />
+          <circle cx="10.2" cy="12.7" r="5.2" />
+          <circle cx="10.2" cy="12.7" r="2.2" />
+          <path d="M18.2 5.2c-3.1.4-5.2 2.5-5.2 5.3 3 .3 5.6-1.9 6.1-5.1l-.9-.2Z" />
+          <path d="M13.2 10.1c1.4.6 3.2 2.1 4.1 4" />
         </>
       ) : null}
       {iconName === 'access-friendly' ? (
