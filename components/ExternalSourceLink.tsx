@@ -1,6 +1,7 @@
 'use client';
 
 import { trackExternalSourceLinkClick } from '@/lib/analytics';
+import { resolveHotelExternalLink } from '@/lib/external-links';
 
 interface ExternalSourceLinkProps {
   sourceUrl: string | null;
@@ -9,31 +10,28 @@ interface ExternalSourceLinkProps {
   label?: string;
 }
 
-function resolveExternalSourceUrl({
-  sourceUrl,
-}: Pick<ExternalSourceLinkProps, 'sourceUrl' | 'hotelId'>): string | null {
-  const currentUrl = sourceUrl?.trim();
-
-  // Future source priority, tracked redirects, or affiliate links should be centralized here.
-  return currentUrl && currentUrl.length > 0 ? currentUrl : null;
-}
-
 export function ExternalSourceLink({
   sourceUrl,
   hotelId,
   className,
-  label = 'Open official / source page',
+  label,
 }: ExternalSourceLinkProps) {
-  const href = resolveExternalSourceUrl({ sourceUrl, hotelId });
+  const externalLink = resolveHotelExternalLink({ sourceUrl, hotelId });
 
-  if (!href) return null;
+  if (!externalLink) return null;
 
   return (
     <a
-      href={href}
+      href={externalLink.href}
       target="_blank"
-      rel="noreferrer"
-      onClick={() => trackExternalSourceLinkClick({ hotel_id: hotelId })}
+      rel={externalLink.isAffiliate ? 'noreferrer sponsored' : 'noreferrer'}
+      onClick={() =>
+        trackExternalSourceLinkClick({
+          hotel_id: hotelId,
+          provider: externalLink.provider,
+          is_affiliate: externalLink.isAffiliate,
+        })
+      }
       className={[
         'inline-flex min-h-10 items-center border border-[var(--bsj-border-strong)] px-4 py-2 text-[12px] font-semibold uppercase tracking-[0.08em] text-[var(--bsj-text)] no-underline transition-colors hover:border-[var(--bsj-primary)] hover:bg-[var(--bsj-primary)] hover:text-white active:border-[var(--bsj-primary)] active:bg-[var(--bsj-primary)] active:text-white focus:outline-none focus-visible:border-[var(--bsj-primary)] focus-visible:bg-[var(--bsj-primary)] focus-visible:text-white',
         className,
@@ -41,7 +39,7 @@ export function ExternalSourceLink({
         .filter(Boolean)
         .join(' ')}
     >
-      {label}
+      {label ?? externalLink.label}
     </a>
   );
 }

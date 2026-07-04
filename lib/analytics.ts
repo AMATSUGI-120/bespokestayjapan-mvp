@@ -58,6 +58,8 @@ export function trackHotelDetailView(props: {
 
 export function trackExternalSourceLinkClick(props: {
   hotel_id: string;
+  provider?: string;
+  is_affiliate?: boolean;
 }) {
   trackEvent('bsj_external_source_link_click', props);
 }
