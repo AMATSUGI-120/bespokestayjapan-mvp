@@ -33,7 +33,7 @@ export default function HotelMapCard({ hotelName, region, address }: HotelMapCar
       <p className="text-[11px] font-semibold uppercase tracking-[0.14em] text-[var(--bsj-text-light)]">
         Area map
       </p>
-      <div className="mt-4 overflow-hidden border border-[var(--bsj-border)] bg-[var(--bsj-bg)]">
+      <div className="mt-4 overflow-hidden border border-[var(--bsj-border-strong)] bg-[var(--bsj-bg)]">
         {isMapVisible ? (
           <iframe
             title={`${hotelName} area map`}
@@ -44,16 +44,17 @@ export default function HotelMapCard({ hotelName, region, address }: HotelMapCar
             allowFullScreen
           />
         ) : (
-          <div className="relative min-h-[210px] overflow-hidden bg-[var(--bsj-bg-subtle)]">
-            <div className="absolute inset-0 opacity-80">
-              <div className="absolute left-[12%] top-0 h-full w-px bg-[var(--bsj-border)]" />
-              <div className="absolute left-[34%] top-0 h-full w-px bg-[var(--bsj-border)]" />
-              <div className="absolute left-[67%] top-0 h-full w-px bg-[var(--bsj-border)]" />
-              <div className="absolute left-0 top-[24%] h-px w-full bg-[var(--bsj-border)]" />
-              <div className="absolute left-0 top-[52%] h-px w-full bg-[var(--bsj-border)]" />
-              <div className="absolute left-0 top-[78%] h-px w-full bg-[var(--bsj-border)]" />
-              <div className="absolute left-[24%] top-[18%] h-[150%] w-px -rotate-[34deg] bg-[var(--bsj-border-strong)]" />
-              <div className="absolute left-[74%] top-[-20%] h-[150%] w-px rotate-[28deg] bg-[var(--bsj-border)]" />
+          <div className="relative min-h-[210px] overflow-hidden bg-[#d8d8d0]">
+            <div className="absolute inset-0 opacity-90">
+              <div className="absolute left-[12%] top-0 h-full w-px bg-[#aaa99f]" />
+              <div className="absolute left-[34%] top-0 h-full w-px bg-[#aaa99f]" />
+              <div className="absolute left-[67%] top-0 h-full w-px bg-[#aaa99f]" />
+              <div className="absolute left-0 top-[24%] h-px w-full bg-[#aaa99f]" />
+              <div className="absolute left-0 top-[52%] h-px w-full bg-[#aaa99f]" />
+              <div className="absolute left-0 top-[78%] h-px w-full bg-[#aaa99f]" />
+              <div className="absolute left-[24%] top-[18%] h-[150%] w-px -rotate-[34deg] bg-[#7f8179]" />
+              <div className="absolute left-[74%] top-[-20%] h-[150%] w-px rotate-[28deg] bg-[#9a9b91]" />
+              <div className="absolute left-[42%] top-[30%] h-[90%] w-[18px] -rotate-[22deg] bg-[#c4c4ba]" />
             </div>
 
             <div className="relative flex min-h-[210px] flex-col justify-between p-5">
@@ -66,7 +67,7 @@ export default function HotelMapCard({ hotelName, region, address }: HotelMapCar
                     Check the area before choosing this stay.
                   </p>
                 </div>
-                <span className="mt-2 h-3 w-3 rounded-full bg-[var(--bsj-primary)] shadow-[0_0_0_6px_var(--bsj-bg)]" />
+                <span className="mt-2 h-3 w-3 rounded-full bg-[var(--bsj-primary)] shadow-[0_0_0_6px_#eeeee8]" />
               </div>
 
               <div>
