@@ -127,9 +127,16 @@ Affiliate links are allowed when they are useful and accurate.
 Rules:
 
 - Only use hotel OTA affiliate links when the exact hotel listing is verified.
+- Do not use hotel name matching alone. Confirm the property by details such as
+  address, city, facility name, room information, and listing context.
 - Only use Travelpayouts links for programs that are active and approved.
 - Do not use Booking.com through Travelpayouts while the connection request is
   declined.
+- If Booking.com, Trip.com, Expedia, or Hotels.com are declined in
+  Travelpayouts, their URLs may remain reference links only. Do not present them
+  as affiliate or preferred booking links.
+- Klook hotel links may be used only after exact-property verification in the
+  Klook / Travelpayouts flow and successful affiliate link generation.
 - Use `rel="sponsored"` for affiliate links.
 - Keep caveats and verification notes visible before external CTAs.
 - Do not let affiliate availability decide whether a hotel is recommended.
@@ -139,6 +146,9 @@ Implementation:
 - Manage hotel external links in `lib/external-links.ts`.
 - Add affiliate overrides one hotel/provider at a time after verification.
 - Do not hard-code affiliate links inside page components.
+- Record each hotel affiliate addition in `docs/hotel-external-link-audit.md`
+  with the stable hotel key, provider, affiliate URL, exact-match evidence, and
+  confirmation date.
 
 ## Product Design
 

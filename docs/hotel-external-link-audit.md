@@ -14,6 +14,37 @@ Do not add hotel affiliate links to `lib/external-links.ts` until:
 - The relevant affiliate program is active and link generation succeeds.
 - The link does not conflict with `docs/booking-support-policy.md`.
 
+## Operating Rules
+
+Use this process for each new hotel affiliate link:
+
+1. Identify the BSJ hotel by stable key.
+2. Find the candidate OTA/Klook listing.
+3. Confirm exact property match. Hotel name alone is not enough; check address,
+   city, facility name, map/listing context, room/property details, and any
+   visible photos only as supporting evidence.
+4. Confirm the affiliate program is active and approved in Travelpayouts or the
+   relevant network.
+5. Generate the affiliate URL.
+6. Add one override in `lib/external-links.ts`.
+7. Confirm the hotel profile renders the managed CTA with `rel="sponsored"`.
+8. Update the audit table below with the evidence and confirmation date.
+
+Do not:
+
+- Add hotel affiliate links from search-result snippets alone.
+- Add a Booking.com, Trip.com, Expedia, or Hotels.com affiliate URL while that
+  program is declined in Travelpayouts.
+- Promote a Japanese booking reference as BSJ booking support.
+- Let affiliate availability decide whether a hotel should appear on BSJ.
+- Hard-code affiliate URLs inside page components.
+
+Record each verified affiliate addition using this format:
+
+| Stable key | Hotel | Provider | Normal listing URL | Affiliate URL | Exact-match evidence | Confirmed date | Notes |
+| --- | --- | --- | --- | --- | --- | --- | --- |
+| `example-key` | Example Hotel | Klook | `https://...` | `https://...` | Name, address, city, and room/listing context matched. | YYYY-MM-DD JST | Added to `lib/external-links.ts`. |
+
 ## Current Travelpayouts Status
 
 Checked under the Travelpayouts project `Bespokestayjapan`.

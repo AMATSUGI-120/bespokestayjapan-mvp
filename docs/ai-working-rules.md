@@ -111,6 +111,27 @@ Prefer useful content even when a product teaser is present.
 - Treat legacy `liteapi_id` as compatibility data, not the future model.
 - Do not assume hotel photos are available or licensed for display.
 
+## Hotel Affiliate Link Rules
+
+Before adding or changing hotel affiliate links:
+
+- Read `docs/booking-support-policy.md`.
+- Read `docs/hotel-external-link-audit.md`.
+- Do not add affiliate links from hotel-name matches alone.
+- Confirm exact property match by address, city, facility name, listing context,
+  and room/property details where available.
+- Only use Travelpayouts hotel links for approved and working programs.
+- While Booking.com, Trip.com, Expedia, and Hotels.com are declined in
+  Travelpayouts, keep their URLs as normal reference links only.
+- For Klook hotel links, verify the exact listing in Klook / Travelpayouts,
+  generate the affiliate URL, then add one override at a time in
+  `lib/external-links.ts`.
+- Do not hard-code hotel affiliate URLs inside page components.
+- After adding or changing a hotel affiliate link, update
+  `docs/hotel-external-link-audit.md` with evidence and date.
+- Use `rel="sponsored"` for affiliate links and keep CTA wording neutral, such
+  as "Check booking options".
+
 ## Token-Saving Rules
 
 - Use `rg`, `rg --files`, and narrow file reads.
