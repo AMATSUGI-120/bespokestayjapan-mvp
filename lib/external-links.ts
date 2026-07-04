@@ -8,6 +8,7 @@ export type ExternalLinkProvider =
   | 'klook'
   | 'rakuten'
   | 'jalan'
+  | 'ikyu'
   | 'google_maps'
   | 'source';
 
@@ -57,6 +58,7 @@ function getExternalLinkProvider(url: string): ExternalLinkProvider {
   if (hostname.includes('klook.com')) return 'klook';
   if (hostname.includes('travel.rakuten.')) return 'rakuten';
   if (hostname.includes('jalan.net')) return 'jalan';
+  if (hostname.includes('ikyu.com')) return 'ikyu';
   if (hostname.includes('google.') || hostname.includes('goo.gl')) return 'google_maps';
 
   return 'official';
@@ -74,6 +76,7 @@ function getExternalLinkLabel(provider: ExternalLinkProvider, isAffiliate: boole
     case 'klook':
     case 'rakuten':
     case 'jalan':
+    case 'ikyu':
       return 'Check booking options';
     case 'google_maps':
       return 'Open map listing';

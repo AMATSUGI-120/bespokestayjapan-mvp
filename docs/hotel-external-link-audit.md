@@ -51,6 +51,25 @@ Source: read-only Supabase query on `hotels` with `is_published = true`.
 | --- | --- | --- | --- | --- |
 | 3 | Riverside Arashiyama | Klook | `https://klook.tpk.mx/ZFwA8IjQ` | Chrome displayed Klook exact hotel page with title `Riverside Arashiyama in Kyoto`, address `10 Nakaoshitacho (Nishikyo-ku)`, and room list. |
 
+## Japanese Booking References
+
+Japanese booking/reference links are shown separately on hotel profile pages
+when detected in `source_urls`.
+
+Current detected providers:
+
+| Provider | Detected count | Notes |
+| --- | ---: | --- |
+| Rakuten Travel | 2 | Use as Japanese booking reference, not as BSJ reservation support. |
+| Jalan | 0 | Add when future source data includes exact listings. |
+| Ikyu | 8 | Use as Japanese booking reference; some URLs may need manual re-check. |
+
+User-facing position:
+
+- These links may contain useful room, plan, or Japanese listing details.
+- BSJ does not book on behalf of users.
+- Users should treat them as references before making their own booking decision.
+
 ## Notes
 
 - HTTP status `202` on Booking.com was treated as reachable, but Booking.com is

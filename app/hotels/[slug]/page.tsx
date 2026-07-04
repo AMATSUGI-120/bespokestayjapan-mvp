@@ -171,6 +171,34 @@ function parseSources(sourceUrls: string | null): string[] {
     .filter((url) => url.length > 0);
 }
 
+function getJapaneseBookingReference(source: string): { href: string; label: string } | null {
+  try {
+    const hostname = new URL(source).hostname.replace(/^www\./, '').toLowerCase();
+
+    if (hostname.includes('travel.rakuten.')) {
+      return { href: source, label: 'Rakuten Travel reference' };
+    }
+    if (hostname.includes('jalan.net')) {
+      return { href: source, label: 'Jalan reference' };
+    }
+    if (hostname.includes('ikyu.com')) {
+      return { href: source, label: 'Ikyu reference' };
+    }
+  } catch {
+    return null;
+  }
+
+  return null;
+}
+
+function getJapaneseBookingReferences(sources: string[]): Array<{ href: string; label: string }> {
+  const references = sources
+    .map(getJapaneseBookingReference)
+    .filter((reference): reference is { href: string; label: string } => reference !== null);
+
+  return Array.from(new Map(references.map((reference) => [reference.href, reference])).values());
+}
+
 async function getStayBySlug(slug: string): Promise<StayDetail | null> {
   const { data, error } = await supabase
     .from('hotels')
@@ -261,6 +289,7 @@ export default async function HotelProfilePage({ params }: PageProps) {
   const tags = buildTags(normalizedTags);
   const region = buildRegion(stay);
   const sources = parseSources(stay.source_urls);
+  const japaneseBookingReferences = getJapaneseBookingReferences(sources);
   const shortDescription = cleanText(stay.short_description);
   const bestFor = cleanText(stay.best_for);
   const cautionNote = cleanText(stay.caution_notes);
@@ -471,6 +500,32 @@ export default async function HotelProfilePage({ params }: PageProps) {
                         >
                           {guide.label}
                         </Link>
+                      ))}
+                    </div>
+                  </div>
+                ) : null}
+
+                {japaneseBookingReferences.length > 0 ? (
+                  <div className="mt-8 border-t border-[var(--bsj-border)] pt-6">
+                    <p className="text-[11px] font-semibold uppercase tracking-[0.14em] text-[var(--bsj-text-light)]">
+                      Japanese booking references
+                    </p>
+                    <p className="mt-3 text-sm leading-[1.75] text-[var(--bsj-text-muted)]">
+                      These Japanese listings may show extra room or plan details. BSJ
+                      does not book on your behalf; use them only as references before
+                      making your own booking decision.
+                    </p>
+                    <div className="mt-4 flex flex-col gap-3">
+                      {japaneseBookingReferences.map((reference) => (
+                        <a
+                          key={reference.href}
+                          href={reference.href}
+                          target="_blank"
+                          rel="noreferrer"
+                          className="border-b border-[var(--bsj-border)] pb-3 text-sm leading-[1.5] text-[var(--bsj-text-muted)] no-underline transition-colors last:border-0 last:pb-0 hover:text-[var(--bsj-text)]"
+                        >
+                          {reference.label}
+                        </a>
                       ))}
                     </div>
                   </div>
