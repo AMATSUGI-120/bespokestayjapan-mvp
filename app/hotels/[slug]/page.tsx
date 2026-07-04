@@ -7,6 +7,7 @@ import SiteFooter from '@/components/SiteFooter';
 import { ConditionTag } from '@/components/ConditionTag';
 import ExternalSourceLink from '@/components/ExternalSourceLink';
 import HotelDetailViewTracker from '@/components/HotelDetailViewTracker';
+import HotelMapCard from '@/components/HotelMapCard';
 import { guidePages, type GuideLink } from '@/lib/guide-content';
 import { supabase } from '@/lib/supabase';
 import { formatCategoryTagLabel, getCategoryTagHref, normalizeCategoryTags } from '@/lib/category-tags';
@@ -456,6 +457,11 @@ export default async function HotelProfilePage({ params }: PageProps) {
                   sourceUrl={primarySourceUrl}
                   hotelId={hotelId}
                   className="mt-5"
+                />
+
+                <HotelMapCard
+                  hotelName={title}
+                  region={region}
                 />
 
                 {relatedProduct ? (
