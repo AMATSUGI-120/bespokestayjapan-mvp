@@ -776,4 +776,119 @@ Thank you.`,
       },
     ],
   },
+  'japan-rail-pass-guide': {
+    path: '/japan-rail-pass-guide',
+    eyebrow: 'Rail planning',
+    title: 'Japan Rail Pass Guide',
+    description:
+      'A practical guide to deciding whether the Japan Rail Pass fits your itinerary, with notes on eligibility, routes, Nozomi and Mizuho trains, and hotel planning.',
+    intro: [
+      'The Japan Rail Pass can be useful for some visitors, but it is no longer an automatic purchase for every Japan trip. After the price changes in recent years, the best answer depends on your exact route, travel pace, and how much flexibility you need.',
+      'Use this guide before buying a pass, especially if your trip is mostly one region, mostly city travel, or includes luggage-heavy transfers.',
+      'BSJ looks at rail passes from the stay-planning side: where you sleep, how often you move hotels, and whether your route is simple enough to make the pass worth the cost.',
+    ],
+    productKey: 'japan-stay-planning-kits',
+    sections: [
+      {
+        title: 'Start with your actual route',
+        body: [
+          'A rail pass should be checked against the route you will actually take, not against a dream itinerary. Write down your long-distance travel days first: airport transfer, Tokyo to Kyoto or Osaka, side trips, and the final return route.',
+          'If your plan is mostly Tokyo, Kyoto, Osaka, and local transit, a national JR Pass may not be the best fit. If your trip crosses multiple regions in a short period, it becomes more worth checking carefully.',
+        ],
+      },
+      {
+        title: 'Who can use it',
+        bullets: [
+          'Foreign tourists entering Japan from overseas under Temporary Visitor status are the main eligible users.',
+          'JR checks eligibility when you pick up or exchange the pass, so passport status matters even if you already purchased online or have an exchange order.',
+          'Foreign residents in Japan generally should not assume they can use the national Japan Rail Pass.',
+          'Japanese nationals living overseas have separate documentation rules and should confirm the official requirements before purchase.',
+        ],
+      },
+      {
+        title: 'Know the price dates',
+        body: [
+          'The official price table currently shows national pass options for 7, 14, and 21 consecutive days, with ordinary and Green Car versions.',
+          'For purchases at overseas JR-designated agencies, the official site lists higher prices for purchases made on or after October 1, 2026. If your travel date is near a price-change period, check the purchase date and official price table before deciding.',
+        ],
+      },
+      {
+        title: 'Nozomi and Mizuho need extra care',
+        body: [
+          'The fastest Nozomi and Mizuho Shinkansen services are not simply included like many other JR trains. JR Pass holders need a special additional ticket for those trains, purchased before boarding, and conditions apply.',
+          'For many travelers, using Hikari, Sakura, Kodama, or Tsubame trains may be simpler. But if speed, frequency, or a specific connection matters, factor the extra Nozomi or Mizuho ticket into your plan.',
+        ],
+      },
+      {
+        title: 'When a pass often makes less sense',
+        bullets: [
+          'You are staying mostly in one city or one region.',
+          'Your long-distance route is only one way, such as Tokyo to Kyoto with no return or major side trip.',
+          'You prefer slower stays with fewer hotel changes.',
+          'You plan to use many private railways, subways, buses, or non-JR routes.',
+          'Your luggage makes frequent same-day transfers stressful.',
+        ],
+      },
+      {
+        title: 'When it is worth checking seriously',
+        bullets: [
+          'You have several long-distance JR rides within 7, 14, or 21 consecutive days.',
+          'You want flexibility to change long-distance plans without buying separate tickets each time.',
+          'Your route connects multiple regions, such as Tokyo, Kansai, Hiroshima, Kyushu, Hokuriku, or Tohoku.',
+          'You are comfortable planning around JR lines and pass conditions.',
+        ],
+      },
+      {
+        title: 'Stay planning angle',
+        body: [
+          'A rail pass can encourage travelers to move too often. Before adding another city because the train feels free, check whether the extra hotel change, luggage movement, and station transfer actually improve the trip.',
+          'For families, travelers with large bags, and first-time visitors, fewer bases can be calmer. A pass is only useful if the route still feels good on the ground.',
+        ],
+      },
+      {
+        title: 'A simple decision checklist',
+        bullets: [
+          'Confirm you are eligible before purchase.',
+          'Price your actual long-distance rides against the current official pass price.',
+          'Check whether regional passes fit better than the national pass.',
+          'Check whether your desired trains are covered or require extra tickets.',
+          'Plan where you will activate the pass and which consecutive days matter most.',
+          'Leave room for luggage delivery or simpler hotel bases if the route feels too rushed.',
+        ],
+      },
+    ],
+    relatedStays: [
+      { href: '/stays/luggage-friendly', label: 'Luggage-friendly stays' },
+      { href: '/stays/access-friendly', label: 'Access-friendly stays' },
+      { href: '/japan-luggage-delivery-guide', label: 'Japan luggage delivery guide' },
+      { href: '/shinkansen-oversized-luggage-guide', label: 'Shinkansen oversized luggage guide' },
+    ],
+    serviceLinks: [
+      affiliateServiceLinks.radicalStorageJapan,
+      affiliateServiceLinks.kiwitaxiJapan,
+      affiliateServiceLinks.airaloJapan,
+    ],
+    sourceLinks: [
+      {
+        href: 'https://japanrailpass.net/en/',
+        label: 'JAPAN RAIL PASS official site',
+        external: true,
+      },
+      {
+        href: 'https://japanrailpass.net/en/purchase/price/',
+        label: 'JAPAN RAIL PASS: Types and prices',
+        external: true,
+      },
+      {
+        href: 'https://japanrailpass.net/en/about_jrp/riyou/',
+        label: 'JAPAN RAIL PASS: Eligibility for use',
+        external: true,
+      },
+      {
+        href: 'https://japanrailpass.net/en/use/special-ticket/',
+        label: 'JAPAN RAIL PASS: Nozomi and Mizuho special ticket',
+        external: true,
+      },
+    ],
+  },
 };

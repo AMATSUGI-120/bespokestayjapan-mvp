@@ -21,6 +21,7 @@ const guideCards = [
   guidePages['ryokan-stay-guide'],
   guidePages['japan-ic-card-guide'],
   guidePages['japan-tax-free-shopping-guide'],
+  guidePages['japan-rail-pass-guide'],
 ];
 
 export default function GuidesPage() {
