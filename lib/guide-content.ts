@@ -1001,4 +1001,114 @@ Thank you.`,
       },
     ],
   },
+  'japan-shrine-temple-etiquette-guide': {
+    path: '/japan-shrine-temple-etiquette-guide',
+    eyebrow: 'Quiet visits',
+    title: 'Japan Shrine and Temple Etiquette Guide',
+    description:
+      'A practical guide to visiting shrines and temples in Japan with calm manners around prayer, photography, goshuin, shoes, and quiet spaces.',
+    intro: [
+      'Shrines and temples are some of the most memorable places to visit in Japan, but they are not only sightseeing spots. Many are active religious spaces, local gathering places, and quiet places for prayer or reflection.',
+      'You do not need to perform every gesture perfectly. The important thing is to move calmly, read signs, respect photo restrictions, and avoid treating prayer areas like a stage set.',
+      'Use this as a gentle pre-visit guide before visiting popular places in Kyoto, Nara, Tokyo, Miyajima, Nikko, Koyasan, or smaller neighborhood shrines and temples.',
+    ],
+    productKey: 'japan-stay-planning-kits',
+    sections: [
+      {
+        title: 'Shrine or temple: what is the difference?',
+        body: [
+          'A shrine is usually Shinto and often has a torii gate. A temple is Buddhist and may have temple gates, incense, Buddhist statues, pagodas, or halls where shoes are removed.',
+          'In everyday travel, the exact distinction is less important than reading the place carefully. Some sites have both Shinto and Buddhist elements nearby, and each place may have its own rules.',
+        ],
+      },
+      {
+        title: 'A calm visitor mindset',
+        bullets: [
+          'Walk slowly and keep your voice low, especially near prayer halls.',
+          'Do not block paths, gates, stairs, offering boxes, or photo spots.',
+          'Follow signs even if other visitors are ignoring them.',
+          'Avoid climbing, sitting, or leaning on sacred objects, fences, lanterns, statues, or old woodwork.',
+          'If a ceremony or prayer is happening, give people space and do not film closely.',
+        ],
+      },
+      {
+        title: 'Basic shrine prayer flow',
+        body: [
+          'At many shrines, visitors purify their hands and mouth at the water basin before approaching the main prayer area. A common prayer pattern is two deep bows, two claps, and one deep bow.',
+          'There are exceptions. Some shrines have different customs, and some visitors simply bow quietly. If you are unsure, a respectful bow and quiet behavior are enough.',
+        ],
+      },
+      {
+        title: 'Temizu: the water basin',
+        bullets: [
+          'Use the ladle to rinse your left hand, then your right hand.',
+          'Pour water into your cupped hand to rinse your mouth; do not touch the ladle directly to your mouth.',
+          'Rinse your left hand again if following the full sequence.',
+          'Tilt the ladle so the remaining water cleans the handle.',
+          'If the basin has signs saying not to use it, follow the signs.',
+        ],
+      },
+      {
+        title: 'Photography rules matter',
+        body: [
+          'Photography is often allowed in outer grounds but restricted near prayer areas, inside halls, around Buddhist statues, or during ceremonies. At some famous sites, seasonal crowding can also create stricter photo rules.',
+          'If you see a no-photo sign, put the camera away. If you are unsure, avoid photographing the altar, worshippers, priests, monks, ceremonies, or the inside of halls.',
+        ],
+      },
+      {
+        title: 'Shoes, halls, and indoor spaces',
+        body: [
+          'Many temple halls, traditional buildings, and some shrine-related buildings require shoes to be removed. Look for shoe shelves, plastic bags, signs, or other visitors changing footwear.',
+          'Wear socks you are comfortable being seen in, and avoid stepping on tatami, polished wood, or sacred indoor areas with outdoor shoes.',
+        ],
+      },
+      {
+        title: 'Goshuin and amulets',
+        body: [
+          'Goshuin are shrine or temple seals written in a special book, usually for a fee. They are not just souvenir stamps, so hand over the book politely and avoid asking for unrelated notebooks or loose scraps unless the site offers a paper version.',
+          'Omamori amulets and omikuji fortunes are part of the visit for many people. Buy them quietly, keep lines moving, and follow local instructions for tying or returning old items.',
+        ],
+      },
+      {
+        title: 'Food, trash, and crowded seasons',
+        bullets: [
+          'Eat only where food is clearly allowed.',
+          'Carry your trash until you find a bin or return to your hotel.',
+          'During cherry blossom, autumn foliage, New Year, and festival periods, move with the flow and avoid stopping suddenly.',
+          'Keep tripods, selfie sticks, and large camera setups away from narrow paths unless explicitly allowed.',
+          'If the site feels crowded, a quieter nearby shrine or temple may offer a better visit.',
+        ],
+      },
+      {
+        title: 'Stay planning angle',
+        body: [
+          'If shrines and temples are a major part of your trip, staying nearby can make mornings calmer. Early visits are often quieter, cooler, and better for respectful photography in allowed areas.',
+          'For Kyoto, Nara, Koyasan, or pilgrimage-style routes, consider luggage delivery, easy station access, and whether your stay has early breakfast or flexible check-out.',
+        ],
+      },
+    ],
+    relatedStays: [
+      { href: '/ryokan-stay-guide', label: 'Ryokan stay guide' },
+      { href: '/japan-ic-card-guide', label: 'Japan IC card guide' },
+      { href: '/japan-luggage-delivery-guide', label: 'Japan luggage delivery guide' },
+      { href: '/stays/luggage-friendly', label: 'Luggage-friendly stays' },
+    ],
+    serviceLinks: [
+      affiliateServiceLinks.klookJapanActivities,
+      affiliateServiceLinks.radicalStorageJapan,
+      affiliateServiceLinks.airaloJapan,
+    ],
+    sourceLinks: [
+      {
+        href: 'https://www.isejingu.or.jp/en/pray/index.html',
+        label: 'Ise Jingu: Basic manners and etiquette',
+        external: true,
+      },
+      {
+        href: 'https://www.isejingu.or.jp/en/ritual/index.html',
+        label: 'Ise Jingu: Rituals and ceremonies',
+        external: true,
+      },
+    ],
+  },
 };
