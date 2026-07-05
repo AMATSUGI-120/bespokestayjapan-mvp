@@ -2,6 +2,7 @@ import type { Metadata } from 'next';
 import SiteNav from '@/components/SiteNav';
 import SiteFooter from '@/components/SiteFooter';
 import { StayRegionGroups } from '@/components/StayRegionGroups';
+import Link from 'next/link';
 import { supabase } from '@/lib/supabase';
 import {
   formatCategoryTagLabel,
@@ -15,6 +16,11 @@ export interface StayCategoryConfig {
   description: string;
   tags: string[];
   path?: string;
+  planningNotes?: string[];
+  guideLinks?: Array<{
+    href: string;
+    label: string;
+  }>;
 }
 
 interface CategoryStay {
@@ -118,6 +124,48 @@ export async function CategoryStayPage({
                 </span>
               ))}
             </div>
+
+            {(config.planningNotes?.length || config.guideLinks?.length) ? (
+              <div className="mt-9 grid gap-px overflow-hidden border border-[var(--bsj-border)] bg-[var(--bsj-border)] md:grid-cols-[minmax(0,1.15fr)_minmax(260px,0.85fr)]">
+                {config.planningNotes?.length ? (
+                  <div className="bg-[var(--bsj-bg-card)] p-5 md:p-6">
+                    <p className="text-[11px] font-semibold uppercase tracking-[0.14em] text-[var(--bsj-text-light)]">
+                      Before you compare
+                    </p>
+                    <ul className="mt-4 space-y-3">
+                      {config.planningNotes.map((note) => (
+                        <li
+                          key={note}
+                          className="flex gap-3 text-[13px] leading-[1.7] text-[var(--bsj-text-muted)]"
+                        >
+                          <span className="mt-[0.75em] h-px w-5 shrink-0 bg-[var(--bsj-accent)]" />
+                          <span>{note}</span>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                ) : null}
+
+                {config.guideLinks?.length ? (
+                  <div className="bg-[var(--bsj-bg-card)] p-5 md:p-6">
+                    <p className="text-[11px] font-semibold uppercase tracking-[0.14em] text-[var(--bsj-text-light)]">
+                      Related guides
+                    </p>
+                    <div className="mt-4 flex flex-col gap-3">
+                      {config.guideLinks.map((guide) => (
+                        <Link
+                          key={guide.href}
+                          href={guide.href}
+                          className="border-b border-[var(--bsj-border)] pb-3 text-[13px] leading-[1.5] text-[var(--bsj-text)] no-underline transition-colors last:border-0 last:pb-0 hover:text-[var(--bsj-primary-hover)] hover:underline"
+                        >
+                          {guide.label}
+                        </Link>
+                      ))}
+                    </div>
+                  </div>
+                ) : null}
+              </div>
+            ) : null}
           </div>
         </section>
 
