@@ -1453,4 +1453,135 @@ Thank you.`,
       },
     ],
   },
+  'japan-train-etiquette-guide': {
+    path: '/japan-train-etiquette-guide',
+    eyebrow: 'Transport manners',
+    title: 'Japan Train Etiquette and Transfer Guide',
+    description:
+      'A practical guide to using trains in Japan with less stress: quiet cars, queues, priority seats, luggage, transfers, IC cards, and rush-hour planning.',
+    intro: [
+      'Japan’s train system is efficient, but it can feel intense when you first arrive: gates, platforms, line colors, crowds, luggage, and announcements all happen quickly.',
+      'The good news is that most train etiquette is practical. Queue where the floor markings tell you, keep noise low, avoid blocking movement, and prepare before you reach the gate.',
+      'This guide is for everyday train use: city subways, JR lines, airport trains, Shinkansen transfers, and the station-to-hotel movement that often decides whether a travel day feels smooth or exhausting.',
+    ],
+    productKey: 'japan-luggage-free-travel-kit',
+    sections: [
+      {
+        title: 'Before you enter the gate',
+        body: [
+          'Have your IC card, ticket, or QR code ready before you reach the ticket gate. Stopping directly in front of the gate to search your bag can block a fast-moving line.',
+          'If you are unsure of the fare, route, or platform, step aside first. Japanese stations often have wide areas near maps, ticket machines, and information boards where you can pause without blocking commuters.',
+        ],
+      },
+      {
+        title: 'Platform queues',
+        bullets: [
+          'Stand behind the platform markings and queue where the train doors will open.',
+          'Let passengers get off before boarding.',
+          'Do not stand in the door area after boarding if people need to move behind you.',
+          'Move into the car when possible, especially during rush hour.',
+          'Keep large bags close and away from the platform edge.',
+        ],
+      },
+      {
+        title: 'Inside the train',
+        body: [
+          'Most city trains are quiet compared with many countries. Talking softly is usually fine, but phone calls, speakerphone, loud videos, and noisy group conversations stand out quickly.',
+          'Backpacks are often worn in front or held low during crowded periods. This makes more space and helps avoid hitting people when the train moves.',
+        ],
+      },
+      {
+        title: 'Priority seats and women-only cars',
+        body: [
+          'Priority seats are intended for passengers who need them, such as elderly people, pregnant passengers, people with disabilities, injured passengers, and people with infants. If you sit there, be ready to offer the seat when someone may need it.',
+          'Some lines have women-only cars during specified weekday times. They are usually marked on platforms and train cars. Check the sign rather than guessing from the car number.',
+        ],
+      },
+      {
+        title: 'Escalators, elevators, and stairs',
+        body: [
+          'Escalator standing customs can vary by region, and some stations ask riders not to walk on escalators for safety. Follow the local signs and avoid rushing around people with children, luggage, or mobility needs.',
+          'Use elevators thoughtfully. If you can use stairs or escalators comfortably, leave elevator space for wheelchair users, strollers, elderly passengers, and travelers with difficult luggage when the station is crowded.',
+        ],
+      },
+      {
+        title: 'Luggage changes everything',
+        bullets: [
+          'Avoid rush hour with large suitcases when possible.',
+          'Check whether your Shinkansen luggage requires an oversized baggage reservation.',
+          'Use luggage delivery when moving between cities with one-night stops or difficult transfers.',
+          'Choose hotels with simple station access when traveling with large bags.',
+          'Keep bags out of doorways, priority areas, and narrow platform paths.',
+        ],
+      },
+      {
+        title: 'IC cards, paper tickets, and transfers',
+        body: [
+          'IC cards such as Suica, PASMO, and ICOCA are useful for many local trains, buses, convenience stores, lockers, and vending machines. They do not replace every long-distance ticket or reserved-seat requirement.',
+          'For transfers between JR, private railways, subways, airport railways, and Shinkansen gates, pay attention to separate ticket gates. A transfer inside one station may still involve leaving one operator and entering another.',
+        ],
+      },
+      {
+        title: 'Rush hour planning',
+        body: [
+          'Morning and evening commuter periods can be difficult with luggage, children, or jet lag. If your schedule is flexible, shifting a transfer by even 30 to 60 minutes can make a travel day much calmer.',
+          'For arrival days, a slightly easier hotel location can be worth more than a cheaper room. The first station transfer with bags often sets the tone for the trip.',
+        ],
+      },
+      {
+        title: 'Common transfer mistakes',
+        bullets: [
+          'Following only the station name and not the line or operator.',
+          'Entering the wrong ticket gate for the Shinkansen or private railway.',
+          'Choosing the fastest route even when it has stairs or several transfers.',
+          'Assuming every elevator route is quick or easy to find.',
+          'Forgetting that local, rapid, express, and limited express trains may stop at different stations.',
+        ],
+      },
+      {
+        title: 'A simple station-day checklist',
+        bullets: [
+          'Charge your phone and keep route screenshots available offline.',
+          'Prepare your IC card or ticket before the gate.',
+          'Check platform number, direction, train type, and final destination.',
+          'Avoid rush hour if carrying large luggage.',
+          'Step aside before checking maps or messages.',
+          'Choose the route you can actually manage, not only the fastest route on paper.',
+        ],
+      },
+    ],
+    relatedStays: [
+      { href: '/japan-ic-card-guide', label: 'Japan IC card guide' },
+      { href: '/japan-rail-pass-guide', label: 'Japan Rail Pass guide' },
+      { href: '/shinkansen-oversized-luggage-guide', label: 'Shinkansen oversized luggage guide' },
+      { href: '/stays/luggage-friendly', label: 'Luggage-friendly stays' },
+    ],
+    serviceLinks: [
+      affiliateServiceLinks.radicalStorageJapan,
+      affiliateServiceLinks.kiwitaxiJapan,
+      affiliateServiceLinks.airaloJapan,
+    ],
+    sourceLinks: [
+      {
+        href: 'https://www.jreast.co.jp/multi/en/welcomesuica/welcomesuica.html',
+        label: 'JR East: Welcome Suica',
+        external: true,
+      },
+      {
+        href: 'https://www.westjr.co.jp/global/en/howto/icoca/',
+        label: 'JR West: ICOCA',
+        external: true,
+      },
+      {
+        href: 'https://global.jr-central.co.jp/en/info/oversized-baggage/',
+        label: 'JR Central: Oversized baggage information',
+        external: true,
+      },
+      {
+        href: 'https://japanrailpass.net/en/',
+        label: 'JAPAN RAIL PASS official site',
+        external: true,
+      },
+    ],
+  },
 };
