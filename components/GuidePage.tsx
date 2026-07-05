@@ -320,7 +320,7 @@ export function GuidePage({ guide }: { guide: GuidePageContent }) {
               {guide.relatedStays?.length ? (
                 <section className="border border-[var(--bsj-border)] bg-[var(--bsj-bg-card)] p-6">
                   <h2 className="text-[13px] font-semibold uppercase tracking-[0.14em] text-[var(--bsj-text)]">
-                    Related stay profiles
+                    Related guides and stay profiles
                   </h2>
                   <div className="mt-5 flex flex-col gap-3">
                     {guide.relatedStays.map((link) => (
