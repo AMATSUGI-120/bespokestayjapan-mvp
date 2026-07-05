@@ -1500,8 +1500,8 @@ Thank you.`,
       {
         title: 'Escalators, elevators, and stairs',
         body: [
-          'Escalator standing customs can vary by region, and some stations ask riders not to walk on escalators for safety. Follow the local signs and avoid rushing around people with children, luggage, or mobility needs.',
-          'As a small local note, many people stand on the left in the Tokyo area, while standing on the right is more common around Osaka. The border is not something travelers need to memorize, and station safety signs matter more than local habit.',
+          'Escalator standing customs can vary by region. Many people stand on the left in the Tokyo area, while standing on the right is more common around Osaka, but this is a local habit rather than a rule travelers need to memorize.',
+          'Some stations, department stores, and public facilities ask people not to walk on escalators for safety, but the signs may be easy to miss or written mainly in Japanese. If you are carrying luggage, traveling with children, or unsure of the local flow, the safer choice is to stand, hold the handrail, and avoid rushing around people.',
           'Use elevators thoughtfully. If you can use stairs or escalators comfortably, leave elevator space for wheelchair users, strollers, elderly passengers, and travelers with difficult luggage when the station is crowded.',
         ],
       },
