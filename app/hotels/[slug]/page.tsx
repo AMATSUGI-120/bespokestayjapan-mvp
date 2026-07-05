@@ -278,6 +278,25 @@ function TextSection({
   );
 }
 
+function ProfileSummaryCard({
+  title,
+  children,
+}: {
+  title: string;
+  children: ReactNode;
+}) {
+  return (
+    <div className="bg-[var(--bsj-bg-card)] p-5 md:p-6">
+      <p className="text-[10px] font-semibold uppercase tracking-[0.14em] text-[var(--bsj-text-light)]">
+        {title}
+      </p>
+      <div className="mt-3 text-[13px] leading-[1.75] text-[var(--bsj-text-muted)]">
+        {children}
+      </div>
+    </div>
+  );
+}
+
 export default async function HotelProfilePage({ params }: PageProps) {
   const { slug } = await params;
   const stay = await getStayBySlug(slug);
@@ -301,6 +320,31 @@ export default async function HotelProfilePage({ params }: PageProps) {
   const relatedProduct = pickRelatedProduct(normalizedTags);
   const relatedGuides = getRelatedGuides(normalizedTags);
   const primarySourceUrl = stay.booking_url;
+  const topSummaryItems = [
+    bestFor
+      ? {
+          title: 'Best for',
+          content: bestFor,
+        }
+      : null,
+    cautionSummary
+      ? {
+          title: 'Good to know',
+          content: cautionSummary,
+        }
+      : null,
+    verifiedNote
+      ? {
+          title: 'Verified notes',
+          content: verifiedNote,
+        }
+      : null,
+    {
+      title: 'Before you book',
+      content:
+        'Use this profile as a research note. Confirm current policies, fees, bath rules, meal support, and cancellation terms directly before booking.',
+    },
+  ].filter((item): item is { title: string; content: string } => item !== null);
 
   return (
     <>
@@ -398,6 +442,33 @@ export default async function HotelProfilePage({ params }: PageProps) {
                 </dl>
               </aside>
             </div>
+
+            <div className="mt-10 grid gap-px overflow-hidden border border-[var(--bsj-border)] bg-[var(--bsj-border)] md:grid-cols-2 lg:grid-cols-4">
+              {topSummaryItems.map((item) => (
+                <ProfileSummaryCard key={item.title} title={item.title}>
+                  <p>{item.content}</p>
+                </ProfileSummaryCard>
+              ))}
+            </div>
+
+            {relatedGuides.length > 0 ? (
+              <div className="mt-8 border-t border-[var(--bsj-border)] pt-6">
+                <p className="text-[11px] font-semibold uppercase tracking-[0.14em] text-[var(--bsj-text-light)]">
+                  Plan this stay with context
+                </p>
+                <div className="mt-4 flex flex-wrap gap-3">
+                  {relatedGuides.map((guide) => (
+                    <Link
+                      key={guide.href}
+                      href={guide.href}
+                      className="inline-flex min-h-10 items-center border border-[var(--bsj-border)] bg-[var(--bsj-bg-card)] px-4 py-2 text-[12px] font-semibold uppercase tracking-[0.08em] text-[var(--bsj-text)] no-underline transition-colors hover:border-[var(--bsj-primary-hover)] hover:bg-[var(--bsj-primary-hover)] hover:text-white"
+                    >
+                      {guide.label}
+                    </Link>
+                  ))}
+                </div>
+              </div>
+            ) : null}
           </div>
         </section>
 
