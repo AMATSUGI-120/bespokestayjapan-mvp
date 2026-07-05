@@ -1111,4 +1111,117 @@ Thank you.`,
       },
     ],
   },
+  'japan-photography-etiquette-guide': {
+    path: '/japan-photography-etiquette-guide',
+    eyebrow: 'Photo manners',
+    title: 'Japan Photography Etiquette Guide',
+    description:
+      'A practical guide to taking photos in Japan without blocking streets, entering private spaces, or disturbing residents, worshippers, performers, and local life.',
+    intro: [
+      'Japan is easy to photograph badly and beautifully at the same time. A quiet alley, a temple hall, a small shopfront, or a person in traditional dress can look like a perfect scene, but it may also be someone’s workplace, home, prayer space, or commute.',
+      'Good photography manners in Japan are mostly about awareness: read signs, avoid blocking movement, do not enter private areas, and do not treat people as props.',
+      'Use this guide before visiting Kyoto, Tokyo neighborhoods, shrines and temples, markets, trains, festivals, and rural towns where the most interesting photos often happen close to daily life.',
+    ],
+    productKey: 'japan-stay-planning-kits',
+    sections: [
+      {
+        title: 'Start with signs, not assumptions',
+        body: [
+          'Photo rules in Japan are highly place-specific. A shrine may allow photos in the outer grounds but ban them at the prayer area. A temple may allow photos outside but not inside halls. A shop, garden, museum, or private lane may have its own rule.',
+          'If a sign says no photography, no video, no tripod, no entry, or no drones, treat that as the rule even if other tourists are ignoring it.',
+        ],
+      },
+      {
+        title: 'People are not background props',
+        bullets: [
+          'Do not chase, stop, touch, follow, or block geiko, maiko, monks, priests, staff, schoolchildren, or residents for photos.',
+          'Ask before taking close portraits, especially of shop staff, artisans, or people in work settings.',
+          'Avoid photographing children in a way that identifies them.',
+          'If someone looks uncomfortable, lower the camera and move on.',
+          'At ceremonies, keep distance and prioritize the event over the shot.',
+        ],
+      },
+      {
+        title: 'Do not block movement',
+        body: [
+          'A common problem is not the photo itself, but stopping suddenly in a narrow street, station passage, temple stairway, or sidewalk. In busy areas, step aside before composing a shot.',
+          'Tripods, selfie sticks, wide group poses, and repeated takes can quickly become a nuisance in places designed for daily movement. If people are flowing around you, the spot is probably not a good place to stop.',
+        ],
+      },
+      {
+        title: 'Private roads and private property',
+        body: [
+          'Some beautiful alleys, gates, gardens, and lanes are private even if they look open. Kyoto’s Gion area is a clear example where local guidance asks visitors not to enter private property or nearby temples and shrines without permission.',
+          'Do not step into gardens, doorways, stone paths, shrine or temple restricted areas, ryokan entrances, or residential lanes for a better angle unless entry is clearly allowed.',
+        ],
+      },
+      {
+        title: 'Shrines and temples',
+        bullets: [
+          'Avoid photographing the prayer area when signs prohibit it.',
+          'Do not photograph worshippers closely while they pray.',
+          'Inside halls, assume photography is not allowed unless clearly permitted.',
+          'Never climb, lean on, or move objects for a photo.',
+          'During crowded seasons, some temples restrict photography for safety and crowd flow.',
+        ],
+      },
+      {
+        title: 'Restaurants, shops, and markets',
+        body: [
+          'Small restaurants and shops may be fine with food photos but not staff, kitchens, price labels, other customers, or the interior. If in doubt, ask or keep the camera focused only on your own food or purchase.',
+          'In markets, do not touch products for photos unless you are buying or the vendor invites it. Keep bags, elbows, and camera straps away from displays.',
+        ],
+      },
+      {
+        title: 'Transport and stations',
+        bullets: [
+          'Do not use flash near train operators, bus drivers, or platform staff.',
+          'Stay behind safety lines and do not stop in ticket gates, escalator exits, or narrow platform areas.',
+          'Avoid filming passengers closely inside trains.',
+          'Large luggage plus camera gear can block movement quickly, so step away from the flow before taking photos.',
+        ],
+      },
+      {
+        title: 'A simple pre-photo checklist',
+        bullets: [
+          'Am I allowed to stand here?',
+          'Is photography allowed here?',
+          'Am I blocking anyone’s path, work, prayer, or daily life?',
+          'Is a person identifiable, and would they reasonably expect privacy?',
+          'Would this same behavior feel rude if someone did it near my home or workplace?',
+          'Can I take the photo faster, farther back, or from a less crowded spot?',
+        ],
+      },
+      {
+        title: 'Stay planning angle',
+        body: [
+          'If photography is important to your trip, choose stays that make early mornings easier. A hotel near the area you want to photograph can reduce crowd pressure and help you avoid blocking busy daytime routes.',
+          'For Kyoto, Nara, temple towns, and festival routes, luggage-friendly stays can also help. Moving through crowds with suitcases and camera gear is rarely pleasant.',
+        ],
+      },
+    ],
+    relatedStays: [
+      { href: '/japan-shrine-temple-etiquette-guide', label: 'Shrine and temple etiquette guide' },
+      { href: '/ryokan-stay-guide', label: 'Ryokan stay guide' },
+      { href: '/japan-luggage-delivery-guide', label: 'Japan luggage delivery guide' },
+      { href: '/stays/luggage-friendly', label: 'Luggage-friendly stays' },
+    ],
+    serviceLinks: [
+      affiliateServiceLinks.klookJapanActivities,
+      affiliateServiceLinks.radicalStorageJapan,
+      affiliateServiceLinks.airaloJapan,
+    ],
+    sourceLinks: [
+      {
+        href: 'https://kyoto.travel/en/responsible-travel/gion-manner-message-from-southern-gionmachi/',
+        label: 'Kyoto City Official Guide: Gion manners',
+        external: true,
+      },
+      {
+        href: 'https://www.isejingu.or.jp/en/pray/index.html',
+        label: 'Ise Jingu: Basic manners and etiquette',
+        external: true,
+      },
+    ],
+  },
 };
