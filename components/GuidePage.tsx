@@ -37,6 +37,7 @@ function LinkList({ links }: { links: GuideLink[] }) {
 
 export function GuidePage({ guide }: { guide: GuidePageContent }) {
   const product = guide.productKey ? getProduct(guide.productKey) : null;
+  const startItems = guide.sections.slice(0, 5).map((section) => section.title);
 
   return (
     <>
@@ -85,6 +86,36 @@ export function GuidePage({ guide }: { guide: GuidePageContent }) {
                   </p>
                 ))}
               </div>
+
+              <section className="grid gap-px overflow-hidden border-b border-[var(--bsj-border)] bg-[var(--bsj-border)] md:grid-cols-[minmax(0,0.95fr)_minmax(0,1.05fr)]">
+                <div className="bg-[var(--bsj-bg)] p-5 md:p-6">
+                  <p className="text-[11px] font-semibold uppercase tracking-[0.14em] text-[var(--bsj-text-light)]">
+                    Start here
+                  </p>
+                  <p className="mt-3 text-[14px] leading-[1.75] text-[var(--bsj-text-muted)]">
+                    Read this guide as a practical checklist. Start with the points that
+                    affect your route, stay choice, booking decision, or day-of-travel
+                    comfort.
+                  </p>
+                </div>
+
+                <div className="bg-[var(--bsj-bg)] p-5 md:p-6">
+                  <p className="text-[11px] font-semibold uppercase tracking-[0.14em] text-[var(--bsj-text-light)]">
+                    In this guide
+                  </p>
+                  <ul className="mt-3 grid gap-2">
+                    {startItems.map((item) => (
+                      <li
+                        key={item}
+                        className="flex gap-3 text-[13px] leading-[1.6] text-[var(--bsj-text-muted)]"
+                      >
+                        <span className="mt-[0.75em] h-px w-4 shrink-0 bg-[var(--bsj-accent)]" />
+                        <span>{item}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              </section>
 
               <div className="divide-y divide-[var(--bsj-border)]">
                 {guide.sections.map((section) => (
