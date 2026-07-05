@@ -20,6 +20,7 @@ const guideCards = [
   guidePages['dietary-restrictions-japan'],
   guidePages['ryokan-stay-guide'],
   guidePages['japan-ic-card-guide'],
+  guidePages['japan-tax-free-shopping-guide'],
 ];
 
 export default function GuidesPage() {
@@ -79,4 +80,3 @@ export default function GuidesPage() {
     </>
   );
 }
-

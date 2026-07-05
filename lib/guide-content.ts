@@ -678,4 +678,102 @@ Thank you.`,
       },
     ],
   },
+  'japan-tax-free-shopping-guide': {
+    path: '/japan-tax-free-shopping-guide',
+    eyebrow: 'Shopping and departure',
+    title: 'Japan Tax-Free Shopping Guide',
+    description:
+      'A practical guide to tax-free shopping in Japan, what changes with the refund method, and what travelers should check before leaving the country.',
+    intro: [
+      'Tax-free shopping in Japan can be useful, but it is easy to misunderstand. It is not the same as airport duty-free shopping, and the rules depend on your visitor status, the store, the item, and the departure process.',
+      'Japan is shifting the consumption-tax exemption system to a refund-style method from November 1, 2026. Until then, some travelers may see old and new explanations side by side, so it is worth checking the timing of any advice you read.',
+      'Use this as a practical travel checklist, not tax advice. For expensive purchases or unusual situations, check the latest official guidance and the store procedure before relying on a refund.',
+    ],
+    productKey: 'japan-stay-planning-kits',
+    sections: [
+      {
+        title: 'Tax-free is different from duty-free',
+        body: [
+          'Tax-free shopping in city stores usually refers to Japan consumption tax exemption for eligible non-resident visitors buying eligible goods at approved tax-free shops. Airport duty-free shopping is a separate retail setup.',
+          'For travelers, the practical difference is timing. City-store tax-free purchases may involve passport checks, purchase records, packaging rules, and customs confirmation at departure. Airport duty-free shopping usually happens after departure procedures.',
+        ],
+      },
+      {
+        title: 'Who should pay attention',
+        bullets: [
+          'Short-term foreign visitors buying goods to take out of Japan.',
+          'Travelers buying cosmetics, medicine, food, electronics, clothing, bags, or souvenirs in approved tax-free stores.',
+          'Travelers with long itineraries who may not leave Japan soon after shopping.',
+          'Foreign residents and long-stay visitors, because eligibility is not the same as nationality.',
+        ],
+      },
+      {
+        title: 'Before November 2026',
+        body: [
+          'Under the current system, many eligible purchases are sold without consumption tax at the store after the tax-free procedure is completed. Stores may check your passport and create electronic purchase records.',
+          'Consumable goods and general goods have had different handling rules, and some items must not be used in Japan before departure. Store staff may seal certain goods or explain restrictions at the counter.',
+        ],
+      },
+      {
+        title: 'From November 2026: refund method',
+        body: [
+          'From November 1, 2026, Japan plans to shift to a refund method. In practical terms, travelers should expect the flow to feel more like paying first and receiving the tax amount back after the departure-side confirmation process.',
+          'The exact refund method can vary by store or refund operator. Official guidance notes that refund methods may include options such as bank transfer, card-based transfer, app transfer, or cash refund at the departure port, depending on how the seller arranges it.',
+        ],
+      },
+      {
+        title: 'Departure timing matters',
+        bullets: [
+          'Keep your passport and purchase information accessible at the airport or departure port.',
+          'Leave time before departure if your refund or customs confirmation requires extra steps.',
+          'Be ready to show tax-free goods if customs asks to inspect them.',
+          'Do not assume you can pack every tax-free item deep inside checked luggage without checking the departure procedure first.',
+          'If you do not export the goods as required, you may lose the exemption or owe the tax amount.',
+        ],
+      },
+      {
+        title: 'Common mistakes',
+        bullets: [
+          'Thinking every store in Japan can sell tax-free. The store must be approved for the procedure.',
+          'Confusing tax-free shopping with airport duty-free shopping.',
+          'Opening or using restricted consumable goods in Japan before departure.',
+          'Forgetting the departure confirmation step after a busy shopping day.',
+          'Relying on old blog posts that do not mention the November 2026 refund-method change.',
+        ],
+      },
+      {
+        title: 'A simple traveler checklist',
+        bullets: [
+          'Ask whether the store is a tax-free shop before you shop seriously.',
+          'Carry the passport or required entry-status proof used for the procedure.',
+          'Ask whether the purchase is tax-free now or refund-based later.',
+          'Keep receipts, purchase records, and any sealed packaging until departure.',
+          'Plan airport time for customs or refund steps if your trip includes large purchases.',
+          'Check official guidance again before travel, especially for trips after November 1, 2026.',
+        ],
+      },
+    ],
+    serviceLinks: [
+      affiliateServiceLinks.airaloJapan,
+      affiliateServiceLinks.sailyJapan,
+      affiliateServiceLinks.yesimJapan,
+    ],
+    sourceLinks: [
+      {
+        href: 'https://www.mlit.go.jp/kankocho/tax-free/index.html',
+        label: 'Japan Tourism Agency: Japan Tax-free Shop',
+        external: true,
+      },
+      {
+        href: 'https://www.nta.go.jp/publication/pamph/shohi/menzei/201805/format/002.htm',
+        label: 'National Tax Agency: Refund method information',
+        external: true,
+      },
+      {
+        href: 'https://www.mlit.go.jp/kankocho/tax-free/page01_000001_00029.html',
+        label: 'Japan Tourism Agency: Traveler refund-method leaflet',
+        external: true,
+      },
+    ],
+  },
 };
