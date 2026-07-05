@@ -1335,4 +1335,122 @@ Thank you.`,
       },
     ],
   },
+  'japan-restaurant-etiquette-guide': {
+    path: '/japan-restaurant-etiquette-guide',
+    eyebrow: 'Food basics',
+    title: 'Japan Restaurant Etiquette Guide',
+    description:
+      'A practical guide to eating out in Japan, from ordering and chopsticks to tipping, payment, allergies, small restaurants, and quiet dining manners.',
+    intro: [
+      'Eating out in Japan is usually easy once you understand the small practical differences. Many rules are not formal ceremony; they are about keeping the restaurant calm, clean, and easy for staff and other customers.',
+      'This guide is for everyday travel meals: ramen shops, sushi counters, izakaya, cafes, department-store restaurants, ryokan meals, and small local places where English may be limited.',
+      'If you have allergies, halal, vegetarian, vegan, or other dietary needs, treat etiquette as only the first layer. You still need clear ingredient confirmation before relying on a meal.',
+    ],
+    productKey: 'japan-dietary-restriction-travel-kit',
+    sections: [
+      {
+        title: 'Before you enter',
+        body: [
+          'Many restaurants have a waiting line, ticket machine, name sheet, or host who seats customers. Do not sit yourself unless the setup clearly suggests it.',
+          'Small restaurants may have limited seats and a short menu. If there is a long line behind you, decide quickly, keep bags close, and avoid turning the counter into a planning session.',
+        ],
+      },
+      {
+        title: 'Ordering basics',
+        bullets: [
+          'Pointing at a menu item or photo is usually fine if language is limited.',
+          'Some ramen, curry, and casual restaurants use a ticket machine near the entrance.',
+          'At izakaya, each person may be expected to order a drink or food item.',
+          'At omakase or course restaurants, tell the restaurant about allergies or restrictions before booking, not after sitting down.',
+          'Do not assume staff can heavily customize dishes during busy service.',
+        ],
+      },
+      {
+        title: 'Oshibori and water',
+        body: [
+          'Many restaurants provide an oshibori, a wet towel, before the meal. Use it to clean your hands, not your face, neck, table, phone, or spilled food.',
+          'Water or tea may be self-service in casual restaurants. If you see a water station, cups, and a pitcher, it is usually fine to help yourself.',
+        ],
+      },
+      {
+        title: 'Chopstick mistakes to avoid',
+        bullets: [
+          'Do not stick chopsticks upright in rice.',
+          'Do not pass food directly from chopsticks to chopsticks.',
+          'Do not point, wave, tap, or gesture with chopsticks.',
+          'Do not spear food if you can reasonably pick it up.',
+          'Use shared utensils when provided for shared dishes.',
+          'Place chopsticks on the rest or wrapper when not using them.',
+        ],
+      },
+      {
+        title: 'Noise, slurping, and shared space',
+        body: [
+          'Slurping noodles such as ramen, soba, or udon is common, but loud conversation, speakerphone use, and filming other customers are not. The safest approach is to match the room.',
+          'In tiny restaurants, avoid spreading out bags, coats, cameras, and shopping on empty seats unless staff clearly says it is fine.',
+        ],
+      },
+      {
+        title: 'Tipping and payment',
+        body: [
+          'Japan generally does not have a tipping culture for normal restaurants. A polite thank you is usually better than leaving coins on the table. Some tourist-facing places may have tip jars or digital tip options, but tipping is not the default expectation.',
+          'Payment often happens at the register, not at the table. Many counters use a small money tray for cash or cards. If a tray is provided, place payment there instead of handing it directly to staff.',
+        ],
+      },
+      {
+        title: 'Food restrictions need specific questions',
+        body: [
+          'Japanese menus may use ingredients that are hard to spot in English: dashi, bonito, gelatin, pork extract, chicken stock, soy sauce, alcohol, wheat, sesame, or shared frying oil.',
+          'For serious allergies, halal, vegan, vegetarian, or religious restrictions, ask specific questions and keep expectations realistic. A restaurant may be kind but still unable to guarantee cross-contact control.',
+        ],
+      },
+      {
+        title: 'Eating while walking',
+        body: [
+          'Eating while walking is not always forbidden, but it can be awkward in crowded streets, trains, shops, shrine and temple approaches, or residential areas. If you buy street food, eat near the vendor or in a clearly suitable area when possible.',
+          'Japan has fewer public trash bins than many visitors expect. Plan to carry wrappers and bottles until you find the right bin or return to your hotel.',
+        ],
+      },
+      {
+        title: 'Ryokan and hotel meals',
+        body: [
+          'Ryokan meals and hotel course meals can be less flexible than casual restaurants. Dinner time may be fixed, late arrival can be a problem, and dietary changes may need advance notice.',
+          'If the meal is a major reason for the stay, confirm timing, restrictions, and whether room-only plans are available before booking.',
+        ],
+      },
+      {
+        title: 'A simple restaurant checklist',
+        bullets: [
+          'Wait to be seated unless the restaurant is clearly self-service.',
+          'Keep bags compact and avoid blocking narrow aisles.',
+          'Use the oshibori for your hands only.',
+          'Handle chopsticks calmly and avoid funeral-related taboos.',
+          'Pay at the register if staff does not bring the bill to the table.',
+          'For allergies or restrictions, ask before ordering and keep backup options nearby.',
+        ],
+      },
+    ],
+    relatedStays: [
+      { href: '/dietary-restrictions-japan', label: 'Dietary restrictions in Japan' },
+      { href: '/stays/food-friendly', label: 'Food-friendly stays' },
+      { href: '/stays/self-catering', label: 'Self-catering stays' },
+      { href: '/ryokan-stay-guide', label: 'Ryokan stay guide' },
+    ],
+    serviceLinks: [
+      affiliateServiceLinks.klookJapanActivities,
+      affiliateServiceLinks.airaloJapan,
+    ],
+    sourceLinks: [
+      {
+        href: 'https://www.jnto.org.au/experience/cuisine/essential-guide-japanese-dining-etiquette/',
+        label: 'Japan National Tourism Organization Australia: Japanese dining etiquette',
+        external: true,
+      },
+      {
+        href: 'https://www.japan.travel/en/plan/vegetarian-guide/',
+        label: 'Japan National Tourism Organization: Vegetarian guide',
+        external: true,
+      },
+    ],
+  },
 };
