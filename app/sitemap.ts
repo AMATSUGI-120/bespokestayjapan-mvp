@@ -18,6 +18,8 @@ const staticPaths = [
   '/stays/tattoo-friendly',
   '/guides',
   '/free-kansai-tattoo-stay-kit',
+  '/free-japan-phrase-cards',
+  '/japan-confirmation-service',
   ...Object.values(guidePages).map((guide) => guide.path),
 ];
 

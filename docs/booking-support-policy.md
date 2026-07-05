@@ -1,6 +1,6 @@
 # Booking Support Policy
 
-Updated: 2026-07-04 JST
+Updated: 2026-07-06 JST
 
 ## Purpose
 
@@ -72,6 +72,84 @@ Good wording:
 - "Check the official site or OTA before booking."
 - "Japanese booking reference."
 - "This listing may be easier to confirm in Japanese."
+
+## Phrase Cards and Confirmation Support
+
+BSJ may offer phrase cards and Japanese confirmation support as travel
+preparation tools. These products should reduce communication uncertainty, not
+replace the user's own booking decision.
+
+Allowed confirmation support:
+
+- Draft Japanese inquiry messages for the user to send.
+- Send a Japanese email inquiry to a facility when the service scope is clear.
+- Summarize the facility reply in English.
+- Attach or quote the original Japanese reply when appropriate.
+- Label the result as Confirmed, Partially confirmed, Not confirmed, or No
+  reply.
+- Explain caveats, confidence level, response date, and suggested next action.
+- Prepare follow-up questions when the answer is unclear.
+
+Do not promise:
+
+- A positive reply.
+- Availability.
+- Acceptance of tattoos, pets, dietary needs, accessibility needs, or luggage.
+- Allergy-safe, medical-safe, or risk-free outcomes.
+- That one staff reply represents all staff, all dates, or future policy.
+
+Phrase cards should include practical disclaimers where needed, especially for
+allergies, medical issues, tattoos, bathing rules, and facility policies.
+
+## Email and Phone Confirmation
+
+Use email-first confirmation whenever possible.
+
+Email is preferred because:
+
+- The facility reply can be preserved.
+- The original Japanese text can be included in delivery.
+- The confirmation date and exact wording are easier to audit.
+- The information can be structured for future internal reference.
+
+Phone confirmation should be treated as weaker evidence and should usually be an
+add-on, not the default.
+
+If phone confirmation is offered, delivery notes must say something like:
+
+"This is a summary of a phone conversation with the facility. It is not an
+official written confirmation from the facility. Policies may vary by staff
+member, date, or situation. Please reconfirm directly before booking or at
+check-in."
+
+## Restaurant and Activity Support
+
+Restaurant and activity support may become a separate service line from hotel
+support. It can be explored because it is not the same as arranging
+accommodation, but scope must still be controlled carefully.
+
+Allowed restaurant/activity support may include:
+
+- Drafting inquiry messages.
+- Checking dietary restrictions, allergens, menus, age limits, tattoo rules,
+  meeting points, language support, accessibility notes, or cancellation rules.
+- Summarizing replies in English.
+- Helping users understand what they need to confirm before they reserve.
+
+Future reservation assistance for restaurants or activities may be considered
+only after separate review of legal, platform, payment, cancellation, privacy,
+and liability requirements.
+
+If BSJ later offers restaurant or activity reservation help, the page copy and
+forms must clearly state:
+
+- Whether BSJ is only confirming details or also requesting a reservation.
+- Who pays the restaurant, venue, or activity provider.
+- Who is responsible for cancellation, no-show fees, changes, and refunds.
+- That BSJ does not guarantee availability, acceptance, safety, or service
+  quality.
+- That medical, allergy, and accessibility decisions remain the user's
+  responsibility.
 
 ## Japanese-Only Hotel Listings
 
@@ -205,6 +283,22 @@ Do not position the service as:
 
 If a traveler needs someone to complete the booking process for them, route them
 to the hotel, OTA, or a properly registered travel business.
+
+## Confirmation Data Reuse
+
+Confirmation work can create valuable internal knowledge, but customer-specific
+requests must be handled carefully.
+
+Rules:
+
+- Do not publish a customer's request context, personal details, travel dates,
+  or private correspondence as-is.
+- Remove personal information before using a reply as internal reference data.
+- Reconfirm or generalize facility information before turning it into public BSJ
+  content.
+- Store confirmation date, source type, facility name, topic, reply status, and
+  confidence level.
+- Treat old replies as time-sensitive. Policies may change.
 
 ## Copy Checklist
 

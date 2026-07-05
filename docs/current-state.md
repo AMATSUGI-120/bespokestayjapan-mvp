@@ -1,6 +1,6 @@
 # Bespoke Stay Japan - Current State
 
-Updated: 2026-06-28 JST
+Updated: 2026-07-06 JST
 
 ## Project Goal
 
@@ -35,6 +35,9 @@ Main monetization is expected to come later from adjacent travel needs:
 - Private tours and experiences
 - Travel insurance
 - Practical PDF/Sheet/Map kits
+- Free phrase-card lead magnets and paid phrase-card packs
+- Japanese confirmation support for hotels, restaurants, activities, and other
+  practical travel questions
 - Future custom research or planning support
 
 ## Current Stack
@@ -92,6 +95,11 @@ Guide pages already planned or implemented:
 - `/ryokan-stay-guide`
 - `/japan-ic-card-guide`
 
+Lead magnet and service pages:
+- `/free-japan-phrase-cards`
+- `/free-kansai-tattoo-stay-kit`
+- `/japan-confirmation-service`
+
 ## Current Design Direction
 
 Photo-less or photo-optional design is now acceptable and likely preferred.
@@ -131,6 +139,31 @@ Expected contents:
 
 Guide pages should allow soft product teasers, but articles should still be
 useful without purchase.
+
+## Phrase Cards and Confirmation Support
+
+BSJ now has a planned free phrase-card lead magnet:
+
+`Free Japan Phrase Cards`
+
+Positioning:
+- Phone-friendly "show-this-card" Japanese for real travel situations.
+- Covers restaurants, hotels, luggage, trains, taxis, onsen, and basic help.
+- Used as a free offer before beehiiv delivery is connected.
+- Phrase cards reduce communication uncertainty but do not guarantee policies,
+  allergy safety, medical outcomes, or facility acceptance.
+
+BSJ also has a planned service page:
+
+`Japan Confirmation Support`
+
+Positioning:
+- Japanese email confirmation and English reply summaries.
+- Useful for tattoo policy, bath type, dietary restrictions, luggage, late
+  check-in, restaurant details, and activity requirements.
+- Not a hotel booking agency.
+- Restaurant/activity support may be explored separately, but scope, payment,
+  cancellation, liability, and user responsibility must be explicit.
 
 ## Portfolio Snapshot
 

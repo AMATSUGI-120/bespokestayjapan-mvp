@@ -188,6 +188,35 @@ export function GuidePage({ guide }: { guide: GuidePageContent }) {
                 </section>
               ) : null}
 
+              <section className="mt-12 border-t border-[var(--bsj-border)] pt-10">
+                <p className="text-[11px] font-semibold uppercase tracking-[0.16em] text-[var(--bsj-text-light)]">
+                  Free phone cards
+                </p>
+                <h2 className="mt-3 text-[24px] font-medium tracking-[0] text-[var(--bsj-text)]">
+                  Need Japanese you can show on your phone?
+                </h2>
+                <p className="mt-4 max-w-2xl text-[14px] leading-[1.8] text-[var(--bsj-text-muted)]">
+                  BSJ is preparing a free mini pack of show-this-card Japanese
+                  phrases for restaurants, hotels, trains, taxis, onsen, luggage,
+                  and basic help. Use it when translation is not enough and you
+                  need staff to understand the exact question.
+                </p>
+                <div className="mt-6 flex flex-wrap gap-3">
+                  <Link
+                    href="/free-japan-phrase-cards"
+                    className="inline-flex min-h-10 items-center border border-[var(--bsj-border-strong)] px-4 py-2 text-[12px] font-semibold uppercase tracking-[0.08em] text-[var(--bsj-text)] no-underline transition-colors hover:bg-[var(--bsj-bg-subtle)]"
+                  >
+                    Get free phrase cards
+                  </Link>
+                  <Link
+                    href="/japan-confirmation-service"
+                    className="inline-flex min-h-10 items-center border border-[var(--bsj-border)] px-4 py-2 text-[12px] font-semibold uppercase tracking-[0.08em] text-[var(--bsj-text-muted)] no-underline transition-colors hover:bg-[var(--bsj-bg-subtle)] hover:text-[var(--bsj-text)]"
+                  >
+                    Need us to check something?
+                  </Link>
+                </div>
+              </section>
+
               {(guide.relatedStays?.length || guide.serviceLinks?.length || product) ? (
                 <section className="mt-12 border-t border-[var(--bsj-border)] pt-10">
                   <p className="text-[11px] font-semibold uppercase tracking-[0.16em] text-[var(--bsj-text-light)]">
