@@ -3,12 +3,14 @@ import Link from 'next/link';
 import SiteFooter from '@/components/SiteFooter';
 import SiteNav from '@/components/SiteNav';
 import { ConditionIcon } from '@/components/ConditionIcon';
+import PhraseCardsSignupCta from '@/components/PhraseCardsSignupCta';
 import { buildPageMetadata } from '@/lib/seo';
 
 const pagePath = '/free-japan-phrase-cards';
 const pageTitle = 'Free Japan Phrase Cards';
 const pageDescription =
   'A free phone-friendly mini pack of show-this-card Japanese phrases for restaurants, hotels, trains, taxis, onsen, and basic travel help.';
+const subscribeUrl = process.env.NEXT_PUBLIC_BEEHIIV_PHRASE_CARDS_URL;
 
 export const metadata: Metadata = buildPageMetadata({
   title: pageTitle,
@@ -106,29 +108,19 @@ export default function FreeJapanPhraseCardsPage() {
                 Get the mini pack
               </p>
               <h2 className="mt-4 text-[24px] font-medium leading-[1.2] text-[var(--bsj-text)]">
-                Join the phrase card waitlist
+                Get the PDF by email
               </h2>
               <p className="mt-4 text-[14px] leading-[1.75] text-[var(--bsj-text-muted)]">
-                The beehiiv signup and file delivery will be connected later. For now,
-                this page defines the free offer and where it will live on BSJ.
+                Join the Bespoke Stay Japan email list and receive the free mini
+                pack when delivery opens. The PDF is designed to be saved on your
+                phone before your trip.
               </p>
-              <form className="mt-6 grid gap-3" aria-label="Phrase card waitlist">
-                <input
-                  type="email"
-                  placeholder="you@example.com"
-                  disabled
-                  className="min-h-11 w-full border border-[var(--bsj-border)] bg-[var(--bsj-bg)] px-4 text-[14px] text-[var(--bsj-text)] outline-none transition-colors placeholder:text-[var(--bsj-text-light)] focus:border-[var(--bsj-primary)]"
-                />
-                <button
-                  type="submit"
-                  disabled
-                  className="min-h-11 border border-[var(--bsj-border-strong)] bg-[var(--bsj-bg-subtle)] px-4 text-[12px] font-semibold uppercase tracking-[0.08em] text-[var(--bsj-text-muted)]"
-                >
-                  Signup opening soon
-                </button>
-              </form>
+              <div className="mt-6">
+                <PhraseCardsSignupCta subscribeUrl={subscribeUrl} />
+              </div>
               <p className="mt-4 text-[11px] leading-[1.6] text-[var(--bsj-text-light)]">
-                Temporary waitlist UI. Email service connection will be added later.
+                No booking spam. Future emails will focus on practical Japan travel
+                questions, stay conditions, phrase cards, and confirmation tools.
               </p>
             </aside>
           </div>

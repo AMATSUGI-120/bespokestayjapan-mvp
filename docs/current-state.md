@@ -153,6 +153,18 @@ Positioning:
 - Phrase cards reduce communication uncertainty but do not guarantee policies,
   allergy safety, medical outcomes, or facility acceptance.
 
+Implementation notes:
+- `/free-japan-phrase-cards` uses `NEXT_PUBLIC_BEEHIIV_PHRASE_CARDS_URL` for
+  the external beehiiv signup CTA.
+- Until that environment variable is set, the CTA remains a disabled
+  "coming soon" button.
+- CTA clicks are tracked with PostHog as `bsj_phrase_cards_signup_click` when
+  the beehiiv URL is configured.
+- The BSJ-branded sample PDF can be regenerated with
+  `python3 scripts/generate_phrase_cards_pdf.py`.
+- Current generated sample output:
+  `output/pdf/japan-survival-phrase-cards-bsj-sample.pdf`
+
 BSJ also has a planned service page:
 
 `Japan Confirmation Support`
