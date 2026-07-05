@@ -1224,4 +1224,115 @@ Thank you.`,
       },
     ],
   },
+  'japan-onsen-etiquette-guide': {
+    path: '/japan-onsen-etiquette-guide',
+    eyebrow: 'Bath culture',
+    title: 'Japan Onsen Etiquette Guide',
+    description:
+      'A practical guide to Japanese onsen and public bath etiquette, including washing, towels, tattoos, private baths, room baths, and what to confirm before booking.',
+    intro: [
+      'A Japanese onsen can be one of the most memorable parts of a trip, but it can also feel intimidating the first time. The rules are not meant to embarrass visitors. They exist so everyone can share the bath water cleanly and calmly.',
+      'The most important idea is simple: wash before soaking. The bath is for relaxing, not for cleaning your body.',
+      'This guide explains the basic flow, common mistakes, tattoo considerations, and how to choose between a public bath, private bath, and in-room bath when planning a stay.',
+    ],
+    productKey: 'kansai-tattoo-friendly-stay-kit',
+    sections: [
+      {
+        title: 'Onsen, sento, public bath, private bath',
+        body: [
+          'An onsen uses natural hot spring water. A sento is a public bathhouse that may use heated tap water, although some facilities also use natural hot spring water. A hotel or ryokan may describe a large shared bath as a public bath, large bath, or daiyokujo.',
+          'A private bath or family bath is usually a reservable bath used privately for a short period. An in-room bath is inside your guest room. For travelers with tattoos, privacy concerns, children, or anxiety about shared bathing, the difference matters.',
+        ],
+      },
+      {
+        title: 'The basic bathing flow',
+        bullets: [
+          'Remove shoes where required before entering the changing area.',
+          'Undress fully in the changing room; swimsuits are normally not worn in traditional onsen baths.',
+          'Take only the small towel and bath items into the washing area.',
+          'Wash and rinse your body thoroughly before entering the bath.',
+          'Keep soap, shampoo, and hair out of the bath water.',
+          'Soak quietly, then dry your body lightly before returning to the changing area.',
+        ],
+      },
+      {
+        title: 'Washing before soaking',
+        body: [
+          'Use the shower station before entering the bath. Sit on the stool, wash with soap or body wash, shampoo if needed, and rinse completely. No soap should enter the shared bath water.',
+          'If there is no shower, follow the local setup and rinse as best you can before soaking. Remote or old facilities may work differently, so watch signs and local instructions.',
+        ],
+      },
+      {
+        title: 'Towels, hair, and phones',
+        bullets: [
+          'Do not put your towel into the bath water.',
+          'Place long hair up so it does not touch the bath water.',
+          'Do not swim, splash, wash, or exercise in the bath.',
+          'Keep phones and cameras out of the bathing area.',
+          'Keep conversation low, especially in small baths or late at night.',
+        ],
+      },
+      {
+        title: 'Tattoos: always confirm',
+        body: [
+          'Tattoo rules vary by property. Some baths do not allow visible tattoos, some allow tattoos if covered, some have more flexible policies, and some private baths or in-room baths avoid the issue entirely.',
+          'If you have visible tattoos and want to use a shared bath, confirm the current policy before booking. Do not rely only on old reviews or vague phrases like tattoo-friendly.',
+        ],
+      },
+      {
+        title: 'Private bath vs in-room bath',
+        body: [
+          'A private bath can still require a reservation, time limit, or extra fee. It may be a shared facility reserved by time slot, not a bath inside your room.',
+          'An in-room bath is usually the lowest-friction option if you want privacy or have tattoo concerns. It may not have hot spring water, so check whether the room bath is a standard bath or an onsen-fed bath if that matters to you.',
+        ],
+      },
+      {
+        title: 'Health, heat, and children',
+        bullets: [
+          'Onsen water can be hotter than many visitors expect; enter slowly and leave if you feel dizzy.',
+          'Avoid bathing immediately after drinking alcohol or when feeling unwell.',
+          'Check local rules for children, diapers, mixed-gender bathing, and age limits.',
+          'If pregnant, managing a medical condition, or sensitive to heat, ask your doctor and follow facility cautions.',
+          'Drink water before and after bathing.',
+        ],
+      },
+      {
+        title: 'What to confirm before booking',
+        bullets: [
+          'Does the property have a public bath, private bath, in-room bath, or all three?',
+          'Can guests with visible tattoos use the shared bath?',
+          'Are cover stickers accepted, and are there size limits?',
+          'Does the private bath require a reservation or extra fee?',
+          'Is the room bath standard water or hot spring water?',
+          'Are bathing hours separated by gender or switched during the day?',
+        ],
+      },
+      {
+        title: 'Stay planning angle',
+        body: [
+          'If bathing is central to your trip, choose the bath type before choosing the room style. A beautiful ryokan can still be stressful if the only bath you want to use has restrictions.',
+          'BSJ stay profiles separate tattoo-friendly notes, tattoo-consideration notes, private-bath notes, and room-bath details so travelers can compare the practical constraints before booking.',
+        ],
+      },
+    ],
+    relatedStays: [
+      { href: '/tattoo-friendly-stays-kansai', label: 'Tattoo-friendly stays in Kansai' },
+      { href: '/private-bath-stays-kansai', label: 'Private bath stays in Kansai' },
+      { href: '/stays/tattoo-friendly', label: 'Tattoo-friendly stay profiles' },
+      { href: '/stays/private-bath', label: 'Private bath stays' },
+    ],
+    serviceLinks: [affiliateServiceLinks.klookJapanActivities],
+    sourceLinks: [
+      {
+        href: 'https://www.japan.travel/en/guide/onsen/',
+        label: 'Japan National Tourism Organization: Onsen guide',
+        external: true,
+      },
+      {
+        href: 'https://time.com/4263931/japan-spa-onsen-tattoo-tourists/',
+        label: 'TIME: Japan Tourism Agency tattoo guidance report',
+        external: true,
+      },
+    ],
+  },
 };
