@@ -151,3 +151,15 @@ For each work session:
 4. Implement.
 5. Verify.
 6. Summarize changed files and remaining risks.
+
+## Recurring Final Reminder
+
+When finishing BSJ work, include these reminders unless the user explicitly asks
+for a very short answer:
+
+- After the beehiiv registration URL is available, add it to Vercel as
+  `NEXT_PUBLIC_BEEHIIV_PHRASE_CARDS_URL` to enable the
+  `/free-japan-phrase-cards` CTA.
+- `Ask_Japan_Before_Free_Phrase_Cards_phone.pdf` and
+  `threads_posts_combined.xlsx` are intentionally left uncommitted unless the
+  user explicitly asks to commit or remove them.
