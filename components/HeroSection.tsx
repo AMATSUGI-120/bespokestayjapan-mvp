@@ -147,7 +147,7 @@ export function HeroSection({ className }: HeroSectionProps) {
         </div>
 
         <div className="lg:pl-4" style={textColStyle}>
-          <p style={eyebrowStyle}>Curated Japan stays</p>
+          <p style={eyebrowStyle}>Researched Japan stay guide</p>
 
           <h1 style={headlineStyle}>
             Stay where the<br className="hidden sm:block" />
@@ -156,25 +156,25 @@ export function HeroSection({ className }: HeroSectionProps) {
           </h1>
 
           <p style={subtextStyle}>
-            Bespoke Stay Japan curates properties around the conditions that shape a trip:
-            pet policies, tattoo-related bath rules, luggage access, private stays, and
-            food-restriction-friendly areas.
+            Bespoke Stay Japan explains the practical details that shape a trip:
+            tattoo-related bath rules, luggage movement, food restrictions, private
+            baths, long-stay comfort, and what to confirm before booking.
           </p>
 
           <div className="flex flex-col sm:flex-row items-start sm:items-center gap-5 mt-9">
             <a
-              href="#featured-stays"
+              href="/guides"
               style={primaryCtaStyle}
               className="bg-[var(--bsj-primary)] text-white transition-colors hover:bg-[var(--bsj-primary-hover)] active:bg-[var(--bsj-text)] focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--bsj-accent)] focus-visible:ring-offset-2 focus-visible:ring-offset-[var(--bsj-bg)]"
             >
-              View curated stays
+              Start with guides
             </a>
             <a
-              href="#ask"
+              href="#conditions"
               style={secondaryCtaStyle}
               className="rounded-[3px] px-1 py-2 text-[var(--bsj-primary)] transition-colors hover:bg-[var(--bsj-bg-subtle)] hover:text-[var(--bsj-primary-hover)] hover:underline active:bg-[var(--bsj-border)] focus:outline-none focus-visible:bg-[var(--bsj-bg-subtle)] focus-visible:underline"
             >
-              Ask for a stay match
+              Browse stay conditions
             </a>
           </div>
         </div>
