@@ -891,4 +891,114 @@ Thank you.`,
       },
     ],
   },
+  'japan-bicycle-rules-guide': {
+    path: '/japan-bicycle-rules-guide',
+    eyebrow: 'Cycling basics',
+    title: 'Japan Bicycle Rules Guide',
+    description:
+      'A practical guide to bicycle rules in Japan for travelers using rental bikes, hotel bikes, share cycles, or e-bikes.',
+    intro: [
+      'Cycling can be a useful way to explore Japan, especially in quieter neighborhoods, island routes, and cities with good rental bike access. But bicycles are treated as vehicles under Japanese traffic rules, and the everyday local habits you see on the street may not always be the safest or clearest guide.',
+      'From April 1, 2026, Japan introduced the traffic violation notice system, often called blue tickets, for cyclists aged 16 and older. Travelers should understand the basic rules before using rental bikes, hotel bicycles, share cycles, or e-bikes.',
+      'Use this guide as a practical pre-ride checklist. Local rules, signs, insurance requirements, and rental shop conditions can vary, so confirm details with the rental provider before riding.',
+    ],
+    productKey: 'japan-stay-planning-kits',
+    sections: [
+      {
+        title: 'The basic idea: bicycles are vehicles',
+        body: [
+          'In Japan, bicycles are generally treated as light vehicles. That means riders are expected to follow traffic rules, not move unpredictably between pedestrian and vehicle behavior.',
+          'The safest starting point is simple: ride on the left side of the road, follow traffic signals and stop signs, slow down near pedestrians, and avoid riding in a way that surprises drivers or walkers.',
+        ],
+      },
+      {
+        title: 'The five core bicycle rules',
+        bullets: [
+          'Use the roadway in principle and ride on the left side; sidewalks are exceptions.',
+          'At intersections, obey traffic lights, stop signs, and check safety before crossing.',
+          'Turn on your light at night.',
+          'Do not ride after drinking alcohol.',
+          'Wear a bicycle helmet.',
+        ],
+      },
+      {
+        title: 'Sidewalks are not a free-for-all',
+        body: [
+          'Many visitors notice people riding on sidewalks in Japan, but the official rule is more limited. Sidewalk riding is allowed only in certain cases, such as when signs permit it, when the rider is under 13 or 70 or older, when a disability makes road riding difficult, or when road conditions make sidewalk use necessary for safety.',
+          'When you do ride on a sidewalk, pedestrians have priority. Ride slowly near the roadway side of the sidewalk and stop if you would interfere with people walking.',
+        ],
+      },
+      {
+        title: 'Blue tickets and risky behavior',
+        body: [
+          'From April 1, 2026, cyclists aged 16 and older can be subject to the traffic violation notice system for certain bicycle violations. Serious or dangerous cases can still be handled more strictly.',
+          'For travelers, the practical message is to avoid the behaviors police and public guidance repeatedly warn about: ignoring signals, failing to stop, riding the wrong way, using a phone while riding, riding after drinking, entering closed railway crossings, or using a bicycle with faulty brakes.',
+        ],
+      },
+      {
+        title: 'E-bikes, pedal-assist bikes, and mopeds',
+        body: [
+          'A normal pedal-assist rental bike is different from a moped or pedal-equipped electric motorcycle. If a vehicle can move under motor power in a way that is treated as a moped, different rules, licensing, registration, insurance, and helmet requirements may apply.',
+          'If you are renting anything electric, ask the rental provider whether it is a standard pedal-assist bicycle under Japanese rules. Do not assume every two-wheeled electric vehicle is legal to ride like a bicycle.',
+        ],
+      },
+      {
+        title: 'Before you rent a bicycle',
+        bullets: [
+          'Ask whether the rental includes liability insurance.',
+          'Check that the brakes, bell, light, tires, and lock work.',
+          'Ask where you may park the bike and what happens if it is removed for illegal parking.',
+          'Confirm whether the route has hills, narrow roads, tunnels, tram tracks, or heavy traffic.',
+          'Use a helmet when available, especially on unfamiliar roads or longer routes.',
+          'Do not ride with an umbrella, phone in hand, or headphones that prevent you from hearing traffic.',
+        ],
+      },
+      {
+        title: 'Hotel and stay planning angle',
+        body: [
+          'If cycling is part of your plan, the right stay can make it easier. Look for bicycle parking, luggage storage, coin laundry, access to quieter roads, and simple routes from the station.',
+          'For families or first-time visitors, a hotel near a safe cycling area may matter more than a central address. For long rides, also check whether the property can store bags before check-in or after checkout.',
+        ],
+      },
+      {
+        title: 'A simple safe-riding checklist',
+        bullets: [
+          'Ride on the left and keep your movement predictable.',
+          'Slow down around pedestrians, crossings, station areas, and shopping streets.',
+          'Stop fully at stop signs and closed railway crossings.',
+          'Use lights at night and avoid dark riverside or rural roads if you are unsure.',
+          'Park only where permitted; station areas often remove illegally parked bikes.',
+          'When in doubt, get off and walk the bicycle.',
+        ],
+      },
+    ],
+    relatedStays: [
+      { href: '/stays/luggage-friendly', label: 'Luggage-friendly stays' },
+      { href: '/stays/access-friendly', label: 'Access-friendly stays' },
+      { href: '/japan-ic-card-guide', label: 'Japan IC card guide' },
+      { href: '/japan-luggage-delivery-guide', label: 'Japan luggage delivery guide' },
+    ],
+    serviceLinks: [
+      affiliateServiceLinks.radicalStorageJapan,
+      affiliateServiceLinks.airaloJapan,
+      affiliateServiceLinks.sailyJapan,
+    ],
+    sourceLinks: [
+      {
+        href: 'https://www.npa.go.jp/bureau/traffic/bicycle/info.html',
+        label: 'National Police Agency: Bicycle safety and traffic rules',
+        external: true,
+      },
+      {
+        href: 'https://www.npa.go.jp/english/bureau/traffic/index.html',
+        label: 'National Police Agency: Traffic rules in English',
+        external: true,
+      },
+      {
+        href: 'https://www.gov-online.go.jp/article/202410/entry-6604.html',
+        label: 'Government Public Relations: Bicycle blue ticket system',
+        external: true,
+      },
+    ],
+  },
 };
