@@ -1,15 +1,45 @@
 import Link from 'next/link';
 import SiteFooter from '@/components/SiteFooter';
 import SiteNav from '@/components/SiteNav';
+import TrackedAnalyticsLink from '@/components/TrackedAnalyticsLink';
 import type { GuideLink, GuidePageContent } from '@/lib/guide-content';
 import { getProduct } from '@/lib/products';
 
-function LinkList({ links }: { links: GuideLink[] }) {
+function LinkList({
+  links,
+  guidePath,
+  ctaLocation,
+}: {
+  links: GuideLink[];
+  guidePath?: string;
+  ctaLocation?: string;
+}) {
   return (
     <div className="flex flex-wrap gap-3">
       {links.map((link) => {
         const className =
           'inline-flex min-h-10 items-center border border-[var(--bsj-border-strong)] px-4 py-2 text-[12px] font-semibold uppercase tracking-[0.08em] text-[var(--bsj-text)] no-underline transition-colors hover:bg-[var(--bsj-bg-subtle)]';
+
+        if (guidePath && ctaLocation) {
+          return (
+            <TrackedAnalyticsLink
+              key={link.href}
+              href={link.href}
+              external={link.external}
+              rel={link.sponsored ? 'noreferrer sponsored' : 'noreferrer'}
+              className={className}
+              tracking={{
+                event: 'guide_cta',
+                guidePath,
+                ctaLabel: link.label,
+                ctaHref: link.href,
+                ctaLocation,
+              }}
+            >
+              {link.label}
+            </TrackedAnalyticsLink>
+          );
+        }
 
         if (link.external) {
           return (
@@ -202,18 +232,32 @@ export function GuidePage({ guide }: { guide: GuidePageContent }) {
                   need staff to understand the exact question.
                 </p>
                 <div className="mt-6 flex flex-wrap gap-3">
-                  <Link
+                  <TrackedAnalyticsLink
                     href="/free-japan-phrase-cards"
                     className="inline-flex min-h-10 items-center border border-[var(--bsj-border-strong)] px-4 py-2 text-[12px] font-semibold uppercase tracking-[0.08em] text-[var(--bsj-text)] no-underline transition-colors hover:bg-[var(--bsj-bg-subtle)]"
+                    tracking={{
+                      event: 'guide_cta',
+                      guidePath: guide.path,
+                      ctaLabel: 'Get free phrase cards',
+                      ctaHref: '/free-japan-phrase-cards',
+                      ctaLocation: 'free_phone_cards',
+                    }}
                   >
                     Get free phrase cards
-                  </Link>
-                  <Link
+                  </TrackedAnalyticsLink>
+                  <TrackedAnalyticsLink
                     href="/japan-confirmation-service"
                     className="inline-flex min-h-10 items-center border border-[var(--bsj-border)] px-4 py-2 text-[12px] font-semibold uppercase tracking-[0.08em] text-[var(--bsj-text-muted)] no-underline transition-colors hover:bg-[var(--bsj-bg-subtle)] hover:text-[var(--bsj-text)]"
+                    tracking={{
+                      event: 'confirmation_service_cta',
+                      sourcePath: guide.path,
+                      ctaLabel: 'Need us to check something?',
+                      ctaHref: '/japan-confirmation-service',
+                      ctaLocation: 'free_phone_cards',
+                    }}
                   >
                     Need us to check something?
-                  </Link>
+                  </TrackedAnalyticsLink>
                 </div>
               </section>
 
@@ -239,13 +283,20 @@ export function GuidePage({ guide }: { guide: GuidePageContent }) {
                         </p>
                         <div className="mt-4 flex flex-col gap-3">
                           {guide.relatedStays.slice(0, 3).map((link) => (
-                            <Link
+                            <TrackedAnalyticsLink
                               key={link.href}
                               href={link.href}
                               className="text-[13px] leading-[1.5] text-[var(--bsj-text)] no-underline transition-colors hover:text-[var(--bsj-primary-hover)] hover:underline"
+                              tracking={{
+                                event: 'guide_cta',
+                                guidePath: guide.path,
+                                ctaLabel: link.label,
+                                ctaHref: link.href,
+                                ctaLocation: 'planning_next_steps_related_stays',
+                              }}
                             >
                               {link.label}
-                            </Link>
+                            </TrackedAnalyticsLink>
                           ))}
                         </div>
                       </div>
@@ -272,15 +323,22 @@ export function GuidePage({ guide }: { guide: GuidePageContent }) {
                         </p>
                         <div className="mt-4 flex flex-col gap-3">
                           {guide.serviceLinks.slice(0, 3).map((link) => (
-                            <a
+                            <TrackedAnalyticsLink
                               key={link.href}
                               href={link.href}
-                              target="_blank"
+                              external
                               rel={link.sponsored ? 'noreferrer sponsored' : 'noreferrer'}
                               className="text-[13px] leading-[1.5] text-[var(--bsj-text)] no-underline transition-colors hover:text-[var(--bsj-primary-hover)] hover:underline"
+                              tracking={{
+                                event: 'guide_cta',
+                                guidePath: guide.path,
+                                ctaLabel: link.label,
+                                ctaHref: link.href,
+                                ctaLocation: 'planning_next_steps_related_tools',
+                              }}
                             >
                               {link.label}
-                            </a>
+                            </TrackedAnalyticsLink>
                           ))}
                         </div>
                       </div>
@@ -343,14 +401,21 @@ export function GuidePage({ guide }: { guide: GuidePageContent }) {
                     </div>
                   ) : null}
                   {product.purchaseUrl ? (
-                    <a
+                    <TrackedAnalyticsLink
                       href={product.purchaseUrl}
-                      target="_blank"
+                      external
                       rel="noreferrer"
                       className="mt-5 inline-flex min-h-10 items-center border border-[var(--bsj-border-strong)] px-4 py-2 text-[12px] font-semibold uppercase tracking-[0.08em] text-[var(--bsj-text)] no-underline transition-colors hover:bg-[var(--bsj-bg-subtle)]"
+                      tracking={{
+                        event: 'product_teaser',
+                        sourcePath: guide.path,
+                        productKey: product.key,
+                        ctaLabel: product.ctaLabel,
+                        ctaHref: product.purchaseUrl,
+                      }}
                     >
                       {product.ctaLabel}
-                    </a>
+                    </TrackedAnalyticsLink>
                   ) : null}
                   <p className="mt-5 border-t border-[var(--bsj-border)] pt-4 text-[12px] leading-[1.7] text-[var(--bsj-text-light)]">
                     {product.statusLabel}
@@ -368,7 +433,11 @@ export function GuidePage({ guide }: { guide: GuidePageContent }) {
                     topic. Check terms, availability, and suitability directly.
                   </p>
                   <div className="mt-5">
-                    <LinkList links={guide.serviceLinks} />
+                    <LinkList
+                      links={guide.serviceLinks}
+                      guidePath={guide.path}
+                      ctaLocation="sidebar_related_travel_tools"
+                    />
                   </div>
                   <p className="mt-4 text-[11px] leading-[1.6] text-[var(--bsj-text-light)]">
                     Some links may be affiliate links. BSJ only includes them when they
@@ -384,13 +453,20 @@ export function GuidePage({ guide }: { guide: GuidePageContent }) {
                   </h2>
                   <div className="mt-5 flex flex-col gap-3">
                     {guide.relatedStays.map((link) => (
-                      <Link
+                      <TrackedAnalyticsLink
                         key={link.href}
                         href={link.href}
                         className="border-b border-[var(--bsj-border)] pb-3 text-[14px] leading-[1.5] text-[var(--bsj-text-muted)] no-underline transition-colors last:border-0 last:pb-0 hover:text-[var(--bsj-text)]"
+                        tracking={{
+                          event: 'guide_cta',
+                          guidePath: guide.path,
+                          ctaLabel: link.label,
+                          ctaHref: link.href,
+                          ctaLocation: 'sidebar_related_stays',
+                        }}
                       >
                         {link.label}
-                      </Link>
+                      </TrackedAnalyticsLink>
                     ))}
                   </div>
                 </section>

@@ -1,6 +1,7 @@
 'use client';
 
 import { useMemo, useState } from 'react';
+import { trackMapLinkClick } from '@/lib/analytics';
 
 interface HotelMapCardProps {
   hotelName: string;
@@ -87,7 +88,15 @@ export default function HotelMapCard({ hotelName, region, address }: HotelMapCar
           <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
             <button
               type="button"
-              onClick={() => setIsMapVisible((value) => !value)}
+              onClick={() =>
+                setIsMapVisible((value) => {
+                  trackMapLinkClick({
+                    hotel_name: hotelName,
+                    map_action: value ? 'hide_embed' : 'show_embed',
+                  });
+                  return !value;
+                })
+              }
               className="inline-flex min-h-10 items-center justify-center border border-[var(--bsj-border-strong)] px-4 py-2 text-[12px] font-semibold uppercase tracking-[0.08em] text-[var(--bsj-text)] transition-colors hover:bg-[var(--bsj-bg-subtle)] active:bg-[var(--bsj-border)]"
             >
               {isMapVisible ? 'Hide map' : 'Show map'}
@@ -96,6 +105,12 @@ export default function HotelMapCard({ hotelName, region, address }: HotelMapCar
               href={mapsUrl}
               target="_blank"
               rel="noreferrer"
+              onClick={() =>
+                trackMapLinkClick({
+                  hotel_name: hotelName,
+                  map_action: 'open_google_maps',
+                })
+              }
               className="inline-flex min-h-10 items-center justify-center text-[12px] font-semibold uppercase tracking-[0.08em] text-[var(--bsj-primary)] no-underline transition-colors hover:text-[var(--bsj-primary-hover)] hover:underline"
             >
               Open in Google Maps

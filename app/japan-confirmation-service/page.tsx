@@ -1,7 +1,7 @@
 import type { Metadata } from 'next';
-import Link from 'next/link';
 import SiteFooter from '@/components/SiteFooter';
 import SiteNav from '@/components/SiteNav';
+import TrackedAnalyticsLink from '@/components/TrackedAnalyticsLink';
 import { buildPageMetadata } from '@/lib/seo';
 
 const pagePath = '/japan-confirmation-service';
@@ -83,12 +83,19 @@ export default function JapanConfirmationServicePage() {
                 This page defines the scope before accepting requests. Intake forms,
                 pricing, and delivery workflow will be added later.
               </p>
-              <Link
+              <TrackedAnalyticsLink
                 href="/free-japan-phrase-cards"
                 className="mt-6 inline-flex min-h-10 items-center border border-[var(--bsj-border-strong)] px-4 py-2 text-[12px] font-semibold uppercase tracking-[0.08em] text-[var(--bsj-text)] no-underline transition-colors hover:bg-[var(--bsj-bg-subtle)]"
+                tracking={{
+                  event: 'confirmation_service_cta',
+                  sourcePath: pagePath,
+                  ctaLabel: 'Start with free phrase cards',
+                  ctaHref: '/free-japan-phrase-cards',
+                  ctaLocation: 'hero_status_card',
+                }}
               >
                 Start with free phrase cards
-              </Link>
+              </TrackedAnalyticsLink>
             </aside>
           </div>
         </section>

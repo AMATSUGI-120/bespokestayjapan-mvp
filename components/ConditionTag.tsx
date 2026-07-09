@@ -1,5 +1,8 @@
+'use client';
+
 import Link from 'next/link';
 import type { CSSProperties } from 'react';
+import { trackTagClick } from '@/lib/analytics';
 import { ConditionIcon } from './ConditionIcon';
 
 export type ConditionTagVariant = 'facility' | 'access' | 'stay-type';
@@ -69,6 +72,13 @@ export function ConditionTag({
     return (
       <Link
         href={href}
+        onClick={() =>
+          trackTagClick({
+            tag_label: label,
+            tag_href: href,
+            tag_variant: variant,
+          })
+        }
         className={[
           'border border-[var(--bsj-border)] text-[var(--bsj-primary)] no-underline transition-colors hover:border-[var(--bsj-primary)] hover:bg-[var(--bsj-primary)] hover:text-white active:border-[var(--bsj-primary)] active:bg-[var(--bsj-primary)] active:text-white focus:outline-none focus-visible:border-[var(--bsj-primary)] focus-visible:bg-[var(--bsj-primary)] focus-visible:text-white',
           className,

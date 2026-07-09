@@ -4,6 +4,7 @@ import SiteFooter from '@/components/SiteFooter';
 import SiteNav from '@/components/SiteNav';
 import { ConditionIcon } from '@/components/ConditionIcon';
 import PhraseCardsSignupCta from '@/components/PhraseCardsSignupCta';
+import TrackedAnalyticsLink from '@/components/TrackedAnalyticsLink';
 import { buildPageMetadata } from '@/lib/seo';
 
 const pagePath = '/free-japan-phrase-cards';
@@ -203,12 +204,19 @@ export default function FreeJapanPhraseCardsPage() {
                 meals, restaurant reservations, or activity details, BSJ is also planning
                 a Japanese confirmation support service.
               </p>
-              <Link
+              <TrackedAnalyticsLink
                 href="/japan-confirmation-service"
                 className="mt-7 inline-flex min-h-10 items-center border border-[var(--bsj-border-strong)] px-4 py-2 text-[12px] font-semibold uppercase tracking-[0.08em] text-[var(--bsj-text)] no-underline transition-colors hover:bg-[var(--bsj-bg-subtle)]"
+                tracking={{
+                  event: 'confirmation_service_cta',
+                  sourcePath: pagePath,
+                  ctaLabel: 'Read about confirmation support',
+                  ctaHref: '/japan-confirmation-service',
+                  ctaLocation: 'when_cards_are_not_enough',
+                }}
               >
                 Read about confirmation support
-              </Link>
+              </TrackedAnalyticsLink>
             </div>
 
             <div className="border border-[var(--bsj-border)] bg-[var(--bsj-bg-card)] p-6">
