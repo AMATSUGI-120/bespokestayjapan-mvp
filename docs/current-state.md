@@ -164,6 +164,9 @@ Implementation notes:
   `python3 scripts/generate_phrase_cards_pdf.py`.
 - Current generated sample output:
   `output/pdf/japan-survival-phrase-cards-bsj-sample.pdf`
+- Current public PDF download URL:
+  `https://bespokestayjapan.com/downloads/japan-survival-phrase-cards-bsj-sample.pdf`
+- beehiiv Email 1 copy is stored in `docs/beehiiv-email-sequence.md`.
 
 BSJ also has a planned service page:
 
