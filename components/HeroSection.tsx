@@ -7,24 +7,13 @@ export interface HeroSectionProps {
 
 const sectionStyle: CSSProperties = {
   backgroundColor: 'var(--bsj-bg)',
-  padding: '48px 24px 72px',
+  padding: '56px 24px 72px',
 };
 
-const guidePanelStyle: CSSProperties = {
-  backgroundColor: 'var(--bsj-bg-subtle)',
-  border: '1px solid var(--bsj-border)',
-  borderRadius: '6px',
-  display: 'grid',
-  gap: '1px',
-  overflow: 'hidden',
-};
-
-/* Text column */
 const textColStyle: CSSProperties = {
   display: 'flex',
   flexDirection: 'column',
-  justifyContent: 'center',
-  flex: '1 1 0',
+  justifyContent: 'flex-start',
   minWidth: 0,
 };
 
@@ -40,10 +29,11 @@ const eyebrowStyle: CSSProperties = {
 
 const headlineStyle: CSSProperties = {
   color: 'var(--bsj-text)',
-  fontSize: 'clamp(38px, 6vw, 82px)',
+  fontSize: 'clamp(42px, 7vw, 92px)',
   fontWeight: 600,
   lineHeight: 0.98,
   letterSpacing: '0',
+  maxWidth: '900px',
 };
 
 const subtextStyle: CSSProperties = {
@@ -51,7 +41,7 @@ const subtextStyle: CSSProperties = {
   fontSize: '16px',
   lineHeight: 1.8,
   marginTop: '24px',
-  maxWidth: '560px',
+  maxWidth: '720px',
 };
 
 const primaryCtaStyle: CSSProperties = {
@@ -71,60 +61,6 @@ const secondaryCtaStyle: CSSProperties = {
   textDecoration: 'none',
 };
 
-const guideTileStyle: CSSProperties = {
-  backgroundColor: 'var(--bsj-bg)',
-  minHeight: '150px',
-  padding: '22px',
-};
-
-const guideCodeStyle: CSSProperties = {
-  color: 'var(--bsj-text-light)',
-  display: 'block',
-  fontSize: '11px',
-  fontWeight: 700,
-  letterSpacing: '0.12em',
-  lineHeight: 1.4,
-  textTransform: 'uppercase',
-};
-
-const guideTitleStyle: CSSProperties = {
-  color: 'var(--bsj-text)',
-  fontSize: '17px',
-  fontWeight: 500,
-  lineHeight: 1.35,
-  marginTop: '20px',
-};
-
-const guideTextStyle: CSSProperties = {
-  color: 'var(--bsj-text-muted)',
-  fontSize: '12px',
-  lineHeight: 1.65,
-  marginTop: '8px',
-};
-
-const GUIDE_TILES = [
-  {
-    code: 'TAT',
-    title: 'Bath rules',
-    text: 'Tattoo notes, private bath options, and what still needs direct confirmation.',
-  },
-  {
-    code: 'BAG',
-    title: 'Luggage flow',
-    text: 'Station proximity, storage, delivery timing, and large-bag practicality.',
-  },
-  {
-    code: 'FOOD',
-    title: 'Diet needs',
-    text: 'Food restriction notes, breakfast caveats, and nearby area suitability.',
-  },
-  {
-    code: 'LONG',
-    title: 'Longer stays',
-    text: 'Kitchen, laundry, room layout, and everyday comfort for slower travel.',
-  },
-];
-
 const KEY_CONDITIONS = [
   { id: 'tattoo-friendly', label: 'Tattoo notes' },
   { id: 'food-friendly', label: 'Food needs' },
@@ -141,22 +77,10 @@ export function HeroSection({ className }: HeroSectionProps) {
       style={sectionStyle}
     >
       <div
-        className="mx-auto flex flex-col lg:flex-row items-stretch gap-9 lg:gap-16"
-        style={{ maxWidth: '1280px' }}
+        className="mx-auto"
+        style={{ maxWidth: '1040px' }}
       >
-        <div className="w-full lg:w-[52%]" style={guidePanelStyle}>
-          <div className="grid grid-cols-1 sm:grid-cols-2">
-            {GUIDE_TILES.map((tile) => (
-              <div key={tile.code} style={guideTileStyle}>
-                <span style={guideCodeStyle}>{tile.code}</span>
-                <p style={guideTitleStyle}>{tile.title}</p>
-                <p style={guideTextStyle}>{tile.text}</p>
-              </div>
-            ))}
-          </div>
-        </div>
-
-        <div className="lg:pl-4" style={textColStyle}>
+        <div style={textColStyle}>
           <p style={eyebrowStyle}>Researched Japan stay guide</p>
 
           <h1 style={headlineStyle}>
@@ -171,7 +95,7 @@ export function HeroSection({ className }: HeroSectionProps) {
             sources and hotel policies, with the details to confirm before booking.
           </p>
 
-          <div className="mt-8 grid grid-cols-2 gap-2 sm:grid-cols-3">
+          <div className="mt-8 grid max-w-[760px] grid-cols-2 gap-2 sm:grid-cols-3">
             {KEY_CONDITIONS.map((condition) => (
               <a
                 key={condition.id}
