@@ -95,7 +95,8 @@ export default function FreeJapanStayChecklistPage() {
               </h2>
               <p className="mt-4 text-[14px] leading-[1.75] text-[var(--bsj-text-muted)]">
                 Join the Bespoke Stay Japan email list and use the PDF before
-                comparing stays. You can also preview the current sample PDF now.
+                comparing stays. The first email includes the download link and
+                a short note on how to use it before booking.
               </p>
               <div className="mt-6">
                 <LeadMagnetSignupCta
@@ -104,9 +105,6 @@ export default function FreeJapanStayChecklistPage() {
                   sourcePath={pagePath}
                 />
               </div>
-              <p className="mt-4 break-words text-[11px] leading-[1.6] text-[var(--bsj-text-light)]">
-                PDF URL: {leadMagnet.pdfUrl}
-              </p>
             </aside>
           </div>
         </section>
