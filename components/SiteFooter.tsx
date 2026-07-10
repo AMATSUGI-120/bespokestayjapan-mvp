@@ -19,6 +19,8 @@ const staysLinks: FooterLink[] = [
 ];
 
 const infoLinks: FooterLink[] = [
+  { href: '/free-japan-travel-samples', label: 'Free planning samples' },
+  { href: '/free-japan-stay-checklist', label: 'Free stay checklist' },
   { href: '/tattoo-friendly-stays-kansai', label: 'Tattoo stay guide' },
   { href: '/shinkansen-oversized-luggage-guide', label: 'Shinkansen luggage guide' },
   { href: '/dietary-restrictions-japan', label: 'Dietary restriction guide' },

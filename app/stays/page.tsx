@@ -1,6 +1,8 @@
 import type { Metadata } from 'next';
+import Link from 'next/link';
 import SiteNav from '@/components/SiteNav';
 import SiteFooter from '@/components/SiteFooter';
+import { ConditionIcon } from '@/components/ConditionIcon';
 import { StayRegionGroups } from '@/components/StayRegionGroups';
 import { supabase } from '@/lib/supabase';
 import { buildPageMetadata } from '@/lib/seo';
@@ -25,6 +27,17 @@ interface PublishedStay {
   best_for: string | null;
   caution_notes: string | null;
 }
+
+const STAY_CONDITIONS = [
+  { href: '/stays/tattoo-friendly', icon: 'tattoo-friendly', label: 'Tattoo notes' },
+  { href: '/stays/private-bath', icon: 'private-bath', label: 'Private bath' },
+  { href: '/stays/luggage-friendly', icon: 'luggage-friendly', label: 'Luggage' },
+  { href: '/stays/food-friendly', icon: 'food-friendly', label: 'Food needs' },
+  { href: '/stays/family-friendly', icon: 'family-friendly', label: 'Family' },
+  { href: '/stays/self-catering', icon: 'self-catering', label: 'Long stay' },
+  { href: '/stays/access-friendly', icon: 'access-friendly', label: 'Access notes' },
+  { href: '/stays/pet-friendly', icon: 'pet-friendly', label: 'Pets' },
+];
 
 async function getPublishedStays(): Promise<PublishedStay[]> {
   const { data, error } = await supabase
@@ -67,7 +80,26 @@ export default async function StaysPage() {
             </h1>
             <p className="mt-6 max-w-xl text-[15px] leading-[1.8] text-[var(--bsj-text-muted)]">
               Curated places in Japan where practical details are easier to compare.
+              Start with all stays, or jump to the condition that matters most for your trip.
             </p>
+
+            <nav
+              aria-label="Browse stay conditions"
+              className="mt-8 grid grid-cols-2 gap-2 sm:grid-cols-4 lg:max-w-4xl"
+            >
+              {STAY_CONDITIONS.map((condition) => (
+                <Link
+                  key={condition.href}
+                  href={condition.href}
+                  className="group flex min-h-[56px] items-center gap-3 rounded-[4px] border border-[var(--bsj-border)] bg-[var(--bsj-bg-card)] px-3 py-2 text-[var(--bsj-text)] no-underline transition-colors hover:border-[var(--bsj-primary)] hover:bg-[var(--bsj-primary)] hover:text-white active:border-[var(--bsj-primary)] active:bg-[var(--bsj-primary)] active:text-white focus:outline-none focus-visible:border-[var(--bsj-primary)] focus-visible:bg-[var(--bsj-primary)] focus-visible:text-white"
+                >
+                  <ConditionIcon name={condition.icon} width={24} height={24} />
+                  <span className="text-[12px] font-semibold leading-[1.25]">
+                    {condition.label}
+                  </span>
+                </Link>
+              ))}
+            </nav>
           </div>
         </section>
 

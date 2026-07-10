@@ -65,6 +65,49 @@ function LinkList({
   );
 }
 
+function GuideDecisionMap() {
+  const steps = [
+    {
+      label: '1',
+      title: 'Identify the constraint',
+      text: 'Tattoo policy, luggage, food needs, bath privacy, access, or timing.',
+    },
+    {
+      label: '2',
+      title: 'Check the public note',
+      text: 'Read the hotel policy, station details, route rules, or official guidance.',
+    },
+    {
+      label: '3',
+      title: 'Confirm before relying on it',
+      text: 'Ask the hotel, restaurant, or operator when the detail affects your booking.',
+    },
+  ];
+
+  return (
+    <section className="border-b border-[var(--bsj-border)] py-8">
+      <p className="text-[11px] font-semibold uppercase tracking-[0.16em] text-[var(--bsj-text-light)]">
+        How to use this guide
+      </p>
+      <div className="mt-5 grid gap-px overflow-hidden border border-[var(--bsj-border)] bg-[var(--bsj-border)] md:grid-cols-3">
+        {steps.map((step) => (
+          <div key={step.label} className="bg-[var(--bsj-bg)] p-5">
+            <span className="inline-flex h-8 w-8 items-center justify-center rounded-full border border-[var(--bsj-border-strong)] text-[12px] font-semibold text-[var(--bsj-text)]">
+              {step.label}
+            </span>
+            <h2 className="mt-4 text-[17px] font-medium leading-[1.25] tracking-[0] text-[var(--bsj-text)]">
+              {step.title}
+            </h2>
+            <p className="mt-3 text-[13px] leading-[1.7] text-[var(--bsj-text-muted)]">
+              {step.text}
+            </p>
+          </div>
+        ))}
+      </div>
+    </section>
+  );
+}
+
 export function GuidePage({ guide }: { guide: GuidePageContent }) {
   const product = guide.productKey ? getProduct(guide.productKey) : null;
   const startItems = guide.sections.slice(0, 5).map((section) => section.title);
@@ -147,6 +190,8 @@ export function GuidePage({ guide }: { guide: GuidePageContent }) {
                 </div>
               </section>
 
+              <GuideDecisionMap />
+
               <div className="divide-y divide-[var(--bsj-border)]">
                 {guide.sections.map((section) => (
                   <section key={section.title} className="py-10">
@@ -218,7 +263,7 @@ export function GuidePage({ guide }: { guide: GuidePageContent }) {
                 </section>
               ) : null}
 
-              <section className="mt-12 border-t border-[var(--bsj-border)] pt-10">
+              <section className="mt-12 border border-[var(--bsj-border)] bg-[var(--bsj-bg)] p-5 md:p-7">
                 <p className="text-[11px] font-semibold uppercase tracking-[0.16em] text-[var(--bsj-text-light)]">
                   Free phone cards
                 </p>
@@ -234,7 +279,7 @@ export function GuidePage({ guide }: { guide: GuidePageContent }) {
                 <div className="mt-6 flex flex-wrap gap-3">
                   <TrackedAnalyticsLink
                     href="/free-japan-phrase-cards"
-                    className="inline-flex min-h-10 items-center border border-[var(--bsj-border-strong)] px-4 py-2 text-[12px] font-semibold uppercase tracking-[0.08em] text-[var(--bsj-text)] no-underline transition-colors hover:bg-[var(--bsj-bg-subtle)]"
+                    className="inline-flex min-h-11 items-center border border-[var(--bsj-primary)] bg-[var(--bsj-primary)] px-4 py-2 text-[12px] font-semibold uppercase tracking-[0.08em] text-white no-underline transition-colors hover:bg-[var(--bsj-primary-hover)] active:bg-[var(--bsj-text)]"
                     tracking={{
                       event: 'guide_cta',
                       guidePath: guide.path,
@@ -247,7 +292,7 @@ export function GuidePage({ guide }: { guide: GuidePageContent }) {
                   </TrackedAnalyticsLink>
                   <TrackedAnalyticsLink
                     href="/japan-confirmation-service"
-                    className="inline-flex min-h-10 items-center border border-[var(--bsj-border)] px-4 py-2 text-[12px] font-semibold uppercase tracking-[0.08em] text-[var(--bsj-text-muted)] no-underline transition-colors hover:bg-[var(--bsj-bg-subtle)] hover:text-[var(--bsj-text)]"
+                    className="inline-flex min-h-11 items-center border border-[var(--bsj-border-strong)] px-4 py-2 text-[12px] font-semibold uppercase tracking-[0.08em] text-[var(--bsj-text)] no-underline transition-colors hover:bg-[var(--bsj-bg-subtle)] active:bg-[var(--bsj-border)]"
                     tracking={{
                       event: 'confirmation_service_cta',
                       sourcePath: guide.path,

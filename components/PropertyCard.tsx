@@ -185,7 +185,7 @@ export function PropertyCard({
   return (
     <article
       className={[
-        'group min-w-0 overflow-hidden border border-[var(--bsj-border)] rounded-[6px] bg-[var(--bsj-bg)] transition-colors hover:border-[var(--bsj-border-strong)]',
+        'group min-w-0 overflow-hidden border border-[var(--bsj-border)] rounded-[6px] bg-[var(--bsj-bg)] transition-colors hover:border-[var(--bsj-border-strong)] hover:bg-[var(--bsj-bg-card)] active:border-[var(--bsj-primary)]',
         className,
       ].filter(Boolean).join(' ')}
       style={{ display: 'flex', flexDirection: 'column', height: '100%' }}
@@ -251,7 +251,7 @@ export function PropertyCard({
         {showCta && (
           <a
             href={ctaHref}
-            className="hover:underline focus:outline-none focus-visible:underline"
+            className="min-h-10 w-fit rounded-[3px] border border-[var(--bsj-border)] px-3 py-2 transition-colors hover:border-[var(--bsj-primary)] hover:bg-[var(--bsj-primary)] hover:text-white hover:no-underline active:border-[var(--bsj-primary)] active:bg-[var(--bsj-primary)] active:text-white focus:outline-none focus-visible:border-[var(--bsj-primary)] focus-visible:bg-[var(--bsj-primary)] focus-visible:text-white"
             style={ctaStyle}
           >
             {ctaLabel} →

@@ -1,4 +1,5 @@
 import type { CSSProperties } from 'react';
+import { ConditionIcon } from './ConditionIcon';
 
 export interface HeroSectionProps {
   className?: string;
@@ -6,7 +7,7 @@ export interface HeroSectionProps {
 
 const sectionStyle: CSSProperties = {
   backgroundColor: 'var(--bsj-bg)',
-  padding: '56px 24px 72px',
+  padding: '48px 24px 72px',
 };
 
 const guidePanelStyle: CSSProperties = {
@@ -39,7 +40,7 @@ const eyebrowStyle: CSSProperties = {
 
 const headlineStyle: CSSProperties = {
   color: 'var(--bsj-text)',
-  fontSize: 'clamp(36px, 5.6vw, 76px)',
+  fontSize: 'clamp(38px, 6vw, 82px)',
   fontWeight: 600,
   lineHeight: 0.98,
   letterSpacing: '0',
@@ -49,8 +50,8 @@ const subtextStyle: CSSProperties = {
   color: 'var(--bsj-text-muted)',
   fontSize: '16px',
   lineHeight: 1.8,
-  marginTop: '28px',
-  maxWidth: '500px',
+  marginTop: '24px',
+  maxWidth: '560px',
 };
 
 const primaryCtaStyle: CSSProperties = {
@@ -72,8 +73,8 @@ const secondaryCtaStyle: CSSProperties = {
 
 const guideTileStyle: CSSProperties = {
   backgroundColor: 'var(--bsj-bg)',
-  minHeight: '138px',
-  padding: '20px',
+  minHeight: '150px',
+  padding: '22px',
 };
 
 const guideCodeStyle: CSSProperties = {
@@ -124,6 +125,15 @@ const GUIDE_TILES = [
   },
 ];
 
+const KEY_CONDITIONS = [
+  { id: 'tattoo-friendly', label: 'Tattoo notes' },
+  { id: 'food-friendly', label: 'Food needs' },
+  { id: 'luggage-friendly', label: 'Luggage' },
+  { id: 'private-bath', label: 'Private bath' },
+  { id: 'family-friendly', label: 'Family stays' },
+  { id: 'self-catering', label: 'Long stay' },
+];
+
 export function HeroSection({ className }: HeroSectionProps) {
   return (
     <section
@@ -134,7 +144,7 @@ export function HeroSection({ className }: HeroSectionProps) {
         className="mx-auto flex flex-col lg:flex-row items-stretch gap-9 lg:gap-16"
         style={{ maxWidth: '1280px' }}
       >
-        <div className="w-full lg:w-[58%]" style={guidePanelStyle}>
+        <div className="w-full lg:w-[52%]" style={guidePanelStyle}>
           <div className="grid grid-cols-1 sm:grid-cols-2">
             {GUIDE_TILES.map((tile) => (
               <div key={tile.code} style={guideTileStyle}>
@@ -150,16 +160,31 @@ export function HeroSection({ className }: HeroSectionProps) {
           <p style={eyebrowStyle}>Researched Japan stay guide</p>
 
           <h1 style={headlineStyle}>
-            Stay where the<br className="hidden sm:block" />
-            details already<br className="hidden sm:block" />
-            make sense.
+            Japan stays that<br className="hidden sm:block" />
+            fit real travel<br className="hidden sm:block" />
+            needs.
           </h1>
 
           <p style={subtextStyle}>
-            Bespoke Stay Japan explains the practical details that shape a trip:
-            tattoo-related bath rules, luggage movement, food restrictions, private
-            baths, long-stay comfort, and what to confirm before booking.
+            Tattoo notes, food restrictions, luggage support, private baths,
+            family stays, pets, and long-stay comfort. Researched from Japanese
+            sources and hotel policies, with the details to confirm before booking.
           </p>
+
+          <div className="mt-8 grid grid-cols-2 gap-2 sm:grid-cols-3">
+            {KEY_CONDITIONS.map((condition) => (
+              <a
+                key={condition.id}
+                href={`/stays/${condition.id === 'private-villa' ? 'private-villas' : condition.id}`}
+                className="group flex min-h-[54px] items-center gap-3 rounded-[4px] border border-[var(--bsj-border)] bg-[var(--bsj-bg-card)] px-3 py-2 text-[var(--bsj-text)] no-underline transition-colors hover:border-[var(--bsj-primary)] hover:bg-[var(--bsj-primary)] hover:text-white active:border-[var(--bsj-primary)] active:bg-[var(--bsj-primary)] active:text-white focus:outline-none focus-visible:border-[var(--bsj-primary)] focus-visible:bg-[var(--bsj-primary)] focus-visible:text-white"
+              >
+                <ConditionIcon name={condition.id} width={25} height={25} />
+                <span className="text-[12px] font-semibold leading-[1.25] tracking-[0.02em]">
+                  {condition.label}
+                </span>
+              </a>
+            ))}
+          </div>
 
           <div className="flex flex-col sm:flex-row items-start sm:items-center gap-5 mt-9">
             <a

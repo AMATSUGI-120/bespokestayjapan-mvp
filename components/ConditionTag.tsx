@@ -19,6 +19,13 @@ interface ConditionTagConfig {
   border?: string;
 }
 
+interface ConditionTagTone {
+  border: string;
+  color: string;
+  background: string;
+  hoverBackground: string;
+}
+
 const conditionTagConfig: Record<ConditionTagVariant, ConditionTagConfig> = {
   facility: {
     color: 'var(--bsj-primary)',
@@ -32,6 +39,71 @@ const conditionTagConfig: Record<ConditionTagVariant, ConditionTagConfig> = {
   },
 };
 
+function getConditionTagTone(label: string, variant: ConditionTagVariant): ConditionTagTone {
+  const normalized = label.toLowerCase();
+
+  if (normalized.includes('tattoo')) {
+    return {
+      border: '#d8c5bd',
+      color: '#7d4038',
+      background: '#fbf6f3',
+      hoverBackground: '#7d4038',
+    };
+  }
+
+  if (normalized.includes('food') || normalized.includes('catering')) {
+    return {
+      border: '#d5d8c4',
+      color: '#58613a',
+      background: '#f7f8f1',
+      hoverBackground: '#58613a',
+    };
+  }
+
+  if (normalized.includes('luggage') || normalized.includes('access')) {
+    return {
+      border: '#cbd3d9',
+      color: '#435a68',
+      background: '#f3f6f7',
+      hoverBackground: '#435a68',
+    };
+  }
+
+  if (normalized.includes('bath')) {
+    return {
+      border: '#c9d0da',
+      color: '#374f72',
+      background: '#f3f5f9',
+      hoverBackground: '#374f72',
+    };
+  }
+
+  if (normalized.includes('pet') || normalized.includes('family')) {
+    return {
+      border: '#d8d1c4',
+      color: '#6a5640',
+      background: '#f9f6f0',
+      hoverBackground: '#6a5640',
+    };
+  }
+
+  if (variant === 'stay-type') {
+    return {
+      border: 'var(--bsj-border)',
+      color: 'var(--bsj-text-muted)',
+      background: 'transparent',
+      hoverBackground: 'var(--bsj-primary)',
+    };
+  }
+
+  return {
+    border: 'var(--bsj-border)',
+    color: conditionTagConfig[variant].color,
+    background: 'transparent',
+    hoverBackground: 'var(--bsj-primary)',
+  };
+}
+
 export function ConditionTag({
   label,
   variant = 'facility',
@@ -39,6 +111,7 @@ export function ConditionTag({
   className,
 }: ConditionTagProps) {
   const config = conditionTagConfig[variant];
+  const tone = getConditionTagTone(label, variant);
 
   const style: CSSProperties = {
     display: 'inline-flex',
@@ -47,9 +120,9 @@ export function ConditionTag({
     width: 'fit-content',
     padding: '3px 8px',
     borderRadius: '3px',
-    border: config.border ?? '1px solid var(--bsj-border)',
-    backgroundColor: 'transparent',
-    color: config.color,
+    border: config.border ?? `1px solid ${tone.border}`,
+    backgroundColor: tone.background,
+    color: tone.color,
     fontSize: '10px',
     fontWeight: 600,
     letterSpacing: '0.08em',
@@ -62,11 +135,22 @@ export function ConditionTag({
   };
 
   if (href) {
-    const linkStyle: CSSProperties = {
-      ...style,
-      border: undefined,
-      backgroundColor: undefined,
-      color: undefined,
+    const { border, backgroundColor, color, ...baseLinkStyle } = style;
+    void border;
+    void backgroundColor;
+    void color;
+
+    const linkStyle: CSSProperties & {
+      '--tag-border': string;
+      '--tag-bg': string;
+      '--tag-color': string;
+      '--tag-hover-bg': string;
+    } = {
+      ...baseLinkStyle,
+      '--tag-border': tone.border,
+      '--tag-bg': tone.background,
+      '--tag-color': tone.color,
+      '--tag-hover-bg': tone.hoverBackground,
     };
 
     return (
@@ -80,7 +164,7 @@ export function ConditionTag({
           })
         }
         className={[
-          'border border-[var(--bsj-border)] text-[var(--bsj-primary)] no-underline transition-colors hover:border-[var(--bsj-primary)] hover:bg-[var(--bsj-primary)] hover:text-white active:border-[var(--bsj-primary)] active:bg-[var(--bsj-primary)] active:text-white focus:outline-none focus-visible:border-[var(--bsj-primary)] focus-visible:bg-[var(--bsj-primary)] focus-visible:text-white',
+          'border border-[var(--tag-border)] bg-[var(--tag-bg)] text-[var(--tag-color)] no-underline transition-colors hover:border-[var(--tag-hover-bg)] hover:bg-[var(--tag-hover-bg)] hover:text-white active:border-[var(--tag-hover-bg)] active:bg-[var(--tag-hover-bg)] active:text-white focus:outline-none focus-visible:border-[var(--tag-hover-bg)] focus-visible:bg-[var(--tag-hover-bg)] focus-visible:text-white',
           className,
         ]
           .filter(Boolean)
