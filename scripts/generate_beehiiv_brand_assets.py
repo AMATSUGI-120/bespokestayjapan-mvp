@@ -177,11 +177,11 @@ def generate_thumbnail() -> Path:
 
     labels = [
         ("Tattoo notes", 462, 458),
-        ("Food needs", 650, 458),
-        ("Luggage", 810, 458),
+        ("Food needs", 660, 458),
+        ("Luggage", 858, 458),
         ("Private bath", 462, 522),
-        ("Long stay", 666, 522),
-        ("Family", 832, 522),
+        ("Long stay", 672, 522),
+        ("Family", 868, 522),
     ]
     for text, x, ly in labels:
         draw_label(draw, x, ly, text)
