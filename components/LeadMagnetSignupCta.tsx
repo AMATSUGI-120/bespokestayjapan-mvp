@@ -14,11 +14,11 @@ export default function LeadMagnetSignupCta({
   subscribeUrl,
   sourcePath,
 }: LeadMagnetSignupCtaProps) {
-  const track = (destination: 'beehiiv' | 'pdf_preview') => {
+  const trackSignup = () => {
     trackEvent('bsj_lead_magnet_signup_click', {
       lead_magnet: leadMagnet.key,
       source_path: sourcePath,
-      destination,
+      destination: 'beehiiv',
     });
   };
 
@@ -30,7 +30,7 @@ export default function LeadMagnetSignupCta({
             href={subscribeUrl}
             target="_blank"
             rel="noreferrer"
-            onClick={() => track('beehiiv')}
+            onClick={trackSignup}
             className="inline-flex min-h-11 w-full items-center justify-center border border-[var(--bsj-border-strong)] bg-[var(--bsj-text)] px-4 text-center text-[12px] font-semibold uppercase tracking-[0.08em] text-[var(--bsj-bg)] no-underline transition-colors hover:bg-[var(--bsj-primary-hover)] active:bg-[var(--bsj-primary)]"
           >
             {leadMagnet.ctaLabel}
@@ -48,16 +48,6 @@ export default function LeadMagnetSignupCta({
           Email signup coming soon
         </button>
       )}
-
-      <a
-        href={leadMagnet.pdfUrl}
-        target="_blank"
-        rel="noreferrer"
-        onClick={() => track('pdf_preview')}
-        className="inline-flex min-h-10 w-full items-center justify-center border border-[var(--bsj-border)] px-4 text-center text-[12px] font-semibold uppercase tracking-[0.08em] text-[var(--bsj-text)] no-underline transition-colors hover:bg-[var(--bsj-bg-subtle)] active:bg-[var(--bsj-border)]"
-      >
-        {leadMagnet.secondaryCtaLabel}
-      </a>
     </div>
   );
 }

@@ -14,7 +14,6 @@ export interface LeadMagnet {
   title: string;
   description: string;
   ctaLabel: string;
-  secondaryCtaLabel: string;
   pdfUrl: string;
   fileName: string;
 }
@@ -28,7 +27,6 @@ export const leadMagnets: Record<LeadMagnetKey, LeadMagnet> = {
     description:
       'A practical BSJ checklist for choosing Japan stays when tattoos, luggage, food needs, private baths, pets, family travel, or long-stay comfort matter.',
     ctaLabel: 'Get the checklist by email',
-    secondaryCtaLabel: 'Preview the sample PDF',
     pdfUrl: '/downloads/japan-stay-pre-booking-checklist-bsj-sample.pdf',
     fileName: 'japan-stay-pre-booking-checklist-bsj-sample.pdf',
   },
@@ -40,7 +38,6 @@ export const leadMagnets: Record<LeadMagnetKey, LeadMagnet> = {
     description:
       'Phone-friendly show-this-card Japanese for restaurants, hotels, trains, taxis, onsen, luggage, and basic help.',
     ctaLabel: 'Get the free cards by email',
-    secondaryCtaLabel: 'Preview the sample PDF',
     pdfUrl: '/downloads/japan-survival-phrase-cards-bsj-sample.pdf',
     fileName: 'japan-survival-phrase-cards-bsj-sample.pdf',
   },
@@ -52,7 +49,6 @@ export const leadMagnets: Record<LeadMagnetKey, LeadMagnet> = {
     description:
       'Short hotel questions for tattooed travelers who need bath policy clarity before booking in Japan.',
     ctaLabel: 'Get the tattoo inquiry template',
-    secondaryCtaLabel: 'Preview the sample PDF',
     pdfUrl: '/downloads/tattoo-friendly-stay-inquiry-template-bsj-sample.pdf',
     fileName: 'tattoo-friendly-stay-inquiry-template-bsj-sample.pdf',
   },
@@ -64,7 +60,6 @@ export const leadMagnets: Record<LeadMagnetKey, LeadMagnet> = {
     description:
       'A quick guide to the difference between public baths, reservable private baths, and in-room baths in Japan.',
     ctaLabel: 'Get the private bath sheet',
-    secondaryCtaLabel: 'Preview the sample PDF',
     pdfUrl: '/downloads/private-bath-comparison-sheet-bsj-sample.pdf',
     fileName: 'private-bath-comparison-sheet-bsj-sample.pdf',
   },
@@ -76,7 +71,6 @@ export const leadMagnets: Record<LeadMagnetKey, LeadMagnet> = {
     description:
       'A practical checklist for travelers with large bags, city transfers, luggage delivery, or early arrivals.',
     ctaLabel: 'Get the luggage mini sheet',
-    secondaryCtaLabel: 'Preview the sample PDF',
     pdfUrl: '/downloads/japan-luggage-planning-mini-sheet-bsj-sample.pdf',
     fileName: 'japan-luggage-planning-mini-sheet-bsj-sample.pdf',
   },
@@ -88,7 +82,6 @@ export const leadMagnets: Record<LeadMagnetKey, LeadMagnet> = {
     description:
       'A Japan-specific food and hotel meal checklist for vegetarian, vegan, halal, allergy, and other food concerns.',
     ctaLabel: 'Get the food needs sheet',
-    secondaryCtaLabel: 'Preview the sample PDF',
     pdfUrl: '/downloads/dietary-restriction-check-sheet-bsj-sample.pdf',
     fileName: 'dietary-restriction-check-sheet-bsj-sample.pdf',
   },
@@ -100,7 +93,6 @@ export const leadMagnets: Record<LeadMagnetKey, LeadMagnet> = {
     description:
       'A sample planning worksheet for tattooed travelers comparing Osaka, Kyoto, Nara, Kobe, and nearby stay options.',
     ctaLabel: 'Get the starter list',
-    secondaryCtaLabel: 'Preview the sample PDF',
     pdfUrl: '/downloads/kansai-tattoo-stay-starter-list-bsj-sample.pdf',
     fileName: 'kansai-tattoo-stay-starter-list-bsj-sample.pdf',
   },
