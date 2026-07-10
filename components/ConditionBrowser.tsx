@@ -100,7 +100,7 @@ const CONDITIONS: Condition[] = [
 const sectionStyle: CSSProperties = {
   backgroundColor: 'var(--bsj-bg-card)',
   borderTop: '1px solid var(--bsj-border)',
-  padding: '88px 24px',
+  padding: '76px 24px',
 };
 
 const headingStyle: CSSProperties = {
@@ -183,10 +183,11 @@ export function ConditionBrowser({ className }: ConditionBrowserProps) {
     >
       <div className="mx-auto" style={{ maxWidth: '1180px' }}>
         <div className="mb-6">
-          <h2 style={headingStyle}>Browse by travel condition</h2>
+          <h2 style={headingStyle}>Choose the detail that could change your stay</h2>
           <p style={subtextStyle}>
-            A quieter way to compare the details that usually sit in footnotes, policies,
-            and unanswered messages.
+            Start with the condition that matters most. Each page gathers published stay
+            profiles around the practical details that often sit in policies, footnotes,
+            or unanswered messages.
           </p>
         </div>
 
@@ -217,7 +218,7 @@ export function ConditionBrowser({ className }: ConditionBrowserProps) {
                 {condition.title}
               </span>
               <span style={entryDescStyle}>{condition.description}</span>
-              <span className="transition-colors group-hover:text-[var(--bsj-primary-hover)] group-hover:underline" style={entryCtaStyle}>View guide</span>
+              <span className="transition-colors group-hover:text-[var(--bsj-primary-hover)] group-hover:underline" style={entryCtaStyle}>View matching stays</span>
             </Link>
           ))}
         </div>

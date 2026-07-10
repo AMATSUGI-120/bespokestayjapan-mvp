@@ -192,17 +192,17 @@ export function FeaturedStays({ hotels, className }: FeaturedStaysProps) {
       <div style={innerStyle}>
         <div>
           <p style={eyebrowStyle}>
-            {hasRealData ? 'Selected stays' : 'Example stay notes'}
+            {hasRealData ? 'Selected stay profiles' : 'Example stay profiles'}
           </p>
           <h2 style={headingStyle}>
             {hasRealData
-              ? 'A small edit of places worth a closer look'
-              : 'How we show stay conditions'}
+              ? 'A small edit of researched places worth checking'
+              : 'How we turn stay research into profiles'}
           </h2>
           <p style={subtextStyle}>
             {hasRealData
-              ? 'Each note is organized around practical travel conditions, not just nightly rates or generic amenities.'
-              : 'These examples show how Bespoke Stay Japan will present stay type, location, condition notes, and what still needs checking.'}
+              ? 'Each profile is organized around practical travel constraints, source-backed notes, and what to confirm before relying on a listing.'
+              : 'These examples show how Bespoke Stay Japan presents stay type, location, condition notes, and what still needs checking.'}
           </p>
         </div>
 

@@ -6,6 +6,7 @@ import { FeaturedStays, type FeaturedHotelData } from '@/components/FeaturedStay
 import GuideTeaserSection from '@/components/GuideTeaserSection';
 import CustomShortlistCTA from '@/components/CustomShortlistCTA';
 import VerificationExplainer from '@/components/VerificationExplainer';
+import HomeSampleCta from '@/components/HomeSampleCta';
 
 interface HomeClientProps {
   initialFeaturedHotels: FeaturedHotelData[];
@@ -20,6 +21,8 @@ export default function HomeClient({
 
       <main>
         <HeroSection />
+
+        <HomeSampleCta />
 
         <div id="conditions">
           <ConditionBrowser />
