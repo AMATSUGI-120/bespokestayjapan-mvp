@@ -265,30 +265,30 @@ export function GuidePage({ guide }: { guide: GuidePageContent }) {
 
               <section className="mt-12 border border-[var(--bsj-border)] bg-[var(--bsj-bg)] p-5 md:p-7">
                 <p className="text-[11px] font-semibold uppercase tracking-[0.16em] text-[var(--bsj-text-light)]">
-                  Free phone cards
+                  Free planning samples
                 </p>
                 <h2 className="mt-3 text-[24px] font-medium tracking-[0] text-[var(--bsj-text)]">
-                  Need Japanese you can show on your phone?
+                  Want a checklist or template before you book?
                 </h2>
                 <p className="mt-4 max-w-2xl text-[14px] leading-[1.8] text-[var(--bsj-text-muted)]">
-                  BSJ is preparing a free mini pack of show-this-card Japanese
-                  phrases for restaurants, hotels, trains, taxis, onsen, luggage,
-                  and basic help. Use it when translation is not enough and you
-                  need staff to understand the exact question.
+                  Start with free BSJ samples: a pre-booking checklist, phrase
+                  cards, hotel inquiry templates, bath wording notes, luggage
+                  prompts, and food restriction checks for practical Japan travel
+                  planning.
                 </p>
                 <div className="mt-6 flex flex-wrap gap-3">
                   <TrackedAnalyticsLink
-                    href="/free-japan-phrase-cards"
+                    href="/free-japan-travel-samples"
                     className="inline-flex min-h-11 items-center border border-[var(--bsj-primary)] bg-[var(--bsj-primary)] px-4 py-2 text-[12px] font-semibold uppercase tracking-[0.08em] text-white no-underline transition-colors hover:bg-[var(--bsj-primary-hover)] active:bg-[var(--bsj-text)]"
                     tracking={{
                       event: 'guide_cta',
                       guidePath: guide.path,
-                      ctaLabel: 'Get free phrase cards',
-                      ctaHref: '/free-japan-phrase-cards',
-                      ctaLocation: 'free_phone_cards',
+                      ctaLabel: 'Browse free samples',
+                      ctaHref: '/free-japan-travel-samples',
+                      ctaLocation: 'free_planning_samples',
                     }}
                   >
-                    Get free phrase cards
+                    Browse free samples
                   </TrackedAnalyticsLink>
                   <TrackedAnalyticsLink
                     href="/japan-confirmation-service"
@@ -298,7 +298,7 @@ export function GuidePage({ guide }: { guide: GuidePageContent }) {
                       sourcePath: guide.path,
                       ctaLabel: 'Need us to check something?',
                       ctaHref: '/japan-confirmation-service',
-                      ctaLocation: 'free_phone_cards',
+                      ctaLocation: 'free_planning_samples',
                     }}
                   >
                     Need us to check something?

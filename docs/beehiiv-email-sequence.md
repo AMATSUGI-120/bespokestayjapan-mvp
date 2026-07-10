@@ -1,6 +1,6 @@
 # beehiiv Email Sequence - Bespoke Stay Japan
 
-Updated: 2026-07-09 JST
+Updated: 2026-07-10 JST
 
 ## Delivery Notes
 
@@ -10,32 +10,43 @@ Publication name:
 Sender:
 `Bespoke Stay Japan <hello@mail.bespokestayjapan.com>`
 
-Lead magnet:
-`Free Japan Phrase Cards`
+Primary lead magnet:
+`Free Japan Travel Planning Samples`
 
-Current PDF download URL:
-`https://bespokestayjapan.com/downloads/japan-survival-phrase-cards-bsj-sample.pdf`
+Main sample hub:
+`https://bespokestayjapan.com/free-japan-travel-samples`
 
-Use this as the first email after someone subscribes through:
+Main checklist page:
+`https://bespokestayjapan.com/free-japan-stay-checklist`
+
+Current PDF highlights:
+
+- `https://bespokestayjapan.com/downloads/japan-stay-pre-booking-checklist-bsj-sample.pdf`
+- `https://bespokestayjapan.com/downloads/japan-survival-phrase-cards-bsj-sample.pdf`
+- `https://bespokestayjapan.com/downloads/tattoo-friendly-stay-inquiry-template-bsj-sample.pdf`
+- `https://bespokestayjapan.com/downloads/japan-luggage-planning-mini-sheet-bsj-sample.pdf`
+- `https://bespokestayjapan.com/downloads/dietary-restriction-check-sheet-bsj-sample.pdf`
+
+Use Email 1 as the first email after someone subscribes through:
 `https://bespokestayjapan.beehiiv.com/subscribe`
 
-Do not overpromise. The cards help communication, but they do not guarantee
-policies, allergy safety, medical outcomes, availability, or facility
-acceptance.
+Do not overpromise. BSJ samples help travelers ask better questions and plan
+more calmly, but they do not guarantee policies, allergy safety, medical
+outcomes, availability, tattoo acceptance, or facility answers.
 
-## Email 1 - Free Phrase Cards Delivery
+## Email 1 - Free Samples Delivery
 
 Subject options:
 
-1. Your Japan phrase cards are here
-2. Save these Japan phrase cards before your trip
-3. Your free Japan travel phrase cards
+1. Your free Japan planning samples are here
+2. Start here before booking a Japan stay
+3. Your BSJ travel planning samples
 
 Recommended subject:
-`Your Japan phrase cards are here`
+`Your free Japan planning samples are here`
 
 Preview text:
-`Save this PDF to your phone and use it when you need to show a clear Japanese question to staff.`
+`Download the BSJ checklist, phrase cards, and practical templates for Japan stays, baths, luggage, and food needs.`
 
 Body:
 
@@ -44,31 +55,36 @@ Hi,
 
 Thanks for joining Bespoke Stay Japan.
 
-Here is your free mini pack:
+Here are your free Japan planning samples:
 
-Japan Survival Phrase Cards
-https://bespokestayjapan.com/downloads/japan-survival-phrase-cards-bsj-sample.pdf
+Free BSJ sample hub
+https://bespokestayjapan.com/free-japan-travel-samples
 
-These are phone-friendly "show-this-card" Japanese phrases for real travel situations in Japan:
+If you only open one thing first, start here:
 
-- restaurants and food restrictions
-- fish broth / dashi questions
-- hotel luggage questions
-- private bath and onsen wording
-- tattoo and public bath checks
-- trains, taxis, and basic help
+Japan Stay Pre-Booking Checklist
+https://bespokestayjapan.com/free-japan-stay-checklist
 
-How to use the cards
+The samples are designed for real travel situations in Japan:
 
-1. Open the PDF on your phone.
-2. Save it somewhere easy to find before your trip.
-3. When you need help, open the card for that situation.
-4. Show the Japanese text to staff.
-5. For important details, ask directly and confirm before relying on the answer.
+- checking hotel and ryokan details before booking
+- tattoo and bath policy questions
+- private bath, public bath, and in-room bath wording
+- luggage storage and delivery questions
+- dietary restriction and fish-based dashi checks
+- phone-friendly Japanese phrase cards
+
+Suggested order
+
+1. Open the free sample hub.
+2. Download the Japan Stay Pre-Booking Checklist.
+3. Save the phrase cards to your phone.
+4. Use the topic-specific templates when a detail affects your booking decision.
+5. For important details, confirm directly with the hotel, restaurant, or facility before relying on the answer.
 
 Important note
 
-These cards are designed to make communication easier. They do not guarantee hotel policies, restaurant ingredients, allergen-free food, medical safety, availability, tattoo acceptance, or final service outcomes.
+These samples are planning aids. They do not guarantee hotel policies, restaurant ingredients, allergen-free food, medical safety, availability, tattoo acceptance, luggage handling, or final service outcomes.
 
 For allergies, medical issues, tattoos, bathing rules, luggage delivery, and booking-related policies, always confirm directly with the facility before making a decision.
 
@@ -95,15 +111,18 @@ Hi,
 
 Thanks for joining Bespoke Stay Japan.
 
-Here is your free mini pack:
+Here are your free Japan planning samples:
 
-Japan Survival Phrase Cards
-https://bespokestayjapan.com/downloads/japan-survival-phrase-cards-bsj-sample.pdf
+https://bespokestayjapan.com/free-japan-travel-samples
 
-Save the PDF to your phone before your trip. When you need help at a restaurant, hotel, station, taxi, or onsen, open the card for that situation and show the Japanese text to staff.
+Start with the Japan Stay Pre-Booking Checklist:
+
+https://bespokestayjapan.com/free-japan-stay-checklist
+
+The samples cover stay checks, phrase cards, tattoo and bath questions, luggage, and food needs. Save the PDFs before your trip and use them when a detail could affect your booking or day-of-travel plan.
 
 Important:
-These cards help communication, but they do not guarantee policies, allergen-free food, medical safety, availability, tattoo acceptance, or final service outcomes. For important details, always confirm directly before relying on the answer.
+These samples are planning aids. They do not guarantee hotel policies, restaurant ingredients, allergen-free food, medical safety, availability, tattoo acceptance, luggage handling, or final service outcomes. For important details, always confirm directly before relying on the answer.
 
 In the next email, I will explain why "I'm vegetarian" may not be enough in Japan, especially when fish-based dashi is involved.
 
@@ -129,9 +148,8 @@ Explain public bath, private bath, in-room bath, cover-required policies, and
 why "tattoo-friendly" should be confirmed by bath type.
 
 Email 4:
-`When phrase cards are not enough`
+`When samples are not enough`
 
 Purpose:
 Introduce confirmation support as a planned BSJ service. Keep it framed as
 Japanese inquiry and English summary support, not booking代行.
-

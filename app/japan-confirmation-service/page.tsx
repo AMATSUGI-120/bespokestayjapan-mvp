@@ -84,17 +84,17 @@ export default function JapanConfirmationServicePage() {
                 pricing, and delivery workflow will be added later.
               </p>
               <TrackedAnalyticsLink
-                href="/free-japan-phrase-cards"
+                href="/free-japan-travel-samples"
                 className="mt-6 inline-flex min-h-10 items-center border border-[var(--bsj-border-strong)] px-4 py-2 text-[12px] font-semibold uppercase tracking-[0.08em] text-[var(--bsj-text)] no-underline transition-colors hover:bg-[var(--bsj-bg-subtle)]"
                 tracking={{
                   event: 'confirmation_service_cta',
                   sourcePath: pagePath,
-                  ctaLabel: 'Start with free phrase cards',
-                  ctaHref: '/free-japan-phrase-cards',
+                  ctaLabel: 'Start with free samples',
+                  ctaHref: '/free-japan-travel-samples',
                   ctaLocation: 'hero_status_card',
                 }}
               >
-                Start with free phrase cards
+                Start with free samples
               </TrackedAnalyticsLink>
             </aside>
           </div>
