@@ -62,22 +62,6 @@ def draw_subtle_grid(draw: ImageDraw.ImageDraw, width: int, height: int, color: 
         draw.line((0, y, width, y), fill=color, width=1)
 
 
-def draw_window_mark(draw: ImageDraw.ImageDraw, cx: int, cy: int, scale: float, color: str) -> None:
-    roof_w = int(160 * scale)
-    roof_h = int(56 * scale)
-    line_w = max(4, int(10 * scale))
-    draw.line((cx - roof_w // 2, cy, cx, cy - roof_h, cx + roof_w // 2, cy), fill=color, width=line_w, joint="curve")
-    sq = int(15 * scale)
-    gap = int(8 * scale)
-    top = cy + int(18 * scale)
-    left = cx - sq - gap // 2
-    for row in range(2):
-        for col in range(2):
-            x0 = left + col * (sq + gap)
-            y0 = top + row * (sq + gap)
-            draw.rectangle((x0, y0, x0 + sq, y0 + sq), fill=color)
-
-
 def generate_logo() -> Path:
     size = 800
     img = Image.new("RGB", (size, size), NAVY)
@@ -87,19 +71,20 @@ def generate_logo() -> Path:
     draw.rectangle((36, 36, size - 36, size - 36), outline="#2a3948", width=2)
     draw.rectangle((58, 58, size - 58, size - 58), outline="#223140", width=1)
 
-    draw_window_mark(draw, 400, 178, 1.15, ACCENT)
+    draw.line((252, 188, 548, 188), fill=ACCENT, width=4)
+    draw.line((310, 214, 490, 214), fill="#354555", width=2)
 
     title_font = font(GEORGIA_BOLD, 206)
-    center_text(draw, (400, 378), "BSJ", title_font, CREAM)
+    center_text(draw, (400, 350), "BSJ", title_font, CREAM)
 
     label_font = font(AVENIR_NEXT, 31)
-    center_text(draw, (400, 590), "BESPOKE STAY JAPAN", label_font, CREAM, spacing=9)
+    center_text(draw, (400, 570), "BESPOKE STAY JAPAN", label_font, CREAM, spacing=9)
 
     small_font = font(AVENIR, 21)
-    center_text(draw, (400, 650), "PRACTICAL JAPAN STAY NOTES", small_font, MUTED, spacing=4)
+    center_text(draw, (400, 640), "PRACTICAL JAPAN STAY NOTES", small_font, MUTED, spacing=4)
 
-    draw.line((104, 592, 134, 592), fill=ACCENT, width=4)
-    draw.line((666, 592, 696, 592), fill=ACCENT, width=4)
+    draw.line((104, 572, 134, 572), fill=ACCENT, width=4)
+    draw.line((666, 572, 696, 572), fill=ACCENT, width=4)
 
     out = OUT_DIR / "bsj-beehiiv-logo.png"
     img.save(out, optimize=True)
@@ -149,11 +134,12 @@ def generate_thumbnail() -> Path:
     draw.rectangle((390, 0, 393, height), fill=ACCENT)
     draw.rectangle((40, 40, 350, height - 40), outline="#2a3948", width=1)
 
-    draw_window_mark(draw, 195, 126, 0.55, ACCENT)
-    center_text(draw, (195, 250), "BSJ", font(GEORGIA_BOLD, 112), CREAM)
-    center_text(draw, (195, 365), "BESPOKE", font(AVENIR_NEXT, 21), CREAM, spacing=7)
-    center_text(draw, (195, 405), "STAY JAPAN", font(AVENIR_NEXT, 21), CREAM, spacing=6)
-    center_text(draw, (195, 506), "Researched stay notes", font(AVENIR, 22), MUTED)
+    draw.line((96, 122, 294, 122), fill=ACCENT, width=3)
+    draw.line((126, 146, 264, 146), fill="#354555", width=2)
+    center_text(draw, (195, 270), "BSJ", font(GEORGIA_BOLD, 112), CREAM)
+    center_text(draw, (195, 386), "BESPOKE", font(AVENIR_NEXT, 21), CREAM, spacing=7)
+    center_text(draw, (195, 426), "STAY JAPAN", font(AVENIR_NEXT, 21), CREAM, spacing=6)
+    center_text(draw, (195, 512), "Researched stay notes", font(AVENIR, 22), MUTED)
 
     eyebrow = font(AVENIR_NEXT, 24)
     draw.text((460, 86), "BESPOKE STAY JAPAN", font=eyebrow, fill=ACCENT)
