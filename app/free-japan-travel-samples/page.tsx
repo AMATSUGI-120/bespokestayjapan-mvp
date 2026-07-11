@@ -121,14 +121,26 @@ export default function FreeJapanTravelSamplesPage() {
                     {sample.description}
                   </p>
                   <div className="mt-6 flex flex-wrap gap-3">
-                    <a
-                      href={sample.pdfUrl}
-                      target="_blank"
-                      rel="noreferrer"
-                      className="inline-flex min-h-10 items-center border border-[var(--bsj-border-strong)] px-4 py-2 text-[12px] font-semibold uppercase tracking-[0.08em] text-[var(--bsj-text)] no-underline transition-colors hover:bg-[var(--bsj-bg-subtle)] active:bg-[var(--bsj-border)]"
-                    >
-                      Preview PDF
-                    </a>
+                    {subscribeUrl ? (
+                      <TrackedAnalyticsLink
+                        href={subscribeUrl}
+                        external
+                        className="inline-flex min-h-10 items-center border border-[var(--bsj-border-strong)] bg-[var(--bsj-text)] px-4 py-2 text-[12px] font-semibold uppercase tracking-[0.08em] text-[var(--bsj-bg)] no-underline transition-colors hover:bg-[var(--bsj-primary-hover)] active:bg-[var(--bsj-primary)]"
+                        tracking={{
+                          event: 'product_teaser',
+                          sourcePath: pagePath,
+                          productKey: sample.key,
+                          ctaLabel: 'Get sample by email',
+                          ctaHref: subscribeUrl,
+                        }}
+                      >
+                        Get by email
+                      </TrackedAnalyticsLink>
+                    ) : (
+                      <span className="inline-flex min-h-10 items-center border border-[var(--bsj-border)] bg-[var(--bsj-bg-subtle)] px-4 py-2 text-[12px] font-semibold uppercase tracking-[0.08em] text-[var(--bsj-text-muted)]">
+                        Email signup coming soon
+                      </span>
+                    )}
                     {sample.path.startsWith('/free-') ? (
                       <Link
                         href={sample.path}
@@ -138,9 +150,6 @@ export default function FreeJapanTravelSamplesPage() {
                       </Link>
                     ) : null}
                   </div>
-                  <p className="mt-4 break-words text-[10px] leading-[1.5] text-[var(--bsj-text-light)]">
-                    {sample.pdfUrl}
-                  </p>
                 </article>
               ))}
             </div>
@@ -161,16 +170,29 @@ export default function FreeJapanTravelSamplesPage() {
                   <div className="mt-5 flex flex-col gap-3">
                     {group.keys.map((key) => {
                       const sample = getLeadMagnet(key);
-                      return (
-                        <a
+                      return subscribeUrl ? (
+                        <TrackedAnalyticsLink
                           key={sample.key}
-                          href={sample.pdfUrl}
-                          target="_blank"
-                          rel="noreferrer"
+                          href={subscribeUrl}
+                          external
                           className="text-[13px] leading-[1.5] text-[var(--bsj-text)] no-underline transition-colors hover:text-[var(--bsj-primary-hover)] hover:underline"
+                          tracking={{
+                            event: 'product_teaser',
+                            sourcePath: pagePath,
+                            productKey: sample.key,
+                            ctaLabel: sample.title,
+                            ctaHref: subscribeUrl,
+                          }}
                         >
                           {sample.title}
-                        </a>
+                        </TrackedAnalyticsLink>
+                      ) : (
+                        <span
+                          key={sample.key}
+                          className="text-[13px] leading-[1.5] text-[var(--bsj-text-muted)]"
+                        >
+                          {sample.title}
+                        </span>
                       );
                     })}
                   </div>

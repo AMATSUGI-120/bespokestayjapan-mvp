@@ -206,26 +206,37 @@ export default function FreeJapanStayChecklistPage() {
 
             <div className="mt-10 grid gap-px overflow-hidden border border-[var(--bsj-border)] bg-[var(--bsj-border)] md:grid-cols-2">
               {relatedSamples.map((sample) => (
-                <a
-                  key={sample.key}
-                  href={sample.pdfUrl}
-                  target="_blank"
-                  rel="noreferrer"
-                  className="group bg-[var(--bsj-bg-card)] p-6 text-[var(--bsj-text)] no-underline transition-colors hover:bg-[var(--bsj-bg)]"
-                >
+                <article key={sample.key} className="bg-[var(--bsj-bg-card)] p-6">
                   <p className="text-[10px] font-semibold uppercase tracking-[0.14em] text-[var(--bsj-text-light)]">
                     {sample.eyebrow}
                   </p>
-                  <h3 className="mt-3 text-[21px] font-medium leading-[1.2] text-[var(--bsj-text)] group-hover:underline">
+                  <h3 className="mt-3 text-[21px] font-medium leading-[1.2] text-[var(--bsj-text)]">
                     {sample.title}
                   </h3>
                   <p className="mt-3 text-[13px] leading-[1.7] text-[var(--bsj-text-muted)]">
                     {sample.description}
                   </p>
-                  <p className="mt-5 text-[12px] font-semibold uppercase tracking-[0.08em] text-[var(--bsj-primary)]">
-                    Preview PDF →
-                  </p>
-                </a>
+                  {subscribeUrl ? (
+                    <TrackedAnalyticsLink
+                      href={subscribeUrl}
+                      external
+                      className="mt-5 inline-flex min-h-10 items-center border border-[var(--bsj-border-strong)] px-4 py-2 text-[12px] font-semibold uppercase tracking-[0.08em] text-[var(--bsj-text)] no-underline transition-colors hover:bg-[var(--bsj-bg-subtle)]"
+                      tracking={{
+                        event: 'product_teaser',
+                        sourcePath: pagePath,
+                        productKey: sample.key,
+                        ctaLabel: 'Get sample by email',
+                        ctaHref: subscribeUrl,
+                      }}
+                    >
+                      Get sample by email
+                    </TrackedAnalyticsLink>
+                  ) : (
+                    <span className="mt-5 inline-flex min-h-10 items-center border border-[var(--bsj-border)] bg-[var(--bsj-bg-subtle)] px-4 py-2 text-[12px] font-semibold uppercase tracking-[0.08em] text-[var(--bsj-text-muted)]">
+                      Email signup coming soon
+                    </span>
+                  )}
+                </article>
               ))}
             </div>
           </div>
