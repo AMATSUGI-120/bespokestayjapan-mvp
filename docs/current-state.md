@@ -255,8 +255,9 @@ Latest known state:
   - 0 posts over 500 characters
 - Current local xlsx tab name is `threads_posts` so it can be uploaded to
   Google Sheets with the tab name expected by n8n.
-- n8n only needs the spreadsheet ID in one place: the `GOOGLE_SHEET_ID`
-  variable. Do not paste the ID separately into each Google Sheets node.
+- The current n8n workflow uses a direct spreadsheet ID inside the Google
+  Sheets nodes rather than the earlier `GOOGLE_SHEET_ID` variable approach.
+  Do not commit the private spreadsheet ID into repo docs.
 - Keep the xlsx as working queue data unless the user explicitly asks to commit
   or publish it.
 
