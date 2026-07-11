@@ -208,20 +208,24 @@ Do not start with product-heavy Threads posting.
 
 ## Current n8n Setup Notes
 
-The local n8n workflow `BSJ Threads Auto Poster` has been simplified so the
-spreadsheet ID should not be pasted into every Google Sheets node.
+The local n8n workflow `BSJ Threads Auto Poster` currently reads the Google
+Sheet directly by spreadsheet ID inside n8n. Do not commit the private
+spreadsheet ID into repo docs.
 
-Use one n8n variable:
+Earlier setup notes mentioned a single n8n variable:
 
 - `GOOGLE_SHEET_ID`: the Google spreadsheet ID for the Threads queue
+
+The current workflow does not require that variable unless the Google Sheets
+nodes are changed back to variable-based configuration.
 
 Expected Google Sheets tab name:
 
 - `threads_posts`
 
-All Google Sheets nodes in the workflow read this same variable and tab name.
-If the queue is uploaded from `threads_posts_combined.xlsx`, make sure the
-Google Sheets tab is named `threads_posts`.
+All Google Sheets nodes in the workflow should read the same spreadsheet and
+tab name. If the queue is uploaded from `threads_posts_combined.xlsx`, make
+sure the Google Sheets tab is named `threads_posts`.
 
 Current workflow checks before posting:
 
