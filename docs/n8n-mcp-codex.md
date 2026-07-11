@@ -41,20 +41,24 @@ Required keys:
 
 Do not commit this env file.
 
-## Current Known Issue
+## Current Status
 
-At setup time, n8n itself was reachable:
+n8n itself is reachable:
 
 - `http://localhost:5678/healthz` returned 200
 - `http://localhost:5678/rest/settings` returned 200
 
-But the public API returned:
+The public API is also reachable after replacing the local API key:
 
-- `/api/v1/workflows?limit=1` -> 401 Unauthorized
+- `/api/v1/workflows?limit=1` returns 200
+- MCP `test_connection` succeeds
 
-This means the Codex MCP server is installed, but the n8n API key in
-`~/.n8n-api.env` must be replaced with a valid current API key before Codex can
-list, create, or update workflows.
+Current BSJ Threads workflow:
+
+- Name: `BSJ Threads Auto Poster`
+- ID: `pp4kjHoDCtD0LFjc`
+- Status: inactive unless the user explicitly approves activation
+- Schedule: 09:00, 22:00, and 02:00 JST
 
 ## Exposed Tools
 

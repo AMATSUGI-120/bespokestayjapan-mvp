@@ -240,6 +240,22 @@ Latest known state:
 9. Resume guide/article expansion after the list and product-demand signals are
    recorded.
 
+## Threads Automation State
+
+- Local n8n API access works through `~/.n8n-api.env`; do not commit or print
+  the API key.
+- Codex MCP setup is documented in `docs/n8n-mcp-codex.md`.
+- Current n8n workflow: `BSJ Threads Auto Poster`
+  (`pp4kjHoDCtD0LFjc`), inactive until explicit approval.
+- Current schedule: 09:00, 22:00, and 02:00 JST for a US-facing audience.
+- Current local `threads_posts_combined.xlsx` queue:
+  - 240 posts
+  - 80 days from `2026-07-12 09:00 JST`
+  - 80 linked posts, roughly 1 in 3
+  - 0 posts over 500 characters
+- Keep the xlsx as working queue data unless the user explicitly asks to commit
+  or publish it.
+
 ## Exploration Rules
 
 Before scanning the repo, read this file. Then use targeted `rg` searches.

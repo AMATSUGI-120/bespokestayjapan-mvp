@@ -50,11 +50,13 @@ Start with:
 
 - 3 posts per day
 - JST schedule
-- Suggested slots: 09:00, 13:00, 18:00
+- Suggested slots for a US-facing audience: 09:00, 22:00, 02:00 JST
+- In US daylight saving time, this roughly maps to 20:00 / 09:00 / 13:00 ET
+  and 17:00 / 06:00 / 10:00 PT
 
 Do not include a link in every post. Start with roughly:
 
-- 1 linked post per 3 to 5 posts
+- 1 linked post per 3 posts
 - More link-free posts while the account is new
 - Links mainly when the post naturally needs a deeper guide or free checklist
 
@@ -129,9 +131,11 @@ Recommended first workflow:
 2. Read queue from Google Sheets or a CSV exported from the xlsx.
 3. Pick the earliest row where `status = ready` and `scheduled_at_jst <= now`.
 4. Validate `final_text`, `char_count`, `media_type`, and optional `cta_url`.
-5. Compose the post:
-   - If `cta_type = none`, post `final_text`.
-   - If `cta_type = site_link`, append one short link line.
+5. Post `final_text`.
+   - If `cta_type = site_link`, the BSJ URL should already be included in
+     `final_text`.
+   - `cta_url` and `site_page` are tracking/reference fields, not separate text
+     composition inputs in the current MVP workflow.
 6. Publish to Threads.
 7. Update the row:
    - `status = posted`
@@ -165,9 +169,9 @@ replies, saves, profile visits, and link clicks.
 Before turning on automation:
 
 - Move the xlsx data into Google Sheets or a CSV that n8n can read.
-- Confirm all scheduled dates should start from the real launch date, not the
-  old draft dates from May 2026.
-- Decide whether the first week should be link-light.
+- Current local xlsx schedule starts from `2026-07-12 09:00 JST` and runs for
+  240 posts / 80 days at 09:00, 22:00, and 02:00 JST.
+- Current local xlsx link ratio is 80 linked posts out of 240 total posts.
 - Review the first 21 posts manually.
 - Confirm whether Threads API access is available or whether posting must begin
   manually / semi-manually.
