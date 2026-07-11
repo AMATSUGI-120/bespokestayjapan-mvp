@@ -205,3 +205,38 @@ Once posts are running:
 4. Build the paid kit only after replies or clicks show demand.
 
 Do not start with product-heavy Threads posting.
+
+## Current n8n Setup Notes
+
+The local n8n workflow `BSJ Threads Auto Poster` has been simplified so the
+spreadsheet ID should not be pasted into every Google Sheets node.
+
+Use one n8n variable:
+
+- `GOOGLE_SHEET_ID`: the Google spreadsheet ID for the Threads queue
+
+Expected Google Sheets tab name:
+
+- `threads_posts`
+
+All Google Sheets nodes in the workflow read this same variable and tab name.
+If the queue is uploaded from `threads_posts_combined.xlsx`, make sure the
+Google Sheets tab is named `threads_posts`.
+
+Current workflow checks before posting:
+
+- row `status` is `ready`
+- `threads_post_id` is blank
+- `scheduled_at_jst` is due, interpreted as Japan time
+- `final_text` is not empty
+- `char_count` is 500 or less
+- `media_type` is `TEXT`
+- optional `cta_url` is a valid `http` or `https` URL
+
+The workflow is still inactive by default. Activate it only after:
+
+- the Google Sheet exists
+- `GOOGLE_SHEET_ID` is set in n8n variables
+- the Google Sheets credential is connected
+- the Threads header-auth credential has a valid token
+- one manual workflow execution succeeds

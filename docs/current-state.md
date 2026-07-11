@@ -253,6 +253,10 @@ Latest known state:
   - 80 days from `2026-07-12 09:00 JST`
   - 80 linked posts, roughly 1 in 3
   - 0 posts over 500 characters
+- Current local xlsx tab name is `threads_posts` so it can be uploaded to
+  Google Sheets with the tab name expected by n8n.
+- n8n only needs the spreadsheet ID in one place: the `GOOGLE_SHEET_ID`
+  variable. Do not paste the ID separately into each Google Sheets node.
 - Keep the xlsx as working queue data unless the user explicitly asks to commit
   or publish it.
 
