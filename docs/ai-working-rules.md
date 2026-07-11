@@ -103,6 +103,10 @@ Use careful language:
 
 Prefer useful content even when a product teaser is present.
 
+For free samples and paid product boundaries, read
+`docs/lead-magnet-product-boundary.md` before adding new downloads, product
+teasers, or kit copy.
+
 ## Data Rules
 
 - Published hotel pages should use `is_published = true`.

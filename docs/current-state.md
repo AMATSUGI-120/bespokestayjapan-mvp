@@ -1,6 +1,6 @@
 # Bespoke Stay Japan - Current State
 
-Updated: 2026-07-06 JST
+Updated: 2026-07-11 JST
 
 ## Project Goal
 
@@ -140,6 +140,17 @@ Expected contents:
 Guide pages should allow soft product teasers, but articles should still be
 useful without purchase.
 
+Current validation stance:
+- Do not build the full paid kit before checking the existing numbers.
+- Record current PostHog, beehiiv, and Travelpayouts metrics first.
+- Send one beehiiv demand-check email for the Kansai Tattoo-Friendly Stay Kit
+  before producing the full product.
+- Treat free samples as trust-building previews, not as the complete paid
+  product.
+- Paid kits should add concrete planning utility: hotel shortlists, Google Map,
+  Google Sheet comparison, confirmation status, source notes, and inquiry
+  templates.
+
 ## Phrase Cards and Confirmation Support
 
 BSJ now has a planned free phrase-card lead magnet:
@@ -210,11 +221,17 @@ Latest known state:
 
 ## Recommended Next Work
 
-1. Strengthen guide articles as landing pages for Threads and Pinterest.
-2. Expand practical templates, especially hotel inquiry examples.
-3. Continue removing remaining booking-site language.
-4. Add product teaser destinations when Gumroad or another storefront is ready.
-5. Later, consider a low-pressure custom research/planning service page.
+1. Record current metrics from PostHog, beehiiv, and Travelpayouts before
+   making more content changes.
+2. Send a beehiiv demand-check email for the Kansai Tattoo-Friendly Stay Kit.
+3. Use clicks/replies/subscriber count to decide whether to build the paid kit.
+4. Keep free samples useful but incomplete: they should reveal the problem and
+   build trust, while paid products provide the working shortlist/map/sheet.
+5. Add privacy policy and commercial disclosure pages before direct paid sales
+   from BSJ. Gumroad or another platform can reduce the initial burden, but the
+   site should still be clear and compliant.
+6. Resume guide/article expansion after the list and product-demand signals are
+   recorded.
 
 ## Exploration Rules
 

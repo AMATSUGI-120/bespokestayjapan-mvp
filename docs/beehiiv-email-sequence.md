@@ -153,3 +153,87 @@ Email 4:
 Purpose:
 Introduce confirmation support as a planned BSJ service. Keep it framed as
 Japanese inquiry and English summary support, not booking代行.
+
+## Demand Check Email - Kansai Tattoo-Friendly Stay Kit
+
+Use this before building the full paid product. The goal is to measure replies
+and clicks, not to announce a finished product.
+
+Recommended timing:
+Send after Email 3, or as a one-off broadcast once the list has enough
+subscribers to make replies meaningful.
+
+Subject options:
+
+1. Would this help your Japan trip?
+2. A question for tattooed travelers visiting Kansai
+3. Should I build this tattoo-friendly stay kit?
+
+Recommended subject:
+`Should I build this tattoo-friendly stay kit?`
+
+Preview text:
+`I am considering a practical Kansai stay kit for tattooed travelers. Your reply will help decide whether it is worth building.`
+
+Body:
+
+```text
+Hi,
+
+I am considering building a practical BSJ kit for tattooed travelers visiting Kansai.
+
+Working title:
+
+Kansai Tattoo-Friendly Stay Kit
+
+It would be made for travelers visiting Osaka, Kyoto, Nara, Kobe, and nearby areas who want to avoid awkward surprises around baths, ryokan rules, and hotel wording.
+
+Possible contents:
+
+- a short guide to public baths, private baths, and in-room baths
+- tattoo-policy wording to watch for
+- a Kansai hotel shortlist
+- confirmed / needs-confirmation notes
+- a Google Map
+- a Google Sheet comparison table
+- English hotel inquiry templates
+- a pre-booking checklist
+- related luggage, eSIM, and bath/onsen links
+
+The goal would not be to book hotels for you.
+
+The goal would be to help you compare options, know what to confirm, and make your own booking decision with less uncertainty.
+
+Possible price:
+$19
+
+Quick question:
+
+If you were planning a Kansai trip with tattoo concerns, would you want something like this?
+
+You can reply with just one number:
+
+1. Yes, I would probably buy it for $19
+2. Maybe, but I would need to see what hotels are included
+3. No, the free samples are enough
+4. Not relevant to my trip
+
+If there is one thing you would want included, reply and tell me.
+
+Thanks,
+
+Bespoke Stay Japan
+
+Practical Japan stay guides for real travel needs
+https://bespokestayjapan.com
+```
+
+Success signals:
+
+- Direct replies from tattooed travelers or companions.
+- Clicks from guide pages or email to the kit interest page if one exists.
+- Subscribers choosing "Yes" or "Maybe" in replies.
+- Specific questions about included hotels, baths, maps, or confirmation status.
+
+Do not treat opens alone as demand. Build only after replies/clicks show that
+the topic has real pull.
