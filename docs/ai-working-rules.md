@@ -107,6 +107,10 @@ For free samples and paid product boundaries, read
 `docs/lead-magnet-product-boundary.md` before adding new downloads, product
 teasers, or kit copy.
 
+For Threads posting, routing, or n8n queue work, read
+`docs/threads-automation.md` and `data/threads-route-map.json` before editing
+post text, CTA URLs, schedules, or automation rules.
+
 ## Data Rules
 
 - Published hotel pages should use `is_published = true`.

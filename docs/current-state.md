@@ -221,16 +221,23 @@ Latest known state:
 
 ## Recommended Next Work
 
-1. Record current metrics from PostHog, beehiiv, and Travelpayouts before
-   making more content changes.
-2. Send a beehiiv demand-check email for the Kansai Tattoo-Friendly Stay Kit.
-3. Use clicks/replies/subscriber count to decide whether to build the paid kit.
-4. Keep free samples useful but incomplete: they should reveal the problem and
+1. Prepare the Threads posting workflow now that the main receiving pages and
+   free sample lead-capture pages exist.
+2. Use `threads_posts_combined.xlsx` as the working post bank and
+   `docs/threads-automation.md` / `data/threads-route-map.json` as the initial
+   automation rules.
+3. Start with text-only, link-light posting before product-heavy promotion.
+4. Record PostHog, beehiiv, and Travelpayouts metrics after there is real
+   Threads-driven traffic.
+5. Send a beehiiv demand-check email for the Kansai Tattoo-Friendly Stay Kit
+   only after the list has enough subscribers or relevant replies.
+6. Use clicks/replies/subscriber count to decide whether to build the paid kit.
+7. Keep free samples useful but incomplete: they should reveal the problem and
    build trust, while paid products provide the working shortlist/map/sheet.
-5. Add privacy policy and commercial disclosure pages before direct paid sales
+8. Add privacy policy and commercial disclosure pages before direct paid sales
    from BSJ. Gumroad or another platform can reduce the initial burden, but the
    site should still be clear and compliant.
-6. Resume guide/article expansion after the list and product-demand signals are
+9. Resume guide/article expansion after the list and product-demand signals are
    recorded.
 
 ## Exploration Rules

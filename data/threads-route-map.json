@@ -1,0 +1,98 @@
+{
+  "baseUrl": "https://bespokestayjapan.com",
+  "defaultFrequency": {
+    "postsPerDay": 3,
+    "timezone": "Asia/Tokyo",
+    "recommendedSlotsJst": ["09:00", "13:00", "18:00"]
+  },
+  "linkPolicy": {
+    "defaultCtaType": "none",
+    "recommendedLinkedPostRatio": "1 linked post per 3 to 5 posts",
+    "utmSource": "threads",
+    "utmMedium": "social"
+  },
+  "categoryRoutes": {
+    "transport": {
+      "primaryPath": "/shinkansen-oversized-luggage-guide",
+      "fallbackPath": "/japan-train-etiquette-guide",
+      "secondaryPaths": [
+        "/japan-luggage-delivery-guide",
+        "/japan-rail-pass-guide",
+        "/japan-ic-card-guide"
+      ]
+    },
+    "food": {
+      "primaryPath": "/dietary-restrictions-japan",
+      "fallbackPath": "/japan-restaurant-etiquette-guide",
+      "secondaryPaths": [
+        "/free-japan-travel-samples"
+      ]
+    },
+    "photo": {
+      "primaryPath": "/japan-photography-etiquette-guide",
+      "fallbackPath": "/guides",
+      "secondaryPaths": []
+    },
+    "tax_free": {
+      "primaryPath": "/japan-tax-free-shopping-guide",
+      "fallbackPath": "/guides",
+      "secondaryPaths": []
+    },
+    "ryokan": {
+      "primaryPath": "/ryokan-stay-guide",
+      "fallbackPath": "/private-bath-stays-kansai",
+      "secondaryPaths": [
+        "/japan-onsen-etiquette-guide",
+        "/free-japan-travel-samples"
+      ]
+    },
+    "bicycle": {
+      "primaryPath": "/japan-bicycle-rules-guide",
+      "fallbackPath": "/guides",
+      "secondaryPaths": []
+    },
+    "shrine_temple": {
+      "primaryPath": "/japan-shrine-temple-etiquette-guide",
+      "fallbackPath": "/guides",
+      "secondaryPaths": []
+    },
+    "ic_card": {
+      "primaryPath": "/japan-ic-card-guide",
+      "fallbackPath": "/japan-train-etiquette-guide",
+      "secondaryPaths": []
+    },
+    "jr_pass": {
+      "primaryPath": "/japan-rail-pass-guide",
+      "fallbackPath": "/japan-train-etiquette-guide",
+      "secondaryPaths": [
+        "/shinkansen-oversized-luggage-guide"
+      ]
+    },
+    "onsen": {
+      "primaryPath": "/japan-onsen-etiquette-guide",
+      "fallbackPath": "/tattoo-friendly-stays-kansai",
+      "secondaryPaths": [
+        "/private-bath-stays-kansai",
+        "/free-kansai-tattoo-stay-kit"
+      ]
+    }
+  },
+  "topicOverrides": {
+    "shinkansen_oversize_definition": "/shinkansen-oversized-luggage-guide",
+    "shinkansen_reservation_required": "/shinkansen-oversized-luggage-guide",
+    "shinkansen_july2025_rule_change": "/shinkansen-oversized-luggage-guide",
+    "shinkansen_sameday_reservation": "/shinkansen-oversized-luggage-guide",
+    "shinkansen_how_to_measure": "/shinkansen-oversized-luggage-guide",
+    "shinkansen_no_reservation_consequence": "/shinkansen-oversized-luggage-guide",
+    "shinkansen_luggage_delivery": "/japan-luggage-delivery-guide",
+    "shinkansen_jr_pass_luggage": "/japan-rail-pass-guide",
+    "shinkansen_reserved_vs_unreserved": "/shinkansen-oversized-luggage-guide",
+    "japan_ic_card": "/japan-ic-card-guide",
+    "onsen_tattoo": "/tattoo-friendly-stays-kansai",
+    "private_bath": "/private-bath-stays-kansai",
+    "vegetarian": "/dietary-restrictions-japan",
+    "vegan": "/dietary-restrictions-japan",
+    "dashi": "/dietary-restrictions-japan",
+    "allergy": "/dietary-restrictions-japan"
+  }
+}
