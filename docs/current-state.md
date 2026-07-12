@@ -261,6 +261,25 @@ Latest known state:
 - Keep the xlsx as working queue data unless the user explicitly asks to commit
   or publish it.
 
+## Pinterest Planning State
+
+- Pinterest is now planned as a search-style distribution channel for
+  planning-stage travelers.
+- Primary format: photo-less text video pins for HyperFrames or similar tools.
+- Pinterest rules are documented in `docs/pinterest-automation.md`.
+- Initial pin queue is stored in `data/pinterest-pin-queue.csv`.
+- Current initial queue:
+  - 30 pins
+  - mix of text video, static text, and checklist pins
+  - topics include tattoo/bath, Shinkansen luggage, eSIM, food restrictions,
+    private tours, airport arrival, family activities, ryokan, IC card, and
+    phrase-card lead magnets
+  - target URLs point to existing BSJ guide, stay, service, and free sample
+    pages
+- First Pinterest phase should stay semi-manual: review the first 30 scripts,
+  create/export assets, then only automate queue handling after the design
+  quality is confirmed.
+
 ## Exploration Rules
 
 Before scanning the repo, read this file. Then use targeted `rg` searches.

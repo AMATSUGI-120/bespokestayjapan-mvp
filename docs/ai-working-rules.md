@@ -111,6 +111,10 @@ For Threads posting, routing, or n8n queue work, read
 `docs/threads-automation.md` and `data/threads-route-map.json` before editing
 post text, CTA URLs, schedules, or automation rules.
 
+For Pinterest pins, HyperFrames scripts, or Pinterest n8n queue work, read
+`docs/pinterest-automation.md` and `data/pinterest-pin-queue.csv` before editing
+pin text, boards, templates, CTAs, schedules, or automation rules.
+
 ## Data Rules
 
 - Published hotel pages should use `is_published = true`.
