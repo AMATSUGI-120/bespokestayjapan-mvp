@@ -48,9 +48,9 @@ Confirmed visible program terms in Travelpayouts:
 | Agoda | Visible in catalog | 6% |
 | Expedia | Connection request shown as declined when generating a link | 1.35-3.6% |
 | Hotels.com | Connection request shown as declined when generating a link | 1.35-3.6% |
-| GetYourGuide | Visible in catalog | 8% |
-| Viator | Visible in catalog | 8% |
-| Klook | Available in My Programs | 2-5%; temporary higher rates were visible |
+| GetYourGuide | Visible but currently unavailable for the BSJ project until stable monthly traffic is available for at least three consecutive months | 8% |
+| Viator | Visible but currently unavailable for the BSJ project until stable monthly traffic is available for at least three consecutive months | 8% |
+| Klook | Available in My Programs | 2-5%; temporary 10% rates for Tours & Sightseeing / Activities & Experiences were visible through Sep 30, 2026 |
 | Airalo | Available in My Programs | 12% |
 | Yesim | Available in My Programs | 18% |
 | Saily | Available in My Programs | 15% |
@@ -67,7 +67,7 @@ Confirmed visible program terms in Travelpayouts:
    - eSIM: Airalo, Saily, Yesim
    - Luggage: Radical Storage
    - Transfers: Kiwitaxi, Welcome Pickups, intui.travel
-   - Activities: Klook, GetYourGuide, Viator
+   - Activities: Klook now; GetYourGuide and Viator after traffic-based approval
 4. Re-check hotel programs before placing hotel OTA affiliate links.
 
 Current first hotel affiliate override:
@@ -88,6 +88,19 @@ Current guide/service affiliate links:
 | Radical Storage Japan | `https://radicalstorage.tpk.mx/bz9wL4jy` | Luggage storage / hands-light travel context |
 | Kiwitaxi Japan | `https://kiwitaxi.tpk.mx/0f91KlnQ` | Airport or private transfer context |
 | Klook Japan activities | `https://klook.tpk.mx/zakGjLwG` | Japan activities / bath, ryokan, local experience context |
+
+## Experience Affiliate Page Rule
+
+For experience articles, prioritize useful public content first:
+
+- Explain the main bookable activity category in the article.
+- Use active Klook links where the category fits and the activity is commissionable.
+- Treat GetYourGuide and Viator as future link targets until the BSJ project is approved.
+- Do not hide safety, cancellation, age, or accessibility warnings behind email signup.
+- Use email signup for deeper practical notes: meeting point checks, luggage suitability,
+  restroom notes, food-need prompts, review-reading checklists, and comparison sheets.
+- Keep CTAs practical, such as "Browse Japan activities on Klook" or "Get the practical
+  checklist before booking".
 
 ## Compliance Notes
 

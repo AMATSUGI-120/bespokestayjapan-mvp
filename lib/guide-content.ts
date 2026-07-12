@@ -29,6 +29,10 @@ export interface GuidePageContent {
   intro: string[];
   productKey?: ProductKey;
   sections: GuideSection[];
+  faqs?: Array<{
+    question: string;
+    answer: string;
+  }>;
   relatedStays?: GuideLink[];
   serviceLinks?: GuideLink[];
   sourceLinks?: GuideLink[];
@@ -71,15 +75,1334 @@ const affiliateServiceLinks = {
     external: true,
     sponsored: true,
   },
+  klookPrivateTours: {
+    href: 'https://klook.tpk.mx/zakGjLwG',
+    label: 'Browse Japan private tours and transfers on Klook',
+    external: true,
+    sponsored: true,
+  },
+  klookKansaiDayTrips: {
+    href: 'https://klook.tpk.mx/zakGjLwG',
+    label: 'Browse Kansai day trips on Klook',
+    external: true,
+    sponsored: true,
+  },
+  klookSnowActivities: {
+    href: 'https://klook.tpk.mx/zakGjLwG',
+    label: 'Browse Japan snow and winter activities on Klook',
+    external: true,
+    sponsored: true,
+  },
+  klookAttractionTickets: {
+    href: 'https://klook.tpk.mx/zakGjLwG',
+    label: 'Browse Japan attraction tickets on Klook',
+    external: true,
+    sponsored: true,
+  },
+  klookAirportTransfers: {
+    href: 'https://klook.tpk.mx/zakGjLwG',
+    label: 'Browse Japan airport transfers on Klook',
+    external: true,
+    sponsored: true,
+  },
+  klookWorkshops: {
+    href: 'https://klook.tpk.mx/zakGjLwG',
+    label: 'Browse Japan cultural workshops on Klook',
+    external: true,
+    sponsored: true,
+  },
 } satisfies Record<string, GuideLink>;
 
 export const guidePages: Record<string, GuidePageContent> = {
+  'japan-esim-guide': {
+    path: '/japan-esim-guide',
+    eyebrow: 'eSIM and connectivity',
+    title: 'Japan eSIM Guide for Travel',
+    description:
+      'How to choose a Japan eSIM for maps, train routes, translation, hotel messages, QR tickets, and arrival-day stress.',
+    intro: [
+      'A Japan eSIM is not only about browsing the internet. It can affect your first hour after landing: maps, train routes, QR tickets, hotel messages, translation, ride pickup, and emergency contact.',
+      'This guide helps travelers choose an eSIM calmly before the trip, and understand when an eSIM should be paired with airport Wi-Fi, hotel Wi-Fi, or a backup plan.',
+      'BSJ treats connectivity as part of stay planning because internet problems often become hotel, transport, luggage, and food-problem problems.',
+    ],
+    sections: [
+      {
+        title: 'Why eSIM planning matters in Japan',
+        bullets: [
+          'Station navigation often depends on live maps, platform details, and route changes.',
+          'Hotel check-in messages, door codes, and late-arrival instructions may arrive online.',
+          'Klook tickets, QR passes, luggage delivery receipts, and confirmation emails may need quick access.',
+          'Translation tools help with restaurants, taxis, pharmacies, and small hotel front desks.',
+          'Public Wi-Fi exists, but it is not a reliable plan for moving between stations and hotels.',
+        ],
+      },
+      {
+        title: 'What to compare before buying',
+        bullets: [
+          'Coverage area and network partner in Japan.',
+          'Data amount, validity days, and whether speed may slow after a threshold.',
+          'Whether tethering/hotspot use is allowed.',
+          'Activation timing: before departure, after landing, or when connected to Wi-Fi.',
+          'Refund or support rules if installation fails.',
+          'Whether your phone is unlocked and supports eSIM.',
+        ],
+      },
+      {
+        title: 'Where affiliate services fit',
+        body: [
+          'Airalo, Saily, and Yesim are useful options to compare before traveling. BSJ should not present one as universally best because the right choice depends on phone compatibility, trip length, data use, and support preference.',
+          'The article should help readers choose the type of plan. The email checklist can help them confirm phone settings, installation timing, and what to screenshot before flying.',
+        ],
+      },
+      {
+        title: 'Arrival-day setup checklist',
+        bullets: [
+          'Install or prepare the eSIM while you still have reliable Wi-Fi.',
+          'Save hotel address, check-in instructions, and key QR codes offline.',
+          'Screenshot train route options from the airport to your hotel.',
+          'Keep a backup payment card and a small amount of cash for ticket machines or taxis.',
+          'Know how to switch mobile data to the eSIM after landing.',
+        ],
+      },
+      {
+        title: 'When eSIM is not enough',
+        body: [
+          'An eSIM does not solve a dead battery, a locked phone, a phone that does not support eSIM, or an app account problem. For high-stress arrival days, keep screenshots and hotel contact details available offline.',
+        ],
+      },
+    ],
+    faqs: [
+      {
+        question: 'Do I need a Japan eSIM if my hotel has Wi-Fi?',
+        answer:
+          'Hotel Wi-Fi helps in your room, but an eSIM is useful between the airport, stations, hotels, restaurants, and activities. Many travel problems happen while moving, when you need maps, tickets, messages, or translation.',
+      },
+      {
+        question: 'Should I install a Japan eSIM before flying?',
+        answer:
+          'In most cases, prepare the eSIM while you still have reliable Wi-Fi, then follow the provider instructions for activation timing. Also save hotel addresses, QR tickets, and check-in details offline.',
+      },
+      {
+        question: 'Is public Wi-Fi enough for a Japan trip?',
+        answer:
+          'Public Wi-Fi can help, but it is not a reliable full travel plan. It may not be available when you are walking between stations, finding a hotel entrance, contacting a tour operator, or using live translation.',
+      },
+    ],
+    relatedStays: [
+      { href: '/japan-airport-arrival-transfer-guide', label: 'Airport arrival guide' },
+      { href: '/japan-ic-card-guide', label: 'IC card guide' },
+      { href: '/japan-train-etiquette-guide', label: 'Train and transfer guide' },
+      { href: '/free-japan-travel-samples', label: 'Get the arrival checklist by email' },
+    ],
+    serviceLinks: [
+      affiliateServiceLinks.airaloJapan,
+      affiliateServiceLinks.sailyJapan,
+      affiliateServiceLinks.yesimJapan,
+    ],
+    sourceLinks: [
+      { href: 'https://www.japan.travel/en/plan/internet-access/', label: 'JNTO: Internet access in Japan', external: true },
+    ],
+  },
+  'japan-luggage-storage-guide': {
+    path: '/japan-luggage-storage-guide',
+    eyebrow: 'Luggage storage',
+    title: 'Japan Luggage Storage Guide',
+    description:
+      'How to decide between station lockers, hotel storage, luggage delivery, and luggage storage services when traveling around Japan.',
+    intro: [
+      'Luggage storage sounds simple until it controls your whole day. A checkout morning, theme park day, late flight, day trip, or station transfer can become stressful if you do not know where your bags will go.',
+      'This guide explains the difference between station lockers, hotel storage, luggage delivery, and luggage storage services such as Radical Storage, so travelers can plan hands-light days without guessing.',
+    ],
+    sections: [
+      {
+        title: 'The four main luggage options',
+        bullets: [
+          'Hotel storage: often convenient before check-in or after checkout, but rules and hours vary.',
+          'Station lockers: useful for short stops, but large lockers can fill quickly and station layouts can be confusing.',
+          'Luggage delivery: best for moving between cities or avoiding train transfers with large bags.',
+          'Luggage storage services: useful when lockers are full, hotel storage is unavailable, or you need a location near an attraction.',
+        ],
+      },
+      {
+        title: 'When luggage storage services make sense',
+        body: [
+          'A service such as Radical Storage can be useful when your hotel is far from your sightseeing area, when you have a late flight, or when station lockers are a poor fit. It can also help on days when you want to visit a museum, workshop, food area, or attraction before moving to the next hotel.',
+          'As with any third-party service, check current opening hours, exact location, bag rules, price, cancellation, and how pickup works before relying on it.',
+        ],
+      },
+      {
+        title: 'What to check before choosing storage',
+        bullets: [
+          'Opening hours and final pickup time.',
+          'Exact address and whether the location is easy to find with bags.',
+          'Large suitcase acceptance and number of bags allowed.',
+          'Security process, receipt, and what happens if pickup is late.',
+          'Distance from your station exit, attraction, or hotel.',
+          'Whether luggage delivery would be better than temporary storage.',
+        ],
+      },
+      {
+        title: 'Common planning mistakes',
+        bullets: [
+          'Assuming every station has large lockers available.',
+          'Returning to the wrong station exit after storing bags.',
+          'Planning a day trip with luggage because storage seems like a small detail.',
+          'Leaving too little time to pick up bags before a train, flight, or hotel transfer.',
+          'Forgetting that some small stays or apartment-style properties may not have staffed storage.',
+        ],
+      },
+      {
+        title: 'Email checklist angle',
+        body: [
+          'The luggage storage checklist should help travelers compare hotel storage, station lockers, delivery, and storage services by day type: arrival day, checkout day, day trip, theme park day, and city transfer day.',
+        ],
+      },
+    ],
+    relatedStays: [
+      { href: '/stays/luggage-friendly', label: 'Luggage-friendly stays' },
+      { href: '/japan-luggage-delivery-guide', label: 'Luggage delivery guide' },
+      { href: '/shinkansen-oversized-luggage-guide', label: 'Shinkansen luggage guide' },
+      { href: '/free-japan-travel-samples', label: 'Get the luggage checklist by email' },
+    ],
+    serviceLinks: [
+      affiliateServiceLinks.radicalStorageJapan,
+      affiliateServiceLinks.kiwitaxiJapan,
+      affiliateServiceLinks.airaloJapan,
+    ],
+    sourceLinks: [
+      { href: 'https://www.japan.travel/en/plan/luggage-storage-delivery/', label: 'JNTO: Luggage storage and delivery', external: true },
+    ],
+  },
+  'japan-taxi-private-transfer-guide': {
+    path: '/japan-taxi-private-transfer-guide',
+    eyebrow: 'Taxis and private transfers',
+    title: 'Japan Taxi and Private Transfer Guide',
+    description:
+      'When to use taxis, private transfers, airport transfers, or car services in Japan, especially with luggage, children, late arrivals, or difficult station routes.',
+    intro: [
+      'Japan public transport is excellent, but that does not mean every traveler should use trains for every movement. Taxis and private transfers can solve specific problems: late arrivals, heavy luggage, young children, older travelers, bad weather, or hotels that are awkward from the nearest station.',
+      'This guide helps you decide when a taxi or transfer is worth paying for, what to check before booking, and how to avoid using private transport when a simple train route is better.',
+    ],
+    sections: [
+      {
+        title: 'When a taxi or private transfer makes sense',
+        bullets: [
+          'Late-night airport arrivals when trains or buses are limited.',
+          'Hotel transfers with large luggage, strollers, or tired children.',
+          'Moving between a station and a stay with difficult slopes, stairs, or unclear exits.',
+          'Theme park, workshop, or day-trip days where the return trip is the hardest part.',
+          'Groups where one larger vehicle is easier than several train transfers.',
+          'Travelers with mobility concerns who need fewer station changes.',
+        ],
+      },
+      {
+        title: 'Taxi, app ride, airport transfer, or charter',
+        body: [
+          'A normal taxi works best for short city movements. A pre-booked airport transfer works better when arrival timing, luggage, and flight tracking matter. A private charter is closer to a flexible car service for several hours or a day route.',
+          'Services such as Kiwitaxi can be useful for airport and private transfer planning, but travelers should still check the pickup point, waiting time, luggage allowance, child seat rules, and cancellation terms directly.',
+        ],
+      },
+      {
+        title: 'What to check before booking a transfer',
+        bullets: [
+          'Pickup point: airport terminal, arrival hall, hotel entrance, station exit, or nearby meeting point.',
+          'Waiting time: what happens if immigration, baggage claim, or train arrival is delayed.',
+          'Luggage allowance: suitcase count, oversized bags, stroller, ski bags, or sports equipment.',
+          'Child seats: availability, age/size fit, and whether they must be requested in advance.',
+          'Destination access: whether the vehicle can stop directly at the hotel or only nearby.',
+          'Payment, cancellation, tolls, parking, and late-night surcharges.',
+        ],
+      },
+      {
+        title: 'When trains are still better',
+        bullets: [
+          'The route is direct, luggage is light, and the station is close to your hotel.',
+          'You are traveling during heavy road traffic periods in central Tokyo, Osaka, or Kyoto.',
+          'Your group can comfortably manage stairs, elevators, and ticket gates.',
+          'The transfer price is high but does not solve a real constraint.',
+          'You want flexibility rather than a fixed pickup time.',
+        ],
+      },
+      {
+        title: 'Email checklist angle',
+        body: [
+          'The transfer checklist should help travelers compare taxi, bus, train, private transfer, and luggage delivery by arrival time, group size, bags, children, hotel location, and backup plan.',
+        ],
+      },
+    ],
+    relatedStays: [
+      { href: '/japan-airport-arrival-transfer-guide', label: 'Airport arrival guide' },
+      { href: '/japan-private-tours-transfers-guide', label: 'Private tours and transfers guide' },
+      { href: '/stays/luggage-friendly', label: 'Luggage-friendly stays' },
+      { href: '/free-japan-travel-samples', label: 'Get the transfer checklist by email' },
+    ],
+    serviceLinks: [
+      affiliateServiceLinks.kiwitaxiJapan,
+      affiliateServiceLinks.radicalStorageJapan,
+      affiliateServiceLinks.airaloJapan,
+    ],
+    sourceLinks: [
+      { href: 'https://www.japan.travel/en/plan/getting-around/', label: 'JNTO: Getting around Japan', external: true },
+    ],
+  },
+  'japan-checkout-day-luggage-guide': {
+    path: '/japan-checkout-day-luggage-guide',
+    eyebrow: 'Checkout day planning',
+    title: 'Japan Checkout Day Luggage Guide',
+    description:
+      'How to plan a Japan checkout day when your hotel stay ends before your train, flight, tour, or evening plans.',
+    intro: [
+      'Checkout day is one of the easiest places for a Japan itinerary to break. Your room ends at 10 or 11, but your train is in the afternoon, your flight is at night, or your next hotel is not ready yet.',
+      'This guide helps travelers decide whether to use hotel storage, luggage delivery, station lockers, luggage storage services, or a private transfer on a checkout day.',
+      'The goal is simple: avoid dragging suitcases through stations, temples, workshops, restaurants, and crowded shopping streets when a better plan exists.',
+    ],
+    sections: [
+      {
+        title: 'Start with the next fixed time',
+        body: [
+          'Before choosing storage, write down the next fixed time: Shinkansen departure, airport arrival target, next hotel check-in, restaurant booking, tour meeting point, or attraction entry. Then work backward.',
+          'A storage plan that looks convenient at noon can become stressful if you need to retrieve bags, cross town, and reach a train platform during evening crowds.',
+        ],
+      },
+      {
+        title: 'Checkout day options',
+        bullets: [
+          'Hotel storage: easiest if you return to the same area before leaving.',
+          'Luggage delivery: best when moving to another city or avoiding a station-heavy transfer.',
+          'Station lockers: useful for short stops but risky if large lockers are full.',
+          'Luggage storage services: useful near attractions or when hotel storage is not convenient.',
+          'Private transfer: useful when bags, children, or timing make the final movement stressful.',
+          'A lighter itinerary: sometimes the best solution is choosing one easy area instead of crossing the city.',
+        ],
+      },
+      {
+        title: 'When to avoid carrying luggage',
+        bullets: [
+          'Visiting temples, shrines, old streets, markets, or small restaurants.',
+          'Taking a workshop, food experience, tea ceremony, or museum visit.',
+          'Moving through rush-hour stations or multiple private railway/JR transfers.',
+          'Traveling with children, strollers, or older family members.',
+          'Leaving from a different station than the one near your hotel.',
+        ],
+      },
+      {
+        title: 'How affiliate tools fit naturally',
+        body: [
+          'Radical Storage can be a practical option when you need a temporary bag drop near the area you actually want to visit. Kiwitaxi or another private transfer can make sense when the final hotel-to-airport or station movement is the stressful part.',
+          'These links should support the plan, not replace the plan. The article should help readers decide whether they need storage, delivery, or a transfer before sending them to a service.',
+        ],
+      },
+      {
+        title: 'A simple checkout-day plan',
+        bullets: [
+          'Confirm hotel checkout time and whether storage is available after checkout.',
+          'Decide whether you will return to the hotel area before leaving.',
+          'If not, compare luggage delivery or storage near your actual sightseeing area.',
+          'Keep one small day bag with passport, medicine, battery, valuables, and tickets.',
+          'Leave extra time to retrieve bags before trains, flights, or tours.',
+          'Avoid booking a luggage-heavy activity unless storage is already solved.',
+        ],
+      },
+      {
+        title: 'Email checklist angle',
+        body: [
+          'The checkout-day checklist should help travelers compare each option by time, location, bag size, children, weather, next hotel, airport route, and whether the day should be simplified.',
+        ],
+      },
+    ],
+    relatedStays: [
+      { href: '/stays/luggage-friendly', label: 'Luggage-friendly stays' },
+      { href: '/japan-luggage-storage-guide', label: 'Luggage storage guide' },
+      { href: '/japan-luggage-delivery-guide', label: 'Luggage delivery guide' },
+      { href: '/japan-taxi-private-transfer-guide', label: 'Taxi and transfer guide' },
+      { href: '/free-japan-travel-samples', label: 'Get the checkout-day checklist by email' },
+    ],
+    serviceLinks: [
+      affiliateServiceLinks.radicalStorageJapan,
+      affiliateServiceLinks.kiwitaxiJapan,
+      affiliateServiceLinks.airaloJapan,
+    ],
+    sourceLinks: [
+      { href: 'https://www.japan.travel/en/plan/luggage-storage-delivery/', label: 'JNTO: Luggage storage and delivery', external: true },
+    ],
+  },
+  'japan-private-tours-transfers-guide': {
+    path: '/japan-private-tours-transfers-guide',
+    eyebrow: 'Private tours and transfers',
+    title: 'Japan Private Tours and Transfers Guide',
+    description:
+      'How to decide when a Japan private tour, private car, airport transfer, or day-trip driver is worth booking for luggage, children, older travelers, or tight timing.',
+    intro: [
+      'A private tour in Japan is not only a luxury upgrade. For some trips, it solves practical problems: luggage, tired children, older travelers, difficult station transfers, early checkout, late arrival, or a day trip that would be stressful by train.',
+      'This guide helps you decide when a private car, private driver, airport transfer, or private day tour is actually useful, and what to check before booking through a platform such as Klook.',
+      'BSJ does not rank tours by hype. We look at the travel day around the booking: hotel location, pickup rules, walking distance, toilet breaks, weather, language support, and what could go wrong if the plan is too tight.',
+    ],
+    sections: [
+      {
+        title: 'When a private tour is worth considering',
+        bullets: [
+          'You are doing a long day trip with several stops, such as Mt. Fuji, Hakone, Nikko, Kamakura, Kyoto, Nara, Kobe, or Amanohashidate.',
+          'You have large luggage, a stroller, mobility concerns, or older travelers who may not enjoy multiple train transfers.',
+          'You want hotel pickup or drop-off because the first or last part of the day is the hardest part to manage.',
+          'You are traveling with children and need a slower pace, rest breaks, and fewer platform changes.',
+          'You have a short Japan trip and cannot afford to lose a day to a confusing route or missed connection.',
+          'You want to visit places where the train route is possible but awkward, especially in poor weather or with bags.',
+        ],
+      },
+      {
+        title: 'The main booking types',
+        body: [
+          'A private day tour usually has a planned route, such as Mt. Fuji and Lake Kawaguchiko from Tokyo or Kyoto and Nara from Osaka. It may include hotel pickup, an English-speaking driver or guide, and a fixed number of hours.',
+          'A private car charter is more flexible. You may choose the route within a time limit, but you still need to check what is included: driver language, tolls, parking, overtime, child seats, and pickup area.',
+          'A point-to-point private transfer is simpler. It is useful for airport arrivals, station transfers, hotel-to-theme-park days, or moving between areas when luggage makes public transport unpleasant.',
+        ],
+      },
+      {
+        title: 'Examples that fit the BSJ angle',
+        body: [
+          'Klook currently has Japan private tour and transfer options that fit this practical use case: Mt. Fuji and Lake Kawaguchiko private day tours from Tokyo, Mt. Fuji and Hakone private tours with English-speaking drivers, Tokyo private car hire for areas such as Kamakura or Chiba, and Kansai private car day tours from Osaka or Kyoto.',
+          'The point is not that every traveler should book a car. The point is to know when the extra cost solves a real constraint. A family with luggage, a short stay, and a weather-sensitive day trip may value the certainty differently from a solo traveler with a flexible schedule.',
+        ],
+      },
+      {
+        title: 'BSJ notes from current private tour listings',
+        body: [
+          'Across private tour and car-charter listings, the same practical details tend to decide whether the booking feels smooth or frustrating: pickup area, driver language, vehicle size, overtime, and what happens when weather or traffic changes the day.',
+          'Treat words such as private, customizable, hotel pickup, and English-speaking carefully. They are helpful signals, but they do not always answer the question that matters for your group.',
+        ],
+        bullets: [
+          'Private may mean your group has the vehicle, not that every stop or timing request is possible.',
+          'Customizable may still be limited by route area, total hours, traffic, and attraction opening times.',
+          'English-speaking driver is not always the same as a licensed guide who explains each site in depth.',
+          'Hotel pickup can be selected-area pickup, nearby pickup, or entrance pickup depending on the listing and road access.',
+          'Mt. Fuji, Hakone, mountain, coastal, and snow routes can be heavily affected by weather and visibility.',
+          'Tolls, parking, attraction tickets, meals, child seats, and overtime are often the details that change the real price.',
+        ],
+      },
+      {
+        title: 'What hotel pickup really solves',
+        body: [
+          'Hotel pickup can remove the hardest part of the morning: finding the right train, managing bags, walking to a station exit, or meeting a guide in a crowded area. It is especially useful when the day starts early or the destination is outside a major city center.',
+          'But hotel pickup is not automatic for every listing. Check the pickup area, exact meeting time, whether your hotel is included, and whether the vehicle can stop directly outside the property. In dense areas of Tokyo, Kyoto, or Osaka, the practical pickup point may be nearby rather than at the entrance.',
+        ],
+      },
+      {
+        title: 'Private tour vs train vs bus tour',
+        bullets: [
+          'Choose trains when the route is direct, luggage is light, and you are comfortable reading platforms and transfers.',
+          'Choose a bus tour when you want lower cost, a fixed route, and do not mind group timing.',
+          'Choose a private car when the route has several scattered stops, the group has mixed energy levels, or luggage and transfers would dominate the day.',
+          'Choose a point-to-point transfer when the main problem is movement, not sightseeing.',
+          'Avoid private tours when you mainly want to wander slowly in one compact neighborhood. Walking or public transport may feel better.',
+        ],
+      },
+      {
+        title: 'The practical notes to check before booking',
+        bullets: [
+          'Pickup and drop-off: exact area, hotel eligibility, station exit, waiting policy, and what happens if you are late.',
+          'Vehicle fit: number of passengers, luggage allowance, stroller space, child seats, and whether bags stay in the vehicle during stops.',
+          'Driver and guide language: English-speaking driver, licensed guide, audio guide, or translation app support are not the same thing.',
+          'Toilet and rest stops: long day trips can be uncomfortable if breaks are unclear or rushed.',
+          'Weather and route changes: Mt. Fuji, mountain, snow, coastal, and outdoor routes need realistic backup expectations.',
+          'Costs not included: tolls, parking, attraction tickets, meals, overtime, child seats, and entrance fees may be separate.',
+          'Cancellation and overtime: check the deadline, refund rule, extra-hour fee, and how itinerary changes are handled.',
+        ],
+      },
+      {
+        title: 'Do not hide the important warnings',
+        body: [
+          'Some details should stay public in the article: cancellation terms, age restrictions, accessibility limitations, severe weather concerns, and whether food or tickets are included. Hiding those behind an email signup would make the page less trustworthy.',
+          'The better email signup offer is a deeper practical checklist: what to ask the operator, what to compare across listings, which review clues matter, and how to decide whether a private tour is actually worth the extra cost for your group.',
+        ],
+      },
+      {
+        title: 'What the email-only memo should add',
+        body: [
+          'The public guide should help you avoid obvious mistakes. The email-only memo can go deeper: a comparison sheet, review-reading prompts, copy-and-paste questions, and a decision grid for train, bus tour, private car, and transfer.',
+          'That is where BSJ can add value without turning the page into a giant checklist. The article gives the main judgment. The downloadable memo helps you apply it to the exact listing you are considering.',
+        ],
+        bullets: [
+          'A one-page comparison table for two or three tour listings.',
+          'A pickup and luggage question set for families, older travelers, and checkout-day plans.',
+          'A cost checklist for tolls, parking, tickets, meals, overtime, and child seats.',
+          'A weather fallback checklist for Mt. Fuji, Hakone, mountain, snow, and coastal routes.',
+          'A short review-reading guide for clues about rushed timing, unclear meeting points, traffic, and restroom breaks.',
+        ],
+      },
+      {
+        title: 'A private tour decision checklist',
+        bullets: [
+          'Will this booking remove two or more stressful transfers?',
+          'Would luggage, a stroller, or mobility needs make the public route unpleasant?',
+          'Is the destination weather-sensitive enough that route flexibility matters?',
+          'Is hotel pickup included for your actual hotel or only selected areas?',
+          'Are toilets, meals, and rest stops clear enough for your group?',
+          'Do you understand what is not included in the price?',
+          'Would a simpler train route plus one taxi be enough?',
+        ],
+      },
+      {
+        title: 'Sample message before booking',
+        body: [
+          'If the listing is close but not clear, send a short message before booking. Ask about the practical constraint, not only the sightseeing route.',
+        ],
+        template: {
+          title: 'Private tour and transfer check',
+          intro:
+            'Use this when luggage, children, pickup location, toilets, or weather could affect whether the tour works for your day.',
+          messages: [
+            {
+              label: 'English',
+              text: `Hello,
+I am interested in booking this private tour or transfer.
+
+Before booking, could you please confirm:
+- Is pickup available from my hotel or only from selected areas?
+- How much luggage can fit in the vehicle?
+- Can the vehicle accommodate a stroller or child seat if needed?
+- Are toilet or rest stops possible during the route?
+- Are tolls, parking, attraction tickets, meals, or overtime fees included?
+- If the weather is poor, can the route be adjusted?
+
+Thank you.`,
+            },
+            {
+              label: 'Japanese',
+              text: `この貸切ツアーまたは送迎の予約を検討しています。
+
+予約前に以下を確認させてください。
+・ホテルまで迎えに来てもらえますか？それとも指定エリアのみですか？
+・車に積める荷物の量はどのくらいですか？
+・ベビーカーやチャイルドシートが必要な場合、対応できますか？
+・途中でトイレ休憩や休憩時間を取ることはできますか？
+・高速料金、駐車料金、入場券、食事、延長料金は料金に含まれていますか？
+・天候が悪い場合、行程の変更は可能ですか？
+
+よろしくお願いいたします。`,
+            },
+          ],
+        },
+      },
+    ],
+    faqs: [
+      {
+        question: 'Is a private tour in Japan worth it?',
+        answer:
+          'A private tour is worth considering when it solves a real travel constraint: several scattered stops, luggage, children, older travelers, a tight schedule, hotel pickup, or a route that would be stressful by train.',
+      },
+      {
+        question: 'Is an English-speaking driver the same as a guide?',
+        answer:
+          'Not always. An English-speaking driver may help with logistics and communication, while a licensed guide is a different service that may explain sites in more detail. Check the listing before booking.',
+      },
+      {
+        question: 'What should I confirm before booking a private car in Japan?',
+        answer:
+          'Confirm pickup area, exact meeting point, vehicle size, luggage allowance, child seats, driver or guide language, tolls, parking, entrance fees, overtime, and weather fallback.',
+      },
+    ],
+    relatedStays: [
+      { href: '/free-japan-travel-samples', label: 'Get the practical checklist by email' },
+      { href: '/japan-experience-booking-guide', label: 'Japan experience booking guide' },
+      { href: '/japan-luggage-delivery-guide', label: 'Luggage delivery guide' },
+      { href: '/shinkansen-oversized-luggage-guide', label: 'Shinkansen luggage guide' },
+      { href: '/japan-confirmation-service', label: 'Japanese confirmation support' },
+    ],
+    serviceLinks: [
+      affiliateServiceLinks.klookPrivateTours,
+      affiliateServiceLinks.kiwitaxiJapan,
+      affiliateServiceLinks.radicalStorageJapan,
+    ],
+    sourceLinks: [
+      {
+        href: 'https://www.japan.travel/en/',
+        label: 'Japan National Tourism Organization',
+        external: true,
+      },
+      {
+        href: 'https://www.klook.com/',
+        label: 'Klook Japan tours, activities, and transfers',
+        external: true,
+      },
+    ],
+  },
+  'kansai-day-trips-practical-guide': {
+    path: '/kansai-day-trips-practical-guide',
+    eyebrow: 'Kansai day trips',
+    title: 'Kansai Day Trips Practical Guide',
+    description:
+      'How to choose Osaka, Kyoto, Nara, Kobe, Amanohashidate, and nearby Kansai day trips when timing, toilets, luggage, walking, and pickup points matter.',
+    intro: [
+      'Kansai day trips can look simple on a map, but the real travel day often depends on station exits, morning meeting points, long bus time, lunch timing, toilets, weather, and how much walking your group can handle.',
+      'This guide helps you decide whether to go by train, join a bus tour, book a private car, or keep the day lighter. It is written for travelers who want a good experience without turning the day into logistics homework.',
+      'Use it alongside current listings on Klook or other platforms, then save a practical checklist before booking anything that will be hard to change.',
+    ],
+    sections: [
+      {
+        title: 'The best day trip is not always the most famous one',
+        body: [
+          'Kyoto, Nara, Kobe, Himeji, Uji, Amanohashidate, Ine, Lake Biwa, Wakayama, and Awaji Island can all work from Osaka or Kyoto. But a day trip should match your base hotel, wake-up time, mobility, weather, and appetite for crowds.',
+          'A packed route can be great for first-time visitors who want a guided overview. It can also be exhausting for families, older travelers, or anyone carrying bags between hotels.',
+        ],
+      },
+      {
+        title: 'Train, bus tour, or private car',
+        bullets: [
+          'Use trains when the destination is direct and you want flexibility, such as Osaka to Nara or Kyoto to Uji.',
+          'Use a bus tour when the route combines several spread-out stops and you are comfortable following a fixed schedule.',
+          'Use a private car when hotel pickup, luggage, slower pacing, or scattered destinations matter more than saving money.',
+          'Avoid heavy day trips on checkout days unless luggage storage or delivery is already solved.',
+          'Do not choose only by price. A cheaper route with several transfers can cost you energy, time, and patience.',
+        ],
+      },
+      {
+        title: 'Klook examples that fit this guide',
+        body: [
+          'Current Klook-style examples include Kyoto and Nara guided day trips from Osaka or Kyoto, Arashiyama and Fushimi Inari routes, Amanohashidate and Ine day trips, and private Kansai car charters that can cover Osaka, Kyoto, Nara, Kobe, Wakayama, or Lake Biwa.',
+          'For BSJ readers, these are useful because the decision is not only sightseeing. The question is whether the route gives you enough toilet stops, rest time, food flexibility, and a meeting point you can actually find in the morning.',
+        ],
+      },
+      {
+        title: 'BSJ notes from current Kansai day trip listings',
+        body: [
+          'Kansai day trips often look compact because the cities are close on a map. The actual friction is usually the morning meeting point, how rushed the route feels, whether lunch is flexible, and how much walking happens at temples, shrines, scenic streets, or viewpoints.',
+          'A cheap group tour can be excellent when you want a fixed overview. A private car can be better when the group has luggage, children, older travelers, or a checkout-day schedule. The right choice depends on the day around the tour.',
+        ],
+        bullets: [
+          'Kyoto and Nara routes can involve more walking, stairs, and crowd navigation than the listing title suggests.',
+          'Amanohashidate, Ine, Lake Biwa, Awaji, and Wakayama routes can become long vehicle days, so toilets and rest stops matter.',
+          'Lunch may be included, optional, self-arranged, or rushed depending on the route.',
+          'Hotel pickup is most valuable when the morning station transfer would otherwise be the stressful part.',
+          'Checkout-day day trips need a luggage plan before you book the activity.',
+        ],
+      },
+      {
+        title: 'Practical checks before booking',
+        bullets: [
+          'Meeting point: exact station exit, landmark, pickup time, and whether your hotel is included.',
+          'Toilets: whether the route has clear restroom stops, especially on long bus or coastal routes.',
+          'Lunch: whether lunch is included, self-arranged, rushed, or difficult for dietary needs.',
+          'Walking: temples, shrines, old streets, slopes, and viewpoint routes can add more walking than expected.',
+          'Luggage: check whether bags can be stored, carried, or should be delivered before the day trip.',
+          'Weather: coastal, mountain, shrine, and scenic routes can feel very different in heat, rain, wind, or snow.',
+        ],
+      },
+      {
+        title: 'What belongs in the email checklist',
+        body: [
+          'Public articles should explain the route type and important warnings. The deeper checklist can help readers compare exact meeting points, restroom clues, lunch risks, walking intensity, stroller fit, and whether the day should be private, guided, or self-guided.',
+          'This is also where BSJ can keep a route-comparison sheet: Osaka base vs Kyoto base, group tour vs train, and whether the day is too heavy for checkout, bad weather, or young children.',
+        ],
+      },
+      {
+        title: 'Sample message before booking',
+        template: {
+          title: 'Kansai day trip practical check',
+          intro: 'Use this when a day trip has several stops or the listing does not clearly explain timing, toilets, or luggage.',
+          messages: [
+            {
+              label: 'English',
+              text: `Hello,
+I am considering booking this Kansai day trip.
+
+Could you please confirm:
+- Where exactly is the meeting point?
+- Are there toilet breaks during the route?
+- Is lunch included, or do we choose our own lunch?
+- How much walking or stair use should we expect?
+- Can travelers bring large luggage or should we avoid bringing bags?
+
+Thank you.`,
+            },
+            {
+              label: 'Japanese',
+              text: `関西の日帰りツアーの予約を検討しています。
+
+以下について確認させてください。
+・集合場所は具体的にどこですか？
+・行程中にトイレ休憩はありますか？
+・昼食は含まれていますか？それとも各自で取りますか？
+・徒歩移動や階段の利用はどのくらいありますか？
+・大きな荷物の持ち込みは可能ですか？持って行かない方がよいですか？
+
+よろしくお願いいたします。`,
+            },
+          ],
+        },
+      },
+    ],
+    faqs: [
+      {
+        question: 'Should I take a train, bus tour, or private car for a Kansai day trip?',
+        answer:
+          'Use trains for direct routes and flexible days, bus tours for lower-cost fixed routes, and private cars when hotel pickup, luggage, children, older travelers, or scattered stops matter more than saving money.',
+      },
+      {
+        question: 'Are Kyoto and Nara day trips easy with luggage?',
+        answer:
+          'They can be difficult with luggage because station exits, crowds, temples, shrines, and deer park areas involve walking and stairs. Solve storage or delivery before booking a day trip on a checkout day.',
+      },
+      {
+        question: 'What should I check before booking a Kansai day tour?',
+        answer:
+          'Check the exact meeting point, toilet breaks, lunch rules, walking distance, stair use, luggage policy, weather plan, and whether your hotel pickup is actually included.',
+      },
+    ],
+    relatedStays: [
+      { href: '/stays/luggage-friendly', label: 'Luggage-friendly stays' },
+      { href: '/japan-private-tours-transfers-guide', label: 'Private tours and transfers guide' },
+      { href: '/japan-luggage-delivery-guide', label: 'Luggage delivery guide' },
+      { href: '/free-japan-travel-samples', label: 'Get the day trip checklist by email' },
+    ],
+    serviceLinks: [
+      affiliateServiceLinks.klookKansaiDayTrips,
+      affiliateServiceLinks.radicalStorageJapan,
+      affiliateServiceLinks.kiwitaxiJapan,
+    ],
+    sourceLinks: [
+      { href: 'https://www.japan.travel/en/destinations/kansai/', label: 'JNTO: Kansai', external: true },
+      { href: 'https://www.klook.com/', label: 'Klook Japan day trips', external: true },
+    ],
+  },
+  'japan-snow-winter-activity-guide': {
+    path: '/japan-snow-winter-activity-guide',
+    eyebrow: 'Winter activities',
+    title: 'Japan Snow and Winter Activity Planning Guide',
+    description:
+      'A practical guide to booking Japan ski lessons, snow day trips, and winter activities when clothing, rentals, lockers, toilets, weather, and children matter.',
+    intro: [
+      'Japan winter activities can be magical, but they are also gear-heavy and weather-sensitive. The important questions are often practical: what to wear, where to store bags, whether beginners are supported, and what happens if snow or wind changes the plan.',
+      'This guide is for travelers comparing ski day tours, private ski lessons, snow-play trips, and mountain routes from places such as Tokyo, Sapporo, Nagano, Niigata, Kanazawa, or Osaka.',
+      'Use public listings to compare the main experience, then keep a checklist for the details that can make the day comfortable or stressful.',
+    ],
+    sections: [
+      {
+        title: 'Choose the winter activity type first',
+        bullets: [
+          'Snow play is usually better for families or first-timers who do not want a full ski day.',
+          'Group ski day tours can simplify transport, rentals, and timing.',
+          'Private lessons cost more but can be worth it for beginners, children, or mixed ability groups.',
+          'Mountain day trips need weather flexibility because views, roads, and schedules can change.',
+          'Do not assume every snow activity includes warm clothing, gloves, goggles, lockers, or insurance.',
+        ],
+      },
+      {
+        title: 'Klook examples that fit this guide',
+        body: [
+          'Current Klook-style options include Sapporo Kokusai and Sapporo Teine ski day tours, Mt. Fuji Yeti snow day trips from Tokyo, Yuzawa private ski lessons, and private ski lessons in Hokkaido or Nagano areas.',
+          'These listings are useful for BSJ because the friction is predictable: cold weather, rental sizing, lockers, bathrooms, transport time, beginner support, and cancellation rules.',
+        ],
+      },
+      {
+        title: 'BSJ notes from current winter activity listings',
+        body: [
+          'Winter listings can make the day sound simple: transfer, rental, snow, return. The real experience depends on clothing, rental sizing, warm indoor breaks, lockers, bathroom access, beginner support, and whether the route still works when weather changes.',
+          'The highest-value mistake to avoid is booking a snow day as if it were a normal sightseeing day. Snow activities need a clothing plan, a bag plan, and a realistic energy plan.',
+        ],
+        bullets: [
+          'All-inclusive does not always mean every warm item is included, especially gloves, hats, goggles, or base layers.',
+          'Beginner-friendly and private lesson are different promises. True first-timers should check lesson language and pace.',
+          'Snow resorts can be difficult with suitcases unless storage, lockers, or hotel transfer timing is clear.',
+          'Cold, wet clothing can make the return trip harder than the activity itself.',
+          'Weather, road conditions, and lift operations can change the value of the day.',
+        ],
+      },
+      {
+        title: 'Practical checks before booking',
+        bullets: [
+          'Clothing: confirm whether snowwear, gloves, hats, goggles, and boots are included or rented separately.',
+          'Luggage and lockers: check whether suitcases are realistic, especially when traveling between hotels.',
+          'Toilets and rest areas: snow days can be long, cold, and tiring without clear breaks.',
+          'Lessons: confirm language, group size, age limits, and whether true beginners are accepted.',
+          'Weather policy: check cancellation, route change, and refund rules before price.',
+          'Insurance and injury: understand that activity booking does not replace travel insurance or medical advice.',
+        ],
+      },
+      {
+        title: 'Who should be extra careful',
+        body: [
+          'Families with young children, travelers without winter clothing, people with injuries, and visitors arriving directly from a long flight should be careful with full-day snow plans. A shorter snow-play activity or private lesson may be calmer than an ambitious day tour.',
+        ],
+      },
+      {
+        title: 'Email checklist angle',
+        body: [
+          'The downloadable checklist should focus on rental items, what to pack, locker questions, toilet and warm-up breaks, beginner questions, child-fit questions, and weather fallback notes.',
+          'The email-only version can include a packing grid, rental confirmation questions, and a quick filter for snow play, group ski day, private lesson, and private transfer.',
+        ],
+      },
+    ],
+    faqs: [
+      {
+        question: 'What is the easiest Japan snow activity for first-time visitors?',
+        answer:
+          'Snow play or a beginner-focused day trip is usually easier than a full ski day. Check clothing, transport time, warm indoor breaks, toilets, and whether rental items are included.',
+      },
+      {
+        question: 'Do Japan ski day tours include all winter clothing?',
+        answer:
+          'Not always. Confirm whether snowwear, gloves, hats, goggles, boots, helmets, and lockers are included, rented separately, or must be brought by you.',
+      },
+      {
+        question: 'Should beginners book a private ski lesson in Japan?',
+        answer:
+          'A private lesson can be worth it for true beginners, children, and mixed-ability groups because pace and language support matter. Check instructor language, meeting point, age limits, and cancellation rules.',
+      },
+    ],
+    relatedStays: [
+      { href: '/japan-private-tours-transfers-guide', label: 'Private tours and transfers guide' },
+      { href: '/japan-luggage-delivery-guide', label: 'Luggage delivery guide' },
+      { href: '/free-japan-travel-samples', label: 'Get the winter activity checklist by email' },
+    ],
+    serviceLinks: [
+      affiliateServiceLinks.klookSnowActivities,
+      affiliateServiceLinks.kiwitaxiJapan,
+      affiliateServiceLinks.airaloJapan,
+    ],
+    sourceLinks: [
+      { href: 'https://www.japan.travel/en/things-to-do/skiing/', label: 'JNTO: Skiing in Japan', external: true },
+      { href: 'https://www.klook.com/', label: 'Klook Japan snow activities', external: true },
+    ],
+  },
+  'japan-theme-park-attraction-guide': {
+    path: '/japan-theme-park-attraction-guide',
+    eyebrow: 'Tickets and attractions',
+    title: 'Japan Theme Park and Major Attraction Planning Guide',
+    description:
+      'How to plan Universal Studios Japan, teamLab, observation decks, museums, and major attraction days around timed entry, lockers, luggage, crowds, food, and transport.',
+    intro: [
+      'Major Japan attractions are easy to add to an itinerary and easy to underestimate. Timed entry, express passes, lockers, stroller rules, food lines, rain, and the ride home can affect the day as much as the ticket itself.',
+      'This guide focuses on attraction days such as Universal Studios Japan, teamLab, observation decks, museums, and bundled city passes, with practical checks before you buy.',
+    ],
+    sections: [
+      {
+        title: 'Plan the whole day, not only the ticket',
+        body: [
+          'A ticket solves entry. It does not solve how you arrive, what happens to luggage, where you rest, whether food works for your group, or how you leave after closing. For families and first-time visitors, those details matter.',
+        ],
+      },
+      {
+        title: 'Klook examples that fit this guide',
+        body: [
+          'Current Klook-style examples include Universal Studios Japan Studio Pass and Express Pass, private or shared transfers to USJ, teamLab Planets, teamLab Borderless, observation deck tickets, and attraction passes around Tokyo or Kansai.',
+          'Before making a page primarily revenue-driven, check the product category and commissionability. Some programs treat theme parks or special tickets differently.',
+        ],
+      },
+      {
+        title: 'BSJ notes from current attraction listings',
+        body: [
+          'Attraction listings usually explain the ticket. They do not always explain the day. For travelers, the hidden friction is often timed entry, lockers, post-closing transport, food queues, stroller handling, and what happens if the group gets tired earlier than expected.',
+          'This is where BSJ can stay useful without becoming a generic ticket site: explain the day around the ticket, then link to current options when the booking makes sense.',
+        ],
+        bullets: [
+          'Express passes and timed-entry tickets can have strict names, dates, and entry windows.',
+          'Large lockers may be limited, far from the entrance, or difficult during peak times.',
+          'After closing, station crowds can be the hardest part of the day for families.',
+          'Food restrictions need a backup plan because attraction food queues and menus can be limited.',
+          'A nearby stay, luggage storage, or private transfer can matter more than the cheapest ticket.',
+        ],
+      },
+      {
+        title: 'Practical checks before buying',
+        bullets: [
+          'Ticket type: date-specific, timed entry, express pass, admission only, or bundled pass.',
+          'Luggage: whether lockers are available, large enough, or realistic during crowded periods.',
+          'Transport: first train, last train, post-closing crowding, and whether a transfer is easier with children.',
+          'Food: dietary restrictions, long queues, outside food rules, and backup meal plans.',
+          'Weather: outdoor queues, rain, heat, and whether the experience is mostly indoor.',
+          'Children and strollers: age/height rules, stroller parking, nap timing, and rest areas.',
+        ],
+      },
+      {
+        title: 'What belongs in the email checklist',
+        body: [
+          'A good attraction checklist helps travelers compare ticket names, entry timing, locker plans, food backup, stroller/rest needs, and whether a transfer or nearby stay would make the day easier.',
+          'The email-only version can include a day plan template: before entry, first two hours, lunch backup, afternoon rest, exit transport, and what to do with bags.',
+        ],
+      },
+    ],
+    faqs: [
+      {
+        question: 'What should I check before buying Japan attraction tickets?',
+        answer:
+          'Check whether the ticket is date-specific, timed-entry, admission-only, express access, QR-only, pickup-required, refundable, or limited by age, height, or re-entry rules.',
+      },
+      {
+        question: 'Can I bring luggage to Universal Studios Japan or teamLab?',
+        answer:
+          'You should not assume large luggage is easy. Check lockers, storage size, crowded periods, and whether luggage storage near the station or hotel is a better plan.',
+      },
+      {
+        question: 'Why plan transport after a theme park day?',
+        answer:
+          'The ride home can be the hardest part, especially after closing, with children, rain, or tired travelers. Check station crowds, last trains, taxi options, or transfers before the day.',
+      },
+    ],
+    relatedStays: [
+      { href: '/stays/family-friendly', label: 'Family-friendly stays' },
+      { href: '/stays/luggage-friendly', label: 'Luggage-friendly stays' },
+      { href: '/free-japan-travel-samples', label: 'Get the attraction day checklist by email' },
+    ],
+    serviceLinks: [
+      affiliateServiceLinks.klookAttractionTickets,
+      affiliateServiceLinks.kiwitaxiJapan,
+      affiliateServiceLinks.radicalStorageJapan,
+    ],
+    sourceLinks: [
+      { href: 'https://www.japan.travel/en/things-to-do/theme-parks/', label: 'JNTO: Theme parks', external: true },
+      { href: 'https://www.klook.com/', label: 'Klook Japan attraction tickets', external: true },
+    ],
+  },
+  'japan-airport-arrival-transfer-guide': {
+    path: '/japan-airport-arrival-transfer-guide',
+    eyebrow: 'Arrival and transfers',
+    title: 'Japan Airport Arrival and Transfer Guide',
+    description:
+      'How to choose Japan airport trains, limousine buses, private transfers, luggage delivery, and eSIM setup for a calmer first day after landing.',
+    intro: [
+      'The first hour after landing in Japan can shape the whole trip. You may be tired, carrying luggage, setting up internet, finding tickets, and trying to reach a hotel before check-in closes.',
+      'This guide helps you compare airport trains, limousine buses, private transfers, and luggage delivery from airports such as Narita, Haneda, and Kansai International Airport.',
+    ],
+    sections: [
+      {
+        title: 'Choose by friction, not only speed',
+        body: [
+          'The fastest route on a map may not be the easiest route with luggage, children, jet lag, or a late arrival. A direct bus to a hotel area can be calmer than a faster train with transfers. A private transfer can be worth it when arrival time is late or the group has several bags.',
+        ],
+      },
+      {
+        title: 'Common airport options',
+        bullets: [
+          'Airport express trains are often fast and reliable when your hotel is near the right station.',
+          'Limousine buses are useful when they stop near your hotel or reduce transfers.',
+          'Private transfers can help with late arrivals, children, large bags, or unfamiliar station exits.',
+          'Luggage delivery can make the first day easier if timing and hotel receiving rules match.',
+          'Airport lounges or waiting areas can help when arrival and check-in times do not line up.',
+        ],
+      },
+      {
+        title: 'Klook examples that fit this guide',
+        body: [
+          'Current Klook-style options include Keisei Skyliner, Narita Express, Narita and Haneda limousine buses, JR Haruka and Nankai Rapi:t from Kansai Airport, Osaka private station transfers, and luggage delivery between airports and hotels.',
+        ],
+      },
+      {
+        title: 'BSJ notes from current airport transfer options',
+        body: [
+          'Airport transport listings are easy to compare by price, but the better question is which option reduces first-day friction. A fast train can still be stressful if your hotel is far from the arrival station. A bus can be slower but calmer if it stops near your hotel area.',
+          'Private transfers are most useful when the flight arrives late, the group has several bags, children are tired, or the hotel route involves station exits that are hard to read after a long flight.',
+        ],
+        bullets: [
+          'Ticket pickup or QR redemption can add time before you even board.',
+          'The best station on the map may not be the best station with suitcases.',
+          'Late arrivals need a last-train and backup-taxi plan.',
+          'Luggage delivery is useful only if delivery timing and hotel receiving rules match your plan.',
+          'Internet setup should happen before you depend on maps, hotel messages, or ticket QR codes.',
+        ],
+      },
+      {
+        title: 'Practical checks before arrival',
+        bullets: [
+          'Landing time: include immigration, baggage claim, customs, and ticket pickup time.',
+          'Hotel check-in: know the front desk hours and late arrival rule.',
+          'Internet: set up eSIM or roaming before you need maps and ticket QR codes.',
+          'Luggage: decide whether you carry it, store it, deliver it, or book a transfer.',
+          'Children and older travelers: choose fewer transfers over theoretical speed.',
+          'Last train or bus: late flights need a backup plan.',
+        ],
+      },
+      {
+        title: 'Email checklist angle',
+        body: [
+          'The arrival-day checklist should help travelers map their airport, internet, ticket, luggage, hotel check-in, and late-arrival backup in one place before flying.',
+          'The email-only version can add a step-by-step arrival worksheet for Narita, Haneda, and Kansai Airport: internet, ticket, luggage, route, hotel message, and backup plan.',
+        ],
+      },
+    ],
+    faqs: [
+      {
+        question: 'What is the easiest way from a Japan airport to my hotel?',
+        answer:
+          'The easiest route depends on your hotel location, bags, arrival time, group size, and energy level. A fast train is not always easiest if it requires several transfers with luggage.',
+      },
+      {
+        question: 'When is a private airport transfer worth it in Japan?',
+        answer:
+          'A private transfer is worth considering for late arrivals, children, older travelers, several large bags, or hotels that are difficult to reach from the nearest station after a long flight.',
+      },
+      {
+        question: 'Should I set up eSIM before leaving the airport?',
+        answer:
+          'Yes, if you depend on maps, hotel messages, ticket QR codes, or translation. Set up connectivity before the route becomes stressful, and keep important details saved offline.',
+      },
+    ],
+    relatedStays: [
+      { href: '/stays/luggage-friendly', label: 'Luggage-friendly stays' },
+      { href: '/japan-luggage-delivery-guide', label: 'Luggage delivery guide' },
+      { href: '/japan-ic-card-guide', label: 'IC card guide' },
+      { href: '/free-japan-travel-samples', label: 'Get the arrival checklist by email' },
+    ],
+    serviceLinks: [
+      affiliateServiceLinks.klookAirportTransfers,
+      affiliateServiceLinks.kiwitaxiJapan,
+      affiliateServiceLinks.airaloJapan,
+      affiliateServiceLinks.radicalStorageJapan,
+    ],
+    sourceLinks: [
+      { href: 'https://www.narita-airport.jp/en/', label: 'Narita Airport', external: true },
+      { href: 'https://tokyo-haneda.com/en/', label: 'Haneda Airport', external: true },
+      { href: 'https://www.kansai-airport.or.jp/en/', label: 'Kansai International Airport', external: true },
+    ],
+  },
+  'japan-cultural-workshop-guide': {
+    path: '/japan-cultural-workshop-guide',
+    eyebrow: 'Workshops and culture',
+    title: 'Japan Cultural Workshop Planning Guide',
+    description:
+      'How to choose tea ceremony, kimono, cooking, craft, and cultural workshops in Japan without missing the small practical details.',
+    intro: [
+      'Cultural workshops can be some of the best memories of a Japan trip. They can also be surprisingly sensitive to timing, clothing, language, food needs, photo rules, and whether children or beginners are comfortable.',
+      'This guide helps you choose workshops such as tea ceremony, kimono rental, sushi or ramen classes, craft sessions, and short cultural experiences with practical expectations in mind.',
+    ],
+    sections: [
+      {
+        title: 'A workshop is a time block, not a quick add-on',
+        body: [
+          'Many workshops last one to three hours, but the true time cost includes arriving early, finding the location, changing clothes, storing bags, taking photos, and moving to the next plan. Do not squeeze a workshop between two stressful transfers.',
+        ],
+      },
+      {
+        title: 'Klook examples that fit this guide',
+        body: [
+          'Current Klook-style examples include Kyoto tea ceremony experiences, tea ceremony and kimono combinations, Tokyo sushi making, Osaka sushi classes, ramen and gyoza classes, and matcha or sweets workshops.',
+          'Food-related workshops may need extra affiliate checking because some food categories can be excluded. They remain strong BSJ content topics because dietary and allergy details matter.',
+        ],
+      },
+      {
+        title: 'Practical checks before booking',
+        bullets: [
+          'Location: small studios can be harder to find than major attractions.',
+          'Clothing: tea rooms, kimono, cooking, and craft spaces may have footwear or sleeve considerations.',
+          'Sitting style: some traditional rooms involve sitting on the floor or low seats.',
+          'Photos: check whether staff photos, self-photos, or photography during the activity are allowed.',
+          'Children: age limits, patience level, sharp tools, hot liquids, or quiet behavior may matter.',
+          'Food needs: ask about fish broth, meat, alcohol, soy, wheat, nuts, and cross-contact when food is included.',
+          'Late arrival: many workshops cannot extend the session if you are late.',
+        ],
+      },
+      {
+        title: 'What belongs in the email checklist',
+        body: [
+          'The workshop checklist should include what to wear, how early to arrive, what to ask about photos, children, food needs, sitting style, language support, and whether the activity works on a luggage-heavy day.',
+        ],
+      },
+    ],
+    relatedStays: [
+      { href: '/dietary-restrictions-japan', label: 'Dietary restriction guide' },
+      { href: '/japan-restaurant-etiquette-guide', label: 'Restaurant etiquette guide' },
+      { href: '/free-japan-travel-samples', label: 'Get the workshop checklist by email' },
+    ],
+    serviceLinks: [
+      affiliateServiceLinks.klookWorkshops,
+      affiliateServiceLinks.radicalStorageJapan,
+      affiliateServiceLinks.airaloJapan,
+    ],
+    sourceLinks: [
+      { href: 'https://www.japan.travel/en/things-to-do/traditional-culture/', label: 'JNTO: Traditional culture', external: true },
+      { href: 'https://www.klook.com/', label: 'Klook Japan workshops', external: true },
+    ],
+  },
+  'japan-food-tours-dietary-needs-guide': {
+    path: '/japan-food-tours-dietary-needs-guide',
+    eyebrow: 'Food tours and dietary needs',
+    title: 'Japan Food Tours and Dietary Needs Guide',
+    description:
+      'How to think about food tours, cooking classes, tastings, and restaurant experiences in Japan when allergies, vegetarian needs, halal concerns, or fish-based dashi matter.',
+    intro: [
+      'Food experiences in Japan can be wonderful, but they are not always simple for travelers with dietary restrictions. A tour listing may say vegetarian-friendly, but that does not always answer questions about fish broth, bonito flakes, shellfish, pork, alcohol, soy sauce, wheat, or cross-contact.',
+      'This guide is written for travelers who want food experiences without relying on vague assumptions. It is also a reminder that some food-related affiliate categories may not be commissionable, so BSJ treats food pages as trust and confirmation pages first.',
+    ],
+    sections: [
+      {
+        title: 'Do not treat every food experience the same',
+        bullets: [
+          'A cooking class may be easier to adapt than a street food tour, because ingredients are visible and prepared in one place.',
+          'A tasting experience may have fixed items that cannot be changed.',
+          'A bar-hopping or izakaya tour may involve hidden sauces, fish broth, pork, or shared cooking surfaces.',
+          'A vegetarian-labeled experience may still use dashi, bonito flakes, or fish-based seasoning.',
+          'Allergy needs require stronger confirmation than preference-based dietary requests.',
+        ],
+      },
+      {
+        title: 'What to ask before booking',
+        bullets: [
+          'Can the operator support your exact restriction, not only a broad category like vegetarian?',
+          'Are fish broth, bonito flakes, dried sardines, shellfish, pork, alcohol, or gelatin used?',
+          'Can ingredients be changed, or is the menu fixed?',
+          'Is food prepared on shared surfaces or in shared oil?',
+          'Can the operator provide written confirmation before the tour?',
+          'If the answer is unclear, is it still worth booking for the non-food parts of the experience?',
+        ],
+      },
+      {
+        title: 'Where BSJ can help',
+        body: [
+          'Public articles should explain the questions travelers often forget to ask. The deeper value is a saved phrase card, message template, or confirmation checklist that travelers can use before booking or show on the day.',
+          'For high-risk allergies, BSJ should never imply a guarantee. The role is to help travelers ask better questions and understand when an answer is too vague to rely on.',
+        ],
+      },
+      {
+        title: 'Sample message before booking',
+        template: {
+          title: 'Food experience dietary check',
+          intro: 'Use this before booking food tours, cooking classes, tastings, or restaurant experiences.',
+          messages: [
+            {
+              label: 'English',
+              text: `Hello,
+I am interested in this food experience.
+
+Before booking, could you please confirm whether the menu can support the following dietary need:
+[write your dietary restriction here]
+
+Also, does the food include fish broth, bonito flakes, dried sardines, shellfish, pork, alcohol, wheat, soy, egg, dairy, or shared cooking oil?
+
+I understand this may not be possible, but I would like to confirm before booking.
+Thank you.`,
+            },
+            {
+              label: 'Japanese',
+              text: `この食事体験の予約を検討しています。
+
+予約前に、以下の食事制限に対応可能か確認したいです。
+【ここに食事制限を記入】
+
+また、料理に魚のだし、かつお節、煮干し、貝類、豚肉、アルコール、小麦、大豆、卵、乳製品、共用の油は使われていますか？
+
+対応が難しい場合があることは理解していますが、予約前に確認したいです。
+よろしくお願いいたします。`,
+            },
+          ],
+        },
+      },
+    ],
+    relatedStays: [
+      { href: '/dietary-restrictions-japan', label: 'Dietary restriction guide' },
+      { href: '/japan-restaurant-etiquette-guide', label: 'Restaurant etiquette guide' },
+      { href: '/japan-confirmation-service', label: 'Japanese confirmation support' },
+      { href: '/free-japan-travel-samples', label: 'Get the food-needs checklist by email' },
+    ],
+    serviceLinks: [
+      affiliateServiceLinks.airaloJapan,
+      affiliateServiceLinks.radicalStorageJapan,
+    ],
+    sourceLinks: [
+      { href: 'https://www.japan.travel/en/guide/vegetarian-guide/', label: 'JNTO: Vegetarian guide', external: true },
+    ],
+  },
+  'japan-family-activity-planning-guide': {
+    path: '/japan-family-activity-planning-guide',
+    eyebrow: 'Family activity planning',
+    title: 'Japan Family Activity Planning Guide',
+    description:
+      'How to choose Japan activities, transfers, theme parks, workshops, and day trips when traveling with children, strollers, luggage, or mixed energy levels.',
+    intro: [
+      'Family travel in Japan often works beautifully, but activity days need a different kind of planning. The question is not only whether children are allowed. It is whether the day has enough toilets, food options, stroller handling, breaks, and transport simplicity.',
+      'This guide helps families choose between theme parks, private transfers, short workshops, day trips, and lighter attraction days without overloading the schedule.',
+    ],
+    sections: [
+      {
+        title: 'Start with the child constraint',
+        bullets: [
+          'Nap timing, meals, toilet access, stroller rules, and heat or rain can matter more than the activity headline.',
+          'A shorter workshop near your hotel may beat a famous attraction across town on a tired day.',
+          'Private transfers can be worth it when the route involves several station changes with a stroller.',
+          'Theme parks need a food, rest, locker, and exit plan, not only a ticket.',
+          'Do not schedule an early day trip after a late arrival or long hotel transfer.',
+        ],
+      },
+      {
+        title: 'Activity types that usually work well',
+        bullets: [
+          'Private car day trips for scattered destinations, luggage-heavy days, or mixed age groups.',
+          'Theme parks and major attractions when ticket timing, transport, and rest breaks are planned.',
+          'Short cultural workshops when the location is easy and the activity is not too long.',
+          'Airport or station transfers when the first or last travel day would otherwise be too hard.',
+          'Simple neighborhood plans with one anchor activity and flexible food breaks.',
+        ],
+      },
+      {
+        title: 'What to check before booking',
+        bullets: [
+          'Age limits, height limits, and whether infants or toddlers can join.',
+          'Stroller rules, storage, elevators, and whether the activity route has stairs.',
+          'Toilet timing, diaper-changing space, and whether breaks are possible.',
+          'Food options nearby and whether dietary needs can be handled.',
+          'Late arrival policy, cancellation, weather changes, and refund rules.',
+          'Whether a private transfer would solve the hardest part of the day.',
+        ],
+      },
+      {
+        title: 'Email checklist angle',
+        body: [
+          'A family activity checklist should help parents compare stroller fit, toilet breaks, food backups, nap timing, luggage storage, ticket timing, and whether the day should be shortened or upgraded to private transport.',
+        ],
+      },
+    ],
+    relatedStays: [
+      { href: '/stays/family-friendly', label: 'Family-friendly stays' },
+      { href: '/japan-theme-park-attraction-guide', label: 'Theme park and attraction guide' },
+      { href: '/japan-private-tours-transfers-guide', label: 'Private tours and transfers guide' },
+      { href: '/free-japan-travel-samples', label: 'Get the family activity checklist by email' },
+    ],
+    serviceLinks: [
+      affiliateServiceLinks.klookAttractionTickets,
+      affiliateServiceLinks.klookPrivateTours,
+      affiliateServiceLinks.kiwitaxiJapan,
+      affiliateServiceLinks.radicalStorageJapan,
+    ],
+    sourceLinks: [
+      { href: 'https://www.japan.travel/en/things-to-do/theme-parks/', label: 'JNTO: Theme parks', external: true },
+      { href: 'https://www.klook.com/', label: 'Klook Japan activities', external: true },
+    ],
+  },
+  'japan-experience-booking-guide': {
+    path: '/japan-experience-booking-guide',
+    eyebrow: 'Experiences and practical notes',
+    title: 'Japan Experience Booking Guide',
+    description:
+      'How to choose Japan tours, tickets, transfers, and activities when the practical details matter as much as the experience itself.',
+    intro: [
+      'Japan has no shortage of bookable experiences: day trips, private tours, food walks, cultural workshops, theme parks, airport transfers, snow trips, and local activities. The hard part is not only choosing what looks fun. It is knowing whether the experience will work for your actual travel day.',
+      'BSJ looks at experience booking from the practical side: meeting points, luggage, toilets, walking distance, weather, family needs, food restrictions, language support, and what to confirm before you pay.',
+      'Use this guide to decide what kind of experience is worth booking through a platform such as Klook now, and what details you should keep in your own checklist before the trip.',
+    ],
+    sections: [
+      {
+        title: 'Start with the travel friction, not the activity title',
+        body: [
+          'A tour can have great reviews and still be a poor fit for your day if the meeting point is difficult, the schedule is tight, luggage is not accepted, or the activity has limited toilet access. This matters even more for families, first-time visitors, travelers with food needs, and people moving between cities.',
+          'Before comparing star ratings, check how the activity fits into your route, hotel location, luggage plan, and energy level for that day.',
+        ],
+      },
+      {
+        title: 'Best experience categories for BSJ readers',
+        bullets: [
+          'Private tours and private transfers when you have luggage, kids, older travelers, or a tight hotel-to-station schedule.',
+          'Day trips from Osaka, Kyoto, or Tokyo where transport planning is the main stress point.',
+          'Cultural workshops when you want a structured activity but need clear language, timing, and location details.',
+          'Food tours only when the listing gives enough information for dietary restrictions and cross-contamination concerns.',
+          'Theme parks and major attractions when timed entry, ticket rules, and transport matter more than general inspiration.',
+          'Snow, mountain, island, or outdoor activities where weather, equipment, bathrooms, and cancellation rules need extra attention.',
+        ],
+      },
+      {
+        title: 'Where Klook fits now',
+        body: [
+          'Klook is the most practical affiliate option for BSJ right now because it is already usable in the current affiliate setup and covers Japan activities, tickets, transport, and selected travel services. That makes it useful for guides where the reader is already comparing real travel constraints.',
+          'BSJ should not turn these pages into generic "best tours" lists. The better angle is to explain which kind of activity fits which travel problem, then link to the relevant booking platform so the reader can compare current options.',
+        ],
+      },
+      {
+        title: 'What to check before booking an experience',
+        bullets: [
+          'Meeting point: exact location, nearest station exit, and whether it is easy to find in rain or crowds.',
+          'Luggage: whether large bags are allowed, stored, carried, or clearly not suitable.',
+          'Toilets: whether there are restrooms at the meeting point, during the route, or only at limited stops.',
+          'Walking and stairs: total walking time, slopes, station transfers, and whether elevators are realistic.',
+          'Food needs: whether vegetarian, vegan, halal, allergies, or no-fish-dashi requests can be handled.',
+          'Weather: whether the activity changes, cancels, or becomes uncomfortable in heat, rain, snow, or wind.',
+          'Children and older travelers: pace, waiting time, stroller rules, seating, and rest breaks.',
+          'Language: whether the guide, voucher, meeting instructions, and emergency contact work in English.',
+        ],
+      },
+      {
+        title: 'Use public notes, save detailed notes for your checklist',
+        body: [
+          'A public guide should give enough information to help you decide whether an activity category is worth considering. It should not hide safety, cancellation, age, or accessibility concerns.',
+          'More detailed practical notes work better as a saved checklist: what to ask, what to bring, which review details to look for, and which conditions would make the activity a poor fit. That checklist is also a good reason to join the BSJ email list before booking.',
+        ],
+      },
+      {
+        title: 'A simple booking decision path',
+        bullets: [
+          'Choose the activity category first: private transfer, day trip, workshop, food tour, attraction ticket, or outdoor activity.',
+          'Remove anything that conflicts with your luggage, hotel location, dietary needs, mobility, or arrival/departure time.',
+          'Check cancellation rules and weather policy before price.',
+          'Read recent low-star reviews for practical friction, not just complaints.',
+          'Save a short checklist of questions before booking anything expensive or hard to replace.',
+        ],
+      },
+      {
+        title: 'Sample questions to ask before booking',
+        body: [
+          'If an experience looks good but the practical details are unclear, ask short, specific questions before you commit.',
+        ],
+        template: {
+          title: 'Experience booking practical check',
+          intro:
+            'Use this for tours, workshops, transfers, and day trips when luggage, toilets, food, or walking distance could affect your day.',
+          messages: [
+            {
+              label: 'English',
+              text: `Hello,
+I am interested in this experience and would like to confirm a few practical details before booking.
+
+- Is large luggage allowed or is there a place to store it?
+- Are there toilets available at the meeting point or during the activity?
+- How much walking or stair use should I expect?
+- Is the meeting point easy to find from the nearest station?
+- Can you support dietary restrictions or should I avoid this activity if food is included?
+
+Thank you.`,
+            },
+            {
+              label: 'Japanese',
+              text: `この体験の予約を検討しています。
+予約前にいくつか実用面の確認をしたいです。
+
+・大きな荷物の持ち込み、または預かりは可能ですか？
+・集合場所や体験中にトイレを利用できる場所はありますか？
+・徒歩移動や階段の利用はどのくらいありますか？
+・最寄り駅から集合場所は分かりやすいですか？
+・食事が含まれる場合、食事制限への対応は可能ですか？
+
+よろしくお願いいたします。`,
+            },
+          ],
+        },
+      },
+    ],
+    relatedStays: [
+      { href: '/free-japan-travel-samples', label: 'Free Japan planning samples' },
+      { href: '/japan-luggage-delivery-guide', label: 'Luggage planning guide' },
+      { href: '/dietary-restrictions-japan', label: 'Dietary restriction guide' },
+      { href: '/japan-confirmation-service', label: 'Japanese confirmation support' },
+    ],
+    serviceLinks: [
+      affiliateServiceLinks.klookJapanActivities,
+      affiliateServiceLinks.radicalStorageJapan,
+      affiliateServiceLinks.kiwitaxiJapan,
+    ],
+    sourceLinks: [
+      {
+        href: 'https://www.japan.travel/en/',
+        label: 'Japan National Tourism Organization',
+        external: true,
+      },
+      {
+        href: 'https://www.klook.com/',
+        label: 'Klook Japan activities and travel services',
+        external: true,
+      },
+    ],
+  },
   'tattoo-friendly-stays-kansai': {
     path: '/tattoo-friendly-stays-kansai',
     eyebrow: 'Tattoo and bath notes',
     title: 'Tattoo-Friendly Stays in Kansai',
     description:
-      'A practical guide to finding stays around Osaka, Kyoto, Nara, and Kobe where tattooed travelers can plan bathing and hotel communication with fewer surprises.',
+      'A practical guide to tattoo-friendly stays around Osaka, Kyoto, Nara, and Kobe, including public bath, private bath, in-room bath, and hotel confirmation notes.',
     intro: [
       'If you travel with tattoos in Japan, the hard part is often not finding a hotel room. It is understanding what you can use once you arrive: the public bath, the large bath, a private reservable bath, an in-room bath, or none of those.',
       'Kansai has many excellent places to stay, but tattoo policies are still uneven and English listings often compress important bath details into vague phrases. This guide helps you read those phrases more carefully before choosing a stay in Osaka, Kyoto, Nara, or Kobe.',
@@ -183,6 +1506,23 @@ Thank you.`,
         },
       },
     ],
+    faqs: [
+      {
+        question: 'Can travelers with tattoos use hotel public baths in Japan?',
+        answer:
+          'It depends on the property. Some hotels allow tattoos, some allow them only when covered, and some restrict public bath use. Confirm the current rule directly if bathing matters to your stay.',
+      },
+      {
+        question: 'Is a private bath the same as an in-room bath?',
+        answer:
+          'No. A private bath may be a reservable shared facility used privately for a time slot, while an in-room bath is inside your room. They create different levels of privacy and convenience.',
+      },
+      {
+        question: 'What should tattooed travelers ask before booking a Kansai stay?',
+        answer:
+          'Ask whether visible tattoos are allowed in the public bath, whether cover stickers are accepted, whether a private bath is available, and whether the guest room has its own bath.',
+      },
+    ],
     relatedStays: [
       { href: '/free-kansai-tattoo-stay-kit', label: 'Free Kansai tattoo stay starter kit' },
       { href: '/stays/tattoo-friendly', label: 'Tattoo-friendly stay profiles' },
@@ -208,7 +1548,7 @@ Thank you.`,
     eyebrow: 'Bath planning',
     title: 'Private Bath Stays in Kansai',
     description:
-      'How to compare private baths, in-room baths, and public baths when choosing a stay in Osaka, Kyoto, Nara, or Kobe.',
+      'How to compare private bath stays, in-room baths, reservable family baths, and public baths when choosing a stay in Osaka, Kyoto, Nara, or Kobe.',
     intro: [
       'For many travelers, the key question is not whether a hotel has a bath. It is whether the bath setup matches privacy, tattoo, family, or comfort needs.',
       'This guide explains the wording to look for before comparing BSJ stay profiles.',
@@ -293,6 +1633,23 @@ Thank you.`,
         },
       },
     ],
+    faqs: [
+      {
+        question: 'What does private bath mean in a Japan hotel or ryokan?',
+        answer:
+          'Private bath can mean a reservable bath facility used privately for a limited time. It does not always mean the bath is inside your room, so confirm the bath type before booking.',
+      },
+      {
+        question: 'Are private baths useful for tattooed travelers?',
+        answer:
+          'They can be useful because they may avoid public-bath restrictions, but policies still vary. Ask whether tattooed guests can use the private bath and whether reservations or extra fees apply.',
+      },
+      {
+        question: 'What should I compare before choosing a private bath stay?',
+        answer:
+          'Compare whether the bath is in-room or reservable, whether use is guaranteed, time limits, extra fees, water type, tattoo rules, and whether children or mobility needs are supported.',
+      },
+    ],
     relatedStays: [
       { href: '/stays/private-bath', label: 'Private bath stay profiles' },
       { href: '/stays/tattoo-friendly', label: 'Tattoo-friendly stays' },
@@ -357,6 +1714,23 @@ Thank you.`,
         ],
       },
     ],
+    faqs: [
+      {
+        question: 'Do I need to reserve oversized luggage space on the Shinkansen?',
+        answer:
+          'On relevant Tokaido, Sanyo, and Kyushu Shinkansen routes, very large luggage may require an oversized luggage space reservation. Check current railway rules before travel.',
+      },
+      {
+        question: 'Should I use luggage delivery instead of carrying bags on the Shinkansen?',
+        answer:
+          'Luggage delivery can be better when bags are large, transfers are complex, or your hotel route includes stairs and crowded stations. Confirm hotel receiving rules and delivery timing first.',
+      },
+      {
+        question: 'What hotel details matter for Shinkansen luggage days?',
+        answer:
+          'Station distance, elevator access, luggage storage, delivery receiving, checkout time, and whether the route from station to hotel is easy with large bags all matter.',
+      },
+    ],
     relatedStays: [
       { href: '/stays/luggage-friendly', label: 'Luggage-friendly stays' },
       { href: '/stays/access-friendly', label: 'Access-friendly stays' },
@@ -378,7 +1752,7 @@ Thank you.`,
     eyebrow: 'Hands-light travel',
     title: 'Japan Luggage Delivery Guide',
     description:
-      'How to think about luggage forwarding, hotel receiving rules, and station movement when planning a Japan trip.',
+      'How to use Japan luggage delivery, hotel luggage forwarding, receiving rules, and hands-free travel planning between airports, hotels, and train stations.',
     intro: [
       'Japan has strong luggage delivery options, but the practical details still matter: hotel acceptance, timing, destination address, cutoff times, and what you need to carry overnight.',
       'This guide is for travelers who want to reduce suitcase stress rather than carry everything through every transfer.',
@@ -448,6 +1822,23 @@ Thank you.`,
         },
       },
     ],
+    faqs: [
+      {
+        question: 'Can I send luggage from one hotel to another in Japan?',
+        answer:
+          'Often yes, but it depends on hotel support, delivery timing, destination address, and bag rules. Confirm with both the sending and receiving property before relying on it.',
+      },
+      {
+        question: 'When should I use luggage delivery in Japan?',
+        answer:
+          'Use it when moving between cities, avoiding crowded train transfers, traveling with children, or planning a checkout day where carrying suitcases would limit the itinerary.',
+      },
+      {
+        question: 'What should I keep with me when forwarding luggage?',
+        answer:
+          'Keep passport, medicine, valuables, chargers, a change of clothes, tickets, and anything needed before the bag arrives. Delivery is convenient, but it is not instant access.',
+      },
+    ],
     relatedStays: [
       { href: '/stays/luggage-friendly', label: 'Luggage-friendly stay profiles' },
       { href: '/stays/access-friendly', label: 'Access-friendly stays' },
@@ -469,7 +1860,7 @@ Thank you.`,
     eyebrow: 'Food and hotel meals',
     title: 'Dietary Restrictions in Japan',
     description:
-      'A stay-planning guide for travelers with allergies, halal, vegetarian, vegan, or other dietary needs in Japan.',
+      'How to plan hotel stays, ryokan meals, restaurants, and self-catering in Japan when allergies, vegetarian, vegan, halal, or other food restrictions matter.',
     intro: [
       'Dietary restrictions can be difficult to explain at hotels, ryokan, restaurants, and breakfast venues in Japan. Some properties can adjust meals with notice, some cannot, and some may need very specific wording.',
       'This guide focuses on what to confirm before relying on hotel meals or remote stay locations.',
@@ -554,6 +1945,23 @@ Thank you.`,
             },
           ],
         },
+      },
+    ],
+    faqs: [
+      {
+        question: 'Is vegetarian food in Japan always free from fish broth?',
+        answer:
+          'No. Vegetarian wording may not always exclude fish-based dashi, bonito flakes, or dried sardines. Ask specifically about fish broth if it matters to your diet.',
+      },
+      {
+        question: 'Are ryokan meals good for dietary restrictions?',
+        answer:
+          'Ryokan meals can be difficult to modify because menus are planned in advance and may use shared stocks or seasonings. Confirm in writing before booking if meals are important.',
+      },
+      {
+        question: 'When is self-catering better for food restrictions in Japan?',
+        answer:
+          'Self-catering can be safer and calmer when restrictions are complex, when breakfast is unclear, or when you need control over ingredients, timing, and backup meals.',
       },
     ],
     relatedStays: [
@@ -1458,7 +2866,7 @@ Thank you.`,
     eyebrow: 'Transport manners',
     title: 'Japan Train Etiquette and Transfer Guide',
     description:
-      'A practical guide to using trains in Japan with less stress: quiet cars, queues, priority seats, luggage, transfers, IC cards, and rush-hour planning.',
+      'A practical Japan train etiquette and transfer guide covering quiet cars, queues, priority seats, escalators, luggage, IC cards, Shinkansen transfers, and rush-hour planning.',
     intro: [
       'Japan’s train system is efficient, but it can feel intense when you first arrive: gates, platforms, line colors, crowds, luggage, and announcements all happen quickly.',
       'The good news is that most train etiquette is practical. Queue where the floor markings tell you, keep noise low, avoid blocking movement, and prepare before you reach the gate.',
@@ -1549,6 +2957,28 @@ Thank you.`,
           'Step aside before checking maps or messages.',
           'Choose the route you can actually manage, not only the fastest route on paper.',
         ],
+      },
+    ],
+    faqs: [
+      {
+        question: 'Which side should I stand on escalators in Japan?',
+        answer:
+          'Customs vary by region. Many people stand on the left around Tokyo, while standing on the right is more common around Osaka. Safety signs or local flow matter more than memorizing a national rule.',
+      },
+      {
+        question: 'Can I bring large luggage on Japanese trains?',
+        answer:
+          'Yes, but large luggage can make transfers stressful. Avoid rush hour, keep bags out of doorways, check Shinkansen oversized baggage rules, and consider luggage delivery for multi-city trips.',
+      },
+      {
+        question: 'Are phone calls allowed on Japanese trains?',
+        answer:
+          'Most city trains are quiet, and phone calls are generally avoided. Keep conversations low, use headphones, and avoid speakerphone or loud videos.',
+      },
+      {
+        question: 'Do IC cards work for every train in Japan?',
+        answer:
+          'IC cards are useful for many local trains, buses, lockers, and vending machines, but they do not replace every long-distance ticket, reserved seat, airport express, or Shinkansen ticket.',
       },
     ],
     relatedStays: [

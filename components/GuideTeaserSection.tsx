@@ -36,12 +36,21 @@ const featuredGuideGroups = [
     ],
   },
   {
+    icon: 'luggage-friendly',
+    label: 'Tours & transfers',
+    guide: guidePages['japan-private-tours-transfers-guide'],
+    links: [
+      guidePages['kansai-day-trips-practical-guide'],
+      guidePages['japan-airport-arrival-transfer-guide'],
+    ],
+  },
+  {
     icon: 'access-friendly',
     label: 'Local basics',
-    guide: guidePages['japan-ic-card-guide'],
+    guide: guidePages['japan-family-activity-planning-guide'],
     links: [
-      guidePages['japan-tax-free-shopping-guide'],
-      guidePages['japan-photography-etiquette-guide'],
+      guidePages['japan-theme-park-attraction-guide'],
+      guidePages['japan-cultural-workshop-guide'],
     ],
   },
 ] as const;

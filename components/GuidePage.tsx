@@ -1,9 +1,15 @@
 import Link from 'next/link';
+import JsonLd from '@/components/JsonLd';
 import SiteFooter from '@/components/SiteFooter';
 import SiteNav from '@/components/SiteNav';
 import TrackedAnalyticsLink from '@/components/TrackedAnalyticsLink';
 import type { GuideLink, GuidePageContent } from '@/lib/guide-content';
 import { getProduct } from '@/lib/products';
+import {
+  buildBreadcrumbJsonLd,
+  buildFaqJsonLd,
+  buildGuideArticleJsonLd,
+} from '@/lib/structured-data';
 
 function LinkList({
   links,
@@ -111,9 +117,17 @@ function GuideDecisionMap() {
 export function GuidePage({ guide }: { guide: GuidePageContent }) {
   const product = guide.productKey ? getProduct(guide.productKey) : null;
   const startItems = guide.sections.slice(0, 5).map((section) => section.title);
+  const breadcrumbJsonLd = buildBreadcrumbJsonLd([
+    { name: 'Home', path: '/' },
+    { name: 'Guides', path: '/guides' },
+    { name: guide.title, path: guide.path },
+  ]);
 
   return (
     <>
+      <JsonLd data={buildGuideArticleJsonLd(guide)} />
+      <JsonLd data={breadcrumbJsonLd} />
+      {guide.faqs?.length ? <JsonLd data={buildFaqJsonLd(guide.faqs)} /> : null}
       <SiteNav />
 
       <main>
@@ -259,6 +273,29 @@ export function GuidePage({ guide }: { guide: GuidePageContent }) {
                   </p>
                   <div className="mt-5">
                     <LinkList links={guide.sourceLinks} />
+                  </div>
+                </section>
+              ) : null}
+
+              {guide.faqs?.length ? (
+                <section className="mt-12 border-t border-[var(--bsj-border)] pt-10">
+                  <p className="text-[11px] font-semibold uppercase tracking-[0.16em] text-[var(--bsj-text-light)]">
+                    Common questions
+                  </p>
+                  <h2 className="mt-3 text-[24px] font-medium tracking-[0] text-[var(--bsj-text)]">
+                    FAQ
+                  </h2>
+                  <div className="mt-6 divide-y divide-[var(--bsj-border)] border-y border-[var(--bsj-border)]">
+                    {guide.faqs.map((faq) => (
+                      <section key={faq.question} className="py-6">
+                        <h3 className="text-[18px] font-medium leading-[1.35] tracking-[0] text-[var(--bsj-text)]">
+                          {faq.question}
+                        </h3>
+                        <p className="mt-3 text-[14px] leading-[1.8] text-[var(--bsj-text-muted)]">
+                          {faq.answer}
+                        </p>
+                      </section>
+                    ))}
                   </div>
                 </section>
               ) : null}
