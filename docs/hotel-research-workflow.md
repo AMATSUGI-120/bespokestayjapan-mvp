@@ -206,6 +206,14 @@ For every candidate, capture:
 - suggested_human_check_questions
 - source_urls
 - research_status
+- last_researched_at
+- last_directly_confirmed_at
+- last_content_updated_at
+- recheck_due_at
+- human_check_due_at
+- follow_up_due_at
+- confirmation_status
+- confirmation_status_note
 
 ## Research Status
 

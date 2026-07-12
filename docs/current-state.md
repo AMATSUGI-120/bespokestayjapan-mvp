@@ -218,6 +218,13 @@ Only run the live import after explicit approval.
   keyword searching alone.
 - Hotel research rules are documented in
   `docs/hotel-research-workflow.md`.
+- Future hotel Google Sheets should include research and trust-management dates:
+  `last_researched_at`, `last_directly_confirmed_at`,
+  `last_content_updated_at`, `recheck_due_at`, `source_recheck_due_at`,
+  `human_check_due_at`, and `follow_up_due_at`.
+- Future hotel Google Sheets should include `confirmation_status` so public
+  profiles can distinguish official-source confirmation, direct confirmation,
+  review hints, conflicting sources, and outdated information.
 - Candidate discovery should start from category-specific sources such as
   tattoo-friendly directories, pet-friendly stay directories, vegan/halal food
   resources, apartment hotel brands, official accessibility pages, and hotel

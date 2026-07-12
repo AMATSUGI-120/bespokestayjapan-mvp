@@ -98,6 +98,50 @@ These columns should be maintained for quality control and future re-check loops
 | `phone_check_reason` | Why confirmation is needed. |
 | `questions_to_confirm` | Specific questions for the human confirmation loop. |
 
+## Research Date And Recheck Columns
+
+These columns should be included in the Google Sheet even before the website DB
+schema is changed. They support trust display, operations, and n8n reminders.
+
+| Column | Purpose |
+| --- | --- |
+| `last_researched_at` | Last date BSJ reviewed official sources, OTA notes, maps, and surrounding practical context. |
+| `last_directly_confirmed_at` | Last date BSJ received a direct email/phone/official reply from the property or operator. Blank if not directly confirmed. |
+| `last_content_updated_at` | Last date the public BSJ profile copy was updated. |
+| `recheck_due_at` | Next date the hotel should be reviewed again. Used for n8n reminders. |
+| `source_recheck_due_at` | Next date source URLs should be checked for broken links or changed content. |
+| `human_check_due_at` | Due date for a human phone/email confirmation task. |
+| `follow_up_due_at` | Due date for a follow-up if a property has not replied. |
+| `confirmation_status` | Public-facing confirmation status. See allowed values below. |
+| `confirmation_status_note` | Short internal note explaining why the status was chosen. |
+| `direct_confirmation_method` | `email`, `phone`, `official_reply`, `official_page`, or blank. |
+| `direct_confirmation_source` | Name/email/phone/source of the confirmation if appropriate for internal tracking. |
+| `direct_confirmation_public_summary` | Short public-safe summary of the direct confirmation, if it should appear on the profile. |
+
+Recommended `confirmation_status` values:
+
+| Value | Meaning |
+| --- | --- |
+| `official_source` | Confirmed from an official hotel/operator page, but not directly contacted. |
+| `direct_confirmed` | Confirmed by direct email/phone/official reply. |
+| `needs_human_check` | Important point is unclear and needs human confirmation. |
+| `review_hint_only` | Found in reviews or third-party sources only. Do not present as confirmed. |
+| `conflicting_sources` | Official, OTA, category site, or review sources conflict. |
+| `outdated` | Source exists but appears old or needs rechecking before relying on it. |
+
+Suggested public display:
+
+```text
+Research notes
+Checked from official sources: July 12, 2026
+Direct hotel confirmation: pending
+Page updated: July 12, 2026
+```
+
+If `last_directly_confirmed_at` is blank, do not imply the hotel directly
+confirmed the claim. Use language such as "Direct confirmation: not yet" or
+"Direct confirmation: pending" only if that fits the page tone.
+
 ## Publication Status Values
 
 Use `final_publication_status` as the website gate.
@@ -200,6 +244,8 @@ A hotel should not be imported/displayed unless these are complete:
 - `listing_caution_notes`
 - `listing_category_tags`
 - `listing_source_urls`
+- `last_researched_at`
+- `confirmation_status`
 
 Condition-specific minimums:
 
