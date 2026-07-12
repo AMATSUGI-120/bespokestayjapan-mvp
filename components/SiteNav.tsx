@@ -18,7 +18,7 @@ const navLinks = [
   { href: '/stays', label: 'Stays' },
   { href: '/guides', label: 'Guides' },
   { href: '/#how-it-works', label: 'How it works' },
-  { href: '/#ask', label: 'Ask for a stay match' },
+  { href: '/japan-confirmation-service', label: 'Ask BSJ' },
 ];
 
 export function SiteNav({ className }: SiteNavProps) {

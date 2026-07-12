@@ -7,7 +7,7 @@ import { buildPageMetadata } from '@/lib/seo';
 const pagePath = '/japan-confirmation-service';
 const pageTitle = 'Japan Confirmation Support';
 const pageDescription =
-  'Planned Japanese confirmation support for travelers who need help checking hotels, ryokan, onsen, restaurants, or activities before making their own decision.';
+  'Planned Japanese confirmation support for travelers who need help checking stays, restaurants, activities, transfers, or practical travel details before making their own decision.';
 
 export const metadata: Metadata = buildPageMetadata({
   title: pageTitle,
@@ -19,17 +19,17 @@ const serviceOptions = [
   {
     title: 'Message draft',
     price: 'Planned: $19-29',
-    text: 'A Japanese inquiry message you can send yourself. Useful when you want control of the conversation but need better wording.',
+    text: 'A Japanese inquiry message you can send yourself. Useful for hotels, restaurants, activities, transfers, or other providers when you need precise wording.',
   },
   {
     title: '1-place confirmation',
     price: 'Planned: around $39',
-    text: 'BSJ sends a Japanese email inquiry to one facility and returns an English summary with the original reply.',
+    text: 'BSJ sends a Japanese email inquiry to one facility or provider and returns an English summary with the original reply.',
   },
   {
-    title: '3-place confirmation pack',
+    title: '3-place comparison pack',
     price: 'Planned: around $89',
-    text: 'Compare up to three facilities on one specific issue, such as tattoo policy, meal support, or reservation conditions.',
+    text: 'Compare up to three hotels, restaurants, activities, or transport options on one specific issue, such as tattoo policy, meal support, luggage, or meeting-point practicality.',
   },
 ];
 
@@ -39,13 +39,15 @@ const confirmationTopics = [
   'Vegetarian, vegan, halal, allergy, or fish-based dashi questions',
   'Luggage storage, luggage delivery, or large suitcase receiving',
   'Late check-in, shuttle service, or ryokan arrival rules',
-  'Restaurant reservation details or activity requirements',
+  'Restaurant food restriction notes, seating, or course details',
+  'Activity meeting points, toilets, luggage rules, or weather policy',
+  'Private transfer pickup, child seats, vehicle fit, or late-arrival backup',
 ];
 
 const boundaries = [
   'BSJ does not book hotels or accommodation on your behalf.',
   'BSJ does not handle accommodation payment, cancellation, refund, or booking changes.',
-  'For restaurants and activities, any future reservation support must clearly show scope, cancellation rules, and whether payment is handled directly by the user or provider.',
+  'For restaurants and activities, any future request support must clearly show scope, cancellation rules, and whether payment is handled directly by the user or provider.',
   'BSJ does not guarantee allergen-free meals, medical safety, facility acceptance, availability, or final service outcomes.',
   'Written replies are preferred. Phone summaries are weaker evidence and would be clearly labeled as phone conversation notes.',
 ];
@@ -66,9 +68,9 @@ export default function JapanConfirmationServicePage() {
               </h1>
               <p className="mt-7 max-w-2xl text-[16px] leading-[1.85] text-[var(--bsj-text-muted)]">
                 A planned Japanese confirmation support service for travelers who need
-                help checking hotel policies, ryokan rules, restaurant details, activity
-                conditions, or food restrictions before making their own booking or travel
-                decision.
+                help checking stay policies, restaurant details, activity conditions,
+                transfer rules, or food restrictions before making their own booking or
+                travel decision.
               </p>
             </div>
 
@@ -80,8 +82,9 @@ export default function JapanConfirmationServicePage() {
                 Service design in progress
               </h2>
               <p className="mt-4 text-[14px] leading-[1.75] text-[var(--bsj-text-muted)]">
-                This page defines the scope before accepting requests. Intake forms,
-                pricing, and delivery workflow will be added later.
+                This page defines the scope before accepting requests. Start with free
+                samples now; intake forms, pricing, and delivery workflow will be added
+                later.
               </p>
               <TrackedAnalyticsLink
                 href="/free-japan-travel-samples"
@@ -160,7 +163,7 @@ export default function JapanConfirmationServicePage() {
               <p className="mt-5 text-[15px] leading-[1.85] text-[var(--bsj-text-muted)]">
                 The core service is asking questions, organizing replies, and translating
                 the practical meaning. Travelers still make their own booking, payment,
-                and final safety decisions.
+                cancellation, and final safety decisions.
               </p>
             </div>
 

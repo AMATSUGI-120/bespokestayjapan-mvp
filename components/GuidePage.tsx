@@ -365,7 +365,7 @@ export function GuidePage({ guide }: { guide: GuidePageContent }) {
                     {guide.relatedStays?.length ? (
                       <div className="border border-[var(--bsj-border)] bg-[var(--bsj-bg)] p-5">
                         <p className="text-[11px] font-semibold uppercase tracking-[0.14em] text-[var(--bsj-text-light)]">
-                          Compare stays
+                          Related guides and stays
                         </p>
                         <div className="mt-4 flex flex-col gap-3">
                           {guide.relatedStays.slice(0, 3).map((link) => (

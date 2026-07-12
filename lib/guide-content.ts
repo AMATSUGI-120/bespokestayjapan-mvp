@@ -141,6 +141,9 @@ export const guidePages: Record<string, GuidePageContent> = {
     sections: [
       {
         title: 'Why eSIM planning matters in Japan',
+        body: [
+          'For many travelers, the eSIM decision is not about streaming or social media. It is about whether the first travel day works: finding the correct train platform, reading hotel messages, opening QR tickets, translating a menu, or contacting an activity operator when a meeting point is unclear.',
+        ],
         bullets: [
           'Station navigation often depends on live maps, platform details, and route changes.',
           'Hotel check-in messages, door codes, and late-arrival instructions may arrive online.',
@@ -164,7 +167,7 @@ export const guidePages: Record<string, GuidePageContent> = {
         title: 'Where affiliate services fit',
         body: [
           'Airalo, Saily, and Yesim are useful options to compare before traveling. BSJ should not present one as universally best because the right choice depends on phone compatibility, trip length, data use, and support preference.',
-          'The article should help readers choose the type of plan. The email checklist can help them confirm phone settings, installation timing, and what to screenshot before flying.',
+          'The article should help readers choose the type of plan. The email checklist can help them confirm phone settings, installation timing, and what to screenshot before flying. Treat the eSIM link as a preparation tool, not as a generic ad.',
         ],
       },
       {
@@ -200,11 +203,22 @@ export const guidePages: Record<string, GuidePageContent> = {
         answer:
           'Public Wi-Fi can help, but it is not a reliable full travel plan. It may not be available when you are walking between stations, finding a hotel entrance, contacting a tour operator, or using live translation.',
       },
+      {
+        question: 'How much eSIM data do I need for Japan?',
+        answer:
+          'It depends on trip length and habits. Maps, messaging, translation, QR tickets, and light browsing use far less data than video. If hotels have Wi-Fi, many travelers can choose a moderate plan, but heavy hotspot or video use needs more data.',
+      },
+      {
+        question: 'Can an eSIM help with food restrictions or hotel check-in?',
+        answer:
+          'Indirectly, yes. Reliable mobile data makes it easier to translate menus, show saved phrase cards, contact hotels, open check-in messages, and confirm activity meeting points while you are away from hotel Wi-Fi.',
+      },
     ],
     relatedStays: [
       { href: '/japan-airport-arrival-transfer-guide', label: 'Airport arrival guide' },
+      { href: '/japan-experience-booking-guide', label: 'Experience booking guide' },
+      { href: '/japan-confirmation-service', label: 'Japanese confirmation support' },
       { href: '/japan-ic-card-guide', label: 'IC card guide' },
-      { href: '/japan-train-etiquette-guide', label: 'Train and transfer guide' },
       { href: '/free-japan-travel-samples', label: 'Get the arrival checklist by email' },
     ],
     serviceLinks: [
@@ -276,6 +290,23 @@ export const guidePages: Record<string, GuidePageContent> = {
         body: [
           'The luggage storage checklist should help travelers compare hotel storage, station lockers, delivery, and storage services by day type: arrival day, checkout day, day trip, theme park day, and city transfer day.',
         ],
+      },
+    ],
+    faqs: [
+      {
+        question: 'Are large station lockers easy to find in Japan?',
+        answer:
+          'Not always. Large lockers can be limited, full, or located in a station area that is hard to reach with bags. For checkout days and day trips, plan a backup such as hotel storage, luggage delivery, or a storage service.',
+      },
+      {
+        question: 'Should I use luggage storage or luggage delivery in Japan?',
+        answer:
+          'Use storage when you need bags for the same day. Use delivery when you want to move between cities or hotels without carrying suitcases. Delivery needs timing and hotel receiving confirmation.',
+      },
+      {
+        question: 'Can hotels in Japan store luggage before check-in?',
+        answer:
+          'Many hotels can, but not all. Small stays, apartment-style properties, and unstaffed accommodations may have limited storage. Confirm hours, rules, and whether large suitcases are accepted.',
       },
     ],
     relatedStays: [
@@ -1418,6 +1449,7 @@ Thank you.`,
         body: [
           'A public guide should give enough information to help you decide whether an activity category is worth considering. It should not hide safety, cancellation, age, or accessibility concerns.',
           'More detailed practical notes work better as a saved checklist: what to ask, what to bring, which review details to look for, and which conditions would make the activity a poor fit. That checklist is also a good reason to join the BSJ email list before booking.',
+          'For example, the public page can say that restroom access, luggage rules, and meeting points matter. The email memo can hold the deeper review-reading prompts and comparison table, so the article stays readable while the useful planning tool still has a clear signup reason.',
         ],
       },
       {
@@ -1470,10 +1502,29 @@ Thank you.`,
         },
       },
     ],
+    faqs: [
+      {
+        question: 'What should I check before booking a Japan activity?',
+        answer:
+          'Check the meeting point, luggage rules, walking distance, toilet access, food restrictions, weather policy, cancellation rules, child or age limits, and whether English support is available when something goes wrong.',
+      },
+      {
+        question: 'Is Klook useful for Japan experiences?',
+        answer:
+          'Klook can be useful for comparing Japan activities, tickets, transfers, and day trips. BSJ treats it as one booking tool, not as a universal answer. Always read current listing details before booking.',
+      },
+      {
+        question: 'Should I book a tour, private car, or go by train?',
+        answer:
+          'Choose by friction. Trains are often best for simple routes. A tour or private car may make sense when luggage, children, older travelers, weather, several stops, or an unclear meeting point would make the day stressful.',
+      },
+    ],
     relatedStays: [
       { href: '/free-japan-travel-samples', label: 'Free Japan planning samples' },
+      { href: '/japan-private-tours-transfers-guide', label: 'Private tours and transfers guide' },
+      { href: '/kansai-day-trips-practical-guide', label: 'Kansai day trips practical guide' },
+      { href: '/japan-airport-arrival-transfer-guide', label: 'Airport arrival transfer guide' },
       { href: '/japan-luggage-delivery-guide', label: 'Luggage planning guide' },
-      { href: '/dietary-restrictions-japan', label: 'Dietary restriction guide' },
       { href: '/japan-confirmation-service', label: 'Japanese confirmation support' },
     ],
     serviceLinks: [

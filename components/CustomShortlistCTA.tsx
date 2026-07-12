@@ -60,18 +60,19 @@ export function CustomShortlistCTA({
     <section id={id} className={className} style={sectionStyle}>
       <div style={innerStyle}>
         <div style={accentBarStyle} aria-hidden="true" />
-        <h2 style={headingStyle}>Not finding what you&apos;re looking for?</h2>
+        <h2 style={headingStyle}>Need help checking a Japan stay or activity?</h2>
         <p style={bodyStyle}>
-          Tell us your travel conditions — pets, tattoos, luggage, dietary
-          needs, or something else — and we&apos;ll put together a shortlist of
-          properties that actually fit.
+          Use BSJ to organize the details that matter before you rely on a listing:
+          tattoo rules, luggage, food needs, bath wording, late arrival, or activity
+          requirements. Future support will focus on Japanese confirmation and clear
+          English summaries, not booking on your behalf.
         </p>
         <a
-          href="mailto:hello@bespokestayjapan.com"
+          href="/japan-confirmation-service"
           style={ctaStyle}
           className="hover:[background-color:var(--bsj-primary-hover)]"
         >
-          Ask for a stay match
+          See confirmation support
         </a>
       </div>
     </section>

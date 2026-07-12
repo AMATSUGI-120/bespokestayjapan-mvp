@@ -33,7 +33,7 @@ const infoLinks: FooterLink[] = [
   { href: '/dietary-restrictions-japan', label: 'Dietary restriction guide' },
   { href: '/ryokan-stay-guide', label: 'Ryokan stay guide' },
   { href: '/#how-it-works', label: 'How it works' },
-  { href: '/#ask', label: 'Ask for a stay match' },
+  { href: '/japan-confirmation-service', label: 'Ask BSJ' },
 ];
 
 const footerStyle: CSSProperties = {
