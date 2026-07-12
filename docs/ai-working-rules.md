@@ -107,6 +107,11 @@ For free samples and paid product boundaries, read
 `docs/lead-magnet-product-boundary.md` before adding new downloads, product
 teasers, or kit copy.
 
+For hotel candidate research, category-source discovery, unclear-point
+extraction, or human confirmation task creation, read
+`docs/hotel-research-workflow.md` before searching or editing hotel research
+data.
+
 For Threads posting, routing, or n8n queue work, read
 `docs/threads-automation.md` and `data/threads-route-map.json` before editing
 post text, CTA URLs, schedules, or automation rules.

@@ -212,6 +212,22 @@ npm run import:hotels
 
 Only run the live import after explicit approval.
 
+## Hotel Research Workflow State
+
+- Hotel expansion should use a category-source-first workflow, not random
+  keyword searching alone.
+- Hotel research rules are documented in
+  `docs/hotel-research-workflow.md`.
+- Candidate discovery should start from category-specific sources such as
+  tattoo-friendly directories, pet-friendly stay directories, vegan/halal food
+  resources, apartment hotel brands, official accessibility pages, and hotel
+  FAQ pages.
+- Category sources are discovery inputs only. BSJ should still verify official
+  hotel pages, practical surroundings, unclear points, and source conflicts.
+- Codex should extract human confirmation questions when facts are unclear.
+- n8n should manage status reminders, recheck due dates, and human check
+  notifications rather than doing primary research.
+
 ## Recent Verification
 
 Latest known state:
