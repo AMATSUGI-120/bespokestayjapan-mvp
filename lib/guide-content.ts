@@ -27,12 +27,6 @@ export interface GuidePageContent {
   title: string;
   description: string;
   intro: string[];
-  visual?: {
-    variant: 'private-tour' | 'kansai-day-trip' | 'airport-arrival';
-    eyebrow: string;
-    title: string;
-    points: string[];
-  };
   productKey?: ProductKey;
   leadMagnetCta?: {
     eyebrow: string;
@@ -477,12 +471,6 @@ export const guidePages: Record<string, GuidePageContent> = {
       'This guide helps you decide when a private car, private driver, airport transfer, or private day tour is actually useful, and what to check before booking through a platform such as Klook.',
       'BSJ does not rank tours by hype. We look at the travel day around the booking: hotel location, pickup rules, walking distance, toilet breaks, weather, language support, and what could go wrong if the plan is too tight.',
     ],
-    visual: {
-      variant: 'private-tour',
-      eyebrow: 'Private car day planning',
-      title: 'Hotel pickup, route flexibility, and what to confirm before the day.',
-      points: ['Pickup', 'Luggage fit', 'Weather fallback'],
-    },
     leadMagnetCta: {
       eyebrow: 'Free private tour checklist',
       title: 'Get the private tour checklist before you book',
@@ -690,12 +678,6 @@ Thank you.`,
       'This guide helps you decide whether to go by train, join a bus tour, book a private car, or keep the day lighter. It is written for travelers who want a good experience without turning the day into logistics homework.',
       'Use it alongside current listings on Klook or other platforms, then save a practical checklist before booking anything that will be hard to change.',
     ],
-    visual: {
-      variant: 'kansai-day-trip',
-      eyebrow: 'Kansai route check',
-      title: 'Osaka, Kyoto, Nara, Kobe, and the details that make a day trip work.',
-      points: ['Meeting point', 'Walking load', 'Lunch and toilets'],
-    },
     leadMagnetCta: {
       eyebrow: 'Free Kansai day trip checklist',
       title: 'Get the Kansai day trip checklist',
@@ -1043,12 +1025,6 @@ Thank you.`,
       'The first hour after landing in Japan can shape the whole trip. You may be tired, carrying luggage, setting up internet, finding tickets, and trying to reach a hotel before check-in closes.',
       'This guide helps you compare airport trains, limousine buses, private transfers, and luggage delivery from airports such as Narita, Haneda, and Kansai International Airport.',
     ],
-    visual: {
-      variant: 'airport-arrival',
-      eyebrow: 'Arrival flow',
-      title: 'Internet, tickets, luggage, and the first route from airport to hotel.',
-      points: ['eSIM', 'Airport route', 'Hotel check-in'],
-    },
     leadMagnetCta: {
       eyebrow: 'Free arrival-day checklist',
       title: 'Get the Japan arrival checklist',

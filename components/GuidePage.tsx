@@ -114,98 +114,6 @@ function GuideDecisionMap() {
   );
 }
 
-function GuideEditorialVisual({ visual }: { visual: NonNullable<GuidePageContent['visual']> }) {
-  const isAirport = visual.variant === 'airport-arrival';
-  const isKansai = visual.variant === 'kansai-day-trip';
-  const codes = isAirport
-    ? ['AIR', 'SIM', 'BAG', 'HOTEL']
-    : isKansai
-      ? ['OSK', 'KYO', 'NRA', 'KBE']
-      : ['HOTEL', 'CAR', 'VIEW', 'BACK'];
-
-  return (
-    <section className="border-b border-[var(--bsj-border)] py-8">
-      <div className="overflow-hidden border border-[var(--bsj-border)] bg-[var(--bsj-bg)]">
-        <div className="grid gap-px bg-[var(--bsj-border)] md:grid-cols-[minmax(0,1fr)_260px]">
-          <div className="relative min-h-[260px] overflow-hidden bg-[var(--bsj-bg-card)] p-6 md:p-8">
-            <div
-              className="absolute inset-0 opacity-[0.45]"
-              style={{
-                backgroundImage:
-                  'linear-gradient(135deg, transparent 0, transparent 47%, var(--bsj-border) 48%, transparent 49%, transparent 100%)',
-                backgroundSize: '34px 34px',
-              }}
-              aria-hidden="true"
-            />
-            <div className="relative flex h-full min-h-[220px] flex-col justify-between">
-              <div>
-                <p className="text-[11px] font-semibold uppercase tracking-[0.16em] text-[var(--bsj-text-light)]">
-                  {visual.eyebrow}
-                </p>
-                <h2 className="mt-3 max-w-xl text-[26px] font-medium leading-[1.12] tracking-[0] text-[var(--bsj-text)] md:text-[34px]">
-                  {visual.title}
-                </h2>
-              </div>
-
-              <div className="mt-8">
-                <div className="grid grid-cols-4 items-center gap-2">
-                  {codes.map((code, index) => (
-                    <div key={code} className="flex items-center">
-                      <div className="flex aspect-square w-full max-w-[92px] flex-col items-center justify-center border border-[var(--bsj-border-strong)] bg-[var(--bsj-bg)] text-center">
-                        <span className="text-[11px] font-semibold uppercase tracking-[0.12em] text-[var(--bsj-text)]">
-                          {code}
-                        </span>
-                        <span className="mt-2 h-px w-8 bg-[var(--bsj-accent)]" />
-                      </div>
-                      {index < codes.length - 1 ? (
-                        <span className="mx-2 hidden h-px flex-1 bg-[var(--bsj-border-strong)] sm:block" />
-                      ) : null}
-                    </div>
-                  ))}
-                </div>
-              </div>
-
-              {visual.variant === 'private-tour' ? (
-                <div className="pointer-events-none absolute bottom-4 right-4 h-20 w-36 border-b border-r border-[var(--bsj-border-strong)]" aria-hidden="true">
-                  <div className="absolute bottom-0 right-0 h-12 w-20 rounded-t-full border-t border-[var(--bsj-border-strong)]" />
-                </div>
-              ) : null}
-              {visual.variant === 'kansai-day-trip' ? (
-                <div className="pointer-events-none absolute bottom-5 right-5 grid h-24 w-24 grid-cols-2 gap-px border border-[var(--bsj-border)] bg-[var(--bsj-border)]" aria-hidden="true">
-                  <span className="bg-[var(--bsj-bg)]" />
-                  <span className="bg-[var(--bsj-bg-subtle)]" />
-                  <span className="bg-[var(--bsj-bg-subtle)]" />
-                  <span className="bg-[var(--bsj-bg)]" />
-                </div>
-              ) : null}
-              {visual.variant === 'airport-arrival' ? (
-                <div className="pointer-events-none absolute bottom-5 right-5 h-24 w-24 rounded-full border border-[var(--bsj-border-strong)]" aria-hidden="true">
-                  <span className="absolute left-1/2 top-3 h-[72px] w-px -translate-x-1/2 bg-[var(--bsj-border-strong)]" />
-                  <span className="absolute left-3 top-1/2 h-px w-[72px] -translate-y-1/2 bg-[var(--bsj-border-strong)]" />
-                </div>
-              ) : null}
-            </div>
-          </div>
-
-          <aside className="bg-[var(--bsj-bg)] p-6 md:p-7">
-            <p className="text-[11px] font-semibold uppercase tracking-[0.16em] text-[var(--bsj-text-light)]">
-              Check before booking
-            </p>
-            <ul className="mt-5 space-y-4">
-              {visual.points.map((point) => (
-                <li key={point} className="flex gap-3 text-[14px] leading-[1.6] text-[var(--bsj-text-muted)]">
-                  <span className="mt-[0.75em] h-px w-5 shrink-0 bg-[var(--bsj-accent)]" />
-                  <span>{point}</span>
-                </li>
-              ))}
-            </ul>
-          </aside>
-        </div>
-      </div>
-    </section>
-  );
-}
-
 export function GuidePage({ guide }: { guide: GuidePageContent }) {
   const product = guide.productKey ? getProduct(guide.productKey) : null;
   const leadMagnetCta = guide.leadMagnetCta ?? {
@@ -272,8 +180,6 @@ export function GuidePage({ guide }: { guide: GuidePageContent }) {
                   </p>
                 ))}
               </div>
-
-              {guide.visual ? <GuideEditorialVisual visual={guide.visual} /> : null}
 
               <section className="grid gap-px overflow-hidden border-b border-[var(--bsj-border)] bg-[var(--bsj-border)] md:grid-cols-[minmax(0,0.95fr)_minmax(0,1.05fr)]">
                 <div className="bg-[var(--bsj-bg)] p-5 md:p-6">
