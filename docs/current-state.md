@@ -291,6 +291,9 @@ Latest known state:
 - Primary format: photo-less text video pins for HyperFrames or similar tools.
 - Pinterest rules are documented in `docs/pinterest-automation.md`.
 - Initial pin queue is stored in `data/pinterest-pin-queue.csv`.
+- The BSJ repo is the canonical Pinterest management source. The HyperFrames
+  video project may keep a copied queue for production, but posting state,
+  UTM, asset paths, and pin URLs should be maintained here.
 - Current initial queue:
   - 30 pins
   - mix of text video, static text, and checklist pins
@@ -302,6 +305,10 @@ Latest known state:
 - First Pinterest phase should stay semi-manual: review the first 30 scripts,
   create/export assets, then only automate queue handling after the design
   quality is confirmed.
+- Phase 1 tracking should use the queue as a posting ledger only:
+  `asset_path`, `render_status`, `post_status`, `posted_at`, `pinterest_url`,
+  and `pin_id`. Do not manually enter changing Pinterest metrics such as saves
+  or impressions into the CSV.
 
 ## Exploration Rules
 

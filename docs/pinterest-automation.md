@@ -157,10 +157,17 @@ Initial local queue:
 
 `data/pinterest-pin-queue.csv`
 
-Recommended columns:
+BSJ main repository is the source of truth for Pinterest planning and posting
+management. The HyperFrames project is only the video production workspace. If
+the video project needs a copy of the queue, copy it from this file and treat
+the BSJ repo version as canonical.
+
+Recommended columns for Phase 1:
 
 - `pin_key`
-- `status`
+- `script_status`
+- `render_status`
+- `post_status`
 - `scheduled_date_jst`
 - `platform`
 - `format`
@@ -173,33 +180,88 @@ Recommended columns:
 - `frame_3`
 - `cta`
 - `target_url`
+- `destination_url_with_utm`
 - `utm_campaign`
+- `utm_content`
 - `template`
+- `asset_path`
+- `rendered_at`
+- `approved_at`
+- `posted_at`
+- `pinterest_url`
+- `pin_id`
+- `performance_notes`
 - `notes`
 
-Status values:
+`script_status` values:
 
 - `draft`
 - `ready`
+- `needs_review`
+- `skip`
+
+`render_status` values:
+
+- `not_started`
+- `rendered`
+- `approved`
+- `needs_revision`
+- `skip`
+
+`post_status` values:
+
+- `not_posted`
 - `scheduled`
 - `posted`
 - `failed`
-- `needs_review`
 - `skip`
+
+Phase 1 CSV rule:
+
+The queue is a posting ledger, not a manual analytics database. Record what was
+created and posted. Do not manually maintain changing Pinterest metrics such as
+impressions, saves, outbound clicks, or engagement rate in this CSV.
+
+Manual posting fields:
+
+- `asset_path`: rendered video/static asset path from the HyperFrames project.
+- `posted_at`: when the pin was published.
+- `pinterest_url`: public pin URL after posting.
+- `pin_id`: optional Pinterest ID if available.
+- `performance_notes`: occasional human notes only, such as "good saves after
+  one week" or "weak hook"; not a full metrics table.
 
 ## n8n Workflow Shape
 
 First phase should stay semi-automated:
 
 1. Read `pinterest-pin-queue` from Google Sheets.
-2. Pick rows with `status = ready` and due `scheduled_date_jst`.
-3. Generate the UTM URL from `target_url`, `utm_campaign`, and `pin_key`.
-4. Send the row to a manual design step or HyperFrames input.
-5. After the asset is exported, publish or queue in Pinterest.
-6. Update the row with posted URL, posted date, and status.
+2. Pick rows with `script_status = ready`, `render_status = approved`, and
+   due `scheduled_date_jst`.
+3. Use `destination_url_with_utm` for the destination URL.
+4. Send the row to a manual posting step.
+5. After human posting, update `post_status`, `posted_at`, `pinterest_url`, and
+   `pin_id` if available.
 
 Do not fully automate image/video generation and posting until the first 30
 pins are reviewed manually.
+
+## Phase 1 Manual Posting
+
+The current phase is manual production and manual posting:
+
+1. Use `data/pinterest-pin-queue.csv` as the canonical queue.
+2. Copy the needed row into the HyperFrames project.
+3. Render the asset in the HyperFrames project.
+4. Write the rendered file path back to `asset_path`.
+5. Set `render_status = rendered`.
+6. After human visual review, set `render_status = approved`.
+7. Manually post to Pinterest.
+8. Set `post_status = posted`, then record `posted_at` and `pinterest_url`.
+
+Do not manually enter impressions, saves, or click counts into the CSV during
+Phase 1. Use Pinterest Analytics for Pinterest-side performance and PostHog for
+BSJ-site behavior from UTM traffic.
 
 ## Human Review Rules
 
