@@ -284,6 +284,27 @@ Latest known state:
 - Keep the xlsx as working queue data unless the user explicitly asks to commit
   or publish it.
 
+## Weekly Analytics Report State
+
+- Weekly analytics reporting is planned in n8n rather than Codex heartbeat so
+  metrics can be stored in a structured place.
+- Report rules are documented in `docs/weekly-analytics-report.md`.
+- Importable workflow draft:
+  `n8n/bsj-weekly-analytics-report.workflow.json`.
+- Report destination tab in the Threads Google Sheet:
+  `weekly_reports`.
+- The report should run Monday 10:00 JST and summarize the previous Monday
+  through Sunday JST.
+- The workflow reads PostHog and `threads_posts`, then appends one row to
+  `weekly_reports`. It should not edit the Threads queue or BSJ code.
+- n8n is reachable from Codex when commands are run with host/network access.
+  The workflow was created in n8n as `BSJ Weekly Analytics Report`
+  (`n436jDlEL3RYoY0T`) and updated to avoid n8n Variables because the current
+  n8n license does not support them.
+- Manual test succeeded and appended a report row to `weekly_reports` for
+  `2026-07-06` through `2026-07-12`.
+- The workflow is active and scheduled for Monday 10:00 JST.
+
 ## Pinterest Planning State
 
 - Pinterest is now planned as a search-style distribution channel for

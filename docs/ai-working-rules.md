@@ -120,6 +120,10 @@ For Pinterest pins, HyperFrames scripts, or Pinterest n8n queue work, read
 `docs/pinterest-automation.md` and `data/pinterest-pin-queue.csv` before editing
 pin text, boards, templates, CTAs, schedules, or automation rules.
 
+For weekly analytics, PostHog reporting, or n8n report workflow work, read
+`docs/weekly-analytics-report.md` before changing report logic, metrics, or
+workflow scheduling.
+
 ## Data Rules
 
 - Published hotel pages should use `is_published = true`.

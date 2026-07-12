@@ -1,0 +1,449 @@
+{
+  "name": "BSJ Weekly Analytics Report",
+  "nodes": [
+    {
+      "id": "manual-trigger",
+      "name": "Manual Trigger",
+      "type": "n8n-nodes-base.manualTrigger",
+      "typeVersion": 1,
+      "position": [
+        -920,
+        -120
+      ],
+      "parameters": {}
+    },
+    {
+      "id": "weekly-schedule",
+      "name": "Weekly Schedule: Monday 10 JST",
+      "type": "n8n-nodes-base.scheduleTrigger",
+      "typeVersion": 1.2,
+      "position": [
+        -920,
+        120
+      ],
+      "parameters": {
+        "rule": {
+          "interval": [
+            {
+              "field": "cronExpression",
+              "expression": "0 10 * * 1"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "read-threads-sheet",
+      "name": "Sheets: Read Threads Queue",
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.6,
+      "position": [
+        -660,
+        0
+      ],
+      "parameters": {
+        "operation": "read",
+        "documentId": {
+          "__rl": true,
+          "value": "__SET_THREADS_SHEET_ID_IN_N8N__",
+          "mode": "id"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": "threads_posts",
+          "mode": "name",
+          "cachedResultName": "threads_posts"
+        },
+        "authentication": "oAuth2",
+        "resource": "sheet",
+        "options": {
+          "dataLocationOnSheet": {
+            "values": {
+              "rangeDefinition": "detectAutomatically",
+              "readRowsUntil": "lastRowInSheet"
+            }
+          },
+          "outputFormatting": {
+            "values": {
+              "general": "UNFORMATTED_VALUE",
+              "date": "FORMATTED_STRING"
+            }
+          },
+          "returnAllMatches": "returnAllMatches"
+        }
+      },
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "",
+          "name": "Google Sheets account"
+        }
+      }
+    },
+    {
+      "id": "prepare-queries",
+      "name": "Code: Prepare Report Queries",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        -380,
+        0
+      ],
+      "parameters": {
+        "mode": "runOnceForAllItems",
+        "jsCode": "return (function prepareQueries() {\n  const MS_DAY = 24 * 60 * 60 * 1000;\n  const TZ_OFFSET_MS = 9 * 60 * 60 * 1000;\n\n  function pad(value) {\n    return String(value).padStart(2, '0');\n  }\n\n  function formatDateJst(date) {\n    const jst = new Date(date.getTime() + TZ_OFFSET_MS);\n    return `${jst.getUTCFullYear()}-${pad(jst.getUTCMonth() + 1)}-${pad(jst.getUTCDate())}`;\n  }\n\n  function mondayStartUtcForPreviousWeek(now = new Date()) {\n    const jstNow = new Date(now.getTime() + TZ_OFFSET_MS);\n    const day = jstNow.getUTCDay();\n    const daysSinceMonday = (day + 6) % 7;\n    const thisMondayJstMidnightUtcMs = Date.UTC(\n      jstNow.getUTCFullYear(),\n      jstNow.getUTCMonth(),\n      jstNow.getUTCDate() - daysSinceMonday,\n      0,\n      0,\n      0,\n    ) - TZ_OFFSET_MS;\n    return new Date(thisMondayJstMidnightUtcMs - 7 * MS_DAY);\n  }\n\n  function sqlDate(date) {\n    return date.toISOString().replace('T', ' ').replace('.000Z', '');\n  }\n\n  function escapeSql(value) {\n    return String(value).replace(/\\\\/g, '\\\\\\\\').replace(/'/g, \"\\\\'\");\n  }\n\n  const weekStart = mondayStartUtcForPreviousWeek();\n  const weekEnd = new Date(weekStart.getTime() + 7 * MS_DAY);\n  const previousWeekStart = new Date(weekStart.getTime() - 7 * MS_DAY);\n  const previousWeekEnd = weekStart;\n  const startUtc = escapeSql(sqlDate(weekStart));\n  const endUtc = escapeSql(sqlDate(weekEnd));\n  const previousStartUtc = escapeSql(sqlDate(previousWeekStart));\n  const previousEndUtc = escapeSql(sqlDate(previousWeekEnd));\n\n  return [{\n    json: {\n      week_start_jst: formatDateJst(weekStart),\n      week_end_jst: formatDateJst(new Date(weekEnd.getTime() - MS_DAY)),\n      week_start_utc_iso: weekStart.toISOString(),\n      week_end_utc_iso: weekEnd.toISOString(),\n      totals_query: `SELECT countIf(event = '$pageview') AS pageviews, uniqIf(distinct_id, event = '$pageview') AS unique_visitors, count() AS total_events FROM events WHERE timestamp >= toDateTime('${startUtc}', 'UTC') AND timestamp < toDateTime('${endUtc}', 'UTC')`,\n      previous_totals_query: `SELECT countIf(event = '$pageview') AS pageviews, uniqIf(distinct_id, event = '$pageview') AS unique_visitors FROM events WHERE timestamp >= toDateTime('${previousStartUtc}', 'UTC') AND timestamp < toDateTime('${previousEndUtc}', 'UTC')`,\n      top_pages_query: `SELECT replaceRegexpOne(toString(properties['$current_url']), '^https?://[^/]+', '') AS path, count() AS pageviews, uniq(distinct_id) AS visitors FROM events WHERE event = '$pageview' AND timestamp >= toDateTime('${startUtc}', 'UTC') AND timestamp < toDateTime('${endUtc}', 'UTC') GROUP BY path ORDER BY pageviews DESC LIMIT 10`,\n      referrers_query: `SELECT coalesce(nullIf(toString(properties['$referrer']), ''), '(none)') AS referrer, coalesce(nullIf(toString(properties['utm_source']), ''), '(none)') AS utm_source, coalesce(nullIf(toString(properties['utm_campaign']), ''), '(none)') AS utm_campaign, count() AS pageviews, uniq(distinct_id) AS visitors FROM events WHERE event = '$pageview' AND timestamp >= toDateTime('${startUtc}', 'UTC') AND timestamp < toDateTime('${endUtc}', 'UTC') GROUP BY referrer, utm_source, utm_campaign ORDER BY pageviews DESC LIMIT 10`,\n      events_query: `SELECT event, count() AS count, uniq(distinct_id) AS visitors FROM events WHERE timestamp >= toDateTime('${startUtc}', 'UTC') AND timestamp < toDateTime('${endUtc}', 'UTC') GROUP BY event ORDER BY count DESC LIMIT 30`,\n      cta_detail_query: `SELECT event, properties['source_path'] AS source_path, properties['guide_path'] AS guide_path, properties['cta_label'] AS cta_label, properties['cta_href'] AS cta_href, count() AS count FROM events WHERE event IN ('bsj_guide_cta_click', 'bsj_lead_magnet_signup_click', 'bsj_phrase_cards_signup_click', 'bsj_tattoo_kit_signup_click', 'bsj_confirmation_service_cta_click', 'bsj_product_teaser_click', 'bsj_external_source_link_click', 'bsj_tag_click', 'bsj_map_link_click') AND timestamp >= toDateTime('${startUtc}', 'UTC') AND timestamp < toDateTime('${endUtc}', 'UTC') GROUP BY event, source_path, guide_path, cta_label, cta_href ORDER BY count DESC LIMIT 20`,\n    },\n  }];\n})();"
+      }
+    },
+    {
+      "id": "posthog-totals",
+      "name": "PostHog: Totals",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        -100,
+        0
+      ],
+      "parameters": {
+        "method": "POST",
+        "url": "https://us.posthog.com/api/projects/__SET_POSTHOG_PROJECT_ID_IN_N8N__/query/",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpHeaderAuth",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{ JSON.stringify({ query: { kind: 'HogQLQuery', query: $('Code: Prepare Report Queries').first().json.totals_query } }) }}",
+        "options": {
+          "timeout": 30000
+        }
+      },
+      "credentials": {
+        "httpHeaderAuth": {
+          "id": "",
+          "name": "BSJ PostHog API"
+        }
+      }
+    },
+    {
+      "id": "posthog-previous-totals",
+      "name": "PostHog: Previous Totals",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        160,
+        0
+      ],
+      "parameters": {
+        "method": "POST",
+        "url": "https://us.posthog.com/api/projects/__SET_POSTHOG_PROJECT_ID_IN_N8N__/query/",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpHeaderAuth",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{ JSON.stringify({ query: { kind: 'HogQLQuery', query: $('Code: Prepare Report Queries').first().json.previous_totals_query } }) }}",
+        "options": {
+          "timeout": 30000
+        }
+      },
+      "credentials": {
+        "httpHeaderAuth": {
+          "id": "",
+          "name": "BSJ PostHog API"
+        }
+      }
+    },
+    {
+      "id": "posthog-top-pages",
+      "name": "PostHog: Top Pages",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        420,
+        0
+      ],
+      "parameters": {
+        "method": "POST",
+        "url": "https://us.posthog.com/api/projects/__SET_POSTHOG_PROJECT_ID_IN_N8N__/query/",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpHeaderAuth",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{ JSON.stringify({ query: { kind: 'HogQLQuery', query: $('Code: Prepare Report Queries').first().json.top_pages_query } }) }}",
+        "options": {
+          "timeout": 30000
+        }
+      },
+      "credentials": {
+        "httpHeaderAuth": {
+          "id": "",
+          "name": "BSJ PostHog API"
+        }
+      }
+    },
+    {
+      "id": "posthog-referrers",
+      "name": "PostHog: Referrers",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        680,
+        0
+      ],
+      "parameters": {
+        "method": "POST",
+        "url": "https://us.posthog.com/api/projects/__SET_POSTHOG_PROJECT_ID_IN_N8N__/query/",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpHeaderAuth",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{ JSON.stringify({ query: { kind: 'HogQLQuery', query: $('Code: Prepare Report Queries').first().json.referrers_query } }) }}",
+        "options": {
+          "timeout": 30000
+        }
+      },
+      "credentials": {
+        "httpHeaderAuth": {
+          "id": "",
+          "name": "BSJ PostHog API"
+        }
+      }
+    },
+    {
+      "id": "posthog-events",
+      "name": "PostHog: Events",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        940,
+        0
+      ],
+      "parameters": {
+        "method": "POST",
+        "url": "https://us.posthog.com/api/projects/__SET_POSTHOG_PROJECT_ID_IN_N8N__/query/",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpHeaderAuth",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{ JSON.stringify({ query: { kind: 'HogQLQuery', query: $('Code: Prepare Report Queries').first().json.events_query } }) }}",
+        "options": {
+          "timeout": 30000
+        }
+      },
+      "credentials": {
+        "httpHeaderAuth": {
+          "id": "",
+          "name": "BSJ PostHog API"
+        }
+      }
+    },
+    {
+      "id": "posthog-cta-detail",
+      "name": "PostHog: CTA Detail",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        1200,
+        0
+      ],
+      "parameters": {
+        "method": "POST",
+        "url": "https://us.posthog.com/api/projects/__SET_POSTHOG_PROJECT_ID_IN_N8N__/query/",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpHeaderAuth",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{ JSON.stringify({ query: { kind: 'HogQLQuery', query: $('Code: Prepare Report Queries').first().json.cta_detail_query } }) }}",
+        "options": {
+          "timeout": 30000
+        }
+      },
+      "credentials": {
+        "httpHeaderAuth": {
+          "id": "",
+          "name": "BSJ PostHog API"
+        }
+      }
+    },
+    {
+      "id": "build-report-row",
+      "name": "Code: Build Weekly Report Row",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        1460,
+        0
+      ],
+      "parameters": {
+        "mode": "runOnceForAllItems",
+        "jsCode": "return (function buildReportRow() {\n  const MS_DAY = 24 * 60 * 60 * 1000;\n  const TZ_OFFSET_MS = 9 * 60 * 60 * 1000;\n\n  function pad(value) {\n    return String(value).padStart(2, '0');\n  }\n\n  function formatJst(date) {\n    const jst = new Date(date.getTime() + TZ_OFFSET_MS);\n    return `${jst.getUTCFullYear()}-${pad(jst.getUTCMonth() + 1)}-${pad(jst.getUTCDate())} ${pad(jst.getUTCHours())}:${pad(jst.getUTCMinutes())}:${pad(jst.getUTCSeconds())}`;\n  }\n\n  function parseJst(value) {\n    if (!value) return null;\n    const text = String(value).trim();\n    const match = text.match(/^(\\d{4})-(\\d{1,2})-(\\d{1,2})(?:[ T](\\d{1,2}):(\\d{2})(?::(\\d{2}))?)?/);\n    if (!match) return null;\n    const [, y, m, d, hh = '0', mm = '0', ss = '0'] = match;\n    return new Date(Date.UTC(Number(y), Number(m) - 1, Number(d), Number(hh), Number(mm), Number(ss)) - TZ_OFFSET_MS);\n  }\n\n  function summarizeRows(rows, formatter) {\n    if (!rows.length) return '';\n    return rows.map(formatter).join(' | ');\n  }\n\n  function getResults(nodeName) {\n    const nodeJson = $(nodeName).first().json || {};\n    return Array.isArray(nodeJson.results) ? nodeJson.results : [];\n  }\n\n  const context = $('Code: Prepare Report Queries').first().json;\n  const weekStart = new Date(context.week_start_utc_iso);\n  const weekEnd = new Date(context.week_end_utc_iso);\n\n  const totalsRows = getResults('PostHog: Totals');\n  const previousTotalsRows = getResults('PostHog: Previous Totals');\n  const pageRows = getResults('PostHog: Top Pages');\n  const referrerRows = getResults('PostHog: Referrers');\n  const eventRows = getResults('PostHog: Events');\n  const ctaRows = getResults('PostHog: CTA Detail');\n\n  const totals = totalsRows[0] || [0, 0, 0];\n  const previousTotals = previousTotalsRows[0] || [0, 0];\n  const eventCounts = Object.fromEntries(eventRows.map(([event, count]) => [event, Number(count)]));\n\n  const threadRows = $('Sheets: Read Threads Queue').all().map((item) => item.json || {});\n  const postedRows = threadRows.filter((row) => {\n    const postedAt = parseJst(row.posted_at_jst || row.last_attempt_at);\n    return row.status === 'posted' && postedAt && postedAt >= weekStart && postedAt < weekEnd;\n  });\n  const linkedPostedRows = postedRows.filter((row) => row.cta_type === 'site_link' || String(row.cta_url || '').startsWith('http'));\n\n  const topPages = summarizeRows(pageRows, ([path, pv, visitors]) => `${path || '(unknown)'}: ${pv} PV / ${visitors} visitors`);\n  const topReferrers = summarizeRows(referrerRows, ([referrer, utmSource, utmCampaign, pv]) => `${utmSource !== '(none)' ? utmSource : referrer}: ${pv} PV${utmCampaign !== '(none)' ? ` (${utmCampaign})` : ''}`);\n  const topCtas = summarizeRows(ctaRows, ([event, sourcePath, guidePath, label, href, count]) => `${event}${label ? ` / ${label}` : ''}${sourcePath || guidePath ? ` @ ${sourcePath || guidePath}` : ''}: ${count}`);\n\n  const pageviews = Number(totals[0] || 0);\n  const uniqueVisitors = Number(totals[1] || 0);\n  const totalEvents = Number(totals[2] || 0);\n  const previousPageviews = Number(previousTotals[0] || 0);\n  const previousVisitors = Number(previousTotals[1] || 0);\n  const pvDelta = previousPageviews ? `${pageviews - previousPageviews >= 0 ? '+' : ''}${pageviews - previousPageviews} vs prior week` : 'no prior-week baseline';\n  const visitorDelta = previousVisitors ? `${uniqueVisitors - previousVisitors >= 0 ? '+' : ''}${uniqueVisitors - previousVisitors} vs prior week` : 'no prior-week baseline';\n\n  const leadClicks = (eventCounts.bsj_lead_magnet_signup_click || 0) + (eventCounts.bsj_phrase_cards_signup_click || 0) + (eventCounts.bsj_tattoo_kit_signup_click || 0);\n  const guideClicks = eventCounts.bsj_guide_cta_click || 0;\n  const affiliateClicks = (eventCounts.bsj_external_source_link_click || 0) + (eventCounts.bsj_product_teaser_click || 0);\n  const tagClicks = eventCounts.bsj_tag_click || 0;\n  const mapClicks = eventCounts.bsj_map_link_click || 0;\n\n  const interpretation = [\n    `${pageviews} pageviews and ${uniqueVisitors} visitors (${pvDelta}; visitors: ${visitorDelta}).`,\n    leadClicks ? `Lead magnet clicks appeared (${leadClicks}).` : 'No lead magnet clicks recorded.',\n    postedRows.length ? `Threads posted ${postedRows.length} times; ${linkedPostedRows.length} linked posts.` : 'No Threads posts recorded as posted in the queue for this week.',\n  ].join(' ');\n\n  const internalTrafficNote = uniqueVisitors <= 5\n    ? 'Traffic is still small and may include owner/admin checks. Treat directionally, not as proof.'\n    : 'Sample is larger, but check owner/admin traffic before making strong conclusions.';\n\n  const recommendedActions = [\n    topPages ? `Double down on the strongest page/topic: ${pageRows[0]?.[0] || 'unknown'}.` : 'Publish and distribute enough content to establish a first baseline.',\n    leadClicks ? 'Keep lead magnet CTAs visible on guide pages and compare beehiiv signups against clicks.' : 'Add or improve contextual lead magnet CTAs on pages receiving traffic.',\n    linkedPostedRows.length ? 'Check Threads-linked URLs in PostHog with UTM tags next week.' : 'Ensure roughly 1 in 3 Threads posts has a natural BSJ guide link once the account warms up.',\n  ].join(' ');\n\n  const rawReportMarkdown = `# BSJ weekly analytics report\\n\\nWeek: ${context.week_start_jst} to ${context.week_end_jst} JST\\nGenerated: ${formatJst(new Date())} JST\\n\\n## Summary\\n- Pageviews: ${pageviews}\\n- Unique visitors: ${uniqueVisitors}\\n- Total events: ${totalEvents}\\n- Lead magnet clicks: ${leadClicks}\\n- Guide CTA clicks: ${guideClicks}\\n- Affiliate/product clicks: ${affiliateClicks}\\n- Threads posted: ${postedRows.length}\\n- Threads linked posts: ${linkedPostedRows.length}\\n\\n## Top pages\\n${topPages || 'No pageviews recorded.'}\\n\\n## Referrers / UTM\\n${topReferrers || 'No referrer data recorded.'}\\n\\n## CTA events\\n${topCtas || 'No CTA events recorded.'}\\n\\n## Interpretation\\n${interpretation}\\n\\n## Internal traffic note\\n${internalTrafficNote}\\n\\n## Recommended actions\\n${recommendedActions}\\n`;\n\n  return [{\n    json: {\n      week_start_jst: context.week_start_jst,\n      week_end_jst: context.week_end_jst,\n      generated_at_jst: formatJst(new Date()),\n      pageviews,\n      unique_visitors: uniqueVisitors,\n      total_events: totalEvents,\n      lead_magnet_clicks: leadClicks,\n      guide_cta_clicks: guideClicks,\n      affiliate_cta_clicks: affiliateClicks,\n      tag_clicks: tagClicks,\n      map_clicks: mapClicks,\n      threads_posted: postedRows.length,\n      threads_linked_posted: linkedPostedRows.length,\n      top_pages: topPages,\n      top_referrers: topReferrers,\n      top_ctas: topCtas,\n      internal_traffic_note: internalTrafficNote,\n      interpretation,\n      recommended_actions: recommendedActions,\n      raw_report_markdown: rawReportMarkdown,\n    },\n  }];\n})();"
+      }
+    },
+    {
+      "id": "append-weekly-report",
+      "name": "Sheets: Append Weekly Report",
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.6,
+      "position": [
+        1740,
+        0
+      ],
+      "parameters": {
+        "operation": "append",
+        "documentId": {
+          "__rl": true,
+          "value": "__SET_THREADS_SHEET_ID_IN_N8N__",
+          "mode": "id"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": "weekly_reports",
+          "mode": "name",
+          "cachedResultName": "weekly_reports"
+        },
+        "authentication": "oAuth2",
+        "resource": "sheet",
+        "columns": {
+          "mappingMode": "autoMapInputData",
+          "value": {},
+          "matchingColumns": [],
+          "schema": [],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "",
+          "name": "Google Sheets account"
+        }
+      }
+    }
+  ],
+  "connections": {
+    "Manual Trigger": {
+      "main": [
+        [
+          {
+            "node": "Sheets: Read Threads Queue",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Weekly Schedule: Monday 10 JST": {
+      "main": [
+        [
+          {
+            "node": "Sheets: Read Threads Queue",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Sheets: Read Threads Queue": {
+      "main": [
+        [
+          {
+            "node": "Code: Prepare Report Queries",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Code: Prepare Report Queries": {
+      "main": [
+        [
+          {
+            "node": "PostHog: Totals",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "PostHog: Totals": {
+      "main": [
+        [
+          {
+            "node": "PostHog: Previous Totals",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "PostHog: Previous Totals": {
+      "main": [
+        [
+          {
+            "node": "PostHog: Top Pages",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "PostHog: Top Pages": {
+      "main": [
+        [
+          {
+            "node": "PostHog: Referrers",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "PostHog: Referrers": {
+      "main": [
+        [
+          {
+            "node": "PostHog: Events",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "PostHog: Events": {
+      "main": [
+        [
+          {
+            "node": "PostHog: CTA Detail",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "PostHog: CTA Detail": {
+      "main": [
+        [
+          {
+            "node": "Code: Build Weekly Report Row",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Code: Build Weekly Report Row": {
+      "main": [
+        [
+          {
+            "node": "Sheets: Append Weekly Report",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "settings": {
+    "timezone": "Asia/Tokyo",
+    "executionOrder": "v1"
+  },
+  "staticData": null,
+  "pinData": {}
+}
