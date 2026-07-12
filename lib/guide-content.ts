@@ -27,7 +27,19 @@ export interface GuidePageContent {
   title: string;
   description: string;
   intro: string[];
+  visual?: {
+    variant: 'private-tour' | 'kansai-day-trip' | 'airport-arrival';
+    eyebrow: string;
+    title: string;
+    points: string[];
+  };
   productKey?: ProductKey;
+  leadMagnetCta?: {
+    eyebrow: string;
+    title: string;
+    description: string;
+    buttonLabel: string;
+  };
   sections: GuideSection[];
   faqs?: Array<{
     question: string;
@@ -125,6 +137,13 @@ export const guidePages: Record<string, GuidePageContent> = {
       'This guide helps travelers choose an eSIM calmly before the trip, and understand when an eSIM should be paired with airport Wi-Fi, hotel Wi-Fi, or a backup plan.',
       'BSJ treats connectivity as part of stay planning because internet problems often become hotel, transport, luggage, and food-problem problems.',
     ],
+    leadMagnetCta: {
+      eyebrow: 'Free arrival planning sample',
+      title: 'Get the arrival and eSIM checklist before you fly',
+      description:
+        'Use the BSJ sample pack to save phone setup, hotel address, ticket, luggage, and first-hour arrival checks before your Japan trip.',
+      buttonLabel: 'Get the arrival checklist',
+    },
     sections: [
       {
         title: 'Why eSIM planning matters in Japan',
@@ -213,6 +232,13 @@ export const guidePages: Record<string, GuidePageContent> = {
       'Luggage storage sounds simple until it controls your whole day. A checkout morning, theme park day, late flight, day trip, or station transfer can become stressful if you do not know where your bags will go.',
       'This guide explains the difference between station lockers, hotel storage, luggage delivery, and luggage storage services such as Radical Storage, so travelers can plan hands-light days without guessing.',
     ],
+    leadMagnetCta: {
+      eyebrow: 'Free luggage planning sample',
+      title: 'Get the luggage planning mini sheet',
+      description:
+        'Compare hotel storage, station lockers, luggage delivery, and storage services before you build a checkout day or city transfer.',
+      buttonLabel: 'Get the luggage checklist',
+    },
     sections: [
       {
         title: 'The four main luggage options',
@@ -283,6 +309,13 @@ export const guidePages: Record<string, GuidePageContent> = {
       'Japan public transport is excellent, but that does not mean every traveler should use trains for every movement. Taxis and private transfers can solve specific problems: late arrivals, heavy luggage, young children, older travelers, bad weather, or hotels that are awkward from the nearest station.',
       'This guide helps you decide when a taxi or transfer is worth paying for, what to check before booking, and how to avoid using private transport when a simple train route is better.',
     ],
+    leadMagnetCta: {
+      eyebrow: 'Free transfer planning sample',
+      title: 'Get the taxi and transfer checklist',
+      description:
+        'Plan pickup points, luggage, waiting time, hotel access, child seats, and backup routes before choosing a taxi or private transfer.',
+      buttonLabel: 'Get the transfer checklist',
+    },
     sections: [
       {
         title: 'When a taxi or private transfer makes sense',
@@ -356,6 +389,13 @@ export const guidePages: Record<string, GuidePageContent> = {
       'This guide helps travelers decide whether to use hotel storage, luggage delivery, station lockers, luggage storage services, or a private transfer on a checkout day.',
       'The goal is simple: avoid dragging suitcases through stations, temples, workshops, restaurants, and crowded shopping streets when a better plan exists.',
     ],
+    leadMagnetCta: {
+      eyebrow: 'Free checkout-day sample',
+      title: 'Get the checkout-day luggage checklist',
+      description:
+        'Map checkout time, next fixed time, storage, delivery, station lockers, and transfer backup before your hotel day ends.',
+      buttonLabel: 'Get the checkout checklist',
+    },
     sections: [
       {
         title: 'Start with the next fixed time',
@@ -437,6 +477,19 @@ export const guidePages: Record<string, GuidePageContent> = {
       'This guide helps you decide when a private car, private driver, airport transfer, or private day tour is actually useful, and what to check before booking through a platform such as Klook.',
       'BSJ does not rank tours by hype. We look at the travel day around the booking: hotel location, pickup rules, walking distance, toilet breaks, weather, language support, and what could go wrong if the plan is too tight.',
     ],
+    visual: {
+      variant: 'private-tour',
+      eyebrow: 'Private car day planning',
+      title: 'Hotel pickup, route flexibility, and what to confirm before the day.',
+      points: ['Pickup', 'Luggage fit', 'Weather fallback'],
+    },
+    leadMagnetCta: {
+      eyebrow: 'Free private tour checklist',
+      title: 'Get the private tour checklist before you book',
+      description:
+        'Compare pickup rules, luggage fit, driver vs guide wording, hidden costs, toilets, and weather fallback before choosing a private car or day tour.',
+      buttonLabel: 'Get the private tour checklist',
+    },
     sections: [
       {
         title: 'When a private tour is worth considering',
@@ -637,6 +690,19 @@ Thank you.`,
       'This guide helps you decide whether to go by train, join a bus tour, book a private car, or keep the day lighter. It is written for travelers who want a good experience without turning the day into logistics homework.',
       'Use it alongside current listings on Klook or other platforms, then save a practical checklist before booking anything that will be hard to change.',
     ],
+    visual: {
+      variant: 'kansai-day-trip',
+      eyebrow: 'Kansai route check',
+      title: 'Osaka, Kyoto, Nara, Kobe, and the details that make a day trip work.',
+      points: ['Meeting point', 'Walking load', 'Lunch and toilets'],
+    },
+    leadMagnetCta: {
+      eyebrow: 'Free Kansai day trip checklist',
+      title: 'Get the Kansai day trip checklist',
+      description:
+        'Compare meeting points, walking, toilets, lunch, luggage, stroller fit, and whether a route works better by train, bus tour, or private car.',
+      buttonLabel: 'Get the day trip checklist',
+    },
     sections: [
       {
         title: 'The best day trip is not always the most famous one',
@@ -775,6 +841,13 @@ Thank you.`,
       'This guide is for travelers comparing ski day tours, private ski lessons, snow-play trips, and mountain routes from places such as Tokyo, Sapporo, Nagano, Niigata, Kanazawa, or Osaka.',
       'Use public listings to compare the main experience, then keep a checklist for the details that can make the day comfortable or stressful.',
     ],
+    leadMagnetCta: {
+      eyebrow: 'Free winter activity checklist',
+      title: 'Get the snow day checklist before you book',
+      description:
+        'Check clothing, rentals, lockers, toilets, beginner support, child fit, and weather fallback before booking a Japan snow activity.',
+      buttonLabel: 'Get the winter checklist',
+    },
     sections: [
       {
         title: 'Choose the winter activity type first',
@@ -874,6 +947,13 @@ Thank you.`,
       'Major Japan attractions are easy to add to an itinerary and easy to underestimate. Timed entry, express passes, lockers, stroller rules, food lines, rain, and the ride home can affect the day as much as the ticket itself.',
       'This guide focuses on attraction days such as Universal Studios Japan, teamLab, observation decks, museums, and bundled city passes, with practical checks before you buy.',
     ],
+    leadMagnetCta: {
+      eyebrow: 'Free attraction day checklist',
+      title: 'Get the attraction day checklist',
+      description:
+        'Plan ticket type, timed entry, lockers, food backup, stroller needs, rest breaks, and the ride home before a major attraction day.',
+      buttonLabel: 'Get the attraction checklist',
+    },
     sections: [
       {
         title: 'Plan the whole day, not only the ticket',
@@ -963,6 +1043,19 @@ Thank you.`,
       'The first hour after landing in Japan can shape the whole trip. You may be tired, carrying luggage, setting up internet, finding tickets, and trying to reach a hotel before check-in closes.',
       'This guide helps you compare airport trains, limousine buses, private transfers, and luggage delivery from airports such as Narita, Haneda, and Kansai International Airport.',
     ],
+    visual: {
+      variant: 'airport-arrival',
+      eyebrow: 'Arrival flow',
+      title: 'Internet, tickets, luggage, and the first route from airport to hotel.',
+      points: ['eSIM', 'Airport route', 'Hotel check-in'],
+    },
+    leadMagnetCta: {
+      eyebrow: 'Free arrival-day checklist',
+      title: 'Get the Japan arrival checklist',
+      description:
+        'Plan internet, airport tickets, luggage, hotel check-in, late-arrival backup, and the first route from Narita, Haneda, or Kansai Airport.',
+      buttonLabel: 'Get the arrival checklist',
+    },
     sections: [
       {
         title: 'Choose by friction, not only speed',
@@ -1064,6 +1157,13 @@ Thank you.`,
       'Cultural workshops can be some of the best memories of a Japan trip. They can also be surprisingly sensitive to timing, clothing, language, food needs, photo rules, and whether children or beginners are comfortable.',
       'This guide helps you choose workshops such as tea ceremony, kimono rental, sushi or ramen classes, craft sessions, and short cultural experiences with practical expectations in mind.',
     ],
+    leadMagnetCta: {
+      eyebrow: 'Free workshop planning sample',
+      title: 'Get the workshop fit checklist',
+      description:
+        'Check location, timing, sitting style, clothing, photos, food needs, children, and luggage before booking a cultural workshop.',
+      buttonLabel: 'Get the workshop checklist',
+    },
     sections: [
       {
         title: 'A workshop is a time block, not a quick add-on',
@@ -1122,6 +1222,13 @@ Thank you.`,
       'Food experiences in Japan can be wonderful, but they are not always simple for travelers with dietary restrictions. A tour listing may say vegetarian-friendly, but that does not always answer questions about fish broth, bonito flakes, shellfish, pork, alcohol, soy sauce, wheat, or cross-contact.',
       'This guide is written for travelers who want food experiences without relying on vague assumptions. It is also a reminder that some food-related affiliate categories may not be commissionable, so BSJ treats food pages as trust and confirmation pages first.',
     ],
+    leadMagnetCta: {
+      eyebrow: 'Free food-needs sample',
+      title: 'Get the food-needs checklist',
+      description:
+        'Use Japan-specific prompts for vegetarian, vegan, halal, allergy, fish-based dashi, and hotel or food-experience confirmation.',
+      buttonLabel: 'Get the food checklist',
+    },
     sections: [
       {
         title: 'Do not treat every food experience the same',
@@ -1210,6 +1317,13 @@ Thank you.`,
       'Family travel in Japan often works beautifully, but activity days need a different kind of planning. The question is not only whether children are allowed. It is whether the day has enough toilets, food options, stroller handling, breaks, and transport simplicity.',
       'This guide helps families choose between theme parks, private transfers, short workshops, day trips, and lighter attraction days without overloading the schedule.',
     ],
+    leadMagnetCta: {
+      eyebrow: 'Free family activity sample',
+      title: 'Get the family activity checklist',
+      description:
+        'Compare stroller fit, toilets, food backup, nap timing, luggage storage, ticket timing, and whether the day should be shortened or upgraded.',
+      buttonLabel: 'Get the family checklist',
+    },
     sections: [
       {
         title: 'Start with the child constraint',
@@ -1277,6 +1391,13 @@ Thank you.`,
       'BSJ looks at experience booking from the practical side: meeting points, luggage, toilets, walking distance, weather, family needs, food restrictions, language support, and what to confirm before you pay.',
       'Use this guide to decide what kind of experience is worth booking through a platform such as Klook now, and what details you should keep in your own checklist before the trip.',
     ],
+    leadMagnetCta: {
+      eyebrow: 'Free experience booking checklist',
+      title: 'Get the experience booking checklist',
+      description:
+        'Save the BSJ checklist for meeting points, luggage, toilets, walking distance, food needs, weather, children, and cancellation rules before booking tours or tickets.',
+      buttonLabel: 'Get the booking checklist',
+    },
     sections: [
       {
         title: 'Start with the travel friction, not the activity title',
