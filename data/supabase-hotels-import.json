@@ -1700,5 +1700,40 @@
     "final_publication_status": "ready_for_listing",
     "final_listing_priority": "high",
     "is_published": true
+  },
+  {
+    "liteapi_id": "arima-grand-hotel",
+    "name": "Arima Grand Hotel — Arima Onsen Stay with Clear Private Bath Options for Tattoo Consideration",
+    "city": "Kobe",
+    "area": "Arima Onsen / Rokko foothills",
+    "address": "1304-1 Arima-cho, Kita-ku, Kobe, Hyogo, 651-1401",
+    "type": "Hotel",
+    "layer": 2,
+    "recommended_margin": 0.15,
+    "booking_url": "https://www.arima-gh.jp/en/",
+    "short_description": "A large Arima Onsen hotel where the official bath page clearly separates tattoo-restricted public baths from reservable private bath options. Useful for travelers who want an onsen-area stay with fewer surprises before booking.",
+    "key_highlights": "Official note says guests with tattoos cannot use the public baths | Reservable private baths and family bath options are available for an extra fee | Some private bath options are designed for easier access, including wheelchair-friendly context | Free shuttle from Arima Onsen Station and nearby bus stops | Strong fit for travelers comparing public bath rules, private bath access, and luggage practicality in Arima",
+    "best_for": "Tattooed travelers, couples, families, and older travelers who want to stay in Arima Onsen but need clearer bath-type choices and easier transport than walking uphill with luggage.",
+    "condition_details": "Arima Grand Hotel is useful for BSJ because the official hot-spring information is unusually clear: guests with tattoos are asked not to use the public baths, and the hotel points tattooed guests toward private bath use instead. This should be treated as tattoo-consideration, not a blanket tattoo-friendly claim. The property offers multiple reservable private bath options, including family-style private baths, so travelers can compare bathing privacy before booking.",
+    "access_summary": "Located in Arima Onsen, Kobe. The hotel states that the area around the property has steep slopes and recommends using its free shuttle rather than walking from Arima Onsen Station or nearby bus stops. This makes it more practical for travelers with large luggage, older family members, or children than a simple map distance might suggest.",
+    "luggage_summary": "Free shuttle service from Arima Onsen Station and Arima-area bus stops is the key luggage advantage. Because the official access page notes steep slopes around the hotel, travelers with large bags should plan to use the shuttle and confirm pickup timing before arrival.",
+    "kitchen_summary": "Not a self-catering stay. This is an onsen hotel with meals and in-house facilities rather than a kitchen-focused apartment stay.",
+    "bath_summary": "Public baths are not available to guests with tattoos according to the official English hot-spring page. Reservable private baths and family-style bath options are available for an extra fee, making this a strong private-bath consideration stay. Confirm current private-bath reservation rules, tattoo conditions, and availability directly before booking around bath access.",
+    "english_support_summary": "Official English website includes hot spring, access, room, facility, and basic information pages. Because tattoo and bath details affect the stay decision, direct confirmation is still recommended before booking.",
+    "rules_summary": "Tattooed guests are asked not to use the public baths. Private baths are paid/reservable facilities. Free shuttle service is available from Arima Onsen Station and nearby bus stops. Meal requests may need advance notice. Confirm exact bath reservation timing, shuttle operation, and current house rules before booking.",
+    "verified_notes": "Checked from official English hotel pages on July 13, 2026. Official hot-spring page states that guests with tattoos cannot use the public baths and recommends private bath use. Official access page notes steep slopes around the hotel and recommends using the free shuttle from Arima Onsen Station or bus stops. Direct hotel confirmation has not yet been completed.",
+    "caution_notes": "Do not treat this as a simple tattoo-friendly onsen. Public baths are restricted for tattooed guests; private bath availability, fees, and reservation timing should be confirmed before booking if bath access is important.",
+    "category_tags": [
+      "tattoo-consideration",
+      "private-bath",
+      "luggage-friendly",
+      "english-friendly",
+      "family-friendly",
+      "access-friendly"
+    ],
+    "source_urls": "https://www.arima-gh.jp/en/ | https://www.arima-gh.jp/en/hot-springs.html | https://www.arima-gh.jp/en/access.html | https://www.arima-gh.jp/en/basic-information.html",
+    "final_publication_status": "ready_for_listing",
+    "final_listing_priority": "high",
+    "is_published": true
   }
 ]
