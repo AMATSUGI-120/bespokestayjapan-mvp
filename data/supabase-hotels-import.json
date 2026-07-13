@@ -1735,5 +1735,39 @@
     "final_publication_status": "ready_for_listing",
     "final_listing_priority": "high",
     "is_published": true
+  },
+  {
+    "liteapi_id": "nishimuraya-honkan-kinosaki",
+    "name": "Nishimuraya Honkan — Historic Kinosaki Ryokan with Private Open-Air Bath Rooms and Tattoo-Friendly Public Onsen Context",
+    "city": "Toyooka",
+    "area": "Kinosaki Onsen / Otani River area",
+    "address": "469 Yushima, Kinosaki-cho, Toyooka City, Hyogo 669-6101",
+    "type": "Ryokan",
+    "layer": 2,
+    "recommended_margin": 0.15,
+    "booking_url": "https://www.nishimuraya.ne.jp/honkan/english/",
+    "short_description": "A historic Kinosaki Onsen ryokan where several room types include private open-air baths, and the official Kinosaki tourism site confirms that all seven public bathhouses in town allow tattoos. Best treated as a tattoo-consideration stay until the ryokan’s own bath policy is directly confirmed.",
+    "key_highlights": "Official ryokan site lists multiple private open-air bath rooms | Kinosaki’s official tourism site says all seven public bathhouses allow tattoos of all sizes with no covering required | Ryokan guests receive a pass for the seven public hot springs | English official site and contact form available | Minimum guest age is 10 years from April 1, 2024 | Useful for travelers comparing ryokan culture, private bath rooms, and tattoo-friendly public bath context",
+    "best_for": "Travelers who want a traditional high-end ryokan stay in Kinosaki while using tattoo-friendly public bathhouses in town, or who prefer booking a room with its own private open-air bath for more privacy.",
+    "condition_details": "Nishimuraya Honkan is a strong BSJ candidate because the surrounding Kinosaki Onsen system is unusually clear for tattooed travelers: the official tourism site states that all seven public bathhouses allow tattoos of all sizes without covering. The ryokan’s own official site lists several rooms with private open-air baths and notes that guests receive a pass for the public hot springs. However, the ryokan’s in-house bath tattoo policy should not be assumed from the town policy, so this profile should remain tattoo-consideration until direct confirmation is completed.",
+    "access_summary": "Located in central Kinosaki Onsen at 469 Yushima. Kinosaki Onsen Station is served by JR Limited Express trains from Kyoto, Osaka, Sannomiya, and Himeji according to the official Kinosaki access page. The town is walkable, but travelers with large luggage should confirm transfer, luggage storage, or pickup details with the ryokan before arrival.",
+    "luggage_summary": "Kinosaki is reachable by direct JR Limited Express trains, and SOZORO tourist information near the station can help visitors orient themselves in town. Specific luggage storage, forwarding, or ryokan pickup rules for Nishimuraya Honkan were not confirmed from the official ryokan page, so travelers with large bags should ask before booking.",
+    "kitchen_summary": "Not a self-catering stay. This is a traditional ryokan with seasonal meals and in-house dining rather than apartment-style kitchen facilities.",
+    "bath_summary": "The ryokan official site lists multiple guest rooms with private open-air baths, Japanese-style baths, and on-property indoor/outdoor hot spring baths. Kinosaki’s official tourism site says the seven public bathhouses in town allow tattoos, but accommodation baths may have different rules and should be confirmed directly with the ryokan.",
+    "english_support_summary": "The ryokan has an English official website, English room and access information, telephone numbers, and a contact form. Kinosaki’s official tourism site also provides English visitor information for the town.",
+    "rules_summary": "Nishimuraya Honkan is non-smoking and the minimum age to stay is 10 years old from April 1, 2024. Some room types include private open-air baths; other room types have Japanese-style baths or standard bath layouts. Confirm room type, meal needs, luggage handling, and bath rules before planning around a specific condition.",
+    "verified_notes": "Checked from official ryokan and official Kinosaki tourism sources on July 13, 2026. The ryokan official page confirms private open-air bath room types, public hot spring passes for guests, non-smoking status, address, and 10+ minimum age. The official Kinosaki tourism site confirms that all seven public bathhouses in town allow tattoos and notes that accommodation baths may have different rules. Direct ryokan confirmation has not yet been completed.",
+    "caution_notes": "Kinosaki’s public bathhouses are tattoo-friendly, but Nishimuraya Honkan’s own accommodation baths may have separate rules. Confirm in-house bath policy, private bath room availability, and luggage handling directly before booking.",
+    "category_tags": [
+      "tattoo-consideration",
+      "private-bath",
+      "english-friendly",
+      "family-friendly",
+      "access-friendly"
+    ],
+    "source_urls": "https://www.nishimuraya.ne.jp/honkan/english/ | https://visitkinosaki.com/plan/visitor-info/guides/tattoos-in-kinosaki-onsen/ | https://visitkinosaki.com/access/ | https://visitkinosaki.com/plan/visitor-info/sozoro/",
+    "final_publication_status": "ready_for_listing",
+    "final_listing_priority": "high",
+    "is_published": true
   }
 ]
