@@ -1,6 +1,5 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
-import Script from "next/script";
 import "./globals.css";
 import PostHogPageView from "./PostHogPageView";
 import { DEFAULT_DESCRIPTION, SITE_NAME, SITE_URL } from "@/lib/seo";
@@ -52,15 +51,24 @@ export default function RootLayout({
       lang="en"
       className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
     >
-      <body className="min-h-full flex flex-col">
-        <Script id="travelpayouts-drive-loader" strategy="afterInteractive">
-          {`(function () {
+      <head>
+        <script
+          id="travelpayouts-drive-loader"
+          data-noptimize="1"
+          data-cfasync="false"
+          data-wpfc-render="false"
+          data-no-defer="1"
+          dangerouslySetInnerHTML={{
+            __html: `(function () {
             var script = document.createElement("script");
             script.async = true;
             script.src = "https://emrldco.com/NTM1NDMz.js?t=535433";
             document.head.appendChild(script);
-          })();`}
-        </Script>
+          })();`,
+          }}
+        />
+      </head>
+      <body className="min-h-full flex flex-col">
         <PostHogPageView />
         {children}
       </body>
